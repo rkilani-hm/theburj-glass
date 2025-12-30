@@ -22,6 +22,7 @@ const translations: Record<string, Record<Language, string>> = {
   // Hero
   "hero.headline": { en: "A Place of Gravity", ar: "هيبة المكان" },
   "hero.subline": { en: "Kuwait's Architectural Landmark", ar: "معلم الكويت المعماري" },
+  "hero.scroll": { en: "Scroll", ar: "مرر" },
 
   // Presence
   "presence.title": { en: "The Tower", ar: "البرج" },

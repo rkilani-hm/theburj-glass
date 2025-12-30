@@ -3,106 +3,127 @@
 @tailwind utilities;
 
 /* Al Hamra Tower Design System
+   هيبة المكان — A Place of Gravity
    Architectural, calm, authoritative
-   Colors: White, off-white, soft greys, charcoal
+   Colors: Stone, sky, light, charcoal
    All colors in HSL
 */
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600&display=swap');
+
 @layer base {
   :root {
-    /* Architectural color palette */
-    --background: 0 0% 100%;
-    --foreground: 0 0% 15%;
+    /* Architectural Stone Palette */
+    --background: 40 25% 98%;
+    --foreground: 220 15% 15%;
 
-    --card: 40 20% 98%;
-    --card-foreground: 0 0% 15%;
+    --card: 40 20% 96%;
+    --card-foreground: 220 15% 15%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 15%;
+    --popover: 40 25% 98%;
+    --popover-foreground: 220 15% 15%;
 
-    /* Charcoal primary */
-    --primary: 0 0% 20%;
-    --primary-foreground: 0 0% 98%;
+    /* Deep Charcoal Primary */
+    --primary: 220 15% 18%;
+    --primary-foreground: 40 25% 98%;
 
-    /* Off-white / stone secondary */
-    --secondary: 40 15% 96%;
-    --secondary-foreground: 0 0% 20%;
+    /* Warm Stone Secondary */
+    --secondary: 38 18% 94%;
+    --secondary-foreground: 220 15% 18%;
 
-    /* Soft grey muted */
-    --muted: 40 10% 94%;
-    --muted-foreground: 0 0% 45%;
+    /* Soft Grey Muted */
+    --muted: 40 12% 92%;
+    --muted-foreground: 220 8% 50%;
 
-    /* Light stone accent */
-    --accent: 40 15% 92%;
-    --accent-foreground: 0 0% 20%;
+    /* Light Stone Accent */
+    --accent: 38 15% 90%;
+    --accent-foreground: 220 15% 18%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 40 10% 88%;
-    --input: 40 10% 88%;
-    --ring: 0 0% 20%;
+    --border: 40 15% 88%;
+    --input: 40 15% 88%;
+    --ring: 220 15% 18%;
 
     --radius: 0rem;
 
-    /* Custom Al Hamra tokens */
-    --stone: 40 20% 96%;
-    --charcoal: 0 0% 20%;
-    --grey-soft: 0 0% 75%;
-    --grey-medium: 0 0% 55%;
+    /* Custom Al Hamra Tokens */
+    --stone: 38 20% 95%;
+    --stone-warm: 35 25% 92%;
+    --charcoal: 220 15% 18%;
+    --charcoal-light: 220 10% 30%;
+    --grey-soft: 220 8% 78%;
+    --grey-medium: 220 8% 55%;
+    --sky: 210 25% 96%;
+    --sky-deep: 215 20% 92%;
 
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 0 0% 20%;
-    --sidebar-primary: 0 0% 15%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 40 15% 94%;
-    --sidebar-accent-foreground: 0 0% 20%;
-    --sidebar-border: 40 10% 90%;
-    --sidebar-ring: 0 0% 20%;
+    /* Gradient tokens */
+    --gradient-stone: linear-gradient(180deg, hsl(40 25% 98%) 0%, hsl(38 20% 94%) 100%);
+    --gradient-sky: linear-gradient(180deg, hsl(210 25% 96%) 0%, hsl(215 20% 92%) 100%);
+    --gradient-overlay: linear-gradient(180deg, transparent 0%, hsl(220 15% 15% / 0.4) 100%);
+
+    --sidebar-background: 40 25% 97%;
+    --sidebar-foreground: 220 15% 18%;
+    --sidebar-primary: 220 15% 15%;
+    --sidebar-primary-foreground: 40 25% 98%;
+    --sidebar-accent: 38 15% 92%;
+    --sidebar-accent-foreground: 220 15% 18%;
+    --sidebar-border: 40 15% 90%;
+    --sidebar-ring: 220 15% 18%;
   }
 
   .dark {
-    --background: 0 0% 8%;
-    --foreground: 0 0% 95%;
+    --background: 220 15% 8%;
+    --foreground: 40 20% 95%;
 
-    --card: 0 0% 10%;
-    --card-foreground: 0 0% 95%;
+    --card: 220 15% 10%;
+    --card-foreground: 40 20% 95%;
 
-    --popover: 0 0% 8%;
-    --popover-foreground: 0 0% 95%;
+    --popover: 220 15% 8%;
+    --popover-foreground: 40 20% 95%;
 
-    --primary: 0 0% 95%;
-    --primary-foreground: 0 0% 10%;
+    --primary: 40 20% 95%;
+    --primary-foreground: 220 15% 10%;
 
-    --secondary: 0 0% 15%;
-    --secondary-foreground: 0 0% 95%;
+    --secondary: 220 12% 15%;
+    --secondary-foreground: 40 20% 95%;
 
-    --muted: 0 0% 18%;
-    --muted-foreground: 0 0% 65%;
+    --muted: 220 12% 18%;
+    --muted-foreground: 220 8% 60%;
 
-    --accent: 0 0% 15%;
-    --accent-foreground: 0 0% 95%;
+    --accent: 220 12% 15%;
+    --accent-foreground: 40 20% 95%;
 
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 62% 30%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
-    --ring: 0 0% 85%;
+    --border: 220 12% 18%;
+    --input: 220 12% 18%;
+    --ring: 40 20% 85%;
 
-    --stone: 0 0% 12%;
-    --charcoal: 0 0% 85%;
-    --grey-soft: 0 0% 40%;
-    --grey-medium: 0 0% 55%;
+    --stone: 220 12% 12%;
+    --stone-warm: 220 10% 14%;
+    --charcoal: 40 15% 88%;
+    --charcoal-light: 40 12% 70%;
+    --grey-soft: 220 8% 40%;
+    --grey-medium: 220 8% 55%;
+    --sky: 220 15% 10%;
+    --sky-deep: 220 12% 12%;
 
-    --sidebar-background: 0 0% 10%;
-    --sidebar-foreground: 0 0% 95%;
-    --sidebar-primary: 0 0% 95%;
-    --sidebar-primary-foreground: 0 0% 10%;
-    --sidebar-accent: 0 0% 15%;
-    --sidebar-accent-foreground: 0 0% 95%;
-    --sidebar-border: 0 0% 18%;
-    --sidebar-ring: 0 0% 85%;
+    --gradient-stone: linear-gradient(180deg, hsl(220 15% 8%) 0%, hsl(220 12% 12%) 100%);
+    --gradient-sky: linear-gradient(180deg, hsl(220 15% 10%) 0%, hsl(220 12% 12%) 100%);
+    --gradient-overlay: linear-gradient(180deg, transparent 0%, hsl(220 15% 5% / 0.6) 100%);
+
+    --sidebar-background: 220 15% 10%;
+    --sidebar-foreground: 40 20% 95%;
+    --sidebar-primary: 40 20% 95%;
+    --sidebar-primary-foreground: 220 15% 10%;
+    --sidebar-accent: 220 12% 15%;
+    --sidebar-accent-foreground: 40 20% 95%;
+    --sidebar-border: 220 12% 18%;
+    --sidebar-ring: 40 20% 85%;
   }
 }
 
@@ -113,11 +134,120 @@
 
   body {
     @apply bg-background text-foreground antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 
-  /* Architectural typography */
   html {
     scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  /* Architectural fade animations */
+  .animate-fade-up {
+    animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .animate-fade-up-delayed {
+    animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+    opacity: 0;
+  }
+
+  .animate-fade-up-delayed-2 {
+    animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
+    opacity: 0;
+  }
+
+  .animate-reveal {
+    animation: reveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .animate-line-grow {
+    animation: line-grow 1s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
+  }
+
+  /* Hover states */
+  .hover-lift {
+    @apply transition-transform duration-500 ease-out;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-4px);
+  }
+
+  /* Text reveal for sections */
+  .section-reveal {
+    @apply opacity-0;
+    animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-play-state: paused;
+  }
+
+  .section-reveal.visible {
+    animation-play-state: running;
+  }
+
+  /* Architectural grid overlay */
+  .architectural-grid {
+    background-image: 
+      linear-gradient(to right, hsl(var(--border) / 0.3) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--border) / 0.3) 1px, transparent 1px);
+    background-size: 80px 80px;
+  }
+
+  /* Subtle noise texture */
+  .texture-noise {
+    position: relative;
+  }
+
+  .texture-noise::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.015;
+    pointer-events: none;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: scale(1.02);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes line-grow {
+  from {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  to {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
   }
 }
 
@@ -128,4 +258,22 @@
 
 [dir="ltr"] {
   text-align: left;
+}
+
+/* Smooth scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--grey-soft));
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--grey-medium));
 }

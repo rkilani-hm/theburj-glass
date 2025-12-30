@@ -13,9 +13,9 @@ import Footer from "@/components/alhamra/Footer";
 const Index = () => {
   return (
     <LanguageProvider>
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background overflow-x-hidden">
         <Header />
-        <main className="pt-16 lg:pt-20">
+        <main>
           <HeroSection />
           <PresenceSection />
           <PerspectiveSection />

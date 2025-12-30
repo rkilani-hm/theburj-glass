@@ -1,4 +1,5 @@
 import { useLanguage } from "@/contexts/LanguageContext";
+import { ArrowUp } from "lucide-react";
 
 const Footer = () => {
   const { t } = useLanguage();
@@ -11,33 +12,49 @@ const Footer = () => {
     { key: "nav.contact", href: "#contact" },
   ];
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
-    <footer className="py-16 bg-primary text-primary-foreground">
+    <footer className="py-20 bg-primary text-primary-foreground relative">
+      {/* Back to top */}
+      <button
+        onClick={scrollToTop}
+        className="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 bg-primary flex items-center justify-center hover:bg-charcoal-light transition-colors duration-300"
+        aria-label="Back to top"
+      >
+        <ArrowUp size={18} />
+      </button>
+
       <div className="container mx-auto px-6 lg:px-12">
-        <div className="grid md:grid-cols-3 gap-12">
-          {/* Logo & Copyright */}
-          <div className="space-y-4">
-            <div className="flex items-center">
-              <div className="w-10 h-10 bg-primary-foreground/20 flex items-center justify-center">
-                <span className="text-xs">LOGO</span>
-              </div>
-              <span className="ml-3 text-sm font-medium tracking-wide uppercase">
-                Al Hamra Tower
+        <div className="grid md:grid-cols-12 gap-12 lg:gap-8">
+          {/* Logo & Brand */}
+          <div className="md:col-span-4 space-y-6">
+            <div>
+              <span className="text-xl font-light tracking-[0.2em] uppercase">
+                Al Hamra
+              </span>
+              <span className="block text-[10px] tracking-[0.3em] uppercase text-primary-foreground/60 mt-0.5">
+                Tower
               </span>
             </div>
-            <p className="text-sm text-primary-foreground/60">
-              © 2024 Al Hamra Tower. {t("footer.rights")}
+            <p className="text-sm text-primary-foreground/60 leading-relaxed max-w-xs">
+              {t("footer.tagline") || "Kuwait's architectural landmark. A place of gravity."}
             </p>
           </div>
 
           {/* Navigation Links */}
-          <div>
-            <nav className="flex flex-wrap gap-x-6 gap-y-2">
+          <div className="md:col-span-4">
+            <h3 className="text-xs uppercase tracking-[0.2em] text-primary-foreground/40 mb-6">
+              {t("footer.navigation") || "Navigation"}
+            </h3>
+            <nav className="grid grid-cols-2 gap-x-6 gap-y-3">
               {navLinks.map((link) => (
                 <a
                   key={link.key}
                   href={link.href}
-                  className="text-sm text-primary-foreground/60 hover:text-primary-foreground transition-colors"
+                  className="text-sm text-primary-foreground/60 hover:text-primary-foreground transition-colors duration-300"
                 >
                   {t(link.key)}
                 </a>
@@ -46,28 +63,54 @@ const Footer = () => {
           </div>
 
           {/* Legal & Social */}
-          <div className="space-y-4">
-            <div className="flex gap-6">
-              <a href="#" className="text-sm text-primary-foreground/60 hover:text-primary-foreground transition-colors">
-                {t("footer.privacy")}
-              </a>
-              <a href="#" className="text-sm text-primary-foreground/60 hover:text-primary-foreground transition-colors">
-                {t("footer.terms")}
-              </a>
+          <div className="md:col-span-4 space-y-8">
+            <div>
+              <h3 className="text-xs uppercase tracking-[0.2em] text-primary-foreground/40 mb-6">
+                {t("footer.legal") || "Legal"}
+              </h3>
+              <div className="flex gap-6">
+                <a href="#" className="text-sm text-primary-foreground/60 hover:text-primary-foreground transition-colors duration-300">
+                  {t("footer.privacy")}
+                </a>
+                <a href="#" className="text-sm text-primary-foreground/60 hover:text-primary-foreground transition-colors duration-300">
+                  {t("footer.terms")}
+                </a>
+              </div>
             </div>
 
-            {/* Social Icons Placeholder */}
-            <div className="flex gap-3">
-              {["LI", "TW", "IG"].map((icon) => (
-                <div
-                  key={icon}
-                  className="w-8 h-8 bg-primary-foreground/10 flex items-center justify-center text-xs text-primary-foreground/60 hover:bg-primary-foreground/20 transition-colors cursor-pointer"
-                >
-                  {icon}
-                </div>
-              ))}
+            {/* Social Icons */}
+            <div>
+              <h3 className="text-xs uppercase tracking-[0.2em] text-primary-foreground/40 mb-6">
+                {t("footer.connect") || "Connect"}
+              </h3>
+              <div className="flex gap-4">
+                {[
+                  { label: "LinkedIn", abbr: "Li" },
+                  { label: "Twitter", abbr: "X" },
+                  { label: "Instagram", abbr: "Ig" },
+                ].map((social) => (
+                  <a
+                    key={social.label}
+                    href="#"
+                    className="w-10 h-10 border border-primary-foreground/20 flex items-center justify-center text-xs text-primary-foreground/60 hover:bg-primary-foreground/10 hover:text-primary-foreground transition-all duration-300"
+                    aria-label={social.label}
+                  >
+                    {social.abbr}
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="mt-20 pt-8 border-t border-primary-foreground/10 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-xs text-primary-foreground/40">
+            © 2024 Al Hamra Tower. {t("footer.rights")}
+          </p>
+          <p className="text-xs text-primary-foreground/40">
+            Kuwait City, Kuwait
+          </p>
         </div>
       </div>
     </footer>
