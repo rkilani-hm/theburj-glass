@@ -11,7 +11,7 @@ const HeroSection = () => {
       <div className="absolute inset-0">
         <img
           src={heroImage}
-          alt="Al Hamra Tower at dusk"
+          alt="Al Hamra Tower at moonlight"
           className="w-full h-full object-cover animate-reveal"
         />
         {/* Gradient Overlay */}
