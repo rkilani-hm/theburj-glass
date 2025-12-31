@@ -1,17 +1,20 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ChevronDown } from "lucide-react";
-import heroImage from "@/assets/hero-tower.jpg";
+import heroVideo from "@/assets/hero-video.mp4";
 
 const HeroSection = () => {
   const { t } = useLanguage();
 
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image */}
+      {/* Background Video */}
       <div className="absolute inset-0">
-        <img
-          src={heroImage}
-          alt="Al Hamra Tower at moonlight"
+        <video
+          src={heroVideo}
+          autoPlay
+          muted
+          loop
+          playsInline
           className="w-full h-full object-cover animate-reveal"
         />
         {/* Gradient Overlay */}
