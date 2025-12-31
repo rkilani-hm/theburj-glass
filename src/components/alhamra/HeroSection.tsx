@@ -15,7 +15,7 @@ const HeroSection = () => {
           muted
           loop
           playsInline
-          className="w-full h-full object-cover animate-reveal"
+          className="w-full h-full object-cover animate-reveal animate-ken-burns"
         />
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
