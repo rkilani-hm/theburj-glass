@@ -1,12 +1,15 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
 import { useScrollReveal, revealVariants } from "@/hooks/useScrollReveal";
+import towerFogNight from "@/assets/tower-fog-night.png";
+import towerAerialSunset from "@/assets/tower-aerial-sunset.png";
 
 const ContinuitySection = () => {
   const { t } = useLanguage();
   const { ref: headerRef, isInView: headerInView } = useScrollReveal();
   const { ref: textRef, isInView: textInView } = useScrollReveal();
   const { ref: timelineRef, isInView: timelineInView } = useScrollReveal();
+  const { ref: visionRef, isInView: visionInView } = useScrollReveal();
 
   const timeline = [
     { year: "2005", label: t("continuity.groundbreaking") || "Ground Breaking" },
@@ -124,6 +127,56 @@ const ContinuitySection = () => {
             </div>
           </div>
         </motion.div>
+
+        {/* Vision Section with Images */}
+        <div ref={visionRef} className="mt-32 pt-20 border-t border-border">
+          <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
+            <motion.div
+              initial="hidden"
+              animate={visionInView ? "visible" : "hidden"}
+              variants={revealVariants.slideLeft}
+              transition={{ duration: 0.8 }}
+              className="space-y-8"
+            >
+              <h3 className="text-title font-light text-foreground">
+                {t("continuity.vision.title") || "A Lasting Vision"}
+              </h3>
+              <p className="text-body-lg text-muted-foreground leading-relaxed">
+                {t("continuity.vision.p1") || "Al Hamra Tower was conceived not as a moment in time, but as a statement for generations. Its design transcends trends, rooted in principles of timeless elegance and structural permanence."}
+              </p>
+              <p className="text-body text-muted-foreground leading-relaxed">
+                {t("continuity.vision.p2") || "The building's legacy is written not just in stone and steel, but in the enterprises it houses and the ambitions it enables."}
+              </p>
+
+              <div className="aspect-[16/10] overflow-hidden group mt-12">
+                <img
+                  src={towerAerialSunset}
+                  alt="Tower at sunset"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial="hidden"
+              animate={visionInView ? "visible" : "hidden"}
+              variants={revealVariants.slideRight}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="lg:pt-24"
+            >
+              <div className="aspect-[3/4] overflow-hidden group">
+                <img
+                  src={towerFogNight}
+                  alt="Tower emerging from fog at night"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+              </div>
+              <p className="mt-6 text-sm text-muted-foreground italic">
+                {t("continuity.caption") || "Above the clouds, a beacon for Kuwait's future"}
+              </p>
+            </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   );

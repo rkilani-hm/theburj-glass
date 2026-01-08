@@ -3,11 +3,14 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
 import { useScrollReveal, revealVariants } from "@/hooks/useScrollReveal";
 import officeInterior from "@/assets/interior-office.jpg";
+import towerAerialDay from "@/assets/tower-aerial-day.png";
+import kuwaitSkylineDay from "@/assets/kuwait-skyline-day.png";
 
 const BusinessSection = () => {
   const { t } = useLanguage();
   const { ref: headerRef, isInView: headerInView } = useScrollReveal();
   const { ref: contentRef, isInView: contentInView } = useScrollReveal();
+  const { ref: additionalRef, isInView: additionalInView } = useScrollReveal();
 
   const items = [
     {
@@ -132,6 +135,59 @@ const BusinessSection = () => {
                 </motion.div>
               ))}
             </div>
+          </div>
+        </div>
+
+        {/* Additional Content Section */}
+        <div ref={additionalRef} className="mt-32 pt-20 border-t border-border">
+          <motion.h3
+            initial="hidden"
+            animate={additionalInView ? "visible" : "hidden"}
+            variants={revealVariants.fadeUp}
+            transition={{ duration: 0.6 }}
+            className="text-title font-light text-foreground mb-12"
+          >
+            {t("business.global.title") || "A Global Business Address"}
+          </motion.h3>
+
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <motion.div
+              initial="hidden"
+              animate={additionalInView ? "visible" : "hidden"}
+              variants={revealVariants.slideLeft}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="space-y-6"
+            >
+              <p className="text-body-lg text-muted-foreground leading-relaxed">
+                {t("business.global.p1") || "Al Hamra Tower hosts the headquarters of Kuwait's leading corporations and international enterprises. The address signals prestige, stability, and forward-thinking vision."}
+              </p>
+              <p className="text-body text-muted-foreground leading-relaxed">
+                {t("business.global.p2") || "With direct access to major transportation networks and proximity to government institutions, the tower offers unmatched connectivity for businesses operating at the highest level."}
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial="hidden"
+              animate={additionalInView ? "visible" : "hidden"}
+              variants={revealVariants.slideRight}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="grid grid-cols-2 gap-4"
+            >
+              <div className="aspect-[3/4] overflow-hidden group">
+                <img
+                  src={towerAerialDay}
+                  alt="Tower aerial view"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+              </div>
+              <div className="aspect-[3/4] overflow-hidden group mt-8">
+                <img
+                  src={kuwaitSkylineDay}
+                  alt="Kuwait skyline"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+              </div>
+            </motion.div>
           </div>
         </div>
       </div>
