@@ -42,13 +42,13 @@ const Header = () => {
           {/* Logo */}
           <a href="#" className="flex items-center group">
             <div className="relative">
-              <span className={`text-xl lg:text-2xl font-light tracking-[0.2em] uppercase transition-colors duration-500 ${
-                scrolled ? "text-foreground" : "text-charcoal-900"
+              <span className={`text-xl lg:text-2xl font-light tracking-[0.2em] uppercase transition-all duration-500 ${
+                scrolled ? "text-foreground" : "text-charcoal-900 drop-shadow-[0_1px_2px_rgba(255,255,255,0.6)]"
               }`}>
                 Al Hamra
               </span>
-              <span className={`block text-[10px] tracking-[0.3em] uppercase mt-0.5 transition-colors duration-500 ${
-                scrolled ? "text-muted-foreground" : "text-charcoal-700"
+              <span className={`block text-[10px] tracking-[0.3em] uppercase mt-0.5 transition-all duration-500 ${
+                scrolled ? "text-muted-foreground" : "text-charcoal-700 drop-shadow-[0_1px_2px_rgba(255,255,255,0.5)]"
               }`}>
                 Tower
               </span>
@@ -61,14 +61,14 @@ const Header = () => {
               <a
                 key={item.key}
                 href={item.href}
-                className={`relative text-sm tracking-wide transition-colors duration-300 group ${
+                className={`relative text-sm tracking-wide transition-all duration-300 group ${
                   scrolled
                     ? activeSection === item.section
                       ? "text-foreground"
                       : "text-muted-foreground hover:text-foreground"
                     : activeSection === item.section
-                      ? "text-charcoal-900"
-                      : "text-charcoal-700 hover:text-charcoal-900"
+                      ? "text-charcoal-900 drop-shadow-[0_1px_2px_rgba(255,255,255,0.6)]"
+                      : "text-charcoal-700 hover:text-charcoal-900 drop-shadow-[0_1px_2px_rgba(255,255,255,0.5)]"
                 }`}
               >
                 {t(item.key)}
@@ -88,7 +88,7 @@ const Header = () => {
               className={`px-4 py-2 text-sm tracking-wider border transition-all duration-300 ${
                 scrolled 
                   ? "border-border hover:bg-muted text-foreground" 
-                  : "border-charcoal-400 hover:bg-charcoal-100 text-charcoal-900"
+                  : "border-charcoal-400 hover:bg-charcoal-100/50 text-charcoal-900 drop-shadow-[0_1px_2px_rgba(255,255,255,0.6)]"
               }`}
             >
               {language === "en" ? "عربي" : "EN"}
