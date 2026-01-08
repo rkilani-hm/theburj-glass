@@ -42,10 +42,14 @@ const Header = () => {
           {/* Logo */}
           <a href="#" className="flex items-center group">
             <div className="relative">
-              <span className="text-xl lg:text-2xl font-light tracking-[0.2em] uppercase text-foreground">
+              <span className={`text-xl lg:text-2xl font-light tracking-[0.2em] uppercase transition-colors duration-500 ${
+                scrolled ? "text-foreground" : "text-charcoal-900"
+              }`}>
                 Al Hamra
               </span>
-              <span className="block text-[10px] tracking-[0.3em] uppercase text-muted-foreground mt-0.5">
+              <span className={`block text-[10px] tracking-[0.3em] uppercase mt-0.5 transition-colors duration-500 ${
+                scrolled ? "text-muted-foreground" : "text-charcoal-700"
+              }`}>
                 Tower
               </span>
             </div>
@@ -58,16 +62,20 @@ const Header = () => {
                 key={item.key}
                 href={item.href}
                 className={`relative text-sm tracking-wide transition-colors duration-300 group ${
-                  activeSection === item.section
-                    ? "text-foreground"
-                    : "text-muted-foreground hover:text-foreground"
+                  scrolled
+                    ? activeSection === item.section
+                      ? "text-foreground"
+                      : "text-muted-foreground hover:text-foreground"
+                    : activeSection === item.section
+                      ? "text-charcoal-900"
+                      : "text-charcoal-700 hover:text-charcoal-900"
                 }`}
               >
                 {t(item.key)}
                 <span
-                  className={`absolute -bottom-1 left-0 h-px bg-foreground transition-all duration-300 ${
-                    activeSection === item.section ? "w-full" : "w-0 group-hover:w-full"
-                  }`}
+                  className={`absolute -bottom-1 left-0 h-px transition-all duration-300 ${
+                    scrolled ? "bg-foreground" : "bg-charcoal-900"
+                  } ${activeSection === item.section ? "w-full" : "w-0 group-hover:w-full"}`}
                 />
               </a>
             ))}
@@ -77,7 +85,11 @@ const Header = () => {
           <div className="flex items-center gap-6">
             <button
               onClick={toggleLanguage}
-              className="px-4 py-2 text-sm tracking-wider border border-border hover:bg-muted transition-all duration-300"
+              className={`px-4 py-2 text-sm tracking-wider border transition-all duration-300 ${
+                scrolled 
+                  ? "border-border hover:bg-muted text-foreground" 
+                  : "border-charcoal-400 hover:bg-charcoal-100 text-charcoal-900"
+              }`}
             >
               {language === "en" ? "عربي" : "EN"}
             </button>
