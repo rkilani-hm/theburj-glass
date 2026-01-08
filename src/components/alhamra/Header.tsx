@@ -77,11 +77,6 @@ const Header = () => {
                 }`}
               >
                 {t(item.key)}
-                <span
-                  className={`absolute -bottom-1 left-0 h-px transition-all duration-300 ${
-                    showLightText ? "bg-charcoal-900" : "bg-foreground"
-                  } ${isActive(item.href) ? "w-full" : "w-0 group-hover:w-full"}`}
-                />
               </Link>
             ))}
           </nav>
