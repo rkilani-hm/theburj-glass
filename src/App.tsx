@@ -3,7 +3,16 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
+import PageLayout from "./layouts/PageLayout";
+import Home from "./pages/Home";
+import Tower from "./pages/Tower";
+import Perspective from "./pages/Perspective";
+import Business from "./pages/Business";
+import Services from "./pages/Services";
+import Legacy from "./pages/Legacy";
+import Location from "./pages/Location";
+import Contact from "./pages/Contact";
+import Leasing from "./pages/Leasing";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -14,11 +23,20 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <PageLayout>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/tower" element={<Tower />} />
+            <Route path="/perspective" element={<Perspective />} />
+            <Route path="/business" element={<Business />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/legacy" element={<Legacy />} />
+            <Route path="/location" element={<Location />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/leasing" element={<Leasing />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </PageLayout>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
