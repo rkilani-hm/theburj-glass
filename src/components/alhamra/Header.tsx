@@ -1,15 +1,14 @@
 import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useScrollSpy } from "@/hooks/useScrollSpy";
 
 const Header = () => {
   const { language, toggleLanguage, t } = useLanguage();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-
-  const sectionIds = ["presence", "perspective", "business", "services", "continuity", "location", "contact"];
-  const activeSection = useScrollSpy(sectionIds, 150);
+  const location = useLocation();
+  const isHome = location.pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,14 +19,20 @@ const Header = () => {
   }, []);
 
   const navItems = [
-    { key: "nav.tower", href: "#presence", section: "presence" },
-    { key: "nav.perspective", href: "#perspective", section: "perspective" },
-    { key: "nav.business", href: "#business", section: "business" },
-    { key: "nav.services", href: "#services", section: "services" },
-    { key: "nav.legacy", href: "#continuity", section: "continuity" },
-    { key: "nav.location", href: "#location", section: "location" },
-    { key: "nav.contact", href: "#contact", section: "contact" },
+    { key: "nav.tower", href: "/tower" },
+    { key: "nav.perspective", href: "/perspective" },
+    { key: "nav.business", href: "/business" },
+    { key: "nav.services", href: "/services" },
+    { key: "nav.legacy", href: "/legacy" },
+    { key: "nav.leasing", href: "/leasing" },
+    { key: "nav.location", href: "/location" },
+    { key: "nav.contact", href: "/contact" },
   ];
+
+  const isActive = (href: string) => location.pathname === href;
+
+  // Show light text on home page when not scrolled
+  const showLightText = isHome && !scrolled;
 
   return (
     <header
@@ -40,44 +45,44 @@ const Header = () => {
       <div className="container mx-auto px-6 lg:px-12">
         <div className="flex items-center justify-between h-20 lg:h-24">
           {/* Logo */}
-          <a href="#" className="flex items-center group">
+          <Link to="/" className="flex items-center group">
             <div className="relative">
               <span className={`text-xl lg:text-2xl font-light tracking-[0.2em] uppercase transition-all duration-500 ${
-                scrolled ? "text-foreground" : "text-charcoal-900 drop-shadow-[0_1px_2px_rgba(255,255,255,0.6)]"
+                showLightText ? "text-charcoal-900 drop-shadow-[0_1px_2px_rgba(255,255,255,0.6)]" : "text-foreground"
               }`}>
                 Al Hamra
               </span>
               <span className={`block text-[10px] tracking-[0.3em] uppercase mt-0.5 transition-all duration-500 ${
-                scrolled ? "text-muted-foreground" : "text-charcoal-700 drop-shadow-[0_1px_2px_rgba(255,255,255,0.5)]"
+                showLightText ? "text-charcoal-700 drop-shadow-[0_1px_2px_rgba(255,255,255,0.5)]" : "text-muted-foreground"
               }`}>
                 Tower
               </span>
             </div>
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-10">
+          <nav className="hidden lg:flex items-center gap-8">
             {navItems.map((item) => (
-              <a
+              <Link
                 key={item.key}
-                href={item.href}
+                to={item.href}
                 className={`relative text-sm tracking-wide transition-all duration-300 group ${
-                  scrolled
-                    ? activeSection === item.section
-                      ? "text-foreground"
-                      : "text-muted-foreground hover:text-foreground"
-                    : activeSection === item.section
+                  showLightText
+                    ? isActive(item.href)
                       ? "text-charcoal-900 drop-shadow-[0_1px_2px_rgba(255,255,255,0.6)]"
                       : "text-charcoal-700 hover:text-charcoal-900 drop-shadow-[0_1px_2px_rgba(255,255,255,0.5)]"
+                    : isActive(item.href)
+                      ? "text-foreground"
+                      : "text-muted-foreground hover:text-foreground"
                 }`}
               >
                 {t(item.key)}
                 <span
                   className={`absolute -bottom-1 left-0 h-px transition-all duration-300 ${
-                    scrolled ? "bg-foreground" : "bg-charcoal-900"
-                  } ${activeSection === item.section ? "w-full" : "w-0 group-hover:w-full"}`}
+                    showLightText ? "bg-charcoal-900" : "bg-foreground"
+                  } ${isActive(item.href) ? "w-full" : "w-0 group-hover:w-full"}`}
                 />
-              </a>
+              </Link>
             ))}
           </nav>
 
@@ -86,9 +91,9 @@ const Header = () => {
             <button
               onClick={toggleLanguage}
               className={`px-4 py-2 text-sm tracking-wider border transition-all duration-300 ${
-                scrolled 
-                  ? "border-border hover:bg-muted text-foreground" 
-                  : "border-charcoal-400 hover:bg-charcoal-100/50 text-charcoal-900 drop-shadow-[0_1px_2px_rgba(255,255,255,0.6)]"
+                showLightText
+                  ? "border-charcoal-400 hover:bg-charcoal-100/50 text-charcoal-900 drop-shadow-[0_1px_2px_rgba(255,255,255,0.6)]"
+                  : "border-border hover:bg-muted text-foreground"
               }`}
             >
               {language === "en" ? "عربي" : "EN"}
@@ -106,25 +111,25 @@ const Header = () => {
         {/* Mobile Navigation */}
         <div
           className={`lg:hidden overflow-hidden transition-all duration-500 ease-out-expo ${
-            menuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+            menuOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
           }`}
         >
-          <nav className="py-8 border-t border-border">
+          <nav className="py-8 border-t border-border bg-background/95 backdrop-blur-md">
             <div className="flex flex-col gap-6">
               {navItems.map((item, index) => (
-                <a
+                <Link
                   key={item.key}
-                  href={item.href}
+                  to={item.href}
                   onClick={() => setMenuOpen(false)}
                   className={`text-lg transition-colors duration-300 ${
-                    activeSection === item.section
+                    isActive(item.href)
                       ? "text-foreground"
                       : "text-muted-foreground hover:text-foreground"
                   }`}
                   style={{ animationDelay: `${index * 50}ms` }}
                 >
                   {t(item.key)}
-                </a>
+                </Link>
               ))}
             </div>
           </nav>
