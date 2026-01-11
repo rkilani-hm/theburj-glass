@@ -10,6 +10,13 @@ import towerDetail from "@/assets/tower-detail.jpg";
 import interiorLobby from "@/assets/interior-lobby.jpg";
 import interiorOffice from "@/assets/interior-office.jpg";
 import towerTopClouds from "@/assets/tower-top-clouds.png";
+import towerFacadeDetail from "@/assets/tower-facade-detail.jpg";
+import towerAerialCityscape from "@/assets/tower-aerial-cityscape.jpg";
+import towerAerialSea from "@/assets/tower-aerial-sea.jpg";
+import towerEntranceNight from "@/assets/tower-entrance-night.jpg";
+import towerEntranceFountain from "@/assets/tower-entrance-fountain.jpg";
+import towerNightIlluminated from "@/assets/tower-night-illuminated.jpg";
+import kuwaitSkylineWaterNight from "@/assets/kuwait-skyline-water-night.jpg";
 
 const PresenceSection = () => {
   const { t } = useLanguage();
@@ -20,6 +27,9 @@ const PresenceSection = () => {
   const { ref: interiorRef, isInView: interiorInView } = useScrollReveal();
   const { ref: detailsRef, isInView: detailsInView } = useScrollReveal();
   const { ref: factsRef, isInView: factsInView } = useScrollReveal();
+  const { ref: aerialRef, isInView: aerialInView } = useScrollReveal();
+  const { ref: nightRef, isInView: nightInView } = useScrollReveal();
+  const { ref: entranceRef, isInView: entranceInView } = useScrollReveal();
 
   const stats = [
     { label: t("presence.height"), value: t("presence.height.value") },
@@ -454,6 +464,198 @@ const PresenceSection = () => {
                 </p>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Aerial Perspectives */}
+      <div className="py-section bg-background texture-noise">
+        <div className="container mx-auto px-6 lg:px-12">
+          <motion.div
+            ref={aerialRef}
+            initial="hidden"
+            animate={aerialInView ? "visible" : "hidden"}
+            variants={revealVariants.fadeUp}
+            transition={{ duration: 0.6 }}
+            className="mb-12"
+          >
+            <div className="flex items-center gap-4 mb-6">
+              <div className="w-12 h-px bg-border" />
+              <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
+                {t("tower.aerial.label")}
+              </span>
+            </div>
+            <h3 className="text-subheadline font-light text-foreground mb-4">
+              {t("tower.aerial.title")}
+            </h3>
+            <p className="text-body text-muted-foreground max-w-2xl">
+              {t("tower.aerial.desc")}
+            </p>
+          </motion.div>
+
+          <div className="grid lg:grid-cols-2 gap-6">
+            <motion.div
+              initial="hidden"
+              animate={aerialInView ? "visible" : "hidden"}
+              variants={revealVariants.fadeUp}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="aspect-[4/3] overflow-hidden group relative"
+            >
+              <img
+                src={towerAerialCityscape}
+                alt="Al Hamra Tower dominating Kuwait City skyline"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-foreground/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute bottom-6 left-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <p className="text-white text-lg font-light">{t("tower.aerial.img1")}</p>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial="hidden"
+              animate={aerialInView ? "visible" : "hidden"}
+              variants={revealVariants.fadeUp}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="aspect-[4/3] overflow-hidden group relative"
+            >
+              <img
+                src={towerAerialSea}
+                alt="Al Hamra Tower with Arabian Gulf view"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-foreground/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute bottom-6 left-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <p className="text-white text-lg font-light">{t("tower.aerial.img2")}</p>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Full Width Facade Detail */}
+          <motion.div
+            initial="hidden"
+            animate={aerialInView ? "visible" : "hidden"}
+            variants={revealVariants.fadeUp}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="mt-6 aspect-[21/9] overflow-hidden group relative"
+          >
+            <img
+              src={towerFacadeDetail}
+              alt="Al Hamra Tower sculptural facade detail"
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-foreground/40 via-transparent to-transparent" />
+            <div className="absolute bottom-8 left-8">
+              <p className="text-white/80 text-sm uppercase tracking-[0.2em] mb-2">{t("tower.facade.label")}</p>
+              <p className="text-white text-2xl font-light max-w-md">{t("tower.facade.title")}</p>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Grand Entrance */}
+      <div className="py-section bg-secondary">
+        <div className="container mx-auto px-6 lg:px-12">
+          <div ref={entranceRef} className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+            {/* Text */}
+            <motion.div
+              initial="hidden"
+              animate={entranceInView ? "visible" : "hidden"}
+              variants={revealVariants.slideLeft}
+              transition={{ duration: 0.8 }}
+              className="space-y-8"
+            >
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-12 h-px bg-border" />
+                <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
+                  {t("tower.entrance.label")}
+                </span>
+              </div>
+              <h3 className="text-subheadline font-light text-foreground">
+                {t("tower.entrance.title")}
+              </h3>
+              <p className="text-body-lg text-muted-foreground leading-relaxed">
+                {t("tower.entrance.p1")}
+              </p>
+              <p className="text-body text-muted-foreground leading-relaxed">
+                {t("tower.entrance.p2")}
+              </p>
+            </motion.div>
+
+            {/* Entrance Images */}
+            <motion.div
+              initial="hidden"
+              animate={entranceInView ? "visible" : "hidden"}
+              variants={revealVariants.slideRight}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="grid grid-cols-2 gap-4"
+            >
+              <div className="aspect-[3/4] overflow-hidden group">
+                <img
+                  src={towerEntranceNight}
+                  alt="Tower entrance at night"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+              </div>
+              <div className="aspect-[3/4] overflow-hidden group mt-8">
+                <img
+                  src={towerEntranceFountain}
+                  alt="Tower fountain and entrance plaza"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </div>
+
+      {/* Night Illumination */}
+      <div className="py-section bg-foreground">
+        <div className="container mx-auto px-6 lg:px-12">
+          <motion.div
+            ref={nightRef}
+            initial="hidden"
+            animate={nightInView ? "visible" : "hidden"}
+            variants={revealVariants.fadeUp}
+            transition={{ duration: 0.6 }}
+            className="mb-12 text-center"
+          >
+            <h3 className="text-subheadline font-light text-background mb-4">
+              {t("tower.night.title")}
+            </h3>
+            <p className="text-body text-background/70 max-w-2xl mx-auto">
+              {t("tower.night.desc")}
+            </p>
+          </motion.div>
+
+          <div className="grid lg:grid-cols-3 gap-6">
+            <motion.div
+              initial="hidden"
+              animate={nightInView ? "visible" : "hidden"}
+              variants={revealVariants.fadeUp}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="lg:col-span-2 aspect-[16/9] overflow-hidden group relative"
+            >
+              <img
+                src={kuwaitSkylineWaterNight}
+                alt="Kuwait City skyline at night with Al Hamra Tower"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+            </motion.div>
+
+            <motion.div
+              initial="hidden"
+              animate={nightInView ? "visible" : "hidden"}
+              variants={revealVariants.fadeUp}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="aspect-[3/4] lg:aspect-auto overflow-hidden group relative"
+            >
+              <img
+                src={towerNightIlluminated}
+                alt="Al Hamra Tower illuminated at night"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+            </motion.div>
           </div>
         </div>
       </div>
