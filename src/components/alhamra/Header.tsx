@@ -66,7 +66,7 @@ const Header = () => {
               <Link
                 key={item.key}
                 to={item.href}
-                className={`relative text-sm tracking-wide transition-all duration-300 group ${
+                className={`text-sm tracking-wide transition-colors duration-300 ${
                   showLightText
                     ? isActive(item.href)
                       ? "text-charcoal-900 drop-shadow-[0_1px_2px_rgba(255,255,255,0.6)]"
