@@ -161,12 +161,24 @@ const Home = () => {
                 animate={galleryInView ? "visible" : "hidden"}
                 variants={revealVariants.fadeUp}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="lg:col-span-2 aspect-[16/9] overflow-hidden group"
+                whileHover={{ scale: 1.02, transition: { duration: 0.4, ease: "easeOut" } }}
+                className="lg:col-span-2 aspect-[16/9] overflow-hidden group relative cursor-pointer"
               >
-                <img
+                <motion.img
                   src={towerCloudsAerial}
                   alt="Tower emerging from clouds"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-full object-cover"
+                  initial={{ scale: 1.1 }}
+                  animate={galleryInView ? { scale: 1 } : { scale: 1.1 }}
+                  transition={{ duration: 1.2, ease: "easeOut" }}
+                  whileHover={{ scale: 1.1 }}
+                />
+                <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors duration-500" />
+                <motion.div 
+                  className="absolute bottom-0 left-0 w-0 h-1 bg-primary group-hover:w-full transition-all duration-700"
+                  initial={{ width: 0 }}
+                  animate={galleryInView ? { width: "30%" } : { width: 0 }}
+                  transition={{ duration: 0.8, delay: 0.4 }}
                 />
               </motion.div>
 
@@ -175,12 +187,24 @@ const Home = () => {
                 animate={galleryInView ? "visible" : "hidden"}
                 variants={revealVariants.fadeUp}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="aspect-[4/5] overflow-hidden group"
+                whileHover={{ scale: 1.02, transition: { duration: 0.4, ease: "easeOut" } }}
+                className="aspect-[4/5] overflow-hidden group relative cursor-pointer"
               >
-                <img
+                <motion.img
                   src={towerBwAngle}
                   alt="Tower architectural detail"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-full object-cover"
+                  initial={{ scale: 1.1 }}
+                  animate={galleryInView ? { scale: 1 } : { scale: 1.1 }}
+                  transition={{ duration: 1.2, ease: "easeOut", delay: 0.1 }}
+                  whileHover={{ scale: 1.1 }}
+                />
+                <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors duration-500" />
+                <motion.div 
+                  className="absolute bottom-0 left-0 h-1 bg-primary"
+                  initial={{ width: 0 }}
+                  animate={galleryInView ? { width: "40%" } : { width: 0 }}
+                  transition={{ duration: 0.8, delay: 0.5 }}
                 />
               </motion.div>
 
@@ -189,12 +213,24 @@ const Home = () => {
                 animate={galleryInView ? "visible" : "hidden"}
                 variants={revealVariants.fadeUp}
                 transition={{ duration: 0.6, delay: 0.3 }}
-                className="aspect-square overflow-hidden group"
+                whileHover={{ scale: 1.02, transition: { duration: 0.4, ease: "easeOut" } }}
+                className="aspect-square overflow-hidden group relative cursor-pointer"
               >
-                <img
+                <motion.img
                   src={skylineTwilight}
                   alt="Kuwait skyline at twilight"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-full object-cover"
+                  initial={{ scale: 1.1 }}
+                  animate={galleryInView ? { scale: 1 } : { scale: 1.1 }}
+                  transition={{ duration: 1.2, ease: "easeOut", delay: 0.2 }}
+                  whileHover={{ scale: 1.1 }}
+                />
+                <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors duration-500" />
+                <motion.div 
+                  className="absolute bottom-0 left-0 h-1 bg-primary"
+                  initial={{ width: 0 }}
+                  animate={galleryInView ? { width: "50%" } : { width: 0 }}
+                  transition={{ duration: 0.8, delay: 0.6 }}
                 />
               </motion.div>
 
@@ -203,12 +239,24 @@ const Home = () => {
                 animate={galleryInView ? "visible" : "hidden"}
                 variants={revealVariants.fadeUp}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="lg:col-span-2 aspect-[21/9] overflow-hidden group"
+                whileHover={{ scale: 1.02, transition: { duration: 0.4, ease: "easeOut" } }}
+                className="lg:col-span-2 aspect-[21/9] overflow-hidden group relative cursor-pointer"
               >
-                <img
+                <motion.img
                   src={kuwaitSkylineNight}
                   alt="Kuwait city at night"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-full object-cover"
+                  initial={{ scale: 1.1 }}
+                  animate={galleryInView ? { scale: 1 } : { scale: 1.1 }}
+                  transition={{ duration: 1.2, ease: "easeOut", delay: 0.3 }}
+                  whileHover={{ scale: 1.1 }}
+                />
+                <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors duration-500" />
+                <motion.div 
+                  className="absolute bottom-0 left-0 h-1 bg-primary"
+                  initial={{ width: 0 }}
+                  animate={galleryInView ? { width: "25%" } : { width: 0 }}
+                  transition={{ duration: 0.8, delay: 0.7 }}
                 />
               </motion.div>
             </div>
