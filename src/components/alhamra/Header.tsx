@@ -31,7 +31,7 @@ const Header = () => {
 
   const isActive = (href: string) => location.pathname === href;
 
-  // Show light text on home page when not scrolled
+  // Show light text on home page when not scrolled - use white for better contrast over video
   const showLightText = isHome && !scrolled;
 
   return (
@@ -42,18 +42,18 @@ const Header = () => {
           : "bg-transparent"
       }`}
     >
-      <div className="container mx-auto px-6 lg:px-12">
-        <div className="flex items-center justify-between h-20 lg:h-24">
+      <div className="container mx-auto px-4 md:px-6 lg:px-12">
+        <div className="flex items-center justify-between h-16 md:h-20 lg:h-24">
           {/* Logo */}
-          <Link to="/" className="flex items-center group">
+          <Link to="/" className="flex items-center group flex-shrink-0">
             <div className="relative">
-              <span className={`text-xl lg:text-2xl font-light tracking-[0.2em] uppercase transition-colors duration-500 ${
-                showLightText ? "text-charcoal-900" : "text-foreground"
+              <span className={`text-lg md:text-xl lg:text-2xl font-light tracking-[0.15em] md:tracking-[0.2em] uppercase transition-colors duration-500 ${
+                showLightText ? "text-white drop-shadow-md" : "text-foreground"
               }`}>
                 Al Hamra
               </span>
-              <span className={`block text-[10px] tracking-[0.3em] uppercase mt-0.5 transition-colors duration-500 ${
-                showLightText ? "text-charcoal-700" : "text-muted-foreground"
+              <span className={`block text-[9px] md:text-[10px] tracking-[0.25em] md:tracking-[0.3em] uppercase mt-0.5 transition-colors duration-500 ${
+                showLightText ? "text-white/80 drop-shadow-sm" : "text-muted-foreground"
               }`}>
                 Tower
               </span>
@@ -61,16 +61,16 @@ const Header = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-8">
+          <nav className="hidden xl:flex items-center gap-4 2xl:gap-8">
             {navItems.map((item) => (
               <Link
                 key={item.key}
                 to={item.href}
-                className={`text-sm tracking-wide transition-colors duration-300 ${
+                className={`text-xs 2xl:text-sm tracking-wide transition-colors duration-300 whitespace-nowrap ${
                   showLightText
                     ? isActive(item.href)
-                      ? "text-charcoal-900"
-                      : "text-charcoal-700 hover:text-charcoal-900"
+                      ? "text-white font-medium drop-shadow-md"
+                      : "text-white/90 hover:text-white drop-shadow-sm"
                     : isActive(item.href)
                       ? "text-foreground"
                       : "text-muted-foreground hover:text-foreground"
@@ -82,12 +82,12 @@ const Header = () => {
           </nav>
 
           {/* Language Toggle & Mobile Menu */}
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-3 md:gap-6">
             <button
               onClick={toggleLanguage}
-              className={`px-4 py-2 text-sm tracking-wider border transition-colors duration-300 ${
+              className={`px-3 md:px-4 py-1.5 md:py-2 text-xs md:text-sm tracking-wider border transition-colors duration-300 ${
                 showLightText
-                  ? "border-charcoal-400 hover:bg-charcoal-100/50 text-charcoal-900"
+                  ? "border-white/50 hover:bg-white/10 text-white drop-shadow-sm"
                   : "border-border hover:bg-muted text-foreground"
               }`}
             >
@@ -96,7 +96,9 @@ const Header = () => {
 
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="lg:hidden p-2 hover:bg-muted transition-colors duration-300"
+              className={`xl:hidden p-2 transition-colors duration-300 ${
+                showLightText ? "text-white hover:bg-white/10" : "hover:bg-muted"
+              }`}
             >
               {menuOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
