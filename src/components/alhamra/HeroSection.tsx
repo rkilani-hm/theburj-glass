@@ -51,7 +51,7 @@ const HeroSection = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 text-left px-6 max-w-4xl mx-auto w-full">
+      <div className="relative z-10 text-left container mx-auto px-6 lg:px-12 w-full">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-light tracking-wide text-foreground">
           <LetterDrop text={t("hero.headline")} delay={0.5} />
         </h1>
