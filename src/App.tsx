@@ -2,9 +2,11 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import PageLayout from "./layouts/PageLayout";
+import PageTransition from "./components/alhamra/PageTransition";
 import Home from "./pages/Home";
 import Tower from "./pages/Tower";
 import Perspective from "./pages/Perspective";
@@ -18,6 +20,27 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
+const AnimatedRoutes = () => {
+  const location = useLocation();
+
+  return (
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<PageTransition><Home /></PageTransition>} />
+        <Route path="/tower" element={<PageTransition><Tower /></PageTransition>} />
+        <Route path="/perspective" element={<PageTransition><Perspective /></PageTransition>} />
+        <Route path="/business" element={<PageTransition><Business /></PageTransition>} />
+        <Route path="/services" element={<PageTransition><Services /></PageTransition>} />
+        <Route path="/legacy" element={<PageTransition><Legacy /></PageTransition>} />
+        <Route path="/location" element={<PageTransition><Location /></PageTransition>} />
+        <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
+        <Route path="/leasing" element={<PageTransition><Leasing /></PageTransition>} />
+        <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
+      </Routes>
+    </AnimatePresence>
+  );
+};
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <LanguageProvider>
@@ -26,18 +49,7 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <PageLayout>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/tower" element={<Tower />} />
-              <Route path="/perspective" element={<Perspective />} />
-              <Route path="/business" element={<Business />} />
-              <Route path="/services" element={<Services />} />
-              <Route path="/legacy" element={<Legacy />} />
-              <Route path="/location" element={<Location />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/leasing" element={<Leasing />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
+            <AnimatedRoutes />
           </PageLayout>
         </BrowserRouter>
       </TooltipProvider>
