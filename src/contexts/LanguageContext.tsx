@@ -125,6 +125,14 @@ const translations: Record<string, Record<Language, string>> = {
   "leasing.cta.desc": { en: "Experience the Al Hamra Tower difference. Our leasing team is ready to show you the possibilities.", ar: "اختبر تميز برج الحمراء. فريق التأجير لدينا مستعد لعرض الإمكانيات." },
   "leasing.cta.button": { en: "Contact Leasing", ar: "تواصل مع التأجير" },
 
+  // Stats
+  "stats.height": { en: "Height", ar: "الارتفاع" },
+  "stats.height.desc": { en: "Kuwait's tallest structure, redefining the skyline", ar: "أطول هيكل في الكويت، يعيد تشكيل الأفق" },
+  "stats.floors": { en: "Floors", ar: "طابق" },
+  "stats.floors.desc": { en: "Premium office and commercial spaces", ar: "مساحات مكتبية وتجارية متميزة" },
+  "stats.sqm": { en: "Square Meters", ar: "متر مربع" },
+  "stats.sqm.desc": { en: "Of leasable premium workspace", ar: "من المساحات المتميزة القابلة للتأجير" },
+
   // Footer
   "footer.rights": { en: "All rights reserved.", ar: "جميع الحقوق محفوظة." },
   "footer.privacy": { en: "Privacy Policy", ar: "سياسة الخصوصية" },
