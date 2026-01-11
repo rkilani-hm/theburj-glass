@@ -44,10 +44,32 @@ const translations: Record<string, Record<Language, string>> = {
 
   // Perspective
   "perspective.title": { en: "Above the City", ar: "فوق المدينة" },
+  "perspective.intro": { en: "From 412 meters, the world transforms. The urban grid becomes geometry, the horizon extends beyond imagination, and the relationship between earth and sky reveals itself in ways only height can offer.", ar: "من ٤١٢ متراً، يتحول العالم. تصبح الشبكة الحضرية هندسة، يمتد الأفق إلى ما وراء الخيال، وتكشف العلاقة بين الأرض والسماء عن نفسها بطرق لا يقدمها سوى الارتفاع." },
   "perspective.caption": {
     en: "Height here is not display, but perspective.",
     ar: "الارتفاع هنا ليس استعراضاً، بل منظوراً."
   },
+  "perspective.vision.label": { en: "Vision", ar: "الرؤية" },
+  "perspective.vision.title": { en: "Designed to See Further", ar: "صُمم ليرى أبعد" },
+  "perspective.vision.p1": { en: "Al Hamra Tower was conceived with perspective as its guiding principle. The distinctive twisting form isn't merely aesthetic—it was engineered to maximize panoramic views from every floor, every office, every corner.", ar: "صُمم برج الحمراء بالمنظور كمبدأ توجيهي. الشكل الملتوي المميز ليس مجرد جمالية — إنه مُهندَس لتعظيم المناظر البانورامية من كل طابق، كل مكتب، كل زاوية." },
+  "perspective.vision.p2": { en: "The result is a building where natural light floods interior spaces, where the Gulf waters meet the desert horizon in an unbroken line of sight, and where occupants feel connected to the city below while rising above it.", ar: "النتيجة مبنى حيث يغمر الضوء الطبيعي المساحات الداخلية، حيث تلتقي مياه الخليج بأفق الصحراء في خط رؤية متصل، وحيث يشعر الشاغلون بالارتباط بالمدينة أدناه بينما يرتفعون فوقها." },
+  "perspective.timeofday.title": { en: "Light Through the Day", ar: "الضوء عبر اليوم" },
+  "perspective.timeofday.desc": { en: "The tower's relationship with light transforms throughout the day, offering ever-changing perspectives on Kuwait's skyline.", ar: "تتحول علاقة البرج بالضوء طوال اليوم، مقدمة منظورات متغيرة باستمرار على أفق الكويت." },
+  "perspective.view1": { en: "Dawn", ar: "الفجر" },
+  "perspective.view2": { en: "Noon", ar: "الظهر" },
+  "perspective.view3": { en: "Dusk", ar: "الغسق" },
+  "perspective.gallery.label": { en: "Gallery", ar: "المعرض" },
+  "perspective.gallery.title": { en: "Visual Studies", ar: "دراسات بصرية" },
+  "perspective.gallery.img1": { en: "Ascending Through Clouds", ar: "صعوداً عبر الغيوم" },
+  "perspective.gallery.img2": { en: "Crown Detail", ar: "تفاصيل التاج" },
+  "perspective.gallery.img3": { en: "Waterfront Reflection", ar: "انعكاس الواجهة البحرية" },
+  "perspective.gallery.img4": { en: "Nocturnal Presence", ar: "الحضور الليلي" },
+  "perspective.gallery.img5": { en: "Urban Context", ar: "السياق الحضري" },
+  "perspective.horizon.title": { en: "Where Sky Meets Sea", ar: "حيث تلتقي السماء بالبحر" },
+  "perspective.horizon.p1": { en: "From the upper floors, the Arabian Gulf stretches to the eastern horizon while the city extends in every direction below. This dual perspective—water and urban landscape—defines the unique experience of occupying Al Hamra Tower.", ar: "من الطوابق العليا، يمتد الخليج العربي إلى الأفق الشرقي بينما تمتد المدينة في كل اتجاه أدناه. هذا المنظور المزدوج — الماء والمشهد الحضري — يحدد التجربة الفريدة لشغل برج الحمراء." },
+  "perspective.horizon.p2": { en: "On clear days, the view extends over 80 kilometers, offering a perspective that transforms how one understands Kuwait's geography and position at the crossroads of land and sea.", ar: "في الأيام الصافية، يمتد المنظر لأكثر من ٨٠ كيلومتراً، مقدماً منظوراً يغير كيفية فهم جغرافية الكويت وموقعها عند مفترق طرق البر والبحر." },
+  "perspective.horizon.stat.label": { en: "Visibility Range", ar: "مدى الرؤية" },
+  "perspective.horizon.stat.value": { en: "80+ km", ar: "+٨٠ كم" },
 
   // Business
   "business.title": { en: "Business Function", ar: "بيئة الأعمال" },
