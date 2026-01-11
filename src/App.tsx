@@ -7,6 +7,7 @@ import { AnimatePresence } from "framer-motion";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import PageLayout from "./layouts/PageLayout";
 import PageTransition from "./components/alhamra/PageTransition";
+import ScrollToTop from "./components/alhamra/ScrollToTop";
 import Home from "./pages/Home";
 import Tower from "./pages/Tower";
 import Perspective from "./pages/Perspective";
@@ -48,6 +49,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <ScrollToTop />
           <PageLayout>
             <AnimatedRoutes />
           </PageLayout>
