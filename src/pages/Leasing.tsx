@@ -212,13 +212,6 @@ const Leasing = () => {
                         ))}
                       </div>
                     </div>
-                    
-                    {/* Availability */}
-                    <div className="lg:col-span-2 lg:text-right">
-                      <span className="text-sm text-muted-foreground">
-                        {plan.available} {t("leasing.available")}
-                      </span>
-                    </div>
                   </div>
                 </motion.div>
               ))}
