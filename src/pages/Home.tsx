@@ -22,18 +22,18 @@ const Home = () => {
   const features = [
     {
       number: "412m",
-      label: t("stats.height") || "Height",
-      description: t("stats.height.desc") || "Kuwait's tallest structure, dominating the skyline"
+      label: t("stats.height"),
+      description: t("stats.height.desc")
     },
     {
       number: "77",
-      label: t("stats.floors") || "Floors",
-      description: t("stats.floors.desc") || "Premium office and commercial spaces"
+      label: t("stats.floors"),
+      description: t("stats.floors.desc")
     },
     {
       number: "195,000",
-      label: t("stats.sqm") || "Square Meters",
-      description: t("stats.sqm.desc") || "Of leasable premium space"
+      label: t("stats.sqm"),
+      description: t("stats.sqm.desc")
     }
   ];
 
