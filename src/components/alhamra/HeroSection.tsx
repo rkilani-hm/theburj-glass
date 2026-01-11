@@ -29,7 +29,7 @@ const HeroSection = () => {
         <h1 className="text-display font-light tracking-wide text-foreground animate-fade-up">
           {t("hero.headline")}
         </h1>
-        <p className="mt-6 text-body-lg text-muted-foreground font-light tracking-wide animate-fade-up-delayed">
+        <p className="mt-6 text-body-lg text-white/90 font-light tracking-wide animate-fade-up-delayed">
           {t("hero.subline")}
         </p>
       </div>
