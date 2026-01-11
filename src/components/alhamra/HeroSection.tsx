@@ -1,6 +1,7 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ChevronDown } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
 import heroVideo from "@/assets/hero-video.mp4";
 
 const LetterDrop = ({ text, className, delay = 0 }: { text: string; className?: string; delay?: number }) => {
@@ -28,8 +29,52 @@ const LetterDrop = ({ text, className, delay = 0 }: { text: string; className?: 
   );
 };
 
+const RotatingHeadline = ({ headlines }: { headlines: string[] }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isInitial, setIsInitial] = useState(true);
+
+  useEffect(() => {
+    // After initial animation completes, start the rotation
+    const initialTimeout = setTimeout(() => {
+      setIsInitial(false);
+    }, 2000);
+
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % headlines.length);
+    }, 20000);
+
+    return () => {
+      clearTimeout(initialTimeout);
+      clearInterval(interval);
+    };
+  }, [headlines.length]);
+
+  if (isInitial) {
+    return <LetterDrop text={headlines[0]} delay={0.5} />;
+  }
+
+  return (
+    <AnimatePresence mode="wait">
+      <motion.span
+        key={currentIndex}
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 20 }}
+        transition={{
+          duration: 0.6,
+          ease: [0.25, 0.46, 0.45, 0.94],
+        }}
+        className="inline-block"
+      >
+        {headlines[currentIndex]}
+      </motion.span>
+    </AnimatePresence>
+  );
+};
+
 const HeroSection = () => {
   const { t } = useLanguage();
+  const headlines = [t("hero.headline"), t("hero.headline2")];
 
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden">
@@ -53,7 +98,7 @@ const HeroSection = () => {
       {/* Content */}
       <div className="relative z-10 text-left container mx-auto px-6 lg:px-12 w-full">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-light tracking-wide text-foreground">
-          <LetterDrop text={t("hero.headline")} delay={0.5} />
+          <RotatingHeadline headlines={headlines} />
         </h1>
         <p className="mt-6 text-body-lg text-black font-light tracking-wide">
           <LetterDrop text={t("hero.subline")} delay={1.2} />
