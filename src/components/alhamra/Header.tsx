@@ -47,13 +47,13 @@ const Header = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center group">
             <div className="relative">
-              <span className={`text-xl lg:text-2xl font-light tracking-[0.2em] uppercase transition-all duration-500 ${
-                showLightText ? "text-charcoal-900 drop-shadow-[0_1px_2px_rgba(255,255,255,0.6)]" : "text-foreground"
+              <span className={`text-xl lg:text-2xl font-light tracking-[0.2em] uppercase transition-colors duration-500 ${
+                showLightText ? "text-charcoal-900" : "text-foreground"
               }`}>
                 Al Hamra
               </span>
-              <span className={`block text-[10px] tracking-[0.3em] uppercase mt-0.5 transition-all duration-500 ${
-                showLightText ? "text-charcoal-700 drop-shadow-[0_1px_2px_rgba(255,255,255,0.5)]" : "text-muted-foreground"
+              <span className={`block text-[10px] tracking-[0.3em] uppercase mt-0.5 transition-colors duration-500 ${
+                showLightText ? "text-charcoal-700" : "text-muted-foreground"
               }`}>
                 Tower
               </span>
@@ -69,8 +69,8 @@ const Header = () => {
                 className={`text-sm tracking-wide transition-colors duration-300 ${
                   showLightText
                     ? isActive(item.href)
-                      ? "text-charcoal-900 drop-shadow-[0_1px_2px_rgba(255,255,255,0.6)]"
-                      : "text-charcoal-700 hover:text-charcoal-900 drop-shadow-[0_1px_2px_rgba(255,255,255,0.5)]"
+                      ? "text-charcoal-900"
+                      : "text-charcoal-700 hover:text-charcoal-900"
                     : isActive(item.href)
                       ? "text-foreground"
                       : "text-muted-foreground hover:text-foreground"
@@ -85,9 +85,9 @@ const Header = () => {
           <div className="flex items-center gap-6">
             <button
               onClick={toggleLanguage}
-              className={`px-4 py-2 text-sm tracking-wider border transition-all duration-300 ${
+              className={`px-4 py-2 text-sm tracking-wider border transition-colors duration-300 ${
                 showLightText
-                  ? "border-charcoal-400 hover:bg-charcoal-100/50 text-charcoal-900 drop-shadow-[0_1px_2px_rgba(255,255,255,0.6)]"
+                  ? "border-charcoal-400 hover:bg-charcoal-100/50 text-charcoal-900"
                   : "border-border hover:bg-muted text-foreground"
               }`}
             >
