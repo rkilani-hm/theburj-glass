@@ -32,32 +32,22 @@ const LetterDrop = ({ text, className, delay = 0 }: { text: string; className?: 
 const RotatingText = ({ 
   texts, 
   currentIndex, 
-  isInitial, 
   initialDelay = 0.5 
 }: { 
   texts: string[]; 
   currentIndex: number; 
-  isInitial: boolean; 
   initialDelay?: number;
 }) => {
-  if (isInitial) {
-    return <LetterDrop text={texts[0]} delay={initialDelay} />;
-  }
-
   return (
     <AnimatePresence mode="wait">
       <motion.span
         key={currentIndex}
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: 20 }}
-        transition={{
-          duration: 0.6,
-          ease: [0.25, 0.46, 0.45, 0.94],
-        }}
+        initial={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.3 }}
         className="inline-block"
       >
-        {texts[currentIndex]}
+        <LetterDrop key={`${currentIndex}-${texts[currentIndex]}`} text={texts[currentIndex]} delay={initialDelay} />
       </motion.span>
     </AnimatePresence>
   );
@@ -66,22 +56,16 @@ const RotatingText = ({
 const HeroContent = () => {
   const { t } = useLanguage();
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isInitial, setIsInitial] = useState(true);
   
   const headlines = [t("hero.headline"), t("hero.headline2")];
   const sublines = [t("hero.subline"), t("hero.subline2")];
 
   useEffect(() => {
-    const initialTimeout = setTimeout(() => {
-      setIsInitial(false);
-    }, 2000);
-
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % headlines.length);
     }, 20000);
 
     return () => {
-      clearTimeout(initialTimeout);
       clearInterval(interval);
     };
   }, [headlines.length]);
@@ -89,10 +73,10 @@ const HeroContent = () => {
   return (
     <div className="relative z-10 text-left container mx-auto px-6 lg:px-12 w-full">
       <h1 className="text-3xl md:text-4xl lg:text-5xl font-light tracking-wide text-foreground">
-        <RotatingText texts={headlines} currentIndex={currentIndex} isInitial={isInitial} initialDelay={0.5} />
+        <RotatingText texts={headlines} currentIndex={currentIndex} initialDelay={0.5} />
       </h1>
       <p className="mt-6 text-body-lg text-black font-light tracking-wide">
-        <RotatingText texts={sublines} currentIndex={currentIndex} isInitial={isInitial} initialDelay={1.2} />
+        <RotatingText texts={sublines} currentIndex={currentIndex} initialDelay={1.2} />
       </p>
     </div>
   );
