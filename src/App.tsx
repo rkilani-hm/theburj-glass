@@ -51,10 +51,10 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <ScrollToTop />
-          <FloatingContact />
           <PageLayout>
             <AnimatedRoutes />
           </PageLayout>
+          <FloatingContact />
         </BrowserRouter>
       </TooltipProvider>
     </LanguageProvider>
