@@ -97,7 +97,7 @@ const HeroSection = () => {
 
       {/* Content */}
       <div className="relative z-10 text-left container mx-auto px-6 lg:px-12 w-full">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-light tracking-wide text-foreground">
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-light tracking-wide text-foreground">
           <RotatingHeadline headlines={headlines} />
         </h1>
         <p className="mt-6 text-body-lg text-black font-light tracking-wide">
