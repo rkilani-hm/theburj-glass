@@ -2,33 +2,38 @@ import Header from "@/components/alhamra/Header";
 import Footer from "@/components/alhamra/Footer";
 import { useScrollReveal, revealVariants } from "@/hooks/useScrollReveal";
 import { motion } from "framer-motion";
-import towerAerialDay from "@/assets/tower-aerial-day.png";
+import somTowerNight from "@/assets/som-tower-night.jpg";
+import somTowerDetail from "@/assets/som-tower-detail.jpg";
 import towerCityContext from "@/assets/tower-city-context.jpg";
 
 const Engineering = () => {
   const heroReveal = useScrollReveal();
 
   const specs = [
-    { label: "Structural System", value: "Reinforced Concrete Core" },
-    { label: "Foundation Depth", value: "30 meters" },
-    { label: "Concrete Volume", value: "85,000 m³" },
-    { label: "Steel Reinforcement", value: "12,500 tonnes" },
-    { label: "Wind Load Design", value: "180 km/h" },
-    { label: "Seismic Rating", value: "Zone 2B Compliant" },
+    { label: "Building Height", value: "412m", detail: "Kuwait's tallest structure" },
+    { label: "Number of Stories", value: "74", detail: "Including observation deck" },
+    { label: "Site Area", value: "10,000m²", detail: "Mixed-use development" },
+    { label: "Gross Area", value: "195,000m²", detail: "Office & retail space" },
+    { label: "Concrete Volume", value: "85,000m³", detail: "High-performance mix" },
+    { label: "Foundation Depth", value: "30m", detail: "Over 200 concrete piles" },
   ];
 
   const innovations = [
     {
-      title: "Asymmetric Core",
-      description: "The offset concrete core provides structural efficiency while allowing for flexible floor plates and unobstructed views."
+      title: "Cantilevered Truss System",
+      description: "The observation deck's curtain wall is supported by an innovative cantilevered truss system that eliminates the need for columns, providing unobstructed 360-degree views from the 130-foot-high space."
     },
     {
-      title: "Outrigger System",
-      description: "Strategic outrigger trusses connect the core to the perimeter columns, reducing lateral sway by 40%."
+      title: "Sloped Perimeter Columns",
+      description: "Columns along the exterior slope inwards at the base, defining the street-level appearance while efficiently transferring the tower's loads to the foundation system."
+    },
+    {
+      title: "Twisted Ribbon Walls",
+      description: "The graceful, twisting 'ribbon' walls required advanced computational modeling and precision construction to achieve the tower's sculptural form while maintaining structural integrity."
     },
     {
       title: "High-Performance Concrete",
-      description: "Custom concrete mixes with compressive strengths up to 80 MPa ensure long-term durability in Kuwait's harsh climate."
+      description: "Custom concrete mixes with compressive strengths up to 80 MPa ensure long-term durability in Kuwait's extreme climate conditions."
     },
   ];
 
@@ -39,7 +44,7 @@ const Engineering = () => {
         {/* Hero Section */}
         <section className="relative h-[70vh] overflow-hidden">
           <img 
-            src={towerAerialDay} 
+            src={somTowerNight} 
             alt="Al Hamra Tower Engineering" 
             className="w-full h-full object-cover"
           />
@@ -53,7 +58,7 @@ const Engineering = () => {
             className="absolute bottom-0 left-0 right-0 p-8 lg:p-16"
           >
             <h1 className="text-4xl lg:text-6xl font-light tracking-wide text-foreground mb-4">
-              Engineering
+              Structural Engineering
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl">
               The science behind the sculpture
@@ -61,8 +66,33 @@ const Engineering = () => {
           </motion.div>
         </section>
 
-        {/* Specifications Grid */}
+        {/* Overview */}
         <section className="py-24 px-6 lg:px-12">
+          <div className="container mx-auto max-w-4xl text-center">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={revealVariants.fadeUp}
+              transition={{ duration: 0.8 }}
+              className="space-y-6"
+            >
+              <p className="text-sm uppercase tracking-widest text-primary">SOM Structural Engineering</p>
+              <h2 className="text-3xl lg:text-4xl font-light tracking-wide">
+                Engineering Excellence
+              </h2>
+              <p className="text-muted-foreground leading-relaxed max-w-3xl mx-auto">
+                Al Hamra Tower's distinctive asymmetrical form presented unprecedented engineering 
+                challenges. The tower's twisted ribbon walls provide stunning visual impact, but 
+                their design is grounded in rigorous structural analysis—consciously maximizing 
+                views of the Arabian Gulf while minimizing solar heat gain.
+              </p>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Specifications Grid */}
+        <section className="py-24 px-6 lg:px-12 bg-muted/30">
           <div className="container mx-auto max-w-6xl">
             <motion.div
               initial="hidden"
@@ -82,10 +112,11 @@ const Engineering = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.05 }}
-                    className="p-6 border border-border text-center"
+                    className="p-6 border border-border bg-background text-center"
                   >
-                    <p className="text-2xl font-light mb-2">{spec.value}</p>
-                    <p className="text-sm text-muted-foreground">{spec.label}</p>
+                    <p className="text-3xl font-light mb-2">{spec.value}</p>
+                    <p className="text-sm text-foreground mb-1">{spec.label}</p>
+                    <p className="text-xs text-muted-foreground">{spec.detail}</p>
                   </motion.div>
                 ))}
               </div>
@@ -94,7 +125,7 @@ const Engineering = () => {
         </section>
 
         {/* Structural Innovations */}
-        <section className="py-24 px-6 lg:px-12 bg-muted/30">
+        <section className="py-24 px-6 lg:px-12">
           <div className="container mx-auto max-w-6xl">
             <div className="grid lg:grid-cols-2 gap-16 items-start">
               <div>
@@ -122,21 +153,23 @@ const Engineering = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8 }}
+                className="lg:sticky lg:top-32"
               >
                 <img 
-                  src={towerCityContext} 
-                  alt="Tower in City Context" 
-                  className="w-full h-auto sticky top-32"
+                  src={somTowerDetail} 
+                  alt="Tower Structural Detail" 
+                  className="w-full h-auto"
                 />
+                <p className="text-xs text-muted-foreground mt-3">Photo: Nick Merrick © Hedrich Blessing</p>
               </motion.div>
             </div>
           </div>
         </section>
 
         {/* Performance Stats */}
-        <section className="py-24 px-6 lg:px-12">
+        <section className="py-24 px-6 lg:px-12 bg-charcoal-900">
           <div className="container mx-auto max-w-4xl text-center">
-            <h2 className="text-3xl font-light tracking-wide mb-16">
+            <h2 className="text-3xl font-light tracking-wide text-white mb-16">
               Performance Metrics
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -153,11 +186,32 @@ const Engineering = () => {
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
                 >
-                  <p className="text-4xl font-light mb-2">{stat.value}</p>
-                  <p className="text-sm text-muted-foreground">{stat.label}</p>
+                  <p className="text-4xl font-light text-white mb-2">{stat.value}</p>
+                  <p className="text-sm text-grey-400">{stat.label}</p>
                 </motion.div>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* City Context */}
+        <section className="py-24 px-6 lg:px-12">
+          <div className="container mx-auto max-w-5xl">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.98 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <img 
+                src={towerCityContext} 
+                alt="Al Hamra Tower in Kuwait City" 
+                className="w-full h-auto"
+              />
+              <p className="text-sm text-muted-foreground mt-4 text-center">
+                Al Hamra Tower dominates the Kuwait City skyline, a testament to engineering ambition
+              </p>
+            </motion.div>
           </div>
         </section>
       </main>
