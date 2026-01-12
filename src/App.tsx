@@ -12,6 +12,7 @@ import FloatingContact from "./components/alhamra/FloatingContact";
 import Home from "./pages/Home";
 import Tower from "./pages/Tower";
 import Origins from "./pages/tower/Origins";
+import Making from "./pages/tower/Making";
 import Architecture from "./pages/tower/Architecture";
 import Engineering from "./pages/tower/Engineering";
 import Recognition from "./pages/tower/Recognition";
@@ -35,6 +36,7 @@ const AnimatedRoutes = () => {
         <Route path="/" element={<PageTransition><Home /></PageTransition>} />
         <Route path="/tower" element={<PageTransition><Tower /></PageTransition>} />
         <Route path="/tower/origins" element={<PageTransition><Origins /></PageTransition>} />
+        <Route path="/tower/making" element={<PageTransition><Making /></PageTransition>} />
         <Route path="/tower/architecture" element={<PageTransition><Architecture /></PageTransition>} />
         <Route path="/tower/engineering" element={<PageTransition><Engineering /></PageTransition>} />
         <Route path="/tower/recognition" element={<PageTransition><Recognition /></PageTransition>} />
