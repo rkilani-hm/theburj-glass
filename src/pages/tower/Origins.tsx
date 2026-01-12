@@ -9,6 +9,9 @@ import towerBw2 from "@/assets/tower-bw-2.png";
 import towerBwAngle from "@/assets/tower-bw-angle.png";
 import towerSunset from "@/assets/tower-sunset.png";
 import towerCityContext from "@/assets/tower-city-context.jpg";
+import constructionFoundation from "@/assets/construction-foundation.jpg";
+import constructionSteel from "@/assets/construction-steel.jpg";
+import constructionFacade from "@/assets/construction-facade.jpg";
 
 const Origins = () => {
   const heroReveal = useScrollReveal();
@@ -16,6 +19,7 @@ const Origins = () => {
   const visionReveal = useScrollReveal();
   const foundersReveal = useScrollReveal();
   const galleryReveal = useScrollReveal();
+  const constructionReveal = useScrollReveal();
 
   const milestones = [
     { 
@@ -241,6 +245,78 @@ const Origins = () => {
                       alt={item.title}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
+                  </div>
+                  <h3 className="text-xl font-light mb-3">{item.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Construction Phases */}
+        <section className="py-24 px-6 lg:px-12 bg-muted/30">
+          <div className="container mx-auto max-w-6xl">
+            <motion.div
+              ref={constructionReveal.ref}
+              initial="hidden"
+              animate={constructionReveal.isInView ? "visible" : "hidden"}
+              variants={revealVariants.fadeUp}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-3xl lg:text-4xl font-light tracking-wide mb-4">
+                Building the Dream
+              </h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                From the first foundation pour to the final glass panel, witness the monumental 
+                construction journey that brought Kuwait's tallest tower to life.
+              </p>
+            </motion.div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              {[
+                {
+                  image: constructionFoundation,
+                  phase: "Phase One",
+                  title: "Foundation & Excavation",
+                  year: "2006-2007",
+                  description: "Deep excavation work and the installation of over 200 concrete piles, driven 30 meters into the bedrock to support the tower's immense weight."
+                },
+                {
+                  image: constructionSteel,
+                  phase: "Phase Two",
+                  title: "Steel Framework",
+                  year: "2007-2009",
+                  description: "The reinforced concrete core and steel superstructure rose steadily, using self-climbing formwork technology to accelerate vertical construction."
+                },
+                {
+                  image: constructionFacade,
+                  phase: "Phase Three",
+                  title: "Façade Installation",
+                  year: "2009-2011",
+                  description: "Skilled craftsmen installed 24,000 square meters of custom-cut limestone panels and high-performance glass to complete the tower's iconic exterior."
+                },
+              ].map((item, index) => (
+                <motion.div
+                  key={item.title}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.15 }}
+                  className="group"
+                >
+                  <div className="relative aspect-[4/3] overflow-hidden mb-6 rounded-sm">
+                    <img 
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    <div className="absolute bottom-4 left-4">
+                      <span className="text-xs text-white/70 uppercase tracking-wider">{item.phase}</span>
+                      <p className="text-white font-light">{item.year}</p>
+                    </div>
                   </div>
                   <h3 className="text-xl font-light mb-3">{item.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
