@@ -11,6 +11,10 @@ import ScrollToTop from "./components/alhamra/ScrollToTop";
 import FloatingContact from "./components/alhamra/FloatingContact";
 import Home from "./pages/Home";
 import Tower from "./pages/Tower";
+import Origins from "./pages/tower/Origins";
+import Architecture from "./pages/tower/Architecture";
+import Engineering from "./pages/tower/Engineering";
+import Recognition from "./pages/tower/Recognition";
 import Perspective from "./pages/Perspective";
 import Business from "./pages/Business";
 import Services from "./pages/Services";
@@ -30,6 +34,10 @@ const AnimatedRoutes = () => {
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<PageTransition><Home /></PageTransition>} />
         <Route path="/tower" element={<PageTransition><Tower /></PageTransition>} />
+        <Route path="/tower/origins" element={<PageTransition><Origins /></PageTransition>} />
+        <Route path="/tower/architecture" element={<PageTransition><Architecture /></PageTransition>} />
+        <Route path="/tower/engineering" element={<PageTransition><Engineering /></PageTransition>} />
+        <Route path="/tower/recognition" element={<PageTransition><Recognition /></PageTransition>} />
         <Route path="/perspective" element={<PageTransition><Perspective /></PageTransition>} />
         <Route path="/business" element={<PageTransition><Business /></PageTransition>} />
         <Route path="/services" element={<PageTransition><Services /></PageTransition>} />

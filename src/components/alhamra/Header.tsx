@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const Header = () => {
   const { language, toggleLanguage, t } = useLanguage();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [towerDropdownOpen, setTowerDropdownOpen] = useState(false);
   const location = useLocation();
   const isHome = location.pathname === "/";
 
@@ -18,8 +19,15 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const towerSubItems = [
+    { key: "nav.tower.overview", href: "/tower", label: { en: "Overview", ar: "نظرة عامة" } },
+    { key: "nav.tower.origins", href: "/tower/origins", label: { en: "Origins", ar: "البدايات" } },
+    { key: "nav.tower.architecture", href: "/tower/architecture", label: { en: "Architecture & Design", ar: "الهندسة والتصميم" } },
+    { key: "nav.tower.engineering", href: "/tower/engineering", label: { en: "Engineering", ar: "الهندسة الإنشائية" } },
+    { key: "nav.tower.recognition", href: "/tower/recognition", label: { en: "Recognition", ar: "الجوائز" } },
+  ];
+
   const navItems = [
-    { key: "nav.tower", href: "/tower" },
     { key: "nav.perspective", href: "/perspective" },
     { key: "nav.business", href: "/business" },
     { key: "nav.services", href: "/services" },
@@ -30,6 +38,7 @@ const Header = () => {
   ];
 
   const isActive = (href: string) => location.pathname === href;
+  const isTowerActive = location.pathname.startsWith("/tower");
 
   // Show light text on home page when not scrolled
   const showLightText = isHome && !scrolled;
@@ -62,6 +71,54 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-8">
+            {/* Tower Dropdown */}
+            <div 
+              className="relative"
+              onMouseEnter={() => setTowerDropdownOpen(true)}
+              onMouseLeave={() => setTowerDropdownOpen(false)}
+            >
+              <button
+                className={`flex items-center gap-1 text-sm tracking-wide transition-colors duration-300 ${
+                  showLightText
+                    ? isTowerActive
+                      ? "text-charcoal-900"
+                      : "text-charcoal-700 hover:text-charcoal-900"
+                    : isTowerActive
+                      ? "text-foreground"
+                      : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {t("nav.tower")}
+                <ChevronDown 
+                  size={14} 
+                  className={`transition-transform duration-300 ${towerDropdownOpen ? "rotate-180" : ""}`}
+                />
+              </button>
+
+              {/* Dropdown Menu */}
+              <div
+                className={`absolute top-full left-0 pt-2 transition-all duration-300 ${
+                  towerDropdownOpen ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-2"
+                }`}
+              >
+                <div className="bg-background/95 backdrop-blur-md border border-border shadow-lg min-w-[220px]">
+                  {towerSubItems.map((item) => (
+                    <Link
+                      key={item.key}
+                      to={item.href}
+                      className={`block px-5 py-3 text-sm tracking-wide transition-colors duration-300 border-b border-border/50 last:border-0 ${
+                        isActive(item.href)
+                          ? "text-foreground bg-muted/50"
+                          : "text-muted-foreground hover:text-foreground hover:bg-muted/30"
+                      }`}
+                    >
+                      {item.label[language]}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+
             {navItems.map((item) => (
               <Link
                 key={item.key}
@@ -106,11 +163,34 @@ const Header = () => {
         {/* Mobile Navigation */}
         <div
           className={`lg:hidden overflow-hidden transition-all duration-500 ease-out-expo ${
-            menuOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+            menuOpen ? "max-h-[700px] opacity-100" : "max-h-0 opacity-0"
           }`}
         >
           <nav className="py-8 border-t border-border bg-background/95 backdrop-blur-md">
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-4">
+              {/* Tower Section with Sub-items */}
+              <div className="space-y-2">
+                <p className="text-xs tracking-widest uppercase text-muted-foreground mb-2">
+                  {t("nav.tower")}
+                </p>
+                {towerSubItems.map((item) => (
+                  <Link
+                    key={item.key}
+                    to={item.href}
+                    onClick={() => setMenuOpen(false)}
+                    className={`block pl-4 py-2 text-base transition-colors duration-300 border-l-2 ${
+                      isActive(item.href)
+                        ? "text-foreground border-foreground"
+                        : "text-muted-foreground hover:text-foreground border-transparent hover:border-muted"
+                    }`}
+                  >
+                    {item.label[language]}
+                  </Link>
+                ))}
+              </div>
+
+              <div className="h-px bg-border my-2" />
+
               {navItems.map((item, index) => (
                 <Link
                   key={item.key}
