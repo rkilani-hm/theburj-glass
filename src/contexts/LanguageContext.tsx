@@ -430,6 +430,14 @@ const translations: Record<string, Record<Language, string>> = {
   "legacy.archival.city.alt": { en: "Aerial view of Kuwait City in the 1970s", ar: "منظر جوي لمدينة الكويت في السبعينيات" },
   "legacy.archival.city.caption": { en: "Kuwait City before the modern skyline emerged", ar: "مدينة الكويت قبل ظهور الأفق الحديث" },
 
+  // Before/After Comparison
+  "legacy.comparison.label": { en: "Then & Now", ar: "الماضي والحاضر" },
+  "legacy.comparison.heading": { en: "Witness the Transformation", ar: "شاهد التحول" },
+  "legacy.comparison.desc": { en: "Slide to reveal the remarkable transformation of this site—from Kuwait's beloved cinema district to its most iconic architectural achievement.", ar: "اسحب لتكشف التحول الملحوظ لهذا الموقع—من حي السينما المحبوب في الكويت إلى أكثر إنجازاتها المعمارية أيقونية." },
+  "legacy.comparison.instruction": { en: "Drag the slider to compare the historic site with the tower today.", ar: "اسحب شريط التمرير لمقارنة الموقع التاريخي بالبرج اليوم." },
+  "legacy.comparison.before.label": { en: "Al Hamra Cinema District", ar: "حي سينما الحمراء" },
+  "legacy.comparison.after.label": { en: "Al Hamra Tower", ar: "برج الحمراء" },
+
   // Founders' Vision
   "legacy.founders.label": { en: "Founders' Vision", ar: "رؤية المؤسسين" },
   "legacy.founders.heading": { en: "The Voices Behind the Vision", ar: "الأصوات وراء الرؤية" },
