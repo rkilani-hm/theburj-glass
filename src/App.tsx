@@ -15,6 +15,7 @@ import Origins from "./pages/tower/Origins";
 import Rising from "./pages/tower/Rising";
 import Architecture from "./pages/tower/Architecture";
 import Engineering from "./pages/tower/Engineering";
+import Sustainability from "./pages/tower/Sustainability";
 import Recognition from "./pages/tower/Recognition";
 import Perspective from "./pages/Perspective";
 import Business from "./pages/Business";
@@ -39,6 +40,7 @@ const AnimatedRoutes = () => {
         <Route path="/tower/rising" element={<PageTransition><Rising /></PageTransition>} />
         <Route path="/tower/architecture" element={<PageTransition><Architecture /></PageTransition>} />
         <Route path="/tower/engineering" element={<PageTransition><Engineering /></PageTransition>} />
+        <Route path="/tower/sustainability" element={<PageTransition><Sustainability /></PageTransition>} />
         <Route path="/tower/recognition" element={<PageTransition><Recognition /></PageTransition>} />
         <Route path="/perspective" element={<PageTransition><Perspective /></PageTransition>} />
         <Route path="/business" element={<PageTransition><Business /></PageTransition>} />
