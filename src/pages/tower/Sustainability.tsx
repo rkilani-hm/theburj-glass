@@ -1,8 +1,11 @@
 import Header from "@/components/alhamra/Header";
 import Footer from "@/components/alhamra/Footer";
+import AnimatedStatCard from "@/components/alhamra/AnimatedStatCard";
+import CircularProgress from "@/components/alhamra/CircularProgress";
 import { useScrollReveal, revealVariants } from "@/hooks/useScrollReveal";
-import { motion } from "framer-motion";
-import { Sun, Shield, Zap, Leaf, Recycle, Car, Building2, Flame } from "lucide-react";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
+import { Sun, Shield, Zap, Leaf, Recycle, Car, Building2, Flame, Thermometer, Wind, Droplets, Battery } from "lucide-react";
 import somTowerDetail from "@/assets/som-tower-detail.jpg";
 import towerSunset from "@/assets/tower-sunset.png";
 import somLobby from "@/assets/som-lobby.jpg";
@@ -10,6 +13,8 @@ import somLobby from "@/assets/som-lobby.jpg";
 const Sustainability = () => {
   const heroReveal = useScrollReveal();
   const introReveal = useScrollReveal();
+  const statsRef = useRef<HTMLDivElement>(null);
+  const statsInView = useInView(statsRef, { once: true, margin: "-100px" });
 
   const energyFeatures = [
     {
@@ -171,6 +176,73 @@ const Sustainability = () => {
           </div>
         </section>
 
+        {/* Animated Energy Stats Infographic */}
+        <section className="py-24 px-6 lg:px-12 bg-gradient-to-b from-background to-muted/30">
+          <div className="container mx-auto max-w-6xl">
+            <div className="text-center mb-16">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+              >
+                <p className="text-sm uppercase tracking-widest text-primary mb-4">By The Numbers</p>
+                <h2 className="text-3xl lg:text-4xl font-light tracking-wide mb-4">
+                  Environmental Impact
+                </h2>
+                <p className="text-muted-foreground max-w-xl mx-auto">
+                  Quantifying the sustainable advantages of climate-responsive architecture
+                </p>
+              </motion.div>
+            </div>
+
+            {/* Circular Progress Charts */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
+              <CircularProgress value={25} label="Solar Heat Reduction" delay={0} />
+              <CircularProgress value={40} label="Limestone Thermal Shield (mm)" suffix="mm" maxValue={50} delay={1} color="hsl(142, 76%, 36%)" />
+              <CircularProgress value={100} label="Recyclable Blinds" delay={2} color="hsl(45, 93%, 47%)" />
+              <CircularProgress value={74} label="Floors Protected" suffix=" floors" maxValue={74} delay={3} color="hsl(217, 91%, 60%)" />
+            </div>
+
+            {/* Stat Cards Grid */}
+            <div ref={statsRef} className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <AnimatedStatCard
+                value={24000}
+                suffix="m²"
+                label="Limestone Façade"
+                description="Jura limestone panels providing natural thermal mass"
+                icon={Thermometer}
+                delay={0}
+                color="primary"
+              />
+              <AnimatedStatCard
+                value={11}
+                label="Parking Levels"
+                description="With integrated EV charging stations"
+                icon={Car}
+                delay={1}
+                color="emerald"
+              />
+              <AnimatedStatCard
+                value={5}
+                label="Substations"
+                description="Distributed across the tower for efficient power delivery"
+                icon={Zap}
+                delay={2}
+                color="amber"
+              />
+              <AnimatedStatCard
+                value={2}
+                label="Refuge Floors"
+                description="Dedicated emergency evacuation zones"
+                icon={Shield}
+                delay={3}
+                color="blue"
+              />
+            </div>
+          </div>
+        </section>
+
         {/* Energy Efficiency Grid */}
         <section className="py-24 px-6 lg:px-12 bg-muted/30">
           <div className="container mx-auto max-w-6xl">
@@ -274,8 +346,111 @@ const Sustainability = () => {
           </div>
         </section>
 
+        {/* Safety Systems Infographic */}
+        <section className="py-24 px-6 lg:px-12 bg-charcoal-900 overflow-hidden">
+          <div className="container mx-auto max-w-6xl">
+            <div className="text-center mb-16">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+              >
+                <p className="text-sm uppercase tracking-widest text-grey-400 mb-4">Safety Infrastructure</p>
+                <h2 className="text-3xl lg:text-4xl font-light tracking-wide text-white mb-4">
+                  Protection by Design
+                </h2>
+              </motion.div>
+            </div>
+
+            {/* Animated Safety Stats */}
+            <div className="grid md:grid-cols-3 gap-8 mb-16">
+              {[
+                { value: 74, label: "Floors Monitored", suffix: "", icon: Building2, description: "Complete fire detection coverage" },
+                { value: 100, label: "Power Redundancy", suffix: "%", icon: Battery, description: "Zero downtime guarantee" },
+                { value: 5, label: "Electrical Substations", suffix: "", icon: Zap, description: "Distributed across key levels" },
+              ].map((stat, index) => (
+                <motion.div
+                  key={stat.label}
+                  initial={{ opacity: 0, y: 30, rotateX: -10 }}
+                  whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.15, duration: 0.6 }}
+                  className="relative bg-charcoal-800/50 border border-charcoal-700/50 p-8 rounded-lg group hover:border-primary/30 transition-all duration-300"
+                >
+                  <stat.icon className="w-8 h-8 text-primary mb-4" strokeWidth={1.5} />
+                  <motion.p 
+                    className="text-4xl lg:text-5xl font-light text-white mb-2 tabular-nums"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.15 + 0.3, duration: 0.8 }}
+                  >
+                    {stat.value}{stat.suffix}
+                  </motion.p>
+                  <p className="text-sm font-medium text-grey-300 uppercase tracking-widest mb-1">
+                    {stat.label}
+                  </p>
+                  <p className="text-xs text-grey-500">{stat.description}</p>
+                  
+                  {/* Animated border glow */}
+                  <motion.div
+                    className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    style={{
+                      background: "linear-gradient(135deg, rgba(var(--primary), 0.1) 0%, transparent 50%)",
+                    }}
+                  />
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Timeline of Safety Features */}
+            <div className="relative">
+              {/* Connecting Line */}
+              <motion.div
+                className="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary/50 via-primary/20 to-transparent hidden md:block"
+                initial={{ scaleY: 0 }}
+                whileInView={{ scaleY: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
+                style={{ transformOrigin: "top" }}
+              />
+              
+              <div className="space-y-8">
+                {[
+                  { level: "B2", name: "Substation 1", desc: "Underground power distribution hub" },
+                  { level: "4", name: "Substation 2", desc: "Lower tower power management" },
+                  { level: "27", name: "Substation 3", desc: "Mid-tower power relay" },
+                  { level: "29", name: "Refuge Floor 1", desc: "Emergency evacuation zone" },
+                  { level: "52", name: "Substation 4", desc: "Upper tower power distribution" },
+                  { level: "54", name: "Refuge Floor 2", desc: "High-rise emergency shelter" },
+                  { level: "76", name: "Substation 5", desc: "Crown level power management" },
+                ].map((item, index) => (
+                  <motion.div
+                    key={item.level}
+                    initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1, duration: 0.5 }}
+                    className={`flex items-center gap-4 ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} md:text-${index % 2 === 0 ? "right" : "left"}`}
+                  >
+                    <div className={`flex-1 ${index % 2 === 0 ? "md:text-right" : "md:text-left"}`}>
+                      <p className="text-white font-light">{item.name}</p>
+                      <p className="text-xs text-grey-500">{item.desc}</p>
+                    </div>
+                    <div className="w-12 h-12 rounded-full bg-primary/20 border border-primary/40 flex items-center justify-center text-primary text-sm font-medium">
+                      {item.level}
+                    </div>
+                    <div className="flex-1 hidden md:block" />
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Recognition Banner */}
-        <section className="py-20 px-6 lg:px-12 bg-charcoal-900">
+        <section className="py-20 px-6 lg:px-12 bg-muted/30">
           <div className="container mx-auto max-w-4xl text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -283,11 +458,11 @@ const Sustainability = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <p className="text-sm uppercase tracking-widest text-grey-400 mb-6">Recognition</p>
-              <h2 className="text-2xl lg:text-3xl font-light text-white mb-8">
+              <p className="text-sm uppercase tracking-widest text-muted-foreground mb-6">Recognition</p>
+              <h2 className="text-2xl lg:text-3xl font-light text-foreground mb-8">
                 CTBUH 10 Year Award 2021
               </h2>
-              <p className="text-grey-300 leading-relaxed max-w-2xl mx-auto">
+              <p className="text-muted-foreground leading-relaxed max-w-2xl mx-auto">
                 A decade after completion, Al Hamra Tower was recognized by the Council on Tall 
                 Buildings and Urban Habitat for its enduring value, sustainable performance, and 
                 continued contribution to Kuwait's urban landscape.
