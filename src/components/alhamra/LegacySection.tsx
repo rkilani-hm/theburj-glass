@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useScrollReveal, revealVariants } from "@/hooks/useScrollReveal";
 import { useRef } from "react";
 import { Quote } from "lucide-react";
+import BeforeAfterSlider from "./BeforeAfterSlider";
 
 // Import images
 import towerBw1 from "@/assets/tower-bw-1.png";
@@ -25,6 +26,7 @@ const LegacySection = () => {
   const { ref: headerRef, isInView: headerInView } = useScrollReveal();
   const { ref: originsRef, isInView: originsInView } = useScrollReveal();
   const { ref: archivalRef, isInView: archivalInView } = useScrollReveal();
+  const { ref: comparisonRef, isInView: comparisonInView } = useScrollReveal();
   const { ref: foundersRef, isInView: foundersInView } = useScrollReveal();
   const { ref: evolutionRef, isInView: evolutionInView } = useScrollReveal();
   const { ref: designRef, isInView: designInView } = useScrollReveal();
@@ -273,6 +275,54 @@ const LegacySection = () => {
               </motion.div>
             ))}
           </div>
+        </div>
+      </div>
+
+      {/* Before/After Comparison Section */}
+      <div className="py-section bg-background">
+        <div className="container mx-auto px-6 lg:px-12">
+          <motion.div 
+            ref={comparisonRef}
+            initial="hidden"
+            animate={comparisonInView ? "visible" : "hidden"}
+            variants={revealVariants.fadeUp}
+            transition={{ duration: 0.6 }}
+            className="mb-12"
+          >
+            <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+              <div className={isArabic ? 'lg:order-2' : ''}>
+                <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground mb-4 block">
+                  {t("legacy.comparison.label")}
+                </span>
+                <h2 className="text-title font-light text-foreground mb-4">
+                  {t("legacy.comparison.heading")}
+                </h2>
+                <p className="text-body text-muted-foreground mb-6">
+                  {t("legacy.comparison.desc")}
+                </p>
+                <p className="text-sm text-muted-foreground italic">
+                  {t("legacy.comparison.instruction")}
+                </p>
+              </div>
+              
+              <motion.div
+                initial="hidden"
+                animate={comparisonInView ? "visible" : "hidden"}
+                variants={revealVariants.fadeUp}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className={isArabic ? 'lg:order-1' : ''}
+              >
+                <BeforeAfterSlider
+                  beforeImage={kuwaitCinemaHistoric}
+                  afterImage={somTowerSkyline}
+                  beforeLabel={t("legacy.comparison.before.label")}
+                  afterLabel={t("legacy.comparison.after.label")}
+                  beforeYear="1960s"
+                  afterYear="2011"
+                />
+              </motion.div>
+            </div>
+          </motion.div>
         </div>
       </div>
 
