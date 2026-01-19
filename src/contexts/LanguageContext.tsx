@@ -19,6 +19,7 @@ const translations: Record<string, Record<Language, string>> = {
   "nav.leasing": { en: "Leasing", ar: "التأجير" },
   "nav.location": { en: "Location", ar: "الموقع" },
   "nav.contact": { en: "Contact", ar: "التواصل" },
+  "nav.sustainability": { en: "Sustainability", ar: "الاستدامة" },
 
   // Hero
   "hero.headline": { en: "A Place of Gravity", ar: "هيبة المكان" },
