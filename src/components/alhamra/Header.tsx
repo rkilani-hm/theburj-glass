@@ -25,12 +25,12 @@ const Header = () => {
     { key: "nav.tower.rising", href: "/tower/rising", label: { en: "Rising", ar: "الصعود" } },
     { key: "nav.tower.architecture", href: "/tower/architecture", label: { en: "Architecture & Design", ar: "الهندسة والتصميم" } },
     { key: "nav.tower.engineering", href: "/tower/engineering", label: { en: "Engineering", ar: "الهندسة الإنشائية" } },
-    { key: "nav.tower.sustainability", href: "/tower/sustainability", label: { en: "Sustainability", ar: "الاستدامة" } },
     { key: "nav.tower.recognition", href: "/tower/recognition", label: { en: "Recognition", ar: "الجوائز" } },
   ];
 
   const navItems = [
     { key: "nav.perspective", href: "/perspective" },
+    { key: "nav.sustainability", href: "/tower/sustainability", label: { en: "Sustainability", ar: "الاستدامة" } },
     { key: "nav.business", href: "/business" },
     { key: "nav.services", href: "/services" },
     { key: "nav.legacy", href: "/legacy" },
