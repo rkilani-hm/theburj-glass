@@ -4,6 +4,7 @@ import { useScrollReveal, revealVariants } from "@/hooks/useScrollReveal";
 import { useRef } from "react";
 import { Quote } from "lucide-react";
 import BeforeAfterSlider from "./BeforeAfterSlider";
+import ParallaxHistoryTimeline from "./ParallaxHistoryTimeline";
 
 // Import images
 import towerBw1 from "@/assets/tower-bw-1.png";
@@ -325,6 +326,9 @@ const LegacySection = () => {
           </motion.div>
         </div>
       </div>
+
+      {/* Parallax History Timeline */}
+      <ParallaxHistoryTimeline />
 
       {/* Founders' Vision Section */}
       <div className="py-section bg-background">
