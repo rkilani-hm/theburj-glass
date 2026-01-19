@@ -6,6 +6,7 @@ import somObservation from "@/assets/som-observation.jpg";
 import somLobby from "@/assets/som-lobby.jpg";
 import kuwaitPanoramaSunset from "@/assets/kuwait-panorama-sunset.png";
 import JourneyTimeline from "./JourneyTimeline";
+import ElevatorSystemVisualization from "./ElevatorSystemVisualization";
 
 const SkyLobbiesSection = () => {
   const { t } = useLanguage();
@@ -254,6 +255,9 @@ const SkyLobbiesSection = () => {
 
       {/* Journey Timeline */}
       <JourneyTimeline />
+
+      {/* Elevator System Visualization */}
+      <ElevatorSystemVisualization />
     </div>
   );
 };
