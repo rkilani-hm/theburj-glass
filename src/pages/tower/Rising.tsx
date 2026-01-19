@@ -8,8 +8,12 @@ import constructionFacade from "@/assets/construction-facade.jpg";
 import towerSunset from "@/assets/tower-sunset.png";
 import somTowerSkyline from "@/assets/som-tower-skyline.jpg";
 import towerBw1 from "@/assets/tower-bw-1.png";
+import ConstructionStory from "@/components/alhamra/ConstructionStory";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Rising = () => {
+  const { t, language } = useLanguage();
+  const isArabic = language === "ar";
   const heroReveal = useScrollReveal();
   const visionReveal = useScrollReveal();
 
@@ -112,10 +116,10 @@ const Rising = () => {
               className="max-w-3xl"
             >
               <h1 className="text-4xl lg:text-6xl font-light tracking-wide text-foreground mb-6">
-                Rising: The Al Hamra Story
+                {t("rising.hero.title")}
               </h1>
               <p className="text-lg text-muted-foreground max-w-2xl">
-                From vision to reality: the seven-year journey of creating Kuwait's most iconic landmark
+                {t("rising.hero.subtitle")}
               </p>
             </motion.div>
           </div>
@@ -158,6 +162,9 @@ const Rising = () => {
             </motion.div>
           </div>
         </section>
+
+        {/* Construction Story - Interactive Scroll Section */}
+        <ConstructionStory />
 
         {/* Timeline Section */}
         <section className="py-24 px-6 lg:px-12 bg-muted/30">

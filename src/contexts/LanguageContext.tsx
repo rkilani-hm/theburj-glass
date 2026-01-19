@@ -517,10 +517,50 @@ const translations: Record<string, Record<Language, string>> = {
   "history.timeline.milestone6.factLabel": { en: "Visitor Milestone", ar: "إنجاز الزوار" },
   "history.timeline.milestone6.archival1": { en: "The tower illuminated at night", ar: "البرج مُضاء في الليل" },
 
+  // Rising Page
+  "rising.hero.title": { en: "Rising: The Al Hamra Story", ar: "الصعود: قصة الحمراء" },
+  "rising.hero.subtitle": { en: "From vision to reality: the seven-year journey of creating Kuwait's most iconic landmark", ar: "من الرؤية إلى الواقع: رحلة سبع سنوات لإنشاء أكثر معالم الكويت شهرة" },
+
   // Footer
   "footer.rights": { en: "All rights reserved.", ar: "جميع الحقوق محفوظة." },
   "footer.privacy": { en: "Privacy Policy", ar: "سياسة الخصوصية" },
   "footer.terms": { en: "Terms of Use", ar: "شروط الاستخدام" },
+
+  // Construction Story
+  "construction.sectionLabel": { en: "Construction Story", ar: "قصة البناء" },
+  "construction.sectionTitle": { en: "Crafting the Icon: Al Hamra Tower Construction", ar: "صناعة الأيقونة: بناء برج الحمراء" },
+  "construction.tapForDetails": { en: "Tap for details", ar: "انقر للتفاصيل" },
+  "construction.significance": { en: "Significance", ar: "الأهمية" },
+  
+  "construction.phase1.title": { en: "Foundation & Site Preparation", ar: "الأساسات وتحضير الموقع" },
+  "construction.phase1.caption": { en: "Foundation Laid", ar: "وُضِعت الأساسات" },
+  "construction.phase1.description": { en: "Deep in Kuwait City's commercial district, the foundation work begins with over 200 concrete piles driven 30 meters into bedrock.", ar: "في عمق منطقة الأعمال بمدينة الكويت، يبدأ العمل على الأساسات بأكثر من ٢٠٠ ركيزة خرسانية تُغرس ٣٠ متراً في الصخر." },
+  "construction.phase1.details": { en: "The site, once home to Kuwait's historic Al Hamra Cinema, was transformed through one of the largest continuous concrete pours in Middle East history. The foundation mat spans over 5,800 square meters—a massive structural base capable of supporting the tower's unprecedented height and unique geometry.", ar: "الموقع، الذي كان يضم سينما الحمراء التاريخية في الكويت، تحول من خلال واحدة من أكبر عمليات صب الخرسانة المستمرة في تاريخ الشرق الأوسط. تمتد قاعدة الأساس على أكثر من ٥٨٠٠ متر مربع—قاعدة هيكلية ضخمة قادرة على دعم الارتفاع غير المسبوق للبرج وهندسته الفريدة." },
+  "construction.phase1.significance": { en: "Established the structural foundation for Kuwait's tallest building, utilizing advanced pile technology to anchor the tower to bedrock 60 meters below.", ar: "أسست القاعدة الهيكلية لأطول مبنى في الكويت، مستخدمة تقنية الركائز المتقدمة لتثبيت البرج بالصخر على عمق ٦٠ متراً." },
+  
+  "construction.phase2.title": { en: "Structural Frame Emerges", ar: "يبرز الهيكل الإنشائي" },
+  "construction.phase2.caption": { en: "Core Takes Shape", ar: "يتشكل القلب" },
+  "construction.phase2.description": { en: "The reinforced concrete core rises above ground, becoming a key milestone as Kuwait City sees its future landmark begin to take form.", ar: "يرتفع القلب الخرساني المسلح فوق الأرض، ليصبح معلماً رئيسياً مع بدء مدينة الكويت برؤية معلمها المستقبلي يتشكل." },
+  "construction.phase2.details": { en: "Self-climbing formwork technology—innovative for its time—enabled rapid vertical construction. The structural core, designed by SOM with Samsung Engineering, features high-performance concrete with compressive strengths up to 80 MPa. This reinforced core would ultimately support the tower's distinctive asymmetric form.", ar: "مكنت تقنية القوالب ذاتية التسلق—المبتكرة في وقتها—من البناء العمودي السريع. القلب الهيكلي، المصمم من قبل SOM مع Samsung Engineering، يتميز بخرسانة عالية الأداء بقوة ضغط تصل إلى ٨٠ ميجاباسكال. هذا القلب المسلح سيدعم في النهاية الشكل غير المتماثل المميز للبرج." },
+  "construction.phase2.significance": { en: "The concrete core system marked a major engineering achievement, pioneering construction techniques that have since influenced high-rise projects worldwide.", ar: "مثّل نظام القلب الخرساني إنجازاً هندسياً كبيراً، رائداً في تقنيات البناء التي أثرت منذ ذلك الحين على مشاريع ناطحات السحاب في جميع أنحاء العالم." },
+  
+  "construction.phase3.title": { en: "Vertical Rise", ar: "الصعود العمودي" },
+  "construction.phase3.caption": { en: "Rising Above", ar: "يرتفع فوق" },
+  "construction.phase3.description": { en: "Floors rise in sequence, conveying the sense of architectural layering as the tower reaches beyond 40 stories.", ar: "ترتفع الطوابق بالتتابع، ناقلة إحساس الطبقات المعمارية مع وصول البرج لما بعد ٤٠ طابقاً." },
+  "construction.phase3.details": { en: "Each floor followed a carefully orchestrated construction sequence, with the tower's distinctive twist becoming increasingly apparent. Over 85,000 cubic meters of concrete and thousands of tons of structural steel were methodically placed. The construction team maintained remarkable precision as the rotating floor plates demanded exact geometric control.", ar: "اتبع كل طابق تسلسل بناء منظم بعناية، مع ظهور اللفة المميزة للبرج بشكل متزايد. تم وضع أكثر من ٨٥٠٠٠ متر مكعب من الخرسانة وآلاف الأطنان من الفولاذ الهيكلي بشكل منهجي. حافظ فريق البناء على دقة ملحوظة حيث تطلبت ألواح الأرضية الدوارة تحكماً هندسياً دقيقاً." },
+  "construction.phase3.significance": { en: "The tower became visible across Kuwait City's skyline for the first time—a symbol of national ambition reaching toward the sky.", ar: "أصبح البرج مرئياً عبر أفق مدينة الكويت لأول مرة—رمز للطموح الوطني يمتد نحو السماء." },
+  
+  "construction.phase4.title": { en: "Cladding & Sculptural Form", ar: "الكسوة والشكل النحتي" },
+  "construction.phase4.caption": { en: "Cladding & Form", ar: "الكسوة والشكل" },
+  "construction.phase4.description": { en: "The unique asymmetric sculpted exterior is applied, hinting at the tower's final iconic silhouette—a form inspired by the traditional Kuwaiti bisht.", ar: "يُطبق الخارج النحتي غير المتماثل الفريد، مشيراً إلى الصورة الظلية الأيقونية النهائية للبرج—شكل مستوحى من البشت الكويتي التقليدي." },
+  "construction.phase4.details": { en: "24,000 square meters of custom-cut Jura limestone panels from Germany were precisely installed to create the tower's distinctive facade. High-performance glazing systems were integrated throughout, providing solar protection while maintaining panoramic views. The limestone's warm tone was carefully selected to complement Kuwait's desert landscape and sky.", ar: "تم تركيب ٢٤٠٠٠ متر مربع من ألواح حجر الجورا الجيري المقطوع خصيصاً من ألمانيا بدقة لإنشاء واجهة البرج المميزة. تم دمج أنظمة التزجيج عالية الأداء في جميع الأنحاء، مما يوفر الحماية من الشمس مع الحفاظ على الإطلالات البانورامية. تم اختيار اللون الدافئ للحجر الجيري بعناية ليتكامل مع مشهد الصحراء والسماء الكويتية." },
+  "construction.phase4.significance": { en: "The facade revealed the tower's final sculptural identity—where the carved form naturally shields interior spaces from direct sunlight while maximizing natural light.", ar: "كشفت الواجهة عن الهوية النحتية النهائية للبرج—حيث يحمي الشكل المنحوت المساحات الداخلية بشكل طبيعي من أشعة الشمس المباشرة مع تعظيم الضوء الطبيعي." },
+  
+  "construction.phase5.title": { en: "Completion & Skyline Debut", ar: "الاكتمال وظهور الأفق" },
+  "construction.phase5.caption": { en: "Icon Complete", ar: "اكتملت الأيقونة" },
+  "construction.phase5.description": { en: "The finished tower stands at 412 meters as Kuwait's definitive skyscraper and the world's tallest sculpted tower.", ar: "يقف البرج المكتمل على ارتفاع ٤١٢ متراً كناطحة سحاب الكويت المميزة وأطول برج منحوت في العالم." },
+  "construction.phase5.details": { en: "On January 2011, Al Hamra Tower officially opened to international acclaim. The completion ceremony drew dignitaries from across the Gulf region. Within its first year, the tower achieved near-full occupancy, attracting Kuwait's leading corporations and international firms. The building's distinctive silhouette immediately became Kuwait City's most photographed landmark.", ar: "في يناير ٢٠١١، افتُتح برج الحمراء رسمياً وسط إشادة دولية. جذب حفل الاكتمال كبار الشخصيات من جميع أنحاء منطقة الخليج. خلال عامه الأول، حقق البرج إشغالاً شبه كامل، مستقطباً الشركات الكويتية الرائدة والشركات الدولية. أصبحت صورة المبنى المميزة فوراً أكثر معالم مدينة الكويت تصويراً." },
+  "construction.phase5.significance": { en: "Al Hamra Tower stands as more than Kuwait's tallest building—it represents the pinnacle of architectural and engineering achievement, a testament to bold vision executed with precision.", ar: "برج الحمراء يقف كأكثر من أطول مبنى في الكويت—إنه يمثل قمة الإنجاز المعماري والهندسي، شهادة على رؤية جريئة نُفذت بدقة." },
 };
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
