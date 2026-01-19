@@ -2,6 +2,7 @@ import Header from "@/components/alhamra/Header";
 import Footer from "@/components/alhamra/Footer";
 import AnimatedStatCard from "@/components/alhamra/AnimatedStatCard";
 import CircularProgress from "@/components/alhamra/CircularProgress";
+import TowerCrossSection from "@/components/alhamra/TowerCrossSection";
 import { useScrollReveal, revealVariants } from "@/hooks/useScrollReveal";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
@@ -404,48 +405,8 @@ const Sustainability = () => {
               ))}
             </div>
 
-            {/* Timeline of Safety Features */}
-            <div className="relative">
-              {/* Connecting Line */}
-              <motion.div
-                className="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary/50 via-primary/20 to-transparent hidden md:block"
-                initial={{ scaleY: 0 }}
-                whileInView={{ scaleY: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
-                style={{ transformOrigin: "top" }}
-              />
-              
-              <div className="space-y-8">
-                {[
-                  { level: "B2", name: "Substation 1", desc: "Underground power distribution hub" },
-                  { level: "4", name: "Substation 2", desc: "Lower tower power management" },
-                  { level: "27", name: "Substation 3", desc: "Mid-tower power relay" },
-                  { level: "29", name: "Refuge Floor 1", desc: "Emergency evacuation zone" },
-                  { level: "52", name: "Substation 4", desc: "Upper tower power distribution" },
-                  { level: "54", name: "Refuge Floor 2", desc: "High-rise emergency shelter" },
-                  { level: "76", name: "Substation 5", desc: "Crown level power management" },
-                ].map((item, index) => (
-                  <motion.div
-                    key={item.level}
-                    initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1, duration: 0.5 }}
-                    className={`flex items-center gap-4 ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} md:text-${index % 2 === 0 ? "right" : "left"}`}
-                  >
-                    <div className={`flex-1 ${index % 2 === 0 ? "md:text-right" : "md:text-left"}`}>
-                      <p className="text-white font-light">{item.name}</p>
-                      <p className="text-xs text-grey-500">{item.desc}</p>
-                    </div>
-                    <div className="w-12 h-12 rounded-full bg-primary/20 border border-primary/40 flex items-center justify-center text-primary text-sm font-medium">
-                      {item.level}
-                    </div>
-                    <div className="flex-1 hidden md:block" />
-                  </motion.div>
-                ))}
-              </div>
-            </div>
+            {/* Interactive Tower Cross-Section */}
+            <TowerCrossSection />
           </div>
         </section>
 
