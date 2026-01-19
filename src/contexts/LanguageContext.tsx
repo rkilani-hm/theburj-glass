@@ -418,6 +418,32 @@ const translations: Record<string, Record<Language, string>> = {
   "legacy.heart.p1": { en: "Situated in the commercial heart of Kuwait City, Al Hamra Tower anchors business, culture, and panoramic views of the Arabian Gulf—bridging past and present while pointing toward an ambitious future.", ar: "يقع في القلب التجاري لمدينة الكويت، يرسخ برج الحمراء الأعمال والثقافة والإطلالات البانورامية على الخليج العربي—جسر بين الماضي والحاضر مع الإشارة نحو مستقبل طموح." },
   "legacy.heart.gallery1.alt": { en: "Tower in urban context", ar: "البرج في السياق الحضري" },
   "legacy.heart.gallery2.alt": { en: "Architectural detail", ar: "تفاصيل معمارية" },
+
+  // Legacy Archival Gallery
+  "legacy.archival.label": { en: "Historical Archive", ar: "الأرشيف التاريخي" },
+  "legacy.archival.heading": { en: "Echoes of What Came Before", ar: "أصداء ما كان قبل" },
+  "legacy.archival.desc": { en: "Before the tower rose, this site was the cultural heart of a growing city—a place where Kuwaitis gathered, celebrated, and built community.", ar: "قبل أن يرتفع البرج، كان هذا الموقع القلب الثقافي لمدينة نامية—مكان حيث تجمع الكويتيون واحتفلوا وبنوا المجتمع." },
+  "legacy.archival.cinema.alt": { en: "Historic Kuwait cinema district in the 1960s", ar: "حي السينما التاريخي في الكويت في الستينيات" },
+  "legacy.archival.cinema.caption": { en: "The Al Hamra Cinema district—Kuwait's first entertainment venue", ar: "حي سينما الحمراء—أول مكان ترفيهي في الكويت" },
+  "legacy.archival.souq.alt": { en: "Traditional Kuwait souq market in the 1950s", ar: "سوق الكويت التقليدي في الخمسينيات" },
+  "legacy.archival.souq.caption": { en: "The surrounding souq where merchants traded for generations", ar: "السوق المحيط حيث تاجر التجار لأجيال" },
+  "legacy.archival.city.alt": { en: "Aerial view of Kuwait City in the 1970s", ar: "منظر جوي لمدينة الكويت في السبعينيات" },
+  "legacy.archival.city.caption": { en: "Kuwait City before the modern skyline emerged", ar: "مدينة الكويت قبل ظهور الأفق الحديث" },
+
+  // Founders' Vision
+  "legacy.founders.label": { en: "Founders' Vision", ar: "رؤية المؤسسين" },
+  "legacy.founders.heading": { en: "The Voices Behind the Vision", ar: "الأصوات وراء الرؤية" },
+  "legacy.founders.desc": { en: "The development team and architects who shaped Al Hamra Tower speak to the ambition and purpose that guided every decision.", ar: "فريق التطوير والمعماريون الذين شكلوا برج الحمراء يتحدثون عن الطموح والهدف الذي وجه كل قرار." },
+  "legacy.founders.quote1": { en: "We wanted to create something that would stand as a testament to Kuwait's capabilities—not just in height, but in architectural innovation and engineering excellence.", ar: "أردنا إنشاء شيء يقف كشهادة على قدرات الكويت—ليس فقط في الارتفاع، بل في الابتكار المعماري والتميز الهندسي." },
+  "legacy.founders.author1": { en: "Al Hamra Real Estate Co.", ar: "شركة الحمراء العقارية" },
+  "legacy.founders.role1": { en: "Development Team", ar: "فريق التطوير" },
+  "legacy.founders.quote2": { en: "The twisting form emerged from our analysis of Kuwait's harsh sun. Every degree of rotation serves a purpose—reducing solar gain while maximizing natural light.", ar: "نشأ الشكل الملتوي من تحليلنا لشمس الكويت القاسية. كل درجة دوران تخدم غرضاً—تقليل اكتساب الحرارة الشمسية مع تعظيم الضوء الطبيعي." },
+  "legacy.founders.author2": { en: "Skidmore, Owings & Merrill", ar: "سكيدمور وأوينغز وميريل" },
+  "legacy.founders.role2": { en: "Lead Architects", ar: "المعماريون الرئيسيون" },
+  "legacy.founders.quote3": { en: "Building the world's tallest carved concrete tower required us to rethink construction methodology from the ground up. Every pour, every cure was choreographed.", ar: "بناء أطول برج خرساني منحوت في العالم تطلب منا إعادة التفكير في منهجية البناء من الأساس. كل صب، كل معالجة كانت منسقة." },
+  "legacy.founders.author3": { en: "Samsung Engineering & Construction", ar: "سامسونج للهندسة والبناء" },
+  "legacy.founders.role3": { en: "Construction Partner", ar: "شريك البناء" },
+  "legacy.founders.vision": { en: "We envisioned a tower that would not simply occupy the skyline, but define it—a landmark that speaks to Kuwait's past while reaching toward its future.", ar: "تخيلنا برجاً لا يشغل الأفق فحسب، بل يحدده—معلم يتحدث عن ماضي الكويت بينما يمتد نحو مستقبلها." },
   
   // Legacy Closing
   "legacy.closing.quote": { en: "Al Hamra Tower is not merely a building—it is a living legacy, rooted in local culture, shaped by architectural ambition, and reaching toward a future that honors what came before.", ar: "برج الحمراء ليس مجرد مبنى—إنه إرث حي، متجذر في الثقافة المحلية، شكله الطموح المعماري، ويتجه نحو مستقبل يكرم ما سبقه." },

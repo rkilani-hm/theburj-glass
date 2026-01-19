@@ -2,6 +2,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useScrollReveal, revealVariants } from "@/hooks/useScrollReveal";
 import { useRef } from "react";
+import { Quote } from "lucide-react";
 
 // Import images
 import towerBw1 from "@/assets/tower-bw-1.png";
@@ -12,16 +13,62 @@ import somTowerSkyline from "@/assets/som-tower-skyline.jpg";
 import kuwaitPanoramaSunset from "@/assets/kuwait-panorama-sunset.png";
 import towerNightIlluminated from "@/assets/tower-night-illuminated.jpg";
 
+// Archival images
+import kuwaitCinemaHistoric from "@/assets/kuwait-cinema-historic.jpg";
+import kuwaitSouqHistoric from "@/assets/kuwait-souq-historic.jpg";
+import kuwaitCity1970s from "@/assets/kuwait-city-1970s.jpg";
+
 const LegacySection = () => {
   const { t, language } = useLanguage();
   const isArabic = language === "ar";
   
   const { ref: headerRef, isInView: headerInView } = useScrollReveal();
   const { ref: originsRef, isInView: originsInView } = useScrollReveal();
+  const { ref: archivalRef, isInView: archivalInView } = useScrollReveal();
+  const { ref: foundersRef, isInView: foundersInView } = useScrollReveal();
   const { ref: evolutionRef, isInView: evolutionInView } = useScrollReveal();
   const { ref: designRef, isInView: designInView } = useScrollReveal();
   const { ref: impactRef, isInView: impactInView } = useScrollReveal();
   const { ref: heartRef, isInView: heartInView } = useScrollReveal();
+
+  const archivalImages = [
+    { 
+      src: kuwaitCinemaHistoric, 
+      alt: t("legacy.archival.cinema.alt"),
+      caption: t("legacy.archival.cinema.caption"),
+      year: "1960s"
+    },
+    { 
+      src: kuwaitSouqHistoric, 
+      alt: t("legacy.archival.souq.alt"),
+      caption: t("legacy.archival.souq.caption"),
+      year: "1950s"
+    },
+    { 
+      src: kuwaitCity1970s, 
+      alt: t("legacy.archival.city.alt"),
+      caption: t("legacy.archival.city.caption"),
+      year: "1970s"
+    }
+  ];
+
+  const foundersQuotes = [
+    {
+      quote: t("legacy.founders.quote1"),
+      author: t("legacy.founders.author1"),
+      role: t("legacy.founders.role1")
+    },
+    {
+      quote: t("legacy.founders.quote2"),
+      author: t("legacy.founders.author2"),
+      role: t("legacy.founders.role2")
+    },
+    {
+      quote: t("legacy.founders.quote3"),
+      author: t("legacy.founders.author3"),
+      role: t("legacy.founders.role3")
+    }
+  ];
   
   const parallaxRef = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -176,6 +223,120 @@ const LegacySection = () => {
               </blockquote>
             </motion.div>
           </div>
+        </div>
+      </div>
+
+      {/* Archival Gallery Section */}
+      <div className="py-section bg-muted/30">
+        <div className="container mx-auto px-6 lg:px-12">
+          <motion.div 
+            ref={archivalRef}
+            initial="hidden"
+            animate={archivalInView ? "visible" : "hidden"}
+            variants={revealVariants.fadeUp}
+            transition={{ duration: 0.6 }}
+            className="mb-16"
+          >
+            <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground mb-4 block">
+              {t("legacy.archival.label")}
+            </span>
+            <h2 className="text-title font-light text-foreground mb-4">
+              {t("legacy.archival.heading")}
+            </h2>
+            <p className="text-body text-muted-foreground max-w-2xl">
+              {t("legacy.archival.desc")}
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {archivalImages.map((image, index) => (
+              <motion.div
+                key={index}
+                initial="hidden"
+                animate={archivalInView ? "visible" : "hidden"}
+                variants={revealVariants.fadeUp}
+                transition={{ duration: 0.6, delay: 0.2 + index * 0.15 }}
+                className="group relative overflow-hidden"
+              >
+                <div className="aspect-[4/3] overflow-hidden">
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    className="w-full h-full object-cover sepia-[0.4] transition-all duration-700 group-hover:sepia-0 group-hover:scale-105"
+                  />
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300" />
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <p className="text-xl font-light text-background mb-1">{image.year}</p>
+                  <p className="text-sm text-background/80">{image.caption}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Founders' Vision Section */}
+      <div className="py-section bg-background">
+        <div className="container mx-auto px-6 lg:px-12">
+          <motion.div 
+            ref={foundersRef}
+            initial="hidden"
+            animate={foundersInView ? "visible" : "hidden"}
+            variants={revealVariants.fadeUp}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground mb-4 block">
+              {t("legacy.founders.label")}
+            </span>
+            <h2 className="text-title font-light text-foreground mb-4">
+              {t("legacy.founders.heading")}
+            </h2>
+            <p className="text-body text-muted-foreground max-w-2xl mx-auto">
+              {t("legacy.founders.desc")}
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
+            {foundersQuotes.map((item, index) => (
+              <motion.div
+                key={index}
+                initial="hidden"
+                animate={foundersInView ? "visible" : "hidden"}
+                variants={revealVariants.fadeUp}
+                transition={{ duration: 0.6, delay: 0.2 + index * 0.15 }}
+                className="relative p-8 bg-muted/30 border border-border group hover:border-foreground/20 transition-colors duration-300"
+              >
+                <Quote className="w-8 h-8 text-foreground/20 mb-6 group-hover:text-foreground/40 transition-colors duration-300" />
+                <blockquote className="mb-8">
+                  <p className="text-body leading-relaxed text-foreground font-light italic">
+                    "{item.quote}"
+                  </p>
+                </blockquote>
+                <footer className="mt-auto">
+                  <p className="text-sm font-medium text-foreground">{item.author}</p>
+                  <p className="text-xs text-muted-foreground uppercase tracking-[0.15em] mt-1">{item.role}</p>
+                </footer>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Vision Statement */}
+          <motion.div
+            initial="hidden"
+            animate={foundersInView ? "visible" : "hidden"}
+            variants={revealVariants.fadeUp}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="mt-20 text-center"
+          >
+            <blockquote className="max-w-3xl mx-auto relative">
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-16 h-px bg-foreground/30" />
+              <p className="text-title font-light text-foreground leading-relaxed pt-8">
+                {t("legacy.founders.vision")}
+              </p>
+            </blockquote>
+          </motion.div>
         </div>
       </div>
 
