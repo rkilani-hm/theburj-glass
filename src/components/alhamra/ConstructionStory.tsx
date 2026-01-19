@@ -103,7 +103,7 @@ const ConstructionStory = () => {
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             {/* Tower SVG Visualization */}
             <div className={`relative flex justify-center ${isArabic ? "lg:order-2" : ""}`}>
-              <TowerVisualization scrollProgress={scrollYProgress} phases={phases} />
+              <TowerVisualization scrollProgress={scrollYProgress} />
             </div>
 
             {/* Phase Content */}
@@ -158,18 +158,21 @@ const ConstructionStory = () => {
 // Tower SVG Visualization Component
 const TowerVisualization = ({
   scrollProgress,
-  phases,
 }: {
   scrollProgress: any;
-  phases: ConstructionPhase[];
 }) => {
-  const { t } = useLanguage();
-  
-  // Transform scroll progress to tower height reveal
-  const towerHeight = useTransform(scrollProgress, [0, 1], [0.05, 1]);
-  const floorLinesProgress = useTransform(scrollProgress, [0, 1], [0, 1]);
+  // Transform scroll progress to tower height reveal - the mask Y position
+  // At scroll 0: mask starts at y=430 (tower hidden), at scroll 1: mask at y=40 (tower fully revealed)
+  const maskY = useTransform(scrollProgress, [0, 1], [430, 40]);
   const glowOpacity = useTransform(scrollProgress, [0, 0.1, 0.9, 1], [0.8, 0.4, 0.4, 0.8]);
   const glowY = useTransform(scrollProgress, [0, 1], [420, 40]);
+  const craneOpacity = useTransform(scrollProgress, [0, 0.1, 0.85, 0.95], [0, 1, 1, 0]);
+  const heightMarkerOpacity = useTransform(scrollProgress, [0.8, 1], [0, 1]);
+  
+  // Floor line opacities
+  const floorLineOpacities = Array.from({ length: 20 }).map((_, i) => 
+    useTransform(scrollProgress, [i * 0.04, i * 0.04 + 0.08], [0, 1])
+  );
 
   return (
     <div className="relative w-full max-w-sm aspect-[1/2]">
@@ -189,20 +192,6 @@ const TowerVisualization = ({
             <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.85" />
           </linearGradient>
 
-          {/* Reveal Mask */}
-          <mask id="revealMask">
-            <motion.rect
-              x="0"
-              y="0"
-              width="200"
-              height="450"
-              fill="white"
-              style={{
-                y: useTransform(towerHeight, (h) => 450 - h * 410),
-              }}
-            />
-          </mask>
-
           {/* Glow Filter */}
           <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
             <feGaussianBlur stdDeviation="3" result="coloredBlur" />
@@ -211,14 +200,24 @@ const TowerVisualization = ({
               <feMergeNode in="SourceGraphic" />
             </feMerge>
           </filter>
+          
+          {/* Clip path for tower reveal */}
+          <clipPath id="towerClip">
+            <motion.rect
+              x="0"
+              width="200"
+              height="450"
+              style={{ y: maskY }}
+            />
+          </clipPath>
         </defs>
 
-        {/* Ground/Foundation */}
+        {/* Ground/Foundation - always visible */}
         <rect x="40" y="430" width="120" height="15" fill="hsl(var(--muted))" />
         <rect x="50" y="428" width="100" height="4" fill="hsl(var(--border))" />
 
-        {/* Tower Silhouette with Reveal */}
-        <g mask="url(#revealMask)">
+        {/* Tower Silhouette with Clip Reveal */}
+        <g clipPath="url(#towerClip)">
           {/* Main Tower Body - Al Hamra's distinctive carved form */}
           <path
             d="M70 430 
@@ -248,27 +247,18 @@ const TowerVisualization = ({
           />
 
           {/* Floor Lines */}
-          <motion.g style={{ opacity: floorLinesProgress }}>
-            {Array.from({ length: 20 }).map((_, i) => (
-              <motion.line
-                key={i}
-                x1="72"
-                y1={425 - i * 18}
-                x2="128"
-                y2={425 - i * 18}
-                stroke="hsl(var(--background))"
-                strokeWidth="0.5"
-                strokeOpacity="0.3"
-                style={{
-                  opacity: useTransform(
-                    scrollProgress,
-                    [i * 0.04, i * 0.04 + 0.05],
-                    [0, 1]
-                  ),
-                }}
-              />
-            ))}
-          </motion.g>
+          {floorLineOpacities.map((lineOpacity, i) => (
+            <motion.line
+              key={i}
+              x1="72"
+              y1={425 - i * 18}
+              x2="128"
+              y2={425 - i * 18}
+              stroke="hsl(var(--background))"
+              strokeWidth="0.5"
+              style={{ opacity: lineOpacity }}
+            />
+          ))}
 
           {/* Tower Crown Detail */}
           <path
@@ -280,11 +270,11 @@ const TowerVisualization = ({
           />
         </g>
 
-        {/* Rising Glow Effect */}
+        {/* Rising Glow Effect - follows the construction line */}
         <motion.line
           x1="70"
-          y1="0"
           x2="130"
+          y1="0"
           y2="0"
           stroke="hsl(var(--primary))"
           strokeWidth="3"
@@ -296,11 +286,7 @@ const TowerVisualization = ({
         />
 
         {/* Construction Crane (visible during building phases) */}
-        <motion.g
-          style={{
-            opacity: useTransform(scrollProgress, [0, 0.1, 0.85, 0.95], [0, 1, 1, 0]),
-          }}
-        >
+        <motion.g style={{ opacity: craneOpacity }}>
           <line x1="155" y1="100" x2="155" y2="300" stroke="hsl(var(--muted-foreground))" strokeWidth="2" />
           <line x1="140" y1="110" x2="180" y2="110" stroke="hsl(var(--muted-foreground))" strokeWidth="2" />
           <line x1="155" y1="110" x2="100" y2="130" stroke="hsl(var(--muted-foreground))" strokeWidth="1" strokeDasharray="3 2" />
@@ -310,9 +296,7 @@ const TowerVisualization = ({
       {/* Height Marker */}
       <motion.div
         className="absolute right-0 top-1/4 flex items-center gap-2 text-sm text-muted-foreground"
-        style={{
-          opacity: useTransform(scrollProgress, [0.8, 1], [0, 1]),
-        }}
+        style={{ opacity: heightMarkerOpacity }}
       >
         <span className="w-8 h-px bg-primary" />
         <span className="font-light">412m</span>
