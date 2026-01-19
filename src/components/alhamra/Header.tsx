@@ -8,6 +8,7 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [towerDropdownOpen, setTowerDropdownOpen] = useState(false);
+  const [connectDropdownOpen, setConnectDropdownOpen] = useState(false);
   const location = useLocation();
   const isHome = location.pathname === "/";
 
@@ -28,19 +29,23 @@ const Header = () => {
     { key: "nav.tower.recognition", href: "/tower/recognition", label: { en: "Recognition", ar: "الجوائز" } },
   ];
 
+  const connectSubItems = [
+    { key: "nav.leasing", href: "/leasing", label: { en: "Leasing", ar: "التأجير" } },
+    { key: "nav.location", href: "/location", label: { en: "Location", ar: "الموقع" } },
+    { key: "nav.contact", href: "/contact", label: { en: "Contact", ar: "التواصل" } },
+  ];
+
   const navItems = [
     { key: "nav.perspective", href: "/perspective" },
     { key: "nav.sustainability", href: "/tower/sustainability", label: { en: "Sustainability", ar: "الاستدامة" } },
     { key: "nav.business", href: "/business" },
     { key: "nav.services", href: "/services" },
     { key: "nav.legacy", href: "/legacy" },
-    { key: "nav.leasing", href: "/leasing" },
-    { key: "nav.location", href: "/location" },
-    { key: "nav.contact", href: "/contact" },
   ];
 
   const isActive = (href: string) => location.pathname === href;
   const isTowerActive = location.pathname.startsWith("/tower");
+  const isConnectActive = ["/leasing", "/location", "/contact"].includes(location.pathname);
 
   // Show light text on home page when not scrolled
   const showLightText = isHome && !scrolled;
@@ -138,6 +143,54 @@ const Header = () => {
                 {t(item.key)}
               </Link>
             ))}
+
+            {/* Connect Dropdown */}
+            <div 
+              className="relative"
+              onMouseEnter={() => setConnectDropdownOpen(true)}
+              onMouseLeave={() => setConnectDropdownOpen(false)}
+            >
+              <button
+                className={`flex items-center gap-1 text-sm tracking-wide transition-colors duration-300 ${
+                  showLightText
+                    ? isConnectActive
+                      ? "text-charcoal-900"
+                      : "text-charcoal-700 hover:text-charcoal-900"
+                    : isConnectActive
+                      ? "text-foreground"
+                      : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {t("nav.connect")}
+                <ChevronDown 
+                  size={14} 
+                  className={`transition-transform duration-300 ${connectDropdownOpen ? "rotate-180" : ""}`}
+                />
+              </button>
+
+              {/* Dropdown Menu */}
+              <div
+                className={`absolute top-full right-0 pt-2 transition-all duration-300 ${
+                  connectDropdownOpen ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-2"
+                }`}
+              >
+                <div className="bg-background/95 backdrop-blur-md border border-border shadow-lg min-w-[180px]">
+                  {connectSubItems.map((item) => (
+                    <Link
+                      key={item.key}
+                      to={item.href}
+                      className={`block px-5 py-3 text-sm tracking-wide transition-colors duration-300 border-b border-border/50 last:border-0 ${
+                        isActive(item.href)
+                          ? "text-foreground bg-muted/50"
+                          : "text-muted-foreground hover:text-foreground hover:bg-muted/30"
+                      }`}
+                    >
+                      {item.label[language]}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
           </nav>
 
           {/* Language Toggle & Mobile Menu */}
@@ -208,6 +261,29 @@ const Header = () => {
                   {t(item.key)}
                 </Link>
               ))}
+
+              <div className="h-px bg-border my-2" />
+
+              {/* Connect Section with Sub-items */}
+              <div className="space-y-2">
+                <p className="text-xs tracking-widest uppercase text-muted-foreground mb-2">
+                  {t("nav.connect")}
+                </p>
+                {connectSubItems.map((item) => (
+                  <Link
+                    key={item.key}
+                    to={item.href}
+                    onClick={() => setMenuOpen(false)}
+                    className={`block pl-4 py-2 text-base transition-colors duration-300 border-l-2 ${
+                      isActive(item.href)
+                        ? "text-foreground border-foreground"
+                        : "text-muted-foreground hover:text-foreground border-transparent hover:border-muted"
+                    }`}
+                  >
+                    {item.label[language]}
+                  </Link>
+                ))}
+              </div>
             </div>
           </nav>
         </div>
