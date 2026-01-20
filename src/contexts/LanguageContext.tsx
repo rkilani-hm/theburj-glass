@@ -19,7 +19,7 @@ const translations: Record<string, Record<Language, string>> = {
   "nav.leasing": { en: "Leasing", ar: "التأجير" },
   "nav.location": { en: "Location", ar: "الموقع" },
   "nav.contact": { en: "Contact", ar: "التواصل" },
-  "nav.connect": { en: "Connect", ar: "تواصل معنا" },
+  "nav.connect": { en: "Engage", ar: "تواصل" },
   "nav.sustainability": { en: "Sustainability", ar: "الاستدامة" },
 
   // Hero
