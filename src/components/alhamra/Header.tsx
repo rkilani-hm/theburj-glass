@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const Header = () => {
@@ -106,27 +107,39 @@ const Header = () => {
               </button>
 
               {/* Dropdown Menu */}
-              <div
-                className={`absolute top-full left-0 pt-2 transition-all duration-300 ${
-                  towerDropdownOpen ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-2"
-                }`}
-              >
-                <div className="bg-background/95 backdrop-blur-md border border-border shadow-lg min-w-[220px]">
-                  {towerSubItems.map((item) => (
-                    <Link
-                      key={item.key}
-                      to={item.href}
-                      className={`block px-5 py-3 text-sm tracking-wide transition-all duration-300 border-b border-border/50 last:border-0 ${
-                        isActive(item.href)
-                          ? "text-foreground bg-muted/50"
-                          : "text-muted-foreground hover:text-foreground hover:bg-muted/30 hover:translate-x-1"
-                      }`}
-                    >
-                      {item.label[language]}
-                    </Link>
-                  ))}
-                </div>
-              </div>
+              <AnimatePresence>
+                {towerDropdownOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute top-full left-0 pt-2"
+                  >
+                    <div className="bg-background/95 backdrop-blur-md border border-border shadow-lg min-w-[220px] overflow-hidden">
+                      {towerSubItems.map((item, index) => (
+                        <motion.div
+                          key={item.key}
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.2, delay: index * 0.05 }}
+                        >
+                          <Link
+                            to={item.href}
+                            className={`block px-5 py-3 text-sm tracking-wide transition-all duration-300 border-b border-border/50 last:border-0 ${
+                              isActive(item.href)
+                                ? "text-foreground bg-muted/50"
+                                : "text-muted-foreground hover:text-foreground hover:bg-muted/30 hover:translate-x-1"
+                            }`}
+                          >
+                            {item.label[language]}
+                          </Link>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
             {navItems.map((item) => (
@@ -172,27 +185,39 @@ const Header = () => {
               </button>
 
               {/* Dropdown Menu */}
-              <div
-                className={`absolute top-full right-0 pt-2 transition-all duration-300 ${
-                  connectDropdownOpen ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-2"
-                }`}
-              >
-                <div className="bg-background/95 backdrop-blur-md border border-border shadow-lg min-w-[180px]">
-                  {connectSubItems.map((item) => (
-                    <Link
-                      key={item.key}
-                      to={item.href}
-                      className={`block px-5 py-3 text-sm tracking-wide transition-all duration-300 border-b border-border/50 last:border-0 ${
-                        isActive(item.href)
-                          ? "text-foreground bg-muted/50"
-                          : "text-muted-foreground hover:text-foreground hover:bg-muted/30 hover:translate-x-1"
-                      }`}
-                    >
-                      {item.label[language]}
-                    </Link>
-                  ))}
-                </div>
-              </div>
+              <AnimatePresence>
+                {connectDropdownOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute top-full right-0 pt-2"
+                  >
+                    <div className="bg-background/95 backdrop-blur-md border border-border shadow-lg min-w-[180px] overflow-hidden">
+                      {connectSubItems.map((item, index) => (
+                        <motion.div
+                          key={item.key}
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.2, delay: index * 0.05 }}
+                        >
+                          <Link
+                            to={item.href}
+                            className={`block px-5 py-3 text-sm tracking-wide transition-all duration-300 border-b border-border/50 last:border-0 ${
+                              isActive(item.href)
+                                ? "text-foreground bg-muted/50"
+                                : "text-muted-foreground hover:text-foreground hover:bg-muted/30 hover:translate-x-1"
+                            }`}
+                          >
+                            {item.label[language]}
+                          </Link>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </nav>
 
