@@ -116,10 +116,10 @@ const Header = () => {
                     <Link
                       key={item.key}
                       to={item.href}
-                      className={`block px-5 py-3 text-sm tracking-wide transition-colors duration-300 border-b border-border/50 last:border-0 ${
+                      className={`block px-5 py-3 text-sm tracking-wide transition-all duration-300 border-b border-border/50 last:border-0 ${
                         isActive(item.href)
                           ? "text-foreground bg-muted/50"
-                          : "text-muted-foreground hover:text-foreground hover:bg-muted/30"
+                          : "text-muted-foreground hover:text-foreground hover:bg-muted/30 hover:translate-x-1"
                       }`}
                     >
                       {item.label[language]}
@@ -182,10 +182,10 @@ const Header = () => {
                     <Link
                       key={item.key}
                       to={item.href}
-                      className={`block px-5 py-3 text-sm tracking-wide transition-colors duration-300 border-b border-border/50 last:border-0 ${
+                      className={`block px-5 py-3 text-sm tracking-wide transition-all duration-300 border-b border-border/50 last:border-0 ${
                         isActive(item.href)
                           ? "text-foreground bg-muted/50"
-                          : "text-muted-foreground hover:text-foreground hover:bg-muted/30"
+                          : "text-muted-foreground hover:text-foreground hover:bg-muted/30 hover:translate-x-1"
                       }`}
                     >
                       {item.label[language]}
