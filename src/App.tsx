@@ -24,6 +24,7 @@ import Legacy from "./pages/Legacy";
 import Location from "./pages/Location";
 import Contact from "./pages/Contact";
 import Leasing from "./pages/Leasing";
+import Presentation from "./pages/Presentation";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -49,6 +50,7 @@ const AnimatedRoutes = () => {
         <Route path="/location" element={<PageTransition><Location /></PageTransition>} />
         <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
         <Route path="/leasing" element={<PageTransition><Leasing /></PageTransition>} />
+        <Route path="/presentation" element={<Presentation />} />
         <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
       </Routes>
     </AnimatePresence>
