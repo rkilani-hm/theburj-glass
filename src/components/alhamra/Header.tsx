@@ -9,6 +9,9 @@ const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [towerDropdownOpen, setTowerDropdownOpen] = useState(false);
   const [connectDropdownOpen, setConnectDropdownOpen] = useState(false);
+  // Mobile accordion states
+  const [mobileTowerOpen, setMobileTowerOpen] = useState(false);
+  const [mobileConnectOpen, setMobileConnectOpen] = useState(false);
   const location = useLocation();
   const isHome = location.pathname === "/";
 
@@ -221,68 +224,101 @@ const Header = () => {
             menuOpen ? "max-h-[700px] opacity-100" : "max-h-0 opacity-0"
           }`}
         >
-          <nav className="py-8 border-t border-border bg-background/95 backdrop-blur-md">
-            <div className="flex flex-col gap-4">
-              {/* Tower Section with Sub-items */}
-              <div className="space-y-2">
-                <p className="text-xs tracking-widest uppercase text-muted-foreground mb-2">
-                  {t("nav.tower")}
-                </p>
-                {towerSubItems.map((item) => (
-                  <Link
-                    key={item.key}
-                    to={item.href}
-                    onClick={() => setMenuOpen(false)}
-                    className={`block pl-4 py-2 text-base transition-colors duration-300 border-l-2 ${
-                      isActive(item.href)
-                        ? "text-foreground border-foreground"
-                        : "text-muted-foreground hover:text-foreground border-transparent hover:border-muted"
-                    }`}
-                  >
-                    {item.label[language]}
-                  </Link>
-                ))}
+          <nav className="py-6 border-t border-border bg-background/95 backdrop-blur-md">
+            <div className="flex flex-col gap-2">
+              {/* Tower Section - Collapsible */}
+              <div>
+                <button
+                  onClick={() => setMobileTowerOpen(!mobileTowerOpen)}
+                  className={`w-full flex items-center justify-between py-3 text-lg transition-colors duration-300 ${
+                    isTowerActive ? "text-foreground" : "text-muted-foreground"
+                  }`}
+                >
+                  <span>{t("nav.tower")}</span>
+                  <ChevronDown 
+                    size={18} 
+                    className={`transition-transform duration-300 ${mobileTowerOpen ? "rotate-180" : ""}`}
+                  />
+                </button>
+                <div
+                  className={`overflow-hidden transition-all duration-300 ease-out ${
+                    mobileTowerOpen ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"
+                  }`}
+                >
+                  <div className="pl-4 pb-2 space-y-1">
+                    {towerSubItems.map((item) => (
+                      <Link
+                        key={item.key}
+                        to={item.href}
+                        onClick={() => setMenuOpen(false)}
+                        className={`block py-2 text-base transition-colors duration-300 border-l-2 pl-4 ${
+                          isActive(item.href)
+                            ? "text-foreground border-foreground"
+                            : "text-muted-foreground hover:text-foreground border-transparent hover:border-muted"
+                        }`}
+                      >
+                        {item.label[language]}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
               </div>
 
-              <div className="h-px bg-border my-2" />
+              <div className="h-px bg-border" />
 
-              {navItems.map((item, index) => (
+              {navItems.map((item) => (
                 <Link
                   key={item.key}
                   to={item.href}
                   onClick={() => setMenuOpen(false)}
-                  className={`text-lg transition-colors duration-300 ${
+                  className={`py-3 text-lg transition-colors duration-300 ${
                     isActive(item.href)
                       ? "text-foreground"
                       : "text-muted-foreground hover:text-foreground"
                   }`}
-                  style={{ animationDelay: `${index * 50}ms` }}
                 >
                   {t(item.key)}
                 </Link>
               ))}
 
-              <div className="h-px bg-border my-2" />
+              <div className="h-px bg-border" />
 
-              {/* Connect Section with Sub-items */}
-              <div className="space-y-2">
-                <p className="text-xs tracking-widest uppercase text-muted-foreground mb-2">
-                  {t("nav.connect")}
-                </p>
-                {connectSubItems.map((item) => (
-                  <Link
-                    key={item.key}
-                    to={item.href}
-                    onClick={() => setMenuOpen(false)}
-                    className={`block pl-4 py-2 text-base transition-colors duration-300 border-l-2 ${
-                      isActive(item.href)
-                        ? "text-foreground border-foreground"
-                        : "text-muted-foreground hover:text-foreground border-transparent hover:border-muted"
-                    }`}
-                  >
-                    {item.label[language]}
-                  </Link>
-                ))}
+              {/* Connect Section - Collapsible */}
+              <div>
+                <button
+                  onClick={() => setMobileConnectOpen(!mobileConnectOpen)}
+                  className={`w-full flex items-center justify-between py-3 text-lg transition-colors duration-300 ${
+                    isConnectActive ? "text-foreground" : "text-muted-foreground"
+                  }`}
+                >
+                  <span>{t("nav.connect")}</span>
+                  <ChevronDown 
+                    size={18} 
+                    className={`transition-transform duration-300 ${mobileConnectOpen ? "rotate-180" : ""}`}
+                  />
+                </button>
+                <div
+                  className={`overflow-hidden transition-all duration-300 ease-out ${
+                    mobileConnectOpen ? "max-h-[200px] opacity-100" : "max-h-0 opacity-0"
+                  }`}
+                >
+                  <div className="pl-4 pb-2 space-y-1">
+                    {connectSubItems.map((item) => (
+                      <Link
+                        key={item.key}
+                        to={item.href}
+                        onClick={() => setMenuOpen(false)}
+                        className={`block py-2 text-base transition-colors duration-300 border-l-2 pl-4 ${
+                          isActive(item.href)
+                            ? "text-foreground border-foreground"
+                            : "text-muted-foreground hover:text-foreground border-transparent hover:border-muted"
+                        }`}
+                      >
+                        {item.label[language]}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </nav>
