@@ -2,12 +2,13 @@ import { Building2, Users, Server, Headphones, Globe, Shield, Zap, Award } from 
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
 import { useScrollReveal, revealVariants } from "@/hooks/useScrollReveal";
-import officeInterior from "@/assets/interior-office.jpg";
+import cityViewInterior from "@/assets/city-view-interior.jpg";
 import towerAerialDay from "@/assets/tower-aerial-day.png";
-import kuwaitSkylineDay from "@/assets/kuwait-skyline-day.png";
-import towerAerialGulf from "@/assets/tower-aerial-gulf.jpg";
+import cityLandscape from "@/assets/city-landscape.jpg";
+import skylineParkPanorama from "@/assets/skyline-park-panorama.jpg";
 import towerKuwaitTowers from "@/assets/tower-kuwait-towers.jpg";
-import interiorLobby from "@/assets/interior-lobby.jpg";
+import lobbyArches from "@/assets/lobby-arches.jpg";
+import officeCorridor from "@/assets/office-corridor.jpg";
 import SkyLobbiesSection from "./SkyLobbiesSection";
 
 const BusinessSection = () => {
@@ -107,8 +108,8 @@ const BusinessSection = () => {
                 <div className="relative group">
                   <div className="aspect-[4/3] overflow-hidden bg-muted">
                     <img
-                      src={officeInterior}
-                      alt="Executive office space"
+                      src={cityViewInterior}
+                      alt="Executive office with city views"
                       className="w-full h-full object-cover transition-transform duration-700 ease-out-expo group-hover:scale-105"
                     />
                   </div>
@@ -243,8 +244,8 @@ const BusinessSection = () => {
               className="aspect-[4/3] overflow-hidden group"
             >
               <img
-                src={interiorLobby}
-                alt="Executive lobby"
+                src={lobbyArches}
+                alt="Grand lobby with lamella arches"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
             </motion.div>
@@ -269,8 +270,21 @@ const BusinessSection = () => {
               className="aspect-[4/3] overflow-hidden group"
             >
               <img
-                src={towerAerialGulf}
-                alt="Tower aerial with Gulf"
+                src={skylineParkPanorama}
+                alt="Kuwait City panorama"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+            </motion.div>
+            <motion.div
+              initial="hidden"
+              animate={tenantsInView ? "visible" : "hidden"}
+              variants={revealVariants.fadeUp}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              className="lg:col-span-3 aspect-[21/9] overflow-hidden group"
+            >
+              <img
+                src={officeCorridor}
+                alt="Premium office corridor"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
             </motion.div>
@@ -326,8 +340,8 @@ const BusinessSection = () => {
               </div>
               <div className="aspect-[3/4] overflow-hidden group mt-8">
                 <img
-                  src={kuwaitSkylineDay}
-                  alt="Kuwait skyline"
+                  src={cityLandscape}
+                  alt="Kuwait city landscape"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               </div>

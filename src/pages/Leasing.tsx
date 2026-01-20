@@ -5,12 +5,13 @@ import { Building2, Ruler, Users, Calendar, ArrowRight, Check, Star, Eye, Key, S
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import towerAerial from "@/assets/tower-aerial.png";
-import skylinePalms from "@/assets/skyline-palms.png";
+import skylineParkPanorama from "@/assets/skyline-park-panorama.jpg";
 import towerTopClouds from "@/assets/tower-top-clouds.png";
-import interiorOffice from "@/assets/interior-office.jpg";
+import cityViewInterior from "@/assets/city-view-interior.jpg";
 import interiorLobby from "@/assets/interior-lobby.jpg";
 import towerAerialBalcony from "@/assets/tower-aerial-balcony.jpg";
-import towerSunset from "@/assets/tower-sunset.png";
+import officeCorridor from "@/assets/office-corridor.jpg";
+import cityLandscape from "@/assets/city-landscape.jpg";
 
 const Leasing = () => {
   const { t } = useLanguage();
@@ -102,8 +103,8 @@ const Leasing = () => {
               >
                 <div className="aspect-[4/3] overflow-hidden">
                   <img 
-                    src={skylinePalms} 
-                    alt="Kuwait City skyline" 
+                    src={skylineParkPanorama} 
+                    alt="Kuwait City panorama" 
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -273,8 +274,8 @@ const Leasing = () => {
               >
                 <div className="aspect-[3/4] overflow-hidden group">
                   <img 
-                    src={interiorOffice} 
-                    alt="Premium office interior" 
+                    src={cityViewInterior} 
+                    alt="Premium office with city views" 
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 </div>
@@ -342,7 +343,7 @@ const Leasing = () => {
               {t("leasing.gallery.title") || "Workspace Gallery"}
             </motion.h2>
             
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-3 gap-6">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -351,8 +352,8 @@ const Leasing = () => {
                 className="aspect-[4/3] overflow-hidden group relative"
               >
                 <img 
-                  src={towerSunset} 
-                  alt="Tower at sunset" 
+                  src={officeCorridor} 
+                  alt="Premium office corridor" 
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-foreground/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -365,6 +366,20 @@ const Leasing = () => {
                 className="aspect-[4/3] overflow-hidden group relative"
               >
                 <img 
+                  src={cityViewInterior} 
+                  alt="Office with city views" 
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-foreground/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="aspect-[4/3] overflow-hidden group relative"
+              >
+                <img 
                   src={towerTopClouds} 
                   alt="Tower crown view" 
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
@@ -372,6 +387,22 @@ const Leasing = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-foreground/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </motion.div>
             </div>
+
+            {/* Additional City View Strip */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="mt-6 aspect-[21/9] overflow-hidden group relative"
+            >
+              <img 
+                src={cityLandscape} 
+                alt="Kuwait City landscape" 
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-foreground/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            </motion.div>
           </div>
         </section>
 

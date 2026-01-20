@@ -11,6 +11,7 @@ import lobbyArches from "@/assets/lobby-arches.jpg";
 import entranceDusk from "@/assets/entrance-dusk.jpg";
 import entranceNightFacade from "@/assets/entrance-night-facade.jpg";
 import towerStreetContext from "@/assets/tower-street-context.jpg";
+import LamellaVisualization from "@/components/alhamra/LamellaVisualization";
 
 const Architecture = () => {
   const heroReveal = useScrollReveal();
@@ -41,12 +42,6 @@ const Architecture = () => {
     }
   ];
 
-  const lamellaCapacity = [
-    { model: "Model 1 (A only)", capacity: "50,000 kN" },
-    { model: "Model 2 (A+B)", capacity: "48,500 kN" },
-    { model: "Model 3 (A+B+C+E)", capacity: "49,500 kN" },
-    { model: "Model 4 (All elements)", capacity: "189,000 kN" },
-  ];
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
@@ -239,24 +234,8 @@ const Architecture = () => {
                     fiberglass formwork moulds to be fabricated directly from 3D digital models, 
                     ensuring precision execution of the complex geometries.
                   </p>
-                  <div className="space-y-4">
-                    <h3 className="text-lg font-light">Buckling Capacity Analysis</h3>
-                    {lamellaCapacity.map((item, index) => (
-                      <motion.div
-                        key={item.model}
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: index * 0.1 }}
-                        className="flex justify-between items-center py-3 border-b border-border"
-                      >
-                        <span className="text-sm text-muted-foreground">{item.model}</span>
-                        <span className={`font-light ${index === 3 ? 'text-primary text-xl' : ''}`}>
-                          {item.capacity}
-                        </span>
-                      </motion.div>
-                    ))}
-                  </div>
+                  {/* Interactive Lamella Visualization */}
+                  <LamellaVisualization />
                 </div>
                 <div>
                   <img 
