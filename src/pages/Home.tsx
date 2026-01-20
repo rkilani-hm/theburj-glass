@@ -6,19 +6,16 @@ import { motion } from "framer-motion";
 import { useScrollReveal, revealVariants } from "@/hooks/useScrollReveal";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Phone, Mail, MapPin } from "lucide-react";
 
 import towerAerialSunset from "@/assets/tower-aerial-sunset.png";
-import towerCloudsAerial from "@/assets/tower-clouds-aerial.png";
 import kuwaitSkylineNight from "@/assets/kuwait-skyline-night.png";
-import towerBwAngle from "@/assets/tower-bw-angle.png";
-import skylineTwilight from "@/assets/skyline-twilight.png";
 
 const Home = () => {
   const { t } = useLanguage();
   const { ref: introRef, isInView: introInView } = useScrollReveal();
   const { ref: featuresRef, isInView: featuresInView } = useScrollReveal();
-  const { ref: galleryRef, isInView: galleryInView } = useScrollReveal();
+  const { ref: ctaRef, isInView: ctaInView } = useScrollReveal();
 
   const features = [
     {
@@ -36,6 +33,13 @@ const Home = () => {
       label: t("stats.sqm"),
       description: t("stats.sqm.desc")
     }
+  ];
+
+  const quickFacts = [
+    { label: t("home.facts.architect") || "Architect", value: "Skidmore, Owings & Merrill" },
+    { label: t("home.facts.completed") || "Completed", value: "2011" },
+    { label: t("home.facts.contractor") || "Contractor", value: "Samsung Engineering" },
+    { label: t("home.facts.rank") || "World Rank", value: "#23 Tallest" },
   ];
 
   return (
@@ -139,147 +143,122 @@ const Home = () => {
           </div>
         </section>
 
+        {/* Quick Facts Bar */}
+        <section className="py-8 bg-foreground">
+          <div className="container mx-auto px-6 lg:px-12">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-12">
+              {quickFacts.map((fact, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="text-center py-4"
+                >
+                  <p className="text-xs uppercase tracking-[0.2em] text-background/60 mb-1">{fact.label}</p>
+                  <p className="text-sm lg:text-base text-background font-light">{fact.value}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Journey Timeline Section - Page Previews */}
         <HomeJourneyTimeline />
 
-        {/* Gallery Section */}
-        <section className="py-section bg-background">
-          <div className="container mx-auto px-6 lg:px-12">
-            <motion.div
-              ref={galleryRef}
-              initial="hidden"
-              animate={galleryInView ? "visible" : "hidden"}
-              variants={revealVariants.fadeUp}
-              transition={{ duration: 0.6 }}
-              className="flex items-center gap-4 mb-12"
-            >
-              <div className="w-12 h-px bg-border" />
-              <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
-                {t("home.gallery") || "Gallery"}
-              </span>
-            </motion.div>
+        {/* CTA Section with Image */}
+        <section className="relative overflow-hidden">
+          <div className="absolute inset-0">
+            <img
+              src={kuwaitSkylineNight}
+              alt="Kuwait skyline at night"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-foreground/90 via-foreground/80 to-foreground/70" />
+          </div>
+          
+          <div className="container mx-auto px-6 lg:px-12 relative z-10">
+            <div ref={ctaRef} className="py-24 lg:py-32">
+              <div className="max-w-3xl">
+                <motion.div
+                  initial="hidden"
+                  animate={ctaInView ? "visible" : "hidden"}
+                  variants={revealVariants.fadeUp}
+                  transition={{ duration: 0.6 }}
+                  className="flex items-center gap-4 mb-6"
+                >
+                  <div className="w-12 h-px bg-background/40" />
+                  <span className="text-xs uppercase tracking-[0.3em] text-background/60">
+                    {t("home.cta.label") || "Get Started"}
+                  </span>
+                </motion.div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <motion.div
-                initial="hidden"
-                animate={galleryInView ? "visible" : "hidden"}
-                variants={revealVariants.fadeUp}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                whileHover={{ scale: 1.02, transition: { duration: 0.4, ease: "easeOut" } }}
-                className="lg:col-span-2 aspect-[16/9] overflow-hidden group relative cursor-pointer"
-              >
-                <motion.img
-                  src={towerCloudsAerial}
-                  alt="Tower emerging from clouds"
-                  className="w-full h-full object-cover"
-                  initial={{ scale: 1.1 }}
-                  animate={galleryInView ? { scale: 1 } : { scale: 1.1 }}
-                  transition={{ duration: 1.2, ease: "easeOut" }}
-                  whileHover={{ scale: 1.1 }}
-                />
-                <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors duration-500" />
-                <motion.div 
-                  className="absolute bottom-0 left-0 w-0 h-1 bg-primary group-hover:w-full transition-all duration-700"
-                  initial={{ width: 0 }}
-                  animate={galleryInView ? { width: "30%" } : { width: 0 }}
-                  transition={{ duration: 0.8, delay: 0.4 }}
-                />
-              </motion.div>
+                <motion.h2 
+                  initial="hidden"
+                  animate={ctaInView ? "visible" : "hidden"}
+                  variants={revealVariants.fadeUp}
+                  transition={{ duration: 0.6, delay: 0.1 }}
+                  className="text-headline font-light tracking-wide text-background mb-6"
+                >
+                  {t("home.cta.title") || "Ready to Elevate Your Business?"}
+                </motion.h2>
 
-              <motion.div
-                initial="hidden"
-                animate={galleryInView ? "visible" : "hidden"}
-                variants={revealVariants.fadeUp}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                whileHover={{ scale: 1.02, transition: { duration: 0.4, ease: "easeOut" } }}
-                className="aspect-[4/5] overflow-hidden group relative cursor-pointer"
-              >
-                <motion.img
-                  src={towerBwAngle}
-                  alt="Tower architectural detail"
-                  className="w-full h-full object-cover"
-                  initial={{ scale: 1.1 }}
-                  animate={galleryInView ? { scale: 1 } : { scale: 1.1 }}
-                  transition={{ duration: 1.2, ease: "easeOut", delay: 0.1 }}
-                  whileHover={{ scale: 1.1 }}
-                />
-                <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors duration-500" />
-                <motion.div 
-                  className="absolute bottom-0 left-0 h-1 bg-primary"
-                  initial={{ width: 0 }}
-                  animate={galleryInView ? { width: "40%" } : { width: 0 }}
-                  transition={{ duration: 0.8, delay: 0.5 }}
-                />
-              </motion.div>
+                <motion.p
+                  initial="hidden"
+                  animate={ctaInView ? "visible" : "hidden"}
+                  variants={revealVariants.fadeUp}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  className="text-body-lg text-background/80 mb-10 max-w-xl"
+                >
+                  {t("home.cta.desc") || "Discover premium office spaces and world-class amenities at Kuwait's most prestigious address. Contact our leasing team to schedule a private tour."}
+                </motion.p>
 
-              <motion.div
-                initial="hidden"
-                animate={galleryInView ? "visible" : "hidden"}
-                variants={revealVariants.fadeUp}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                whileHover={{ scale: 1.02, transition: { duration: 0.4, ease: "easeOut" } }}
-                className="aspect-square overflow-hidden group relative cursor-pointer"
-              >
-                <motion.img
-                  src={skylineTwilight}
-                  alt="Kuwait skyline at twilight"
-                  className="w-full h-full object-cover"
-                  initial={{ scale: 1.1 }}
-                  animate={galleryInView ? { scale: 1 } : { scale: 1.1 }}
-                  transition={{ duration: 1.2, ease: "easeOut", delay: 0.2 }}
-                  whileHover={{ scale: 1.1 }}
-                />
-                <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors duration-500" />
-                <motion.div 
-                  className="absolute bottom-0 left-0 h-1 bg-primary"
-                  initial={{ width: 0 }}
-                  animate={galleryInView ? { width: "50%" } : { width: 0 }}
-                  transition={{ duration: 0.8, delay: 0.6 }}
-                />
-              </motion.div>
+                <motion.div
+                  initial="hidden"
+                  animate={ctaInView ? "visible" : "hidden"}
+                  variants={revealVariants.fadeUp}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                  className="flex flex-col sm:flex-row gap-4 mb-12"
+                >
+                  <Link 
+                    to="/leasing"
+                    className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-background text-foreground hover:bg-background/90 transition-colors group"
+                  >
+                    <span className="text-sm uppercase tracking-wider">{t("home.cta.leasing") || "Explore Leasing"}</span>
+                    <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+                  </Link>
+                  <Link 
+                    to="/contact"
+                    className="inline-flex items-center justify-center gap-3 px-8 py-4 border border-background/40 text-background hover:bg-background/10 transition-colors group"
+                  >
+                    <span className="text-sm uppercase tracking-wider">{t("home.cta.contact") || "Contact Us"}</span>
+                  </Link>
+                </motion.div>
 
-              <motion.div
-                initial="hidden"
-                animate={galleryInView ? "visible" : "hidden"}
-                variants={revealVariants.fadeUp}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                whileHover={{ scale: 1.02, transition: { duration: 0.4, ease: "easeOut" } }}
-                className="lg:col-span-2 aspect-[21/9] overflow-hidden group relative cursor-pointer"
-              >
-                <motion.img
-                  src={kuwaitSkylineNight}
-                  alt="Kuwait city at night"
-                  className="w-full h-full object-cover"
-                  initial={{ scale: 1.1 }}
-                  animate={galleryInView ? { scale: 1 } : { scale: 1.1 }}
-                  transition={{ duration: 1.2, ease: "easeOut", delay: 0.3 }}
-                  whileHover={{ scale: 1.1 }}
-                />
-                <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors duration-500" />
-                <motion.div 
-                  className="absolute bottom-0 left-0 h-1 bg-primary"
-                  initial={{ width: 0 }}
-                  animate={galleryInView ? { width: "25%" } : { width: 0 }}
-                  transition={{ duration: 0.8, delay: 0.7 }}
-                />
-              </motion.div>
+                {/* Contact Quick Info */}
+                <motion.div
+                  initial="hidden"
+                  animate={ctaInView ? "visible" : "hidden"}
+                  variants={revealVariants.fadeUp}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                  className="flex flex-wrap gap-8 pt-8 border-t border-background/20"
+                >
+                  <div className="flex items-center gap-3 text-background/70">
+                    <Phone size={16} />
+                    <span className="text-sm">+965 2227 5000</span>
+                  </div>
+                  <div className="flex items-center gap-3 text-background/70">
+                    <Mail size={16} />
+                    <span className="text-sm">leasing@alhamratower.com</span>
+                  </div>
+                  <div className="flex items-center gap-3 text-background/70">
+                    <MapPin size={16} />
+                    <span className="text-sm">Sharq, Kuwait City</span>
+                  </div>
+                </motion.div>
+              </div>
             </div>
-
-            <motion.div
-              initial="hidden"
-              animate={galleryInView ? "visible" : "hidden"}
-              variants={revealVariants.fadeUp}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="mt-12 text-center"
-            >
-              <Link 
-                to="/perspective" 
-                className="inline-flex items-center gap-3 text-foreground hover:text-muted-foreground transition-colors group"
-              >
-                <span className="text-sm uppercase tracking-wider">{t("home.view.all") || "View All Perspectives"}</span>
-                <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
-              </Link>
-            </motion.div>
           </div>
         </section>
       </main>

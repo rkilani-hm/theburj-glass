@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, History, Building2, Leaf, Eye } from "lucide-react";
+import { ArrowRight, History, Building2, Leaf, Eye, MapPin, Sparkles, Compass } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useScrollReveal, revealVariants } from "@/hooks/useScrollReveal";
 
@@ -10,6 +10,10 @@ import kuwaitPanoramaSunset from "@/assets/kuwait-panorama-sunset.png";
 import interiorLobby from "@/assets/interior-lobby.jpg";
 import somTowerDetail from "@/assets/som-tower-detail.jpg";
 import towerFogNight from "@/assets/tower-fog-night.png";
+import skylineReflection from "@/assets/skyline-reflection.png";
+import towerEntranceFountain from "@/assets/tower-entrance-fountain.jpg";
+import towerAerialDay from "@/assets/tower-aerial-day.png";
+import somTowerSkyline from "@/assets/som-tower-skyline.jpg";
 
 interface JourneyStop {
   id: string;
@@ -21,6 +25,7 @@ interface JourneyStop {
   link: string;
   linkText: string;
   stat?: { value: string; label: string };
+  highlights?: string[];
 }
 
 const HomeJourneyTimeline = () => {
@@ -45,18 +50,44 @@ const HomeJourneyTimeline = () => {
       image: kuwaitPanoramaSunset,
       link: "/legacy",
       linkText: t("home.journey.legacy.cta") || "Explore the Legacy",
-      stat: { value: "1960s", label: t("home.journey.legacy.stat") || "Original Site Era" }
+      stat: { value: "1960s", label: t("home.journey.legacy.stat") || "Original Site Era" },
+      highlights: [
+        t("home.journey.legacy.h1") || "Kuwait's first cinema location",
+        t("home.journey.legacy.h2") || "Cultural heritage preserved",
+        t("home.journey.legacy.h3") || "Historic district transformation"
+      ]
+    },
+    {
+      id: "tower",
+      icon: Compass,
+      label: t("home.journey.tower.label") || "Architecture",
+      title: t("home.journey.tower.title") || "Form Follows Vision",
+      description: t("home.journey.tower.desc") || "A sculptural masterpiece by Skidmore, Owings & Merrill—the tower's distinctive twist is both aesthetic innovation and climate-responsive engineering.",
+      image: somTowerSkyline,
+      link: "/tower",
+      linkText: t("home.journey.tower.cta") || "Discover the Design",
+      stat: { value: "77", label: t("home.journey.tower.stat") || "Stories Above Ground" },
+      highlights: [
+        t("home.journey.tower.h1") || "Award-winning SOM design",
+        t("home.journey.tower.h2") || "Unique sculptural silhouette",
+        t("home.journey.tower.h3") || "2005-2011 construction"
+      ]
     },
     {
       id: "business",
       icon: Building2,
       label: t("home.journey.business.label") || "Enterprise",
       title: t("home.journey.business.title") || "Where Business Rises",
-      description: t("home.journey.business.desc") || "A vertical ecosystem designed for enterprise excellence—sky lobbies, premium infrastructure, and an address that signals prestige across the Gulf.",
+      description: t("home.journey.business.desc") || "A vertical ecosystem designed for enterprise excellence—sky lobbies on floors 30 and 55, premium infrastructure, and an address that signals prestige across the Gulf.",
       image: interiorLobby,
       link: "/business",
       linkText: t("home.journey.business.cta") || "Discover the Workspace",
-      stat: { value: "50+", label: t("home.journey.business.stat") || "Leading Companies" }
+      stat: { value: "50+", label: t("home.journey.business.stat") || "Leading Companies" },
+      highlights: [
+        t("home.journey.business.h1") || "Two sky lobby transfer floors",
+        t("home.journey.business.h2") || "95% occupancy rate",
+        t("home.journey.business.h3") || "24/7 building operations"
+      ]
     },
     {
       id: "sustainability",
@@ -67,7 +98,44 @@ const HomeJourneyTimeline = () => {
       image: somTowerDetail,
       link: "/tower/sustainability",
       linkText: t("home.journey.sustainability.cta") || "See the Innovation",
-      stat: { value: "25%", label: t("home.journey.sustainability.stat") || "Solar Heat Reduction" }
+      stat: { value: "25%", label: t("home.journey.sustainability.stat") || "Solar Heat Reduction" },
+      highlights: [
+        t("home.journey.sustainability.h1") || "Time Magazine's 50 Best Inventions",
+        t("home.journey.sustainability.h2") || "Passive solar design",
+        t("home.journey.sustainability.h3") || "Limestone thermal shielding"
+      ]
+    },
+    {
+      id: "services",
+      icon: Sparkles,
+      label: t("home.journey.services.label") || "Hospitality",
+      title: t("home.journey.services.title") || "Seamless Support",
+      description: t("home.journey.services.desc") || "Beyond workspace—a complete ecosystem of services from 24/7 concierge to executive dining, designed to anticipate needs before they arise.",
+      image: towerEntranceFountain,
+      link: "/services",
+      linkText: t("home.journey.services.cta") || "Experience the Services",
+      stat: { value: "24/7", label: t("home.journey.services.stat") || "Concierge Service" },
+      highlights: [
+        t("home.journey.services.h1") || "Executive dining facilities",
+        t("home.journey.services.h2") || "Valet parking service",
+        t("home.journey.services.h3") || "Premium wellness programs"
+      ]
+    },
+    {
+      id: "location",
+      icon: MapPin,
+      label: t("home.journey.location.label") || "Connectivity",
+      title: t("home.journey.location.title") || "Command Central",
+      description: t("home.journey.location.desc") || "Positioned at the nexus of Kuwait's commercial and governmental centers—20 minutes from the airport, steps from the financial district.",
+      image: skylineReflection,
+      link: "/location",
+      linkText: t("home.journey.location.cta") || "Find the Location",
+      stat: { value: "Sharq", label: t("home.journey.location.stat") || "Prime District" },
+      highlights: [
+        t("home.journey.location.h1") || "1,400+ parking spaces",
+        t("home.journey.location.h2") || "Direct highway access",
+        t("home.journey.location.h3") || "Near Kuwait Towers"
+      ]
     },
     {
       id: "perspective",
@@ -78,7 +146,12 @@ const HomeJourneyTimeline = () => {
       image: towerFogNight,
       link: "/perspective",
       linkText: t("home.journey.perspective.cta") || "View the Perspective",
-      stat: { value: "412m", label: t("home.journey.perspective.stat") || "Commanding Height" }
+      stat: { value: "412m", label: t("home.journey.perspective.stat") || "Commanding Height" },
+      highlights: [
+        t("home.journey.perspective.h1") || "Kuwait's tallest structure",
+        t("home.journey.perspective.h2") || "Panoramic Gulf views",
+        t("home.journey.perspective.h3") || "Observation experiences"
+      ]
     }
   ];
 
@@ -119,7 +192,7 @@ const HomeJourneyTimeline = () => {
           </div>
 
           {/* Journey Stops */}
-          <div className="space-y-24 lg:space-y-32">
+          <div className="space-y-20 lg:space-y-28">
             {journeyStops.map((stop, index) => (
               <JourneyStopCard 
                 key={stop.id} 
@@ -142,7 +215,7 @@ interface JourneyStopCardProps {
 }
 
 const JourneyStopCard = ({ stop, index, isArabic }: JourneyStopCardProps) => {
-  const { ref, isInView } = useScrollReveal({ margin: "-150px" });
+  const { ref, isInView } = useScrollReveal({ margin: "-100px" });
   const isEven = index % 2 === 0;
   
   // Flip layout in Arabic
@@ -229,11 +302,35 @@ const JourneyStopCard = ({ stop, index, isArabic }: JourneyStopCardProps) => {
             {stop.description}
           </p>
 
+          {/* Highlights */}
+          {stop.highlights && (
+            <motion.ul 
+              className="space-y-2 pt-2"
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+            >
+              {stop.highlights.map((highlight, idx) => (
+                <motion.li 
+                  key={idx}
+                  className="flex items-center gap-3 text-sm text-muted-foreground"
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
+                  transition={{ duration: 0.4, delay: 0.5 + idx * 0.1 }}
+                >
+                  <div className="w-1 h-1 bg-foreground rounded-full" />
+                  {highlight}
+                </motion.li>
+              ))}
+            </motion.ul>
+          )}
+
           {/* CTA Link */}
           <motion.div
             initial={{ opacity: 0, x: -10 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
+            transition={{ duration: 0.5, delay: 0.7 }}
+            className="pt-2"
           >
             <Link 
               to={stop.link}
