@@ -265,28 +265,40 @@ const Header = () => {
                     className={`transition-transform duration-300 ${mobileTowerOpen ? "rotate-180" : ""}`}
                   />
                 </button>
-                <div
-                  className={`overflow-hidden transition-all duration-300 ease-out ${
-                    mobileTowerOpen ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"
-                  }`}
-                >
-                  <div className="pl-4 pb-2 space-y-1">
-                    {towerSubItems.map((item) => (
-                      <Link
-                        key={item.key}
-                        to={item.href}
-                        onClick={() => setMenuOpen(false)}
-                        className={`block py-2 text-base transition-colors duration-300 border-l-2 pl-4 ${
-                          isActive(item.href)
-                            ? "text-foreground border-foreground"
-                            : "text-muted-foreground hover:text-foreground border-transparent hover:border-muted"
-                        }`}
-                      >
-                        {item.label[language]}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
+                <AnimatePresence>
+                  {mobileTowerOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="pl-4 pb-2 space-y-1">
+                        {towerSubItems.map((item, index) => (
+                          <motion.div
+                            key={item.key}
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.2, delay: index * 0.05 }}
+                          >
+                            <Link
+                              to={item.href}
+                              onClick={() => setMenuOpen(false)}
+                              className={`block py-2 text-base transition-all duration-300 border-l-2 pl-4 ${
+                                isActive(item.href)
+                                  ? "text-foreground border-foreground"
+                                  : "text-muted-foreground hover:text-foreground border-transparent hover:border-foreground/50"
+                              }`}
+                            >
+                              {item.label[language]}
+                            </Link>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
 
               <div className="h-px bg-border" />
@@ -322,28 +334,40 @@ const Header = () => {
                     className={`transition-transform duration-300 ${mobileConnectOpen ? "rotate-180" : ""}`}
                   />
                 </button>
-                <div
-                  className={`overflow-hidden transition-all duration-300 ease-out ${
-                    mobileConnectOpen ? "max-h-[200px] opacity-100" : "max-h-0 opacity-0"
-                  }`}
-                >
-                  <div className="pl-4 pb-2 space-y-1">
-                    {connectSubItems.map((item) => (
-                      <Link
-                        key={item.key}
-                        to={item.href}
-                        onClick={() => setMenuOpen(false)}
-                        className={`block py-2 text-base transition-colors duration-300 border-l-2 pl-4 ${
-                          isActive(item.href)
-                            ? "text-foreground border-foreground"
-                            : "text-muted-foreground hover:text-foreground border-transparent hover:border-muted"
-                        }`}
-                      >
-                        {item.label[language]}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
+                <AnimatePresence>
+                  {mobileConnectOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="pl-4 pb-2 space-y-1">
+                        {connectSubItems.map((item, index) => (
+                          <motion.div
+                            key={item.key}
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.2, delay: index * 0.05 }}
+                          >
+                            <Link
+                              to={item.href}
+                              onClick={() => setMenuOpen(false)}
+                              className={`block py-2 text-base transition-all duration-300 border-l-2 pl-4 ${
+                                isActive(item.href)
+                                  ? "text-foreground border-foreground"
+                                  : "text-muted-foreground hover:text-foreground border-transparent hover:border-foreground/50"
+                              }`}
+                            >
+                              {item.label[language]}
+                            </Link>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             </div>
           </nav>
