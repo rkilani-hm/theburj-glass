@@ -1,10 +1,8 @@
 import Header from "@/components/alhamra/Header";
-import TowerHeroSection from "@/components/alhamra/TowerHeroSection";
-import IntegratedEcosystemSection from "@/components/alhamra/IntegratedEcosystemSection";
-import SmartInfrastructureSection from "@/components/alhamra/SmartInfrastructureSection";
-import ServiceExcellenceSection from "@/components/alhamra/ServiceExcellenceSection";
-import TrustSignalsSection from "@/components/alhamra/TrustSignalsSection";
-import PresenceSection from "@/components/alhamra/PresenceSection";
+import TowerDigitalTwinHero from "@/components/alhamra/TowerDigitalTwinHero";
+import SystemPulseSidebar from "@/components/alhamra/SystemPulseSidebar";
+import ServiceHubDrawers from "@/components/alhamra/ServiceHubDrawers";
+import TrustBadgesFooter from "@/components/alhamra/TrustBadgesFooter";
 import AwardsSection from "@/components/alhamra/AwardsSection";
 import Footer from "@/components/alhamra/Footer";
 
@@ -12,29 +10,28 @@ const Tower = () => {
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
       <Header />
-      <main className="pt-24">
-        {/* Core Identity Hero */}
-        <TowerHeroSection />
+      
+      {/* Fixed System Pulse Sidebar */}
+      <SystemPulseSidebar />
+      
+      <main className="pt-24 pb-24">
+        {/* Digital Twin Hero with Interactive Hotspots */}
+        <TowerDigitalTwinHero />
         
-        {/* Integrated Ecosystem - Three Pillars */}
-        <IntegratedEcosystemSection />
-        
-        {/* Smart Infrastructure */}
-        <SmartInfrastructureSection />
-        
-        {/* Service Excellence */}
-        <ServiceExcellenceSection />
-        
-        {/* Trust Signals - ISO Certifications */}
-        <TrustSignalsSection />
-        
-        {/* Detailed Tower Content */}
-        <PresenceSection />
+        {/* Interactive Service Hub Drawers */}
+        <ServiceHubDrawers />
         
         {/* Awards & Recognition */}
         <AwardsSection />
       </main>
-      <Footer />
+      
+      {/* Trust Badges Footer - Fixed at bottom */}
+      <TrustBadgesFooter />
+      
+      {/* Main Footer with padding for trust badges */}
+      <div className="pb-20">
+        <Footer />
+      </div>
     </div>
   );
 };
