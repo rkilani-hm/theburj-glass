@@ -150,7 +150,7 @@ const PresenceSection = () => {
                 </div>
                 <div className="aspect-square overflow-hidden bg-muted flex items-center justify-center border border-border group hover:bg-secondary transition-colors duration-500">
                   <div className="text-center p-4">
-                    <span className="text-4xl font-light text-foreground">412m</span>
+                    <span className="text-4xl font-light text-foreground">413m</span>
                     <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground mt-2">{t("tower.architectural.height")}</p>
                   </div>
                 </div>

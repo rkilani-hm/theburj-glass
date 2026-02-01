@@ -42,9 +42,65 @@ const translations: Record<string, Record<Language, string>> = {
   "presence.height": { en: "Height", ar: "الارتفاع" },
   "presence.year": { en: "Completed", ar: "الإنجاز" },
   "presence.location": { en: "Location", ar: "الموقع" },
-  "presence.height.value": { en: "412.6m", ar: "٤١٢.٦ م" },
+  "presence.height.value": { en: "413m", ar: "٤١٣ م" },
   "presence.year.value": { en: "2011", ar: "٢٠١١" },
   "presence.location.value": { en: "Kuwait City", ar: "مدينة الكويت" },
+
+  // Tower Hero Section
+  "tower.hero.label": { en: "The Tower", ar: "البرج" },
+  "tower.hero.headline": { en: "Kuwait's Tallest Sculpted Skyscraper", ar: "أطول ناطحة سحاب منحوتة في الكويت" },
+  "tower.hero.height": { en: "413 Meters of Architectural Vision", ar: "٤١٣ متراً من الرؤية المعمارية" },
+  "tower.hero.identity": { en: "A national landmark embodying the State's institutional aspirations, Al Hamra Tower stands as a testament to Kuwait's vision and ambition.", ar: "معلم وطني يجسد تطلعات الدولة المؤسسية، يقف برج الحمراء شاهداً على رؤية الكويت وطموحها." },
+
+  // Integrated Ecosystem Section
+  "tower.ecosystem.label": { en: "Integrated Ecosystem", ar: "منظومة متكاملة" },
+  "tower.ecosystem.title": { en: "An Integrated Business Ecosystem", ar: "منظومة أعمال متكاملة" },
+  "tower.ecosystem.intro": { en: "Three interconnected pillars form a complete business address, offering everything needed for enterprise excellence under one iconic roof.", ar: "ثلاث ركائز مترابطة تشكل عنواناً تجارياً متكاملاً، تقدم كل ما تحتاجه المؤسسات المتميزة تحت سقف أيقوني واحد." },
+  "tower.ecosystem.business.title": { en: "Business Tower", ar: "برج الأعمال" },
+  "tower.ecosystem.business.floors": { en: "80 Floors", ar: "٨٠ طابقاً" },
+  "tower.ecosystem.business.area": { en: "2,300 sqm Floorplates", ar: "مساحة طابق ٢٣٠٠ م²" },
+  "tower.ecosystem.business.desc": { en: "Contemporary, open-plan office spaces with floorplates up to 2,300 sqm designed for maximum flexibility and efficiency.", ar: "مساحات مكتبية معاصرة ومفتوحة بمساحات طوابق تصل إلى ٢٣٠٠ م² مصممة لأقصى درجات المرونة والكفاءة." },
+  "tower.ecosystem.shopping.title": { en: "Shopping Center", ar: "المركز التجاري" },
+  "tower.ecosystem.shopping.levels": { en: "5 Luxury Levels", ar: "٥ طوابق فاخرة" },
+  "tower.ecosystem.shopping.brands": { en: "Curated Brands & Dining", ar: "علامات تجارية ومطاعم منتقاة" },
+  "tower.ecosystem.shopping.desc": { en: "Five levels of curated luxury brands and dining that enhance the work-life experience for employees and visitors.", ar: "خمسة طوابق من العلامات التجارية الفاخرة والمطاعم المنتقاة التي تعزز تجربة العمل والحياة للموظفين والزوار." },
+  "tower.ecosystem.parking.title": { en: "Parking Complex", ar: "مجمع المواقف" },
+  "tower.ecosystem.parking.floors": { en: "11 Floors", ar: "١١ طابقاً" },
+  "tower.ecosystem.parking.feature": { en: "Smart & Air-Conditioned", ar: "ذكية ومكيفة" },
+  "tower.ecosystem.parking.desc": { en: "11 floors of smart, air-conditioned parking directly connected to the tower for seamless access.", ar: "١١ طابقاً من مواقف السيارات الذكية والمكيفة المتصلة مباشرة بالبرج لوصول سلس." },
+
+  // Smart Infrastructure Section
+  "tower.infra.label": { en: "Smart Infrastructure", ar: "البنية التحتية الذكية" },
+  "tower.infra.title": { en: "Smart Infrastructure", ar: "البنية التحتية الذكية" },
+  "tower.infra.intro": { en: "Al Hamra provides comprehensive digital infrastructure that eliminates capital expenses while ensuring uninterrupted operations.", ar: "توفر الحمراء بنية تحتية رقمية شاملة تلغي النفقات الرأسمالية مع ضمان عمليات متواصلة." },
+  "tower.infra.zerocost": { en: "Zero-Cost Digital Infrastructure", ar: "بنية تحتية رقمية بتكلفة صفرية" },
+  "tower.infra.fiber": { en: "Redundant fiber connectivity to all major ISPs ensures uninterrupted connectivity.", ar: "اتصال ألياف ضوئية متعدد لجميع مزودي الخدمة الرئيسيين يضمن اتصالاً متواصلاً." },
+  "tower.infra.backup": { en: "12-Hour Backup Power", ar: "طاقة احتياطية ١٢ ساعة" },
+  "tower.infra.backup.desc": { en: "Comprehensive backup systems guarantee uninterrupted operations during any power event.", ar: "أنظمة احتياطية شاملة تضمن عمليات متواصلة خلال أي انقطاع في الطاقة." },
+  "tower.infra.it": { en: "24/7 Certified IT Support", ar: "دعم تقني معتمد ٢٤/٧" },
+  "tower.infra.it.desc": { en: "Round-the-clock technical assistance from certified professionals.", ar: "مساعدة تقنية على مدار الساعة من محترفين معتمدين." },
+  "tower.infra.efficiency": { en: "Financial Efficiency", ar: "الكفاءة المالية" },
+  "tower.infra.savings": { en: "Save millions in annual capital expenses with our comprehensive infrastructure. Focus on your core business while we handle the technology.", ar: "وفر الملايين سنوياً من النفقات الرأسمالية مع بنيتنا التحتية الشاملة. ركز على أعمالك الأساسية بينما نتولى نحن التقنية." },
+
+  // Service Excellence Section
+  "tower.service.label": { en: "Service Excellence", ar: "التميز في الخدمة" },
+  "tower.service.title": { en: "Service Excellence", ar: "التميز في الخدمة" },
+  "tower.service.intro": { en: "Comprehensive facility services ensure a premium, worry-free environment for all tenants and visitors.", ar: "خدمات مرافق شاملة تضمن بيئة متميزة وخالية من القلق لجميع المستأجرين والزوار." },
+  "tower.service.polishing": { en: "Floor Polishing & Maintenance", ar: "تلميع وصيانة الأرضيات" },
+  "tower.service.security": { en: "Professional Security", ar: "أمن احترافي" },
+  "tower.service.bms": { en: "Building Management System", ar: "نظام إدارة المبنى" },
+  "tower.service.energy": { en: "Energy Efficiency Monitoring", ar: "مراقبة كفاءة الطاقة" },
+  "tower.service.operations": { en: "24/7 Operations Center", ar: "مركز عمليات ٢٤/٧" },
+
+  // Trust Signals Section
+  "tower.trust.label": { en: "Certifications", ar: "الشهادات" },
+  "tower.trust.title": { en: "World-Class Property Management", ar: "إدارة عقارات عالمية المستوى" },
+  "tower.trust.iso9001": { en: "Quality Management", ar: "إدارة الجودة" },
+  "tower.trust.iso9001.desc": { en: "Certified processes ensuring consistent service excellence.", ar: "عمليات معتمدة تضمن تميزاً مستمراً في الخدمة." },
+  "tower.trust.iso14001": { en: "Environmental Management", ar: "الإدارة البيئية" },
+  "tower.trust.iso14001.desc": { en: "Sustainable practices minimizing environmental impact.", ar: "ممارسات مستدامة تقلل من الأثر البيئي." },
+  "tower.trust.iso45001": { en: "Occupational Health & Safety", ar: "الصحة والسلامة المهنية" },
+  "tower.trust.iso45001.desc": { en: "Rigorous standards protecting all occupants and staff.", ar: "معايير صارمة تحمي جميع الشاغلين والموظفين." },
 
   // Tower Page
   "tower.intro": { en: "Al Hamra Tower is more than Kuwait's tallest building—it is a statement of architectural ambition that has reshaped the nation's skyline and redefined what is possible in modern construction.", ar: "برج الحمراء أكثر من مجرد أطول مبنى في الكويت — إنه بيان طموح معماري أعاد تشكيل أفق الأمة وأعاد تعريف ما هو ممكن في البناء الحديث." },
