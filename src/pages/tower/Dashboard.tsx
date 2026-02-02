@@ -13,28 +13,28 @@ const Dashboard = () => {
   const hotspots = [
     {
       id: "height",
-      position: { x: "calc(50% + 180px)", y: "12%" },
+      position: { x: "calc(50% + 120px)", y: "18%" },
       title: { en: "413M HEIGHT", ar: "ارتفاع ٤١٣م" },
       subtitle: { en: "80 FLOORS", ar: "٨٠ طابق" },
       side: "right" as const,
     },
     {
       id: "floorplate",
-      position: { x: "calc(50% - 280px)", y: "35%" },
+      position: { x: "calc(50% - 200px)", y: "38%" },
       title: { en: "2,300 SQM", ar: "٢,٣٠٠ م²" },
       subtitle: { en: "FLOORPLATE", ar: "مساحة الطابق" },
       side: "left" as const,
     },
     {
       id: "fiber",
-      position: { x: "calc(50% + 180px)", y: "55%" },
+      position: { x: "calc(50% + 140px)", y: "52%" },
       title: { en: "FIBER OPTIC", ar: "ألياف ضوئية" },
       subtitle: { en: "BACKBONE", ar: "العمود الفقري" },
       side: "right" as const,
     },
     {
       id: "power",
-      position: { x: "calc(50% - 280px)", y: "70%" },
+      position: { x: "calc(50% - 180px)", y: "68%" },
       title: { en: "DUAL POWER", ar: "طاقة مزدوجة" },
       subtitle: { en: "REDUNDANCY", ar: "التكرار" },
       side: "left" as const,
