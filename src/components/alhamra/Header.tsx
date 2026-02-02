@@ -26,6 +26,7 @@ const Header = () => {
 
   const towerSubItems = [
     { key: "nav.tower.bydina", href: "/tower", label: { en: "The Tower by Dina", ar: "البرج بواسطة دينا" } },
+    { key: "nav.tower.dashboard", href: "/tower/dashboard", label: { en: "Technical Dashboard", ar: "لوحة التحكم الفنية" } },
     { key: "nav.tower.rising", href: "/tower/rising", label: { en: "Rising", ar: "الصعود" } },
     { key: "nav.tower.architecture", href: "/tower/architecture", label: { en: "Architectural Design", ar: "التصميم المعماري" } },
     { key: "nav.tower.engineering", href: "/tower/engineering", label: { en: "Structural Design", ar: "التصميم الإنشائي" } },
