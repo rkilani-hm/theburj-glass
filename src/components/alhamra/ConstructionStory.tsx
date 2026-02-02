@@ -95,7 +95,7 @@ const ConstructionStory = () => {
     <section
       ref={containerRef}
       className="relative bg-gradient-to-b from-muted/30 via-background to-muted/30"
-      style={{ height: `${(phases.length + 1) * 100}vh` }}
+      style={{ height: `${phases.length * 100}vh` }}
     >
       {/* Section Header */}
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
