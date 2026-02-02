@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useIsMobile } from "@/hooks/use-mobile";
 import Header from "@/components/alhamra/Header";
 import DashboardHotspot from "@/components/alhamra/DashboardHotspot";
 import HotspotDetailModal from "@/components/alhamra/HotspotDetailModal";
@@ -11,6 +12,7 @@ import towerBackground from "@/assets/tower-daylight-hud.png";
 
 const Dashboard = () => {
   const { language } = useLanguage();
+  const isMobile = useIsMobile();
   const [selectedHotspot, setSelectedHotspot] = useState<string | null>(null);
 
   const hotspots = [
@@ -105,15 +107,15 @@ const Dashboard = () => {
 
       {/* Dashboard Title */}
       <motion.div
-        className="absolute top-28 left-1/2 -translate-x-1/2 z-30 text-center"
+        className="absolute top-20 md:top-28 left-1/2 -translate-x-1/2 z-30 text-center px-4"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.3 }}
       >
-        <h1 className="text-lg lg:text-xl font-mono uppercase tracking-[0.3em] text-slate-700">
+        <h1 className="text-sm md:text-lg lg:text-xl font-mono uppercase tracking-[0.2em] md:tracking-[0.3em] text-slate-700">
           {language === "en" ? "TECHNICAL DASHBOARD" : "لوحة التحكم الفنية"}
         </h1>
-        <div className="h-px w-32 mx-auto mt-2 bg-gradient-to-r from-transparent via-sky-500 to-transparent" />
+        <div className="h-px w-24 md:w-32 mx-auto mt-2 bg-gradient-to-r from-transparent via-sky-500 to-transparent" />
       </motion.div>
 
       {/* Subtle grid overlay for HUD effect */}
@@ -128,8 +130,8 @@ const Dashboard = () => {
         }}
       />
 
-      {/* Floating Hotspots with leader lines */}
-      {hotspots.map((hotspot, index) => (
+      {/* Floating Hotspots with leader lines - hidden on mobile */}
+      {!isMobile && hotspots.map((hotspot, index) => (
         <DashboardHotspot
           key={hotspot.id}
           position={hotspot.position}
@@ -142,6 +144,40 @@ const Dashboard = () => {
         />
       ))}
 
+      {/* Mobile Hotspot List */}
+      {isMobile && (
+        <div className="relative z-30 px-4 py-6 space-y-3">
+          {hotspots.map((hotspot, index) => (
+            <motion.button
+              key={hotspot.id}
+              onClick={() => setSelectedHotspot(hotspot.id)}
+              className="w-full flex items-center justify-between p-4 bg-white/90 backdrop-blur-xl border border-sky-400/50 rounded-lg shadow-md"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-2.5 h-2.5 rounded-full bg-sky-500 shadow-[0_0_8px_rgba(14,165,233,0.8)]" />
+                <div className="text-left">
+                  <p className="text-sm font-mono font-bold text-slate-800">
+                    {hotspot.title[language]}
+                  </p>
+                  {hotspot.subtitle && (
+                    <p className="text-xs font-mono text-sky-600">
+                      {hotspot.subtitle[language]}
+                    </p>
+                  )}
+                </div>
+              </div>
+              <svg className="w-5 h-5 text-sky-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </motion.button>
+          ))}
+        </div>
+      )}
+
       {/* Hotspot Detail Modal */}
       <HotspotDetailModal
         isOpen={!!selectedHotspot}
@@ -150,11 +186,11 @@ const Dashboard = () => {
         language={language}
       />
 
-      {/* System Vitality Panel (Left) */}
-      <SystemVitalityPanel language={language} />
+      {/* System Vitality Panel (Left) - Hidden on mobile */}
+      {!isMobile && <SystemVitalityPanel language={language} />}
 
-      {/* Network Status Panel (Right) */}
-      <NetworkStatusPanel language={language} />
+      {/* Network Status Panel (Right) - Hidden on mobile */}
+      {!isMobile && <NetworkStatusPanel language={language} />}
 
       {/* Footer Navigation */}
       <DashboardFooter language={language} />
