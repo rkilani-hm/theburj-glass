@@ -1,7 +1,6 @@
 import Header from "@/components/alhamra/Header";
 import Footer from "@/components/alhamra/Footer";
 import LegacyFadeHero from "@/components/alhamra/LegacyFadeHero";
-import ConstructionStory from "@/components/alhamra/ConstructionStory";
 
 const Rising = () => {
   return (
@@ -10,9 +9,6 @@ const Rising = () => {
       <main className="pt-20">
         {/* Legacy Fade Hero - Cinematic B&W to Color transition */}
         <LegacyFadeHero />
-        
-        {/* Construction Journey - Animated Build Story */}
-        <ConstructionStory />
       </main>
       <Footer />
     </div>
