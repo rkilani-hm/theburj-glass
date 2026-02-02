@@ -1,5 +1,5 @@
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import GlowingGauge from "./GlowingGauge";
 
 interface SystemVitalityPanelProps {
@@ -9,6 +9,15 @@ interface SystemVitalityPanelProps {
 const SystemVitalityPanel = ({ language }: SystemVitalityPanelProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const labels = {
     title: { en: "SYSTEM VITALITY", ar: "حيوية النظام" },
@@ -30,7 +39,11 @@ const SystemVitalityPanel = ({ language }: SystemVitalityPanelProps) => {
       animate={isInView ? { opacity: 1, x: 0 } : {}}
       transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
     >
-      <div className="relative bg-white/70 backdrop-blur-xl border border-slate-200 shadow-lg shadow-slate-200/50 p-4 lg:p-5 rounded-lg">
+      <div className={`relative backdrop-blur-xl border border-slate-200 shadow-lg p-4 lg:p-5 rounded-lg transition-all duration-300 ${
+        isScrolled 
+          ? "bg-white/90 shadow-slate-300/60 border-slate-300" 
+          : "bg-white/70 shadow-slate-200/50"
+      }`}>
         {/* Corner decorations */}
         <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-sky-500 rounded-tl-lg" />
         <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-sky-500 rounded-tr-lg" />
