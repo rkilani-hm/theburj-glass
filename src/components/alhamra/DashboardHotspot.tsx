@@ -7,6 +7,7 @@ interface DashboardHotspotProps {
   side: "left" | "right";
   language: "en" | "ar";
   delay?: number;
+  onClick?: () => void;
 }
 
 const DashboardHotspot = ({
@@ -16,6 +17,7 @@ const DashboardHotspot = ({
   side,
   language,
   delay = 0,
+  onClick,
 }: DashboardHotspotProps) => {
   const isRTL = language === "ar";
   const adjustedSide = isRTL ? (side === "left" ? "right" : "left") : side;
@@ -57,23 +59,27 @@ const DashboardHotspot = ({
           />
         </motion.div>
 
-        {/* Label Container */}
-        <motion.div
+        {/* Label Container - Clickable */}
+        <motion.button
+          onClick={onClick}
           className="relative px-4 py-2.5 bg-white/90 backdrop-blur-xl border border-sky-400/50 rounded-lg
                      shadow-lg shadow-sky-100/50 hover:shadow-xl hover:shadow-sky-200/50
-                     transition-shadow duration-300"
+                     hover:border-sky-500 hover:bg-white cursor-pointer
+                     transition-all duration-300 group"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3, delay: delay * 0.15 + 0.6 }}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
         >
           {/* Corner accents */}
-          <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-sky-500 rounded-tl-lg" />
-          <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-sky-500 rounded-tr-lg" />
-          <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-sky-500 rounded-bl-lg" />
-          <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-sky-500 rounded-br-lg" />
+          <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-sky-500 rounded-tl-lg group-hover:w-3 group-hover:h-3 transition-all" />
+          <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-sky-500 rounded-tr-lg group-hover:w-3 group-hover:h-3 transition-all" />
+          <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-sky-500 rounded-bl-lg group-hover:w-3 group-hover:h-3 transition-all" />
+          <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-sky-500 rounded-br-lg group-hover:w-3 group-hover:h-3 transition-all" />
 
           <div className={`${isRTL ? "text-right" : "text-left"}`}>
-            <p className="text-sm font-mono font-bold text-slate-800 tracking-wide whitespace-nowrap">
+            <p className="text-sm font-mono font-bold text-slate-800 tracking-wide whitespace-nowrap group-hover:text-sky-700 transition-colors">
               {title[language]}
             </p>
             {subtitle && (
@@ -82,7 +88,7 @@ const DashboardHotspot = ({
               </p>
             )}
           </div>
-        </motion.div>
+        </motion.button>
       </div>
     </motion.div>
   );
