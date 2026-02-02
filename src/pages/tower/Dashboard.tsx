@@ -87,20 +87,20 @@ const Dashboard = () => {
   const selectedHotspotData = hotspots.find(h => h.id === selectedHotspot);
 
   return (
-    <div className="relative h-screen w-full overflow-hidden">
+    <div className="relative min-h-screen w-full overflow-y-auto">
       {/* Header - Fixed at top */}
       <Header />
 
-      {/* Tower Image - Full screen under header */}
-      <div className="absolute inset-0 pt-20">
+      {/* Tower Image Container - Shows full image */}
+      <div className="relative pt-20 pb-24">
         <img
           src={towerBackground}
           alt="Al Hamra Tower"
-          className="h-full w-full object-cover object-top"
+          className="w-full h-auto object-contain"
           style={{ imageRendering: "crisp-edges" }}
         />
         {/* Light overlay for readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-white/40" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-white/40 pointer-events-none" />
       </div>
 
       {/* Dashboard Title */}
