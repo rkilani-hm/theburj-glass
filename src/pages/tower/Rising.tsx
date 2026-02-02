@@ -1,6 +1,6 @@
 import Header from "@/components/alhamra/Header";
 import Footer from "@/components/alhamra/Footer";
-import LegacySection from "@/components/alhamra/LegacySection";
+import LegacyFadeHero from "@/components/alhamra/LegacyFadeHero";
 import ConstructionStory from "@/components/alhamra/ConstructionStory";
 import PerspectiveSection from "@/components/alhamra/PerspectiveSection";
 
@@ -9,8 +9,8 @@ const Rising = () => {
     <div className="min-h-screen bg-background overflow-x-hidden">
       <Header />
       <main className="pt-20">
-        {/* Legacy Section - Heritage & Origins */}
-        <LegacySection />
+        {/* Legacy Fade Hero - Cinematic B&W to Color transition */}
+        <LegacyFadeHero />
         
         {/* Construction Journey - Animated Build Story */}
         <ConstructionStory />
