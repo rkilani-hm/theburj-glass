@@ -2,7 +2,6 @@ import Header from "@/components/alhamra/Header";
 import Footer from "@/components/alhamra/Footer";
 import LegacyFadeHero from "@/components/alhamra/LegacyFadeHero";
 import ConstructionStory from "@/components/alhamra/ConstructionStory";
-import PerspectiveSection from "@/components/alhamra/PerspectiveSection";
 
 const Rising = () => {
   return (
@@ -14,9 +13,6 @@ const Rising = () => {
         
         {/* Construction Journey - Animated Build Story */}
         <ConstructionStory />
-        
-        {/* Perspective Section - Views & Visual Studies */}
-        <PerspectiveSection />
       </main>
       <Footer />
     </div>
