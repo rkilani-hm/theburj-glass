@@ -27,7 +27,7 @@ const DashboardFooter = ({ language }: DashboardFooterProps) => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
     >
-      <div className="bg-black/70 backdrop-blur-xl border-t border-white/10">
+      <div className="bg-white/80 backdrop-blur-xl border-t border-slate-200 shadow-lg shadow-slate-200/30">
         <div className="container mx-auto px-4 lg:px-8 py-3">
           <div className="flex items-center justify-between gap-2 lg:gap-4">
             {/* Main buttons */}
@@ -35,9 +35,9 @@ const DashboardFooter = ({ language }: DashboardFooterProps) => {
               {buttons.map((button, index) => (
                 <motion.button
                   key={button.key}
-                  className="flex items-center gap-2 px-3 lg:px-5 py-2.5 bg-black/50 border border-white/10 
-                           hover:border-cyan-500/50 hover:bg-cyan-500/10 transition-all duration-300
-                           group whitespace-nowrap"
+                  className="flex items-center gap-2 px-3 lg:px-5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg
+                           hover:border-sky-400 hover:bg-sky-50 transition-all duration-300
+                           group whitespace-nowrap shadow-sm"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: 1 + index * 0.1 }}
@@ -46,9 +46,9 @@ const DashboardFooter = ({ language }: DashboardFooterProps) => {
                 >
                   <button.icon 
                     size={16} 
-                    className="text-gray-400 group-hover:text-cyan-400 transition-colors"
+                    className="text-slate-500 group-hover:text-sky-600 transition-colors"
                   />
-                  <span className="text-[10px] lg:text-xs font-mono uppercase tracking-wider text-gray-400 group-hover:text-cyan-400 transition-colors">
+                  <span className="text-[10px] lg:text-xs font-mono uppercase tracking-wider text-slate-600 group-hover:text-sky-600 transition-colors">
                     {button.label[language]}
                   </span>
                 </motion.button>
@@ -63,14 +63,14 @@ const DashboardFooter = ({ language }: DashboardFooterProps) => {
             >
               <Link
                 to="/tower"
-                className="flex items-center gap-2 px-4 lg:px-6 py-2.5 bg-cyan-500/20 border border-cyan-500/50 
-                         hover:bg-cyan-500/30 transition-all duration-300 group"
+                className="flex items-center gap-2 px-4 lg:px-6 py-2.5 bg-sky-500 border border-sky-600 rounded-lg
+                         hover:bg-sky-600 transition-all duration-300 group shadow-md shadow-sky-200/50"
               >
                 <ArrowLeft 
                   size={16} 
-                  className="text-cyan-400 group-hover:-translate-x-1 transition-transform"
+                  className="text-white group-hover:-translate-x-1 transition-transform"
                 />
-                <span className="text-xs font-mono uppercase tracking-wider text-cyan-400">
+                <span className="text-xs font-mono uppercase tracking-wider text-white">
                   {labels.backToTower[language]}
                 </span>
               </Link>

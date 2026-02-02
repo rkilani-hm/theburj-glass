@@ -49,17 +49,17 @@ const NetworkStatusPanel = ({ language }: NetworkStatusPanelProps) => {
       animate={isInView ? { opacity: 1, x: 0 } : {}}
       transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
     >
-      <div className="relative bg-black/60 backdrop-blur-xl border border-white/10 p-4 lg:p-5">
+      <div className="relative bg-white/70 backdrop-blur-xl border border-slate-200 shadow-lg shadow-slate-200/50 p-4 lg:p-5 rounded-lg">
         {/* Corner decorations */}
-        <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-cyan-500" />
-        <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-cyan-500" />
-        <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-cyan-500" />
-        <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-cyan-500" />
+        <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-sky-500 rounded-tl-lg" />
+        <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-sky-500 rounded-tr-lg" />
+        <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-sky-500 rounded-bl-lg" />
+        <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-sky-500 rounded-br-lg" />
 
         {/* Header */}
         <div className="flex items-center gap-2 mb-4">
-          <div className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_8px_rgba(0,212,255,0.8)]" />
-          <h3 className="text-xs font-mono font-bold text-cyan-400 tracking-wider">
+          <div className="w-2 h-2 rounded-full bg-sky-500 animate-pulse shadow-[0_0_8px_rgba(14,165,233,0.8)]" />
+          <h3 className="text-xs font-mono font-bold text-sky-600 tracking-wider">
             {labels.title[language]}
           </h3>
         </div>
@@ -69,7 +69,7 @@ const NetworkStatusPanel = ({ language }: NetworkStatusPanelProps) => {
           {statusItems.map((item, index) => (
             <motion.div
               key={index}
-              className="flex items-center justify-between p-2 bg-black/40 border border-white/5"
+              className="flex items-center justify-between p-2 bg-slate-50/80 border border-slate-100 rounded-md"
               initial={{ opacity: 0, y: 10 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
@@ -77,10 +77,10 @@ const NetworkStatusPanel = ({ language }: NetworkStatusPanelProps) => {
               <div className="flex items-center gap-2">
                 <item.icon 
                   size={14} 
-                  className="text-gray-400"
+                  className="text-slate-500"
                   style={{ filter: `drop-shadow(0 0 4px ${item.color})` }}
                 />
-                <span className="text-[11px] text-gray-400">
+                <span className="text-[11px] text-slate-600">
                   {item.label[language]}
                 </span>
               </div>
@@ -101,12 +101,12 @@ const NetworkStatusPanel = ({ language }: NetworkStatusPanelProps) => {
         </div>
 
         {/* Live indicator */}
-        <div className="flex items-center justify-center gap-2 mt-4 pt-3 border-t border-white/5">
+        <div className="flex items-center justify-center gap-2 mt-4 pt-3 border-t border-slate-200">
           <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
           </span>
-          <span className="text-[10px] font-mono uppercase text-red-400 tracking-wider">
+          <span className="text-[10px] font-mono uppercase text-emerald-600 tracking-wider">
             LIVE
           </span>
         </div>

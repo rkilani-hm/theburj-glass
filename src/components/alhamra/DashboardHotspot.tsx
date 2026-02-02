@@ -35,22 +35,22 @@ const DashboardHotspot = ({
       >
         {/* Label Container */}
         <div
-          className="relative px-4 py-2.5 bg-black/50 backdrop-blur-xl border border-cyan-500/40 
-                     shadow-[0_0_20px_rgba(0,212,255,0.2)] hover:shadow-[0_0_30px_rgba(0,212,255,0.4)]
+          className="relative px-4 py-2.5 bg-white/80 backdrop-blur-xl border border-sky-400/50 rounded-lg
+                     shadow-lg shadow-sky-100/50 hover:shadow-xl hover:shadow-sky-200/50
                      transition-shadow duration-300"
         >
           {/* Corner accents */}
-          <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-cyan-400" />
-          <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-cyan-400" />
-          <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-cyan-400" />
-          <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-cyan-400" />
+          <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-sky-500 rounded-tl-lg" />
+          <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-sky-500 rounded-tr-lg" />
+          <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-sky-500 rounded-bl-lg" />
+          <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-sky-500 rounded-br-lg" />
 
           <div className={`${isRTL ? "text-right" : "text-left"}`}>
-            <p className="text-sm font-mono font-bold text-white tracking-wide">
+            <p className="text-sm font-mono font-bold text-slate-800 tracking-wide">
               {title[language]}
             </p>
             {subtitle && (
-              <p className="text-xs font-mono text-cyan-400 mt-0.5">
+              <p className="text-xs font-mono text-sky-600 mt-0.5">
                 {subtitle[language]}
               </p>
             )}
@@ -66,12 +66,12 @@ const DashboardHotspot = ({
           style={{ transformOrigin: adjustedSide === "left" ? "right" : "left" }}
         >
           <div 
-            className="w-16 h-px bg-gradient-to-r from-cyan-400 to-transparent"
+            className="w-16 h-px bg-gradient-to-r from-sky-500 to-transparent"
             style={{
               transform: adjustedSide === "right" ? "scaleX(-1)" : "none"
             }}
           />
-          <div className="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_10px_rgba(0,212,255,0.8)] animate-pulse" />
+          <div className="w-2 h-2 rounded-full bg-sky-500 shadow-[0_0_10px_rgba(14,165,233,0.8)] animate-pulse" />
         </motion.div>
       </div>
     </motion.div>

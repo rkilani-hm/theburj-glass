@@ -62,7 +62,7 @@ const GlowingGauge = ({
       <div className="relative" style={{ width: size, height: size }}>
         {/* Glow effect background */}
         <div
-          className="absolute inset-0 rounded-full blur-xl opacity-30 animate-pulse"
+          className="absolute inset-0 rounded-full blur-xl opacity-20 animate-pulse"
           style={{ backgroundColor: glowColor }}
         />
         
@@ -77,7 +77,7 @@ const GlowingGauge = ({
             cy={size / 2}
             r={radius}
             fill="none"
-            stroke="rgba(255,255,255,0.1)"
+            stroke="rgba(148,163,184,0.3)"
             strokeWidth={strokeWidth}
           />
           {/* Progress circle with glow */}
@@ -94,7 +94,7 @@ const GlowingGauge = ({
             animate={isInView ? { strokeDashoffset: offset } : {}}
             transition={{ duration: 2, ease: [0.22, 1, 0.36, 1] }}
             style={{
-              filter: `drop-shadow(0 0 8px ${glowColor})`,
+              filter: `drop-shadow(0 0 6px ${glowColor})`,
             }}
           />
         </svg>
@@ -102,8 +102,8 @@ const GlowingGauge = ({
         {/* Center text */}
         <div className="absolute inset-0 flex flex-col items-center justify-center z-20">
           <span 
-            className="text-xl font-mono font-bold text-white"
-            style={{ textShadow: `0 0 10px ${glowColor}` }}
+            className="text-xl font-mono font-bold text-slate-700"
+            style={{ textShadow: `0 0 8px ${glowColor}40` }}
           >
             {count}%
           </span>
@@ -111,7 +111,7 @@ const GlowingGauge = ({
       </div>
       
       {/* Label */}
-      <p className="mt-3 text-xs font-mono uppercase tracking-wider text-cyan-400 text-center">
+      <p className="mt-3 text-xs font-mono uppercase tracking-wider text-sky-600 text-center">
         {label[language]}
       </p>
       
@@ -121,7 +121,7 @@ const GlowingGauge = ({
           className="w-1.5 h-1.5 rounded-full animate-pulse"
           style={{ backgroundColor: glowColor }}
         />
-        <span className="text-[10px] font-mono uppercase text-gray-400">
+        <span className="text-[10px] font-mono uppercase text-slate-500">
           {status[language]}
         </span>
       </div>

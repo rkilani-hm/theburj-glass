@@ -30,17 +30,17 @@ const SystemVitalityPanel = ({ language }: SystemVitalityPanelProps) => {
       animate={isInView ? { opacity: 1, x: 0 } : {}}
       transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
     >
-      <div className="relative bg-black/60 backdrop-blur-xl border border-white/10 p-4 lg:p-5">
+      <div className="relative bg-white/70 backdrop-blur-xl border border-slate-200 shadow-lg shadow-slate-200/50 p-4 lg:p-5 rounded-lg">
         {/* Corner decorations */}
-        <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-cyan-500" />
-        <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-cyan-500" />
-        <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-cyan-500" />
-        <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-cyan-500" />
+        <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-sky-500 rounded-tl-lg" />
+        <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-sky-500 rounded-tr-lg" />
+        <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-sky-500 rounded-bl-lg" />
+        <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-sky-500 rounded-br-lg" />
 
         {/* Header */}
         <div className="flex items-center gap-2 mb-4">
-          <div className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_8px_rgba(0,212,255,0.8)]" />
-          <h3 className="text-xs font-mono font-bold text-cyan-400 tracking-wider">
+          <div className="w-2 h-2 rounded-full bg-sky-500 animate-pulse shadow-[0_0_8px_rgba(14,165,233,0.8)]" />
+          <h3 className="text-xs font-mono font-bold text-sky-600 tracking-wider">
             {labels.title[language]}
           </h3>
         </div>
@@ -68,23 +68,23 @@ const SystemVitalityPanel = ({ language }: SystemVitalityPanelProps) => {
         </div>
 
         {/* Divider */}
-        <div className="h-px bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent my-3" />
+        <div className="h-px bg-gradient-to-r from-transparent via-sky-400/50 to-transparent my-3" />
 
         {/* Mini Line Graph */}
         <div>
-          <p className="text-[10px] font-mono uppercase text-gray-500 mb-2 tracking-wider">
+          <p className="text-[10px] font-mono uppercase text-slate-500 mb-2 tracking-wider">
             {labels.networkTraffic[language]}
           </p>
           <div className="h-12 flex items-end gap-0.5">
             {graphData.map((value, i) => (
               <motion.div
                 key={i}
-                className="flex-1 bg-gradient-to-t from-cyan-500/30 to-cyan-400 rounded-t-sm"
+                className="flex-1 bg-gradient-to-t from-sky-300/50 to-sky-500 rounded-t-sm"
                 initial={{ height: 0 }}
                 animate={isInView ? { height: `${value}%` } : {}}
                 transition={{ duration: 0.5, delay: 0.5 + i * 0.05 }}
                 style={{
-                  boxShadow: "0 0 5px rgba(0,212,255,0.3)",
+                  boxShadow: "0 0 5px rgba(14,165,233,0.3)",
                 }}
               />
             ))}
