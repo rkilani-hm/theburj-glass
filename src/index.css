@@ -28,8 +28,8 @@
     --popover: 45 33% 97%;
     --popover-foreground: 210 29% 24%;
 
-    /* Muted Bronze/Champagne - Primary Accent #C5A059 */
-    --primary: 40 50% 56%;
+    /* Deep Black - Primary Accent */
+    --primary: 220 15% 15%;
     --primary-foreground: 0 0% 100%;
 
     /* Warm Stone Secondary */
@@ -50,7 +50,7 @@
     /* Pale Beige Borders #E5E0D8 */
     --border: 35 20% 87%;
     --input: 35 20% 87%;
-    --ring: 40 50% 56%;
+    --ring: 220 15% 15%;
 
     --radius: 0.5rem;
 
@@ -60,9 +60,9 @@
     --cool-grey: 220 20% 95%;
     --deep-slate: 210 29% 24%;
     --slate-light: 210 20% 35%;
-    --bronze: 40 50% 56%;
-    --bronze-light: 40 45% 70%;
-    --bronze-dark: 40 55% 45%;
+    --bronze: 220 15% 15%;
+    --bronze-light: 220 12% 30%;
+    --bronze-dark: 220 18% 8%;
     --beige: 35 20% 87%;
     --beige-light: 38 25% 92%;
 
