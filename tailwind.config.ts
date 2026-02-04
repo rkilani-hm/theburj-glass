@@ -47,21 +47,24 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        stone: {
-          DEFAULT: "hsl(var(--stone))",
-          warm: "hsl(var(--stone-warm))",
+        /* Limestone & Light Palette */
+        limestone: {
+          DEFAULT: "hsl(var(--limestone))",
+          warm: "hsl(var(--limestone-warm))",
         },
-        charcoal: {
-          DEFAULT: "hsl(var(--charcoal))",
-          light: "hsl(var(--charcoal-light))",
+        "cool-grey": "hsl(var(--cool-grey))",
+        "deep-slate": {
+          DEFAULT: "hsl(var(--deep-slate))",
+          light: "hsl(var(--slate-light))",
         },
-        grey: {
-          soft: "hsl(var(--grey-soft))",
-          medium: "hsl(var(--grey-medium))",
+        bronze: {
+          DEFAULT: "hsl(var(--bronze))",
+          light: "hsl(var(--bronze-light))",
+          dark: "hsl(var(--bronze-dark))",
         },
-        sky: {
-          DEFAULT: "hsl(var(--sky))",
-          deep: "hsl(var(--sky-deep))",
+        beige: {
+          DEFAULT: "hsl(var(--beige))",
+          light: "hsl(var(--beige-light))",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
@@ -75,19 +78,21 @@ export default {
         },
       },
       fontFamily: {
+        serif: ["Playfair Display", "Georgia", "serif"],
         sans: ["Inter", "system-ui", "sans-serif"],
         arabic: ["Noto Sans Arabic", "Tahoma", "sans-serif"],
       },
       fontSize: {
-        "display": ["clamp(2.5rem, 6vw, 5rem)", { lineHeight: "1.1", letterSpacing: "-0.02em" }],
-        "headline": ["clamp(2rem, 4vw, 3.5rem)", { lineHeight: "1.15", letterSpacing: "-0.015em" }],
-        "title": ["clamp(1.5rem, 3vw, 2.25rem)", { lineHeight: "1.2", letterSpacing: "-0.01em" }],
-        "body-lg": ["1.125rem", { lineHeight: "1.7" }],
+        "display": ["clamp(2.5rem, 6vw, 5rem)", { lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "500" }],
+        "headline": ["clamp(2rem, 4vw, 3.5rem)", { lineHeight: "1.15", letterSpacing: "-0.015em", fontWeight: "500" }],
+        "title": ["clamp(1.5rem, 3vw, 2.25rem)", { lineHeight: "1.2", letterSpacing: "-0.01em", fontWeight: "500" }],
+        "body-lg": ["1.125rem", { lineHeight: "1.8" }],
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+        pill: "9999px",
       },
       spacing: {
         "section": "10rem",

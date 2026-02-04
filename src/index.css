@@ -4,126 +4,135 @@
 
 /* Al Hamra Tower Design System
    هيبة المكان — A Place of Gravity
-   Architectural, calm, authoritative
-   Colors: Stone, sky, light, charcoal
+   "Limestone & Light" — Luxury Corporate
+   Sculptural warmth inspired by the tower's carved stone facade
    All colors in HSL
 */
 
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600&display=swap');
 
 @layer base {
   :root {
-    /* Architectural Stone Palette */
-    --background: 40 25% 98%;
-    --foreground: 220 15% 15%;
+    /* Limestone & Light Palette */
+    /* Warm Limestone - Main Background #F9F8F4 */
+    --background: 45 33% 97%;
+    /* Deep Slate - Primary Text #2C3E50 */
+    --foreground: 210 29% 24%;
 
-    --card: 40 20% 96%;
-    --card-foreground: 220 15% 15%;
+    /* Cool Grey - Secondary/Cards #F0F2F5 */
+    --card: 220 20% 95%;
+    --card-foreground: 210 29% 24%;
 
-    --popover: 40 25% 98%;
-    --popover-foreground: 220 15% 15%;
+    --popover: 45 33% 97%;
+    --popover-foreground: 210 29% 24%;
 
-    /* Deep Charcoal Primary */
-    --primary: 220 15% 18%;
-    --primary-foreground: 40 25% 98%;
+    /* Muted Bronze/Champagne - Primary Accent #C5A059 */
+    --primary: 40 50% 56%;
+    --primary-foreground: 0 0% 100%;
 
     /* Warm Stone Secondary */
-    --secondary: 38 18% 94%;
-    --secondary-foreground: 220 15% 18%;
+    --secondary: 40 20% 94%;
+    --secondary-foreground: 210 29% 24%;
 
-    /* Soft Grey Muted */
-    --muted: 40 12% 92%;
-    --muted-foreground: 220 8% 50%;
+    /* Soft Muted */
+    --muted: 40 15% 92%;
+    --muted-foreground: 210 15% 45%;
 
     /* Light Stone Accent */
-    --accent: 38 15% 90%;
-    --accent-foreground: 220 15% 18%;
+    --accent: 40 20% 92%;
+    --accent-foreground: 210 29% 24%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 40 15% 88%;
-    --input: 40 15% 88%;
-    --ring: 220 15% 18%;
+    /* Pale Beige Borders #E5E0D8 */
+    --border: 35 20% 87%;
+    --input: 35 20% 87%;
+    --ring: 40 50% 56%;
 
-    --radius: 0rem;
+    --radius: 0.5rem;
 
     /* Custom Al Hamra Tokens */
-    --stone: 38 20% 95%;
-    --stone-warm: 35 25% 92%;
-    --charcoal: 220 15% 18%;
-    --charcoal-light: 220 10% 30%;
-    --grey-soft: 220 8% 78%;
-    --grey-medium: 220 8% 55%;
-    --sky: 210 25% 96%;
-    --sky-deep: 215 20% 92%;
+    --limestone: 45 33% 97%;
+    --limestone-warm: 40 30% 95%;
+    --cool-grey: 220 20% 95%;
+    --deep-slate: 210 29% 24%;
+    --slate-light: 210 20% 35%;
+    --bronze: 40 50% 56%;
+    --bronze-light: 40 45% 70%;
+    --bronze-dark: 40 55% 45%;
+    --beige: 35 20% 87%;
+    --beige-light: 38 25% 92%;
 
     /* Gradient tokens */
-    --gradient-stone: linear-gradient(180deg, hsl(40 25% 98%) 0%, hsl(38 20% 94%) 100%);
-    --gradient-sky: linear-gradient(180deg, hsl(210 25% 96%) 0%, hsl(215 20% 92%) 100%);
-    --gradient-overlay: linear-gradient(180deg, transparent 0%, hsl(220 15% 15% / 0.4) 100%);
+    --gradient-limestone: linear-gradient(180deg, hsl(45 33% 97%) 0%, hsl(40 30% 95%) 100%);
+    --gradient-cool: linear-gradient(180deg, hsl(220 20% 95%) 0%, hsl(45 33% 97%) 100%);
+    --gradient-overlay: linear-gradient(180deg, transparent 0%, hsl(210 29% 24% / 0.4) 100%);
 
-    --sidebar-background: 40 25% 97%;
-    --sidebar-foreground: 220 15% 18%;
-    --sidebar-primary: 220 15% 15%;
-    --sidebar-primary-foreground: 40 25% 98%;
-    --sidebar-accent: 38 15% 92%;
-    --sidebar-accent-foreground: 220 15% 18%;
-    --sidebar-border: 40 15% 90%;
-    --sidebar-ring: 220 15% 18%;
+    --sidebar-background: 45 33% 96%;
+    --sidebar-foreground: 210 29% 24%;
+    --sidebar-primary: 40 50% 56%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 40 20% 92%;
+    --sidebar-accent-foreground: 210 29% 24%;
+    --sidebar-border: 35 20% 87%;
+    --sidebar-ring: 40 50% 56%;
   }
 
   .dark {
-    --background: 220 15% 8%;
-    --foreground: 40 20% 95%;
+    --background: 220 20% 8%;
+    --foreground: 45 20% 92%;
 
-    --card: 220 15% 10%;
-    --card-foreground: 40 20% 95%;
+    --card: 220 18% 12%;
+    --card-foreground: 45 20% 92%;
 
-    --popover: 220 15% 8%;
-    --popover-foreground: 40 20% 95%;
+    --popover: 220 20% 8%;
+    --popover-foreground: 45 20% 92%;
 
-    --primary: 40 20% 95%;
-    --primary-foreground: 220 15% 10%;
+    --primary: 40 50% 56%;
+    --primary-foreground: 220 20% 8%;
 
-    --secondary: 220 12% 15%;
-    --secondary-foreground: 40 20% 95%;
+    --secondary: 220 15% 15%;
+    --secondary-foreground: 45 20% 92%;
 
-    --muted: 220 12% 18%;
-    --muted-foreground: 220 8% 60%;
+    --muted: 220 15% 18%;
+    --muted-foreground: 220 10% 55%;
 
-    --accent: 220 12% 15%;
-    --accent-foreground: 40 20% 95%;
+    --accent: 220 15% 15%;
+    --accent-foreground: 45 20% 92%;
 
     --destructive: 0 62% 30%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 220 12% 18%;
-    --input: 220 12% 18%;
-    --ring: 40 20% 85%;
+    --border: 220 15% 20%;
+    --input: 220 15% 20%;
+    --ring: 40 50% 56%;
 
-    --stone: 220 12% 12%;
-    --stone-warm: 220 10% 14%;
-    --charcoal: 40 15% 88%;
-    --charcoal-light: 40 12% 70%;
-    --grey-soft: 220 8% 40%;
-    --grey-medium: 220 8% 55%;
-    --sky: 220 15% 10%;
-    --sky-deep: 220 12% 12%;
+    --limestone: 220 18% 10%;
+    --limestone-warm: 220 15% 12%;
+    --cool-grey: 220 18% 14%;
+    --deep-slate: 45 15% 88%;
+    --slate-light: 45 12% 70%;
+    --bronze: 40 50% 56%;
+    --bronze-light: 40 45% 65%;
+    --bronze-dark: 40 55% 48%;
+    --beige: 220 12% 22%;
+    --beige-light: 220 10% 18%;
 
-    --gradient-stone: linear-gradient(180deg, hsl(220 15% 8%) 0%, hsl(220 12% 12%) 100%);
-    --gradient-sky: linear-gradient(180deg, hsl(220 15% 10%) 0%, hsl(220 12% 12%) 100%);
-    --gradient-overlay: linear-gradient(180deg, transparent 0%, hsl(220 15% 5% / 0.6) 100%);
+    --gradient-limestone: linear-gradient(180deg, hsl(220 20% 8%) 0%, hsl(220 18% 12%) 100%);
+    --gradient-cool: linear-gradient(180deg, hsl(220 18% 14%) 0%, hsl(220 20% 8%) 100%);
+    --gradient-overlay: linear-gradient(180deg, transparent 0%, hsl(220 20% 5% / 0.6) 100%);
 
-    --sidebar-background: 220 15% 10%;
-    --sidebar-foreground: 40 20% 95%;
-    --sidebar-primary: 40 20% 95%;
-    --sidebar-primary-foreground: 220 15% 10%;
-    --sidebar-accent: 220 12% 15%;
-    --sidebar-accent-foreground: 40 20% 95%;
-    --sidebar-border: 220 12% 18%;
-    --sidebar-ring: 40 20% 85%;
+    --sidebar-background: 220 18% 10%;
+    --sidebar-foreground: 45 20% 92%;
+    --sidebar-primary: 40 50% 56%;
+    --sidebar-primary-foreground: 220 20% 8%;
+    --sidebar-accent: 220 15% 15%;
+    --sidebar-accent-foreground: 45 20% 92%;
+    --sidebar-border: 220 15% 20%;
+    --sidebar-ring: 40 50% 56%;
   }
 }
 
@@ -135,10 +144,44 @@
   body {
     @apply bg-background text-foreground antialiased;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    line-height: 1.8;
   }
 
   html {
     scroll-behavior: smooth;
+  }
+
+  /* Editorial Typography */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl;
+    line-height: 1.1;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl;
+    line-height: 1.15;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl;
+    line-height: 1.2;
+  }
+
+  /* Stone Slab Cards */
+  .card-limestone {
+    @apply bg-background border border-beige;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+  }
+
+  /* Section Spacing - Generous whitespace */
+  .section-sculptural {
+    @apply py-32 md:py-40;
   }
 }
 
