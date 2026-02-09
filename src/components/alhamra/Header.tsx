@@ -64,7 +64,7 @@ const Header = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center group">
             <div className="relative">
-              <span className={`text-xl lg:text-2xl font-light tracking-[0.2em] uppercase transition-colors duration-500 text-charcoal-dark
+              <span className={`text-xl lg:text-2xl font-semibold tracking-[0.2em] uppercase transition-colors duration-500 text-charcoal-dark
               }`}>
                 Al Hamra
               </span>
@@ -83,7 +83,7 @@ const Header = () => {
               onMouseLeave={() => setTowerDropdownOpen(false)}
             >
               <button
-                className={`flex items-center gap-1 text-sm tracking-wide transition-colors duration-300 ${
+                className={`flex items-center gap-1 text-sm font-semibold tracking-wide transition-colors duration-300 ${
                   isTowerActive
                     ? "text-charcoal-dark"
                     : "text-charcoal-light hover:text-charcoal-dark"
@@ -136,7 +136,7 @@ const Header = () => {
               <Link
                 key={item.key}
                 to={item.href}
-                className={`text-sm tracking-wide transition-colors duration-300 ${
+                className={`text-sm font-semibold tracking-wide transition-colors duration-300 ${
                   isActive(item.href)
                     ? "text-charcoal-dark"
                     : "text-charcoal-light hover:text-charcoal-dark"
@@ -153,7 +153,7 @@ const Header = () => {
               onMouseLeave={() => setConnectDropdownOpen(false)}
             >
               <button
-                className={`flex items-center gap-1 text-sm tracking-wide transition-colors duration-300 ${
+                className={`flex items-center gap-1 text-sm font-semibold tracking-wide transition-colors duration-300 ${
                   isConnectActive
                     ? "text-charcoal-dark"
                     : "text-charcoal-light hover:text-charcoal-dark"
