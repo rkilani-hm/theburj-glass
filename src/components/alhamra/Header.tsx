@@ -14,7 +14,7 @@ const Header = () => {
   const [mobileTowerOpen, setMobileTowerOpen] = useState(false);
   const [mobileConnectOpen, setMobileConnectOpen] = useState(false);
   const location = useLocation();
-  const isHome = location.pathname === "/";
+  
 
   useEffect(() => {
     const handleScroll = () => {
@@ -49,8 +49,7 @@ const Header = () => {
   const isTowerActive = location.pathname.startsWith("/tower");
   const isConnectActive = ["/leasing", "/location", "/contact"].includes(location.pathname);
 
-  // Show light text on home page when not scrolled
-  const showLightText = isHome && !scrolled;
+  // Always use dark text - backgrounds are always light (images or white)
 
   return (
     <header
@@ -65,14 +64,11 @@ const Header = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center group">
             <div className="relative">
-              <span className={`text-xl lg:text-2xl font-light tracking-[0.2em] uppercase transition-colors duration-500 ${
-                showLightText ? "text-charcoal-900" : "text-foreground"
+              <span className={`text-xl lg:text-2xl font-light tracking-[0.2em] uppercase transition-colors duration-500 text-charcoal-dark
               }`}>
                 Al Hamra
               </span>
-              <span className={`block text-[10px] tracking-[0.3em] uppercase mt-0.5 transition-colors duration-500 ${
-                showLightText ? "text-charcoal-700" : "text-muted-foreground"
-              }`}>
+              <span className="block text-[10px] tracking-[0.3em] uppercase mt-0.5 transition-colors duration-500 text-charcoal-light">
                 Tower
               </span>
             </div>
@@ -88,13 +84,9 @@ const Header = () => {
             >
               <button
                 className={`flex items-center gap-1 text-sm tracking-wide transition-colors duration-300 ${
-                  showLightText
-                    ? isTowerActive
-                      ? "text-charcoal-900"
-                      : "text-charcoal-700 hover:text-charcoal-900"
-                    : isTowerActive
-                      ? "text-foreground"
-                      : "text-muted-foreground hover:text-foreground"
+                  isTowerActive
+                    ? "text-charcoal-dark"
+                    : "text-charcoal-light hover:text-charcoal-dark"
                 }`}
               >
                 {t("nav.tower")}
@@ -145,13 +137,9 @@ const Header = () => {
                 key={item.key}
                 to={item.href}
                 className={`text-sm tracking-wide transition-colors duration-300 ${
-                  showLightText
-                    ? isActive(item.href)
-                      ? "text-charcoal-900"
-                      : "text-charcoal-700 hover:text-charcoal-900"
-                    : isActive(item.href)
-                      ? "text-foreground"
-                      : "text-muted-foreground hover:text-foreground"
+                  isActive(item.href)
+                    ? "text-charcoal-dark"
+                    : "text-charcoal-light hover:text-charcoal-dark"
                 }`}
               >
                 {t(item.key)}
@@ -166,13 +154,9 @@ const Header = () => {
             >
               <button
                 className={`flex items-center gap-1 text-sm tracking-wide transition-colors duration-300 ${
-                  showLightText
-                    ? isConnectActive
-                      ? "text-charcoal-900"
-                      : "text-charcoal-700 hover:text-charcoal-900"
-                    : isConnectActive
-                      ? "text-foreground"
-                      : "text-muted-foreground hover:text-foreground"
+                  isConnectActive
+                    ? "text-charcoal-dark"
+                    : "text-charcoal-light hover:text-charcoal-dark"
                 }`}
               >
                 {t("nav.connect")}
@@ -223,11 +207,7 @@ const Header = () => {
           <div className="flex items-center gap-6">
             <button
               onClick={toggleLanguage}
-              className={`px-4 py-2 text-sm tracking-wider border transition-colors duration-300 ${
-                showLightText
-                  ? "border-charcoal-400 hover:bg-charcoal-100/50 text-charcoal-900"
-                  : "border-border hover:bg-muted text-foreground"
-              }`}
+              className="px-4 py-2 text-sm tracking-wider border border-charcoal/20 hover:bg-charcoal/5 text-charcoal-dark transition-colors duration-300"
             >
               {language === "en" ? "عربي" : "EN"}
             </button>
