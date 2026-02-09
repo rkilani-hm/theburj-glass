@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
+import alHamraLogo from "@/assets/al-hamra-logo.png";
 
 const Header = () => {
   const { language, toggleLanguage, t } = useLanguage();
@@ -63,15 +64,11 @@ const Header = () => {
         <div className="flex items-center justify-between h-20 lg:h-24">
           {/* Logo */}
           <Link to="/" className="flex items-center group">
-            <div className="relative">
-              <span className={`text-xl lg:text-2xl font-semibold tracking-[0.2em] uppercase transition-colors duration-500 text-charcoal-dark
-              }`}>
-                Al Hamra
-              </span>
-              <span className="block text-[10px] tracking-[0.3em] uppercase mt-0.5 transition-colors duration-500 text-charcoal-light">
-                Tower
-              </span>
-            </div>
+            <img 
+              src={alHamraLogo} 
+              alt="Al Hamra Tower" 
+              className="h-14 lg:h-16 w-auto object-contain transition-transform duration-500 group-hover:scale-105"
+            />
           </Link>
 
           {/* Desktop Navigation */}
