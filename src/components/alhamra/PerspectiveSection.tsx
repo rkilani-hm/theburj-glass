@@ -24,7 +24,7 @@ const PerspectiveSection = () => {
   return (
     <section id="perspective" className="bg-secondary relative">
       {/* Hero Section */}
-      <div className="py-section">
+      <div className="py-16">
         <div className="container mx-auto px-6 lg:px-12">
           {/* Section Label */}
           <motion.div 
@@ -104,7 +104,7 @@ const PerspectiveSection = () => {
       </div>
 
       {/* Vision Section */}
-      <div className="py-section bg-background texture-noise">
+      <div className="py-16 bg-background texture-noise">
         <div className="container mx-auto px-6 lg:px-12">
           <div ref={visionRef} className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             {/* Text Column */}
@@ -154,7 +154,7 @@ const PerspectiveSection = () => {
       </div>
 
       {/* Time of Day Views */}
-      <div className="py-section bg-secondary">
+      <div className="py-16 bg-secondary">
         <div className="container mx-auto px-6 lg:px-12">
           <motion.div 
             ref={viewsRef}
@@ -211,7 +211,7 @@ const PerspectiveSection = () => {
       </div>
 
       {/* Gallery Grid */}
-      <div className="py-section bg-background">
+      <div className="py-16 bg-background">
         <div className="container mx-auto px-6 lg:px-12">
           <motion.div
             ref={galleryRef}
@@ -344,7 +344,7 @@ const PerspectiveSection = () => {
       </div>
 
       {/* Horizon Statement */}
-      <div className="py-section bg-secondary">
+      <div className="py-16 bg-secondary">
         <div className="container mx-auto px-6 lg:px-12">
           <div ref={horizonRef} className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             {/* Image Column */}

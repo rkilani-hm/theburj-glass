@@ -106,7 +106,7 @@ const LegacySection = () => {
   return (
     <section id="legacy" className="bg-background relative overflow-hidden">
       {/* Hero Section with Parallax */}
-      <div ref={parallaxRef} className="relative h-[70vh] min-h-[500px] overflow-hidden">
+      <div ref={parallaxRef} className="relative h-[50vh] min-h-[400px] overflow-hidden">
         <motion.div 
           style={{ y: parallaxY }}
           className="absolute inset-0 scale-110"
@@ -147,7 +147,7 @@ const LegacySection = () => {
       </div>
 
       {/* Origins Section - Cinema to Tower */}
-      <div className="py-section bg-background">
+      <div className="py-16 bg-background">
         <div className="container mx-auto px-6 lg:px-12">
           <motion.div 
             ref={originsRef}
@@ -155,7 +155,7 @@ const LegacySection = () => {
             animate={originsInView ? "visible" : "hidden"}
             variants={revealVariants.fadeUp}
             transition={{ duration: 0.6 }}
-            className="mb-20"
+            className="mb-12"
           >
             <h2 className="text-title font-light text-foreground mb-4">
               {t("legacy.origins.heading")}
@@ -230,7 +230,7 @@ const LegacySection = () => {
       </div>
 
       {/* Archival Gallery Section */}
-      <div className="py-section bg-muted/30">
+      <div className="py-16 bg-muted/30">
         <div className="container mx-auto px-6 lg:px-12">
           <motion.div 
             ref={archivalRef}
@@ -280,7 +280,7 @@ const LegacySection = () => {
       </div>
 
       {/* Before/After Comparison Section */}
-      <div className="py-section bg-background">
+      <div className="py-16 bg-background">
         <div className="container mx-auto px-6 lg:px-12">
           <motion.div 
             ref={comparisonRef}
@@ -331,7 +331,7 @@ const LegacySection = () => {
       <ParallaxHistoryTimeline />
 
       {/* Founders' Vision Section */}
-      <div className="py-section bg-background">
+      <div className="py-16 bg-background">
         <div className="container mx-auto px-6 lg:px-12">
           <motion.div 
             ref={foundersRef}
@@ -382,7 +382,7 @@ const LegacySection = () => {
             animate={foundersInView ? "visible" : "hidden"}
             variants={revealVariants.fadeUp}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="mt-20 text-center"
+            className="mt-12 text-center"
           >
             <blockquote className="max-w-3xl mx-auto relative">
               <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-16 h-px bg-foreground/30" />
@@ -395,7 +395,7 @@ const LegacySection = () => {
       </div>
 
       {/* Timeline Section */}
-      <div className="py-section bg-muted/30">
+      <div className="py-16 bg-muted/30">
         <div className="container mx-auto px-6 lg:px-12">
           <motion.div 
             ref={evolutionRef}
@@ -403,7 +403,7 @@ const LegacySection = () => {
             animate={evolutionInView ? "visible" : "hidden"}
             variants={revealVariants.fadeUp}
             transition={{ duration: 0.6 }}
-            className="text-center mb-20"
+            className="text-center mb-12"
           >
             <h2 className="text-title font-light text-foreground mb-4">
               {t("legacy.evolution.heading")}
@@ -452,7 +452,7 @@ const LegacySection = () => {
       </div>
 
       {/* Design & Achievement Section */}
-      <div className="py-section bg-background">
+      <div className="py-16 bg-background">
         <div className="container mx-auto px-6 lg:px-12">
           <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
             <motion.div
@@ -532,7 +532,7 @@ const LegacySection = () => {
       </div>
 
       {/* Urban & Cultural Impact */}
-      <div className="py-section bg-foreground text-background">
+      <div className="py-16 bg-foreground text-background">
         <div className="container mx-auto px-6 lg:px-12">
           <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             <motion.div
@@ -597,7 +597,7 @@ const LegacySection = () => {
       </div>
 
       {/* Legacy in the Heart of the City */}
-      <div className="py-section bg-background">
+      <div className="py-16 bg-background">
         <div className="container mx-auto px-6 lg:px-12">
           <motion.div 
             ref={heartRef}
@@ -651,7 +651,7 @@ const LegacySection = () => {
             animate={heartInView ? "visible" : "hidden"}
             variants={revealVariants.fadeUp}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="mt-20 text-center"
+            className="mt-12 text-center"
           >
             <blockquote className="max-w-2xl mx-auto">
               <p className="text-title font-light text-foreground leading-relaxed">
