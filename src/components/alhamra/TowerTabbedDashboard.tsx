@@ -25,15 +25,15 @@ const tabsData: TabData[] = [
     icon: Mountain,
     label: { en: "The Apex", ar: "القمة" },
     title: { en: "The Apex", ar: "القمة" },
-    subtitle: { en: "413 Meters", ar: "٤١٣ متر" },
+    subtitle: { en: "Approx. 412–413 meters", ar: "حوالي ٤١٢-٤١٣ متر" },
     description: {
-      en: "Kuwait's tallest sculpted skyscraper, rising 413 meters as an iconic symbol of national ambition. The crown features the distinctive twisting geometry that defines Al Hamra's silhouette against the Arabian Gulf skyline.",
-      ar: "أطول ناطحة سحاب منحوتة في الكويت، ترتفع ٤١٣ متراً كرمز أيقوني للطموح الوطني. يتميز التاج بالهندسة الملتوية المميزة التي تحدد صورة الحمراء على أفق الخليج العربي."
+      en: "One of the tallest towers in the region. The crown features the distinctive carved geometry that defines Al Hamra's silhouette against the Arabian Gulf skyline.",
+      ar: "أحد أطول الأبراج في المنطقة. يتميز التاج بالهندسة المنحوتة المميزة التي تحدد صورة الحمراء على أفق الخليج العربي."
     },
     stats: [
-      { value: "413m", label: { en: "Total Height", ar: "الارتفاع الكلي" } },
+      { value: "~413m", label: { en: "Total Height", ar: "الارتفاع الكلي" } },
       { value: "#1", label: { en: "Tallest in Kuwait", ar: "الأطول في الكويت" } },
-      { value: "77°", label: { en: "Twist Angle", ar: "زاوية الالتواء" } },
+      { value: "24m", label: { en: "Lobby Height", ar: "ارتفاع الردهة" } },
     ],
     imagePosition: { top: "0%", height: "35%" },
   },
@@ -42,14 +42,14 @@ const tabsData: TabData[] = [
     icon: Layers,
     label: { en: "The Core", ar: "القلب" },
     title: { en: "The Core", ar: "القلب" },
-    subtitle: { en: "80 Premium Floors", ar: "٨٠ طابقاً متميزاً" },
+    subtitle: { en: "Largest office floor area in Kuwait City", ar: "أكبر مساحة طابق مكتبي في مدينة الكويت" },
     description: {
-      en: "Premium Grade A office spaces with 2,300 sqm column-free floorplates designed for maximum flexibility. Each floor offers unobstructed panoramic views of Kuwait City and the Arabian Gulf.",
-      ar: "مساحات مكتبية من الدرجة الأولى بمساحة ٢,٣٠٠ م² خالية من الأعمدة مصممة لأقصى درجات المرونة. يوفر كل طابق إطلالات بانورامية غير محجوبة على مدينة الكويت والخليج العربي."
+      en: "Efficient floor plates allow flexible configurations suitable for single-tenant headquarters or multi-tenant layouts. Each floor offers unobstructed panoramic views of Kuwait City and the Arabian Gulf.",
+      ar: "تسمح الطوابق الفعالة بتكوينات مرنة مناسبة لمقرات المستأجر الواحد أو التخطيطات متعددة المستأجرين. يوفر كل طابق إطلالات بانورامية غير محجوبة على مدينة الكويت والخليج العربي."
     },
     stats: [
-      { value: "80", label: { en: "Office Floors", ar: "طوابق مكتبية" } },
-      { value: "2,300", label: { en: "sqm Floorplate", ar: "م² لكل طابق" } },
+      { value: "~2,300", label: { en: "sqm Build-Up", ar: "م² مساحة بناء" } },
+      { value: "~1,750", label: { en: "sqm Leasable", ar: "م² قابلة للتأجير" } },
       { value: "3", label: { en: "Sky Lobbies", ar: "بهو سماوي" } },
     ],
     imagePosition: { top: "25%", height: "45%" },
@@ -59,15 +59,15 @@ const tabsData: TabData[] = [
     icon: Building2,
     label: { en: "The Foundation", ar: "الأساس" },
     title: { en: "The Foundation", ar: "الأساس" },
-    subtitle: { en: "16 Integrated Levels", ar: "١٦ مستوى متكامل" },
+    subtitle: { en: "Integrated Retail & Lifestyle", ar: "تجزئة ونمط حياة متكامل" },
     description: {
-      en: "A complete lifestyle destination featuring a 5-level luxury Shopping Center and an 11-floor smart Parking Complex with air-conditioned comfort. The podium seamlessly integrates retail, dining, and convenience.",
-      ar: "وجهة نمط حياة متكاملة تضم مركز تسوق فاخر من ٥ مستويات ومجمع مواقف ذكي من ١١ طابقاً مع راحة تكييف الهواء. يدمج المنصة بسلاسة بين التجزئة والمطاعم والراحة."
+      en: "Integrated with Al Hamra retail and lifestyle destination. Retail, dining, and service amenities within the complex reinforce the tower as a complete professional environment.",
+      ar: "متكامل مع وجهة الحمراء للتجزئة ونمط الحياة. تعزز مرافق التجزئة والمطاعم والخدمات ضمن المجمع البرج كبيئة مهنية متكاملة."
     },
     stats: [
-      { value: "5", label: { en: "Shopping Levels", ar: "طوابق تسوق" } },
+      { value: "5", label: { en: "Retail Levels", ar: "طوابق تجزئة" } },
       { value: "11", label: { en: "Parking Floors", ar: "طوابق مواقف" } },
-      { value: "24/7", label: { en: "Smart Access", ar: "وصول ذكي" } },
+      { value: "24/7", label: { en: "Access", ar: "وصول" } },
     ],
     imagePosition: { top: "65%", height: "35%" },
   },
@@ -96,7 +96,7 @@ const TowerTabbedDashboard = () => {
         >
           <div className="w-12 h-px bg-border" />
           <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
-            {language === "en" ? "Digital Twin" : "التوأم الرقمي"}
+            {language === "en" ? "Overview" : "نظرة عامة"}
           </span>
           <div className="w-12 h-px bg-border" />
         </motion.div>
@@ -108,7 +108,7 @@ const TowerTabbedDashboard = () => {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-2xl md:text-3xl lg:text-4xl font-light tracking-wide text-foreground text-center mb-8"
         >
-          {language === "en" ? "Explore the Tower" : "استكشف البرج"}
+          {language === "en" ? "Al Hamra Business Tower" : "برج الحمراء للأعمال"}
         </motion.h1>
 
         {/* Main Dashboard Layout */}

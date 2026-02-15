@@ -118,15 +118,14 @@ const Sustainability = () => {
             >
               <div className="inline-flex items-center gap-2 text-primary mb-6">
                 <Leaf className="w-5 h-5" />
-                <span className="text-sm uppercase tracking-widest">Environmental Excellence</span>
+              <span className="text-sm uppercase tracking-widest">Environmental Strategy</span>
               </div>
               <h1 className="text-4xl lg:text-6xl font-light tracking-wide text-foreground mb-6">
-                Sustainable by Design
+                A climate-led architectural approach.
               </h1>
               <p className="text-lg text-muted-foreground max-w-2xl">
-                Al Hamra Tower's revolutionary form is not merely sculptural—it is a functional 
-                response to Kuwait's desert climate, integrating passive solar strategies with 
-                cutting-edge building systems.
+                The tower's carved geometry and façade strategy reduce solar exposure while 
+                enhancing internal comfort.
               </p>
             </motion.div>
           </div>
@@ -158,19 +157,16 @@ const Sustainability = () => {
               <div className="space-y-6">
                 <p className="text-sm uppercase tracking-widest text-primary">Form Follows Climate</p>
                 <h2 className="text-3xl lg:text-4xl font-light tracking-wide">
-                  Architecture as Environmental Response
+                  Operational intelligence. Real-world efficiency.
                 </h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  In Kuwait's extreme climate, where summer temperatures exceed 50°C, conventional 
-                  tower design would result in massive energy consumption. Al Hamra Tower's 
-                  asymmetrical sculpting emerged as an elegant solution—removing floor area from 
-                  the south side reduces heat gain while the solid limestone core acts as a 
-                  thermal shield.
+                  Building systems are designed to support performance, comfort, and long-term 
+                  asset value. The tower's asymmetrical sculpting reduces heat gain while the 
+                  solid stone core acts as a thermal shield.
                 </p>
                 <p className="text-muted-foreground leading-relaxed">
-                  This integration of sustainable principles at the conceptual level, rather than 
-                  as an afterthought, earned recognition from Time Magazine as one of the 50 Best 
-                  Inventions of 2011.
+                  Commitments you can measure. This section displays sustainability and building 
+                  performance recognitions as applicable.
                 </p>
               </div>
             </motion.div>
@@ -248,9 +244,9 @@ const Sustainability = () => {
         <section className="py-24 px-6 lg:px-12 bg-muted/30">
           <div className="container mx-auto max-w-6xl">
             <div className="text-center mb-16">
-              <p className="text-sm uppercase tracking-widest text-primary mb-4">Energy Efficiency</p>
+              <p className="text-sm uppercase tracking-widest text-primary mb-4">Performance</p>
               <h2 className="text-3xl lg:text-4xl font-light tracking-wide">
-                Designed for Performance
+                Designed for Efficiency
               </h2>
             </div>
 

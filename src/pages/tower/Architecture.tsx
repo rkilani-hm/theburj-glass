@@ -23,24 +23,24 @@ const Architecture = () => {
 
   const features = [
     {
-      title: "The Geometry of Removal",
-      description: "A spiraling geometry developed by subtracting a quadrant of a typical filleted square floor plan. The subtracted portion incrementally rotates at each higher level, creating a mathematically precise hyperbolic paraboloid surface."
+      title: "Architectural Concept",
+      description: "The tower's asymmetrical carved profile responds directly to solar exposure, optimizing comfort while shaping a distinctive skyline identity."
     },
     {
-      title: "Sculptural Twist",
-      description: "Each floor plate is rotated counterclockwise around the core, creating an ascending, geometric unraveling that defines the tower's iconic silhouette."
+      title: "Solar Strategy",
+      description: "The massing reduces heat gain and enhances shading, transforming environmental constraints into architectural advantage."
     },
     {
-      title: "Carved South Wall",
-      description: "A quarter of each floor plate is chiseled out of the south side, shifting from west to east over the height of the building, maximizing Gulf views while minimizing solar heat gain."
+      title: "Vertical Form & Massing",
+      description: "A confident vertical gesture defining Kuwait's skyline."
     },
     {
-      title: "Jura Limestone Façade",
-      description: "The south-facing core wall is constructed of 24,000m² of richly textured Jura limestone, standing distinct from the three glass-enclosed sides of the tower."
+      title: "Façade Systems",
+      description: "Glass curtain wall systems combined with stone cladding on solar-exposed surfaces ensure durability and performance."
     },
     {
-      title: "Traditional Bisht Form",
-      description: "The asymmetrical form draws inspiration from the traditional bisht robes worn by Kuwaitis, making the tower a culturally resonant icon."
+      title: "Structural Innovation",
+      description: "High-performance concrete systems engineered to support the tower's sculpted form and vertical demands."
     }
   ];
 
@@ -66,7 +66,7 @@ const Architecture = () => {
             className="absolute bottom-0 left-0 right-0 p-8 lg:p-16"
           >
             <h1 className="text-4xl lg:text-6xl font-light tracking-wide text-foreground mb-4">
-              Architecture & Design
+              Design & Engineering
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl">
               Where form follows climate and culture
@@ -91,15 +91,14 @@ const Architecture = () => {
                   A Timeless, Elegant Marker
                 </h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  A desire to maximize waterfront views while minimizing solar heat gain inspired 
-                  the building's asymmetrical form, which calls to mind the traditional bisht robes 
-                  worn by Kuwaitis. The purity of its form, expressed by a simple operation of 
-                  removal, makes the tower a timeless, elegant marker in the heart of Kuwait City.
+                  The tower's asymmetrical carved profile responds directly to solar exposure, 
+                  optimizing comfort while shaping a distinctive skyline identity. The massing 
+                  reduces heat gain and enhances shading, transforming environmental constraints 
+                  into architectural advantage.
                 </p>
                 <p className="text-muted-foreground leading-relaxed">
-                  The stone-clad continuous ribbon connects the hyperbolic paraboloid flared walls 
-                  to the roof, gesturing gracefully toward the sky while the rich, monolithic 
-                  limestone of the south wall stands framed by the twisting glass façades.
+                  Glass curtain wall systems combined with stone cladding on solar-exposed surfaces 
+                  ensure durability and performance across Kuwait's demanding climate.
                 </p>
                 <div className="grid grid-cols-2 gap-6 pt-4 border-t border-border">
                   <div>
@@ -199,12 +198,12 @@ const Architecture = () => {
               </div>
               <div className="space-y-8 order-1 lg:order-2">
                 <h2 className="text-3xl lg:text-4xl font-light tracking-wide">
-                  The Grand Lobby
+                  Lobby Experience
                 </h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  At the base of the mixed-use complex, the main 24-meter high grand lobby on the north 
-                  side of the tower extends from the tower's core to its perimeter frame. Columns along 
-                  the exterior follow a circular arch, moving 7.6 meters outward at ground level.
+                  A 24-meter-high column-free lobby establishes immediate presence and spatial 
+                  clarity. The grand lobby on the north side of the tower extends from the core 
+                  to its perimeter frame.
                 </p>
                 <p className="text-muted-foreground leading-relaxed">
                   The lobby's dramatic scale and carefully orchestrated light create an arrival 
@@ -238,18 +237,17 @@ const Architecture = () => {
               <div className="grid lg:grid-cols-2 gap-16 items-center">
                 <div className="space-y-8">
                   <h2 className="text-3xl lg:text-4xl font-light tracking-wide">
-                    Revolutionary Lamella Structure
+                    Structural Innovation
                   </h2>
                   <p className="text-muted-foreground leading-relaxed">
-                    The lobby's innovative lamella bracing scheme features 5 distinct element types 
-                    (A, B, C, D, E), each contributing to overall stability. Non-linear buckling 
-                    analysis revealed that the D elements increased structural capacity from 49,500 kN 
-                    to an extraordinary 189,000 kN—a 3.8× improvement.
+                    High-performance concrete systems engineered to support the tower's sculpted 
+                    form and vertical demands. The lobby's innovative lamella bracing scheme 
+                    features 5 distinct element types, each contributing to overall stability.
                   </p>
                   <p className="text-muted-foreground leading-relaxed">
-                    Parametric modeling using Gehry Technologies' Digital Project software enabled 
-                    fiberglass formwork moulds to be fabricated directly from 3D digital models, 
-                    ensuring precision execution of the complex geometries.
+                    Mechanical and service floors are integrated throughout the tower, ensuring 
+                    operational efficiency across all levels. Life safety design includes 
+                    engineered safety and circulation systems designed for long-term resilience.
                   </p>
                   {/* Interactive Lamella Visualization */}
                   <LamellaVisualization />
@@ -371,7 +369,7 @@ const Architecture = () => {
                 className="w-full h-auto"
               />
               <p className="text-sm text-muted-foreground mt-4 text-center">
-                Façade detail showing the interplay of Jura limestone and glass curtain wall
+                Façade detail showing the interplay of stone cladding and glass curtain wall systems
               </p>
             </motion.div>
           </div>

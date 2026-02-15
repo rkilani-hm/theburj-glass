@@ -78,10 +78,10 @@ const Recognition = () => {
             className="absolute bottom-0 left-0 right-0 p-8 lg:p-16"
           >
             <h1 className="text-4xl lg:text-6xl font-light tracking-wide text-foreground mb-4">
-              Recognition
+              Awards & Recognition
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl">
-              Honored by the world's leading architectural institutions
+              Recognized on the global stage.
             </p>
           </motion.div>
         </section>
