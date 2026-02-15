@@ -18,6 +18,10 @@ import Sustainability from "./pages/tower/Sustainability";
 import Recognition from "./pages/tower/Recognition";
 import Dashboard from "./pages/tower/Dashboard";
 import Business from "./pages/Business";
+import WorkplaceExperience from "./pages/business/WorkplaceExperience";
+import OfficeSpaces from "./pages/business/OfficeSpaces";
+import VerticalTransportation from "./pages/business/VerticalTransportation";
+import Connectivity from "./pages/business/Connectivity";
 import Services from "./pages/Services";
 import Location from "./pages/Location";
 import LeasingContact from "./pages/LeasingContact";
@@ -44,7 +48,11 @@ const AnimatedRoutes = () => {
         <Route path="/tower/dashboard" element={<PageTransition><Dashboard /></PageTransition>} />
         <Route path="/perspective" element={<Navigate to="/tower/rising" replace />} />
         <Route path="/legacy" element={<Navigate to="/tower/rising" replace />} />
-        <Route path="/business" element={<PageTransition><Business /></PageTransition>} />
+        <Route path="/business" element={<Navigate to="/business/workplace-experience" replace />} />
+        <Route path="/business/workplace-experience" element={<PageTransition><WorkplaceExperience /></PageTransition>} />
+        <Route path="/business/office-spaces" element={<PageTransition><OfficeSpaces /></PageTransition>} />
+        <Route path="/business/vertical-transportation" element={<PageTransition><VerticalTransportation /></PageTransition>} />
+        <Route path="/business/connectivity" element={<PageTransition><Connectivity /></PageTransition>} />
         <Route path="/services" element={<PageTransition><Services /></PageTransition>} />
         <Route path="/location" element={<PageTransition><Location /></PageTransition>} />
         <Route path="/leasing" element={<PageTransition><LeasingContact /></PageTransition>} />

@@ -6,7 +6,7 @@ const Footer = () => {
 
   const navLinks = [
     { label: { en: "The Tower", ar: "البرج" }, href: "/tower" },
-    { label: { en: "Business", ar: "الأعمال" }, href: "/business" },
+    { label: { en: "Business", ar: "الأعمال" }, href: "/business/workplace-experience" },
     { label: { en: "Services & Facilities", ar: "الخدمات والمرافق" }, href: "/services" },
     { label: { en: "Sustainability", ar: "الاستدامة" }, href: "/tower/sustainability" },
     { label: { en: "Location & Access", ar: "الموقع والوصول" }, href: "/location" },
