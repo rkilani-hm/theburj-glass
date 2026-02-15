@@ -10,7 +10,7 @@ const Footer = () => {
     { label: { en: "Services & Facilities", ar: "الخدمات والمرافق" }, href: "/services" },
     { label: { en: "Sustainability", ar: "الاستدامة" }, href: "/tower/sustainability" },
     { label: { en: "Location & Access", ar: "الموقع والوصول" }, href: "/location" },
-    { label: { en: "Leasing & Contact", ar: "التأجير والتواصل" }, href: "/leasing" },
+    { label: { en: "Leasing", ar: "التأجير" }, href: "/leasing" },
   ];
 
   const scrollToTop = () => {

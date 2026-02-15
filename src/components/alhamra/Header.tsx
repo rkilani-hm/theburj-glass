@@ -10,8 +10,10 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [towerDropdownOpen, setTowerDropdownOpen] = useState(false);
+  const [experienceDropdownOpen, setExperienceDropdownOpen] = useState(false);
   // Mobile accordion states
   const [mobileTowerOpen, setMobileTowerOpen] = useState(false);
+  const [mobileExperienceOpen, setMobileExperienceOpen] = useState(false);
   const location = useLocation();
   
 
@@ -30,16 +32,20 @@ const Header = () => {
     { key: "nav.tower.recognition", href: "/tower/recognition", label: { en: "Awards & Recognition", ar: "الجوائز والتقدير" } },
   ];
 
+  const experienceSubItems = [
+    { key: "nav.experience.services", href: "/services", label: { en: "Services & Facilities", ar: "الخدمات والمرافق" } },
+    { key: "nav.experience.sustainability", href: "/tower/sustainability", label: { en: "Sustainability & Innovation", ar: "الاستدامة والابتكار" } },
+    { key: "nav.experience.location", href: "/location", label: { en: "Location & Access", ar: "الموقع والوصول" } },
+  ];
+
   const navItems = [
     { key: "nav.business", href: "/business" },
-    { key: "nav.services", href: "/services", label: { en: "Services & Facilities", ar: "الخدمات والمرافق" } },
-    { key: "nav.sustainability", href: "/tower/sustainability", label: { en: "Sustainability & Innovation", ar: "الاستدامة والابتكار" } },
-    { key: "nav.location", href: "/location", label: { en: "Location & Access", ar: "الموقع والوصول" } },
-    { key: "nav.leasing", href: "/leasing", label: { en: "Leasing & Contact", ar: "التأجير والتواصل" } },
+    { key: "nav.leasing", href: "/leasing", label: { en: "Leasing", ar: "التأجير" } },
   ];
 
   const isActive = (href: string) => location.pathname === href;
-  const isTowerActive = location.pathname.startsWith("/tower");
+  const isTowerActive = location.pathname.startsWith("/tower") && !location.pathname.startsWith("/tower/sustainability");
+  const isExperienceActive = ["/services", "/tower/sustainability", "/location"].some(p => location.pathname.startsWith(p));
 
   // Always use dark text - backgrounds are always light (images or white)
 
@@ -120,19 +126,84 @@ const Header = () => {
               </AnimatePresence>
             </div>
 
-            {navItems.map((item) => (
-              <Link
-                key={item.key}
-                to={item.href}
-                className={`text-[clamp(0.75rem,0.9vw,1rem)] font-semibold tracking-wide whitespace-nowrap transition-colors duration-300 ${
-                  isActive(item.href)
+            {/* Business Link */}
+            <Link
+              to="/business"
+              className={`text-[clamp(0.75rem,0.9vw,1rem)] font-semibold tracking-wide whitespace-nowrap transition-colors duration-300 ${
+                isActive("/business")
+                  ? "text-charcoal-dark"
+                  : "text-charcoal-light hover:text-charcoal-dark"
+              }`}
+            >
+              {t("nav.business")}
+            </Link>
+
+            {/* Experience Dropdown */}
+            <div 
+              className="relative"
+              onMouseEnter={() => setExperienceDropdownOpen(true)}
+              onMouseLeave={() => setExperienceDropdownOpen(false)}
+            >
+              <button
+                className={`flex items-center gap-1 text-[clamp(0.75rem,0.9vw,1rem)] font-semibold tracking-wide whitespace-nowrap transition-colors duration-300 ${
+                  isExperienceActive
                     ? "text-charcoal-dark"
                     : "text-charcoal-light hover:text-charcoal-dark"
                 }`}
               >
-                {item.label ? item.label[language] : t(item.key)}
-              </Link>
-            ))}
+                {language === "en" ? "Experience" : "التجربة"}
+                <ChevronDown 
+                  size={14} 
+                  className={`transition-transform duration-300 ${experienceDropdownOpen ? "rotate-180" : ""}`}
+                />
+              </button>
+
+              <AnimatePresence>
+                {experienceDropdownOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute top-full left-0 pt-2"
+                  >
+                    <div className="glass border border-border/50 shadow-lg min-w-[220px] overflow-hidden">
+                      {experienceSubItems.map((item, index) => (
+                        <motion.div
+                          key={item.key}
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.2, delay: index * 0.05 }}
+                        >
+                          <Link
+                            to={item.href}
+                            className={`block px-5 py-3 text-sm tracking-wide transition-all duration-300 border-b border-border/50 last:border-0 border-l-2 ${
+                              isActive(item.href)
+                                ? "text-foreground bg-muted/50 border-l-foreground"
+                                : "text-muted-foreground hover:text-foreground hover:bg-muted/30 hover:translate-x-1 border-l-transparent hover:border-l-foreground/50"
+                            }`}
+                          >
+                            {item.label[language]}
+                          </Link>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Leasing Link */}
+            <Link
+              to="/leasing"
+              className={`text-[clamp(0.75rem,0.9vw,1rem)] font-semibold tracking-wide whitespace-nowrap transition-colors duration-300 ${
+                isActive("/leasing")
+                  ? "text-charcoal-dark"
+                  : "text-charcoal-light hover:text-charcoal-dark"
+              }`}
+            >
+              {language === "en" ? "Leasing" : "التأجير"}
+            </Link>
 
           </nav>
 
@@ -214,20 +285,81 @@ const Header = () => {
 
               <div className="h-px bg-border" />
 
-              {navItems.map((item) => (
-                <Link
-                  key={item.key}
-                  to={item.href}
-                  onClick={() => setMenuOpen(false)}
-                  className={`py-3 text-lg transition-colors duration-300 ${
-                    isActive(item.href)
-                      ? "text-foreground"
-                      : "text-muted-foreground hover:text-foreground"
+              {/* Business Link */}
+              <Link
+                to="/business"
+                onClick={() => setMenuOpen(false)}
+                className={`py-3 text-lg transition-colors duration-300 ${
+                  isActive("/business") ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {t("nav.business")}
+              </Link>
+
+              <div className="h-px bg-border" />
+
+              {/* Experience Section - Collapsible */}
+              <div>
+                <button
+                  onClick={() => setMobileExperienceOpen(!mobileExperienceOpen)}
+                  className={`w-full flex items-center justify-between py-3 text-lg transition-colors duration-300 ${
+                    isExperienceActive ? "text-foreground" : "text-muted-foreground"
                   }`}
                 >
-                  {item.label ? item.label[language] : t(item.key)}
-                </Link>
-              ))}
+                  <span>{language === "en" ? "Experience" : "التجربة"}</span>
+                  <ChevronDown 
+                    size={18} 
+                    className={`transition-transform duration-300 ${mobileExperienceOpen ? "rotate-180" : ""}`}
+                  />
+                </button>
+                <AnimatePresence>
+                  {mobileExperienceOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="pl-4 pb-2 space-y-1">
+                        {experienceSubItems.map((item, index) => (
+                          <motion.div
+                            key={item.key}
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.2, delay: index * 0.05 }}
+                          >
+                            <Link
+                              to={item.href}
+                              onClick={() => setMenuOpen(false)}
+                              className={`block py-2 text-base transition-all duration-300 border-l-2 pl-4 ${
+                                isActive(item.href)
+                                  ? "text-foreground border-foreground"
+                                  : "text-muted-foreground hover:text-foreground border-transparent hover:border-foreground/50"
+                              }`}
+                            >
+                              {item.label[language]}
+                            </Link>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              <div className="h-px bg-border" />
+
+              {/* Leasing Link */}
+              <Link
+                to="/leasing"
+                onClick={() => setMenuOpen(false)}
+                className={`py-3 text-lg transition-colors duration-300 ${
+                  isActive("/leasing") ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {language === "en" ? "Leasing" : "التأجير"}
+              </Link>
 
             </div>
           </nav>
