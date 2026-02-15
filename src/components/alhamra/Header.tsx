@@ -63,7 +63,7 @@ const Header = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-8">
+          <nav className="hidden lg:flex items-center gap-[clamp(1rem,1.5vw,2rem)]">
             {/* Tower Dropdown */}
             <div 
               className="relative"
@@ -71,7 +71,7 @@ const Header = () => {
               onMouseLeave={() => setTowerDropdownOpen(false)}
             >
               <button
-                className={`flex items-center gap-1 text-base font-semibold tracking-wide transition-colors duration-300 ${
+                className={`flex items-center gap-1 text-[clamp(0.75rem,0.9vw,1rem)] font-semibold tracking-wide whitespace-nowrap transition-colors duration-300 ${
                   isTowerActive
                     ? "text-charcoal-dark"
                     : "text-charcoal-light hover:text-charcoal-dark"
@@ -124,7 +124,7 @@ const Header = () => {
               <Link
                 key={item.key}
                 to={item.href}
-                className={`text-base font-semibold tracking-wide transition-colors duration-300 ${
+                className={`text-[clamp(0.75rem,0.9vw,1rem)] font-semibold tracking-wide whitespace-nowrap transition-colors duration-300 ${
                   isActive(item.href)
                     ? "text-charcoal-dark"
                     : "text-charcoal-light hover:text-charcoal-dark"
