@@ -11,8 +11,10 @@ const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [towerDropdownOpen, setTowerDropdownOpen] = useState(false);
   const [experienceDropdownOpen, setExperienceDropdownOpen] = useState(false);
+  const [businessDropdownOpen, setBusinessDropdownOpen] = useState(false);
   // Mobile accordion states
   const [mobileTowerOpen, setMobileTowerOpen] = useState(false);
+  const [mobileBusinessOpen, setMobileBusinessOpen] = useState(false);
   const [mobileExperienceOpen, setMobileExperienceOpen] = useState(false);
   const location = useLocation();
   
@@ -32,19 +34,22 @@ const Header = () => {
     { key: "nav.tower.recognition", href: "/tower/recognition", label: { en: "Awards & Recognition", ar: "الجوائز والتقدير" } },
   ];
 
+  const businessSubItems = [
+    { key: "nav.business.workplace", href: "/business/workplace-experience", label: { en: "Workplace Experience", ar: "تجربة مكان العمل" } },
+    { key: "nav.business.offices", href: "/business/office-spaces", label: { en: "Office Spaces & Floor Plans", ar: "المساحات المكتبية ومخططات الطوابق" } },
+    { key: "nav.business.transport", href: "/business/vertical-transportation", label: { en: "Vertical Transportation", ar: "النقل العمودي" } },
+    { key: "nav.business.connectivity", href: "/business/connectivity", label: { en: "Connectivity & Integration", ar: "الاتصال والتكامل" } },
+  ];
+
   const experienceSubItems = [
     { key: "nav.experience.services", href: "/services", label: { en: "Services & Facilities", ar: "الخدمات والمرافق" } },
     { key: "nav.experience.sustainability", href: "/tower/sustainability", label: { en: "Sustainability & Innovation", ar: "الاستدامة والابتكار" } },
     { key: "nav.experience.location", href: "/location", label: { en: "Location & Access", ar: "الموقع والوصول" } },
   ];
 
-  const navItems = [
-    { key: "nav.business", href: "/business" },
-    { key: "nav.leasing", href: "/leasing", label: { en: "Leasing", ar: "التأجير" } },
-  ];
-
   const isActive = (href: string) => location.pathname === href;
   const isTowerActive = location.pathname.startsWith("/tower") && !location.pathname.startsWith("/tower/sustainability");
+  const isBusinessActive = location.pathname.startsWith("/business");
   const isExperienceActive = ["/services", "/tower/sustainability", "/location"].some(p => location.pathname.startsWith(p));
 
   // Always use dark text - backgrounds are always light (images or white)
@@ -126,17 +131,60 @@ const Header = () => {
               </AnimatePresence>
             </div>
 
-            {/* Business Link */}
-            <Link
-              to="/business"
-              className={`text-[clamp(0.75rem,0.9vw,1rem)] font-semibold tracking-wide whitespace-nowrap transition-colors duration-300 ${
-                isActive("/business")
-                  ? "text-charcoal-dark"
-                  : "text-charcoal-light hover:text-charcoal-dark"
-              }`}
+            {/* Business Dropdown */}
+            <div 
+              className="relative"
+              onMouseEnter={() => setBusinessDropdownOpen(true)}
+              onMouseLeave={() => setBusinessDropdownOpen(false)}
             >
-              {t("nav.business")}
-            </Link>
+              <button
+                className={`flex items-center gap-1 text-[clamp(0.75rem,0.9vw,1rem)] font-semibold tracking-wide whitespace-nowrap transition-colors duration-300 ${
+                  isBusinessActive
+                    ? "text-charcoal-dark"
+                    : "text-charcoal-light hover:text-charcoal-dark"
+                }`}
+              >
+                {t("nav.business")}
+                <ChevronDown 
+                  size={14} 
+                  className={`transition-transform duration-300 ${businessDropdownOpen ? "rotate-180" : ""}`}
+                />
+              </button>
+
+              <AnimatePresence>
+                {businessDropdownOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute top-full left-0 pt-2"
+                  >
+                    <div className="glass border border-border/50 shadow-lg min-w-[260px] overflow-hidden">
+                      {businessSubItems.map((item, index) => (
+                        <motion.div
+                          key={item.key}
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.2, delay: index * 0.05 }}
+                        >
+                          <Link
+                            to={item.href}
+                            className={`block px-5 py-3 text-sm tracking-wide transition-all duration-300 border-b border-border/50 last:border-0 border-l-2 ${
+                              isActive(item.href)
+                                ? "text-foreground bg-muted/50 border-l-foreground"
+                                : "text-muted-foreground hover:text-foreground hover:bg-muted/30 hover:translate-x-1 border-l-transparent hover:border-l-foreground/50"
+                            }`}
+                          >
+                            {item.label[language]}
+                          </Link>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
 
             {/* Experience Dropdown */}
             <div 
@@ -285,16 +333,55 @@ const Header = () => {
 
               <div className="h-px bg-border" />
 
-              {/* Business Link */}
-              <Link
-                to="/business"
-                onClick={() => setMenuOpen(false)}
-                className={`py-3 text-lg transition-colors duration-300 ${
-                  isActive("/business") ? "text-foreground" : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                {t("nav.business")}
-              </Link>
+              {/* Business Section - Collapsible */}
+              <div>
+                <button
+                  onClick={() => setMobileBusinessOpen(!mobileBusinessOpen)}
+                  className={`w-full flex items-center justify-between py-3 text-lg transition-colors duration-300 ${
+                    isBusinessActive ? "text-foreground" : "text-muted-foreground"
+                  }`}
+                >
+                  <span>{t("nav.business")}</span>
+                  <ChevronDown 
+                    size={18} 
+                    className={`transition-transform duration-300 ${mobileBusinessOpen ? "rotate-180" : ""}`}
+                  />
+                </button>
+                <AnimatePresence>
+                  {mobileBusinessOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="pl-4 pb-2 space-y-1">
+                        {businessSubItems.map((item, index) => (
+                          <motion.div
+                            key={item.key}
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.2, delay: index * 0.05 }}
+                          >
+                            <Link
+                              to={item.href}
+                              onClick={() => setMenuOpen(false)}
+                              className={`block py-2 text-base transition-all duration-300 border-l-2 pl-4 ${
+                                isActive(item.href)
+                                  ? "text-foreground border-foreground"
+                                  : "text-muted-foreground hover:text-foreground border-transparent hover:border-foreground/50"
+                              }`}
+                            >
+                              {item.label[language]}
+                            </Link>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
 
               <div className="h-px bg-border" />
 
