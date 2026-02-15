@@ -81,7 +81,7 @@ const Recognition = () => {
               Global Acknowledgement
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl">
-              Al Hamra Business Tower has been recognized by leading architectural and development institutions for its design excellence and long-term presence on the global skyline.
+              Al Hamra Business Tower has been recognized by leading architectural and development institutions for its design excellence and long-term presence on the global skyline. Awards include the Council on Tall Buildings and Urban Habitat's Best Tall Building – 10 Year Award and multiple international architectural accolades affirming its engineering and aesthetic legacy.
             </p>
           </motion.div>
         </section>
