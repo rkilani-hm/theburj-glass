@@ -24,7 +24,10 @@ import VerticalTransportation from "./pages/business/VerticalTransportation";
 import Connectivity from "./pages/business/Connectivity";
 import Services from "./pages/Services";
 import Location from "./pages/Location";
-import LeasingContact from "./pages/LeasingContact";
+import LeasingOpportunities from "./pages/leasing/Opportunities";
+import LeasingInquiry from "./pages/leasing/Inquiry";
+import LeasingDownloads from "./pages/leasing/Downloads";
+import LeasingContactPage from "./pages/leasing/Contact";
 import Presentation from "./pages/Presentation";
 import NotFound from "./pages/NotFound";
 
@@ -55,8 +58,12 @@ const AnimatedRoutes = () => {
         <Route path="/business/connectivity" element={<PageTransition><Connectivity /></PageTransition>} />
         <Route path="/services" element={<PageTransition><Services /></PageTransition>} />
         <Route path="/location" element={<PageTransition><Location /></PageTransition>} />
-        <Route path="/leasing" element={<PageTransition><LeasingContact /></PageTransition>} />
-        <Route path="/contact" element={<Navigate to="/leasing" replace />} />
+        <Route path="/leasing" element={<Navigate to="/leasing/opportunities" replace />} />
+        <Route path="/leasing/opportunities" element={<PageTransition><LeasingOpportunities /></PageTransition>} />
+        <Route path="/leasing/inquiry" element={<PageTransition><LeasingInquiry /></PageTransition>} />
+        <Route path="/leasing/downloads" element={<PageTransition><LeasingDownloads /></PageTransition>} />
+        <Route path="/leasing/contact" element={<PageTransition><LeasingContactPage /></PageTransition>} />
+        <Route path="/contact" element={<Navigate to="/leasing/contact" replace />} />
         <Route path="/presentation" element={<Presentation />} />
         <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
       </Routes>
