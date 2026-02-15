@@ -12,10 +12,12 @@ const Header = () => {
   const [towerDropdownOpen, setTowerDropdownOpen] = useState(false);
   const [experienceDropdownOpen, setExperienceDropdownOpen] = useState(false);
   const [businessDropdownOpen, setBusinessDropdownOpen] = useState(false);
+  const [leasingDropdownOpen, setLeasingDropdownOpen] = useState(false);
   // Mobile accordion states
   const [mobileTowerOpen, setMobileTowerOpen] = useState(false);
   const [mobileBusinessOpen, setMobileBusinessOpen] = useState(false);
   const [mobileExperienceOpen, setMobileExperienceOpen] = useState(false);
+  const [mobileLeasingOpen, setMobileLeasingOpen] = useState(false);
   const location = useLocation();
   
 
@@ -47,10 +49,18 @@ const Header = () => {
     { key: "nav.experience.location", href: "/location", label: { en: "Location & Access", ar: "الموقع والوصول" } },
   ];
 
+  const leasingSubItems = [
+    { key: "nav.leasing.opportunities", href: "/leasing/opportunities", label: { en: "Leasing Opportunities", ar: "فرص التأجير" } },
+    { key: "nav.leasing.inquiry", href: "/leasing/inquiry", label: { en: "Inquiry", ar: "استفسار" } },
+    { key: "nav.leasing.downloads", href: "/leasing/downloads", label: { en: "Downloads", ar: "التنزيلات" } },
+    { key: "nav.leasing.contact", href: "/leasing/contact", label: { en: "Contact", ar: "التواصل" } },
+  ];
+
   const isActive = (href: string) => location.pathname === href;
   const isTowerActive = location.pathname.startsWith("/tower") && !location.pathname.startsWith("/tower/sustainability");
   const isBusinessActive = location.pathname.startsWith("/business");
   const isExperienceActive = ["/services", "/tower/sustainability", "/location"].some(p => location.pathname.startsWith(p));
+  const isLeasingActive = location.pathname.startsWith("/leasing");
 
   // Always use dark text - backgrounds are always light (images or white)
 
@@ -241,17 +251,60 @@ const Header = () => {
               </AnimatePresence>
             </div>
 
-            {/* Leasing Link */}
-            <Link
-              to="/leasing"
-              className={`text-[clamp(0.75rem,0.9vw,1rem)] font-semibold tracking-wide whitespace-nowrap transition-colors duration-300 ${
-                isActive("/leasing")
-                  ? "text-charcoal-dark"
-                  : "text-charcoal-light hover:text-charcoal-dark"
-              }`}
+            {/* Leasing Dropdown */}
+            <div 
+              className="relative"
+              onMouseEnter={() => setLeasingDropdownOpen(true)}
+              onMouseLeave={() => setLeasingDropdownOpen(false)}
             >
-              {language === "en" ? "Leasing" : "التأجير"}
-            </Link>
+              <button
+                className={`flex items-center gap-1 text-[clamp(0.75rem,0.9vw,1rem)] font-semibold tracking-wide whitespace-nowrap transition-colors duration-300 ${
+                  isLeasingActive
+                    ? "text-charcoal-dark"
+                    : "text-charcoal-light hover:text-charcoal-dark"
+                }`}
+              >
+                {language === "en" ? "Leasing" : "التأجير"}
+                <ChevronDown 
+                  size={14} 
+                  className={`transition-transform duration-300 ${leasingDropdownOpen ? "rotate-180" : ""}`}
+                />
+              </button>
+
+              <AnimatePresence>
+                {leasingDropdownOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute top-full right-0 pt-2"
+                  >
+                    <div className="glass border border-border/50 shadow-lg min-w-[220px] overflow-hidden">
+                      {leasingSubItems.map((item, index) => (
+                        <motion.div
+                          key={item.key}
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.2, delay: index * 0.05 }}
+                        >
+                          <Link
+                            to={item.href}
+                            className={`block px-5 py-3 text-sm tracking-wide transition-all duration-300 border-b border-border/50 last:border-0 border-l-2 ${
+                              isActive(item.href)
+                                ? "text-foreground bg-muted/50 border-l-foreground"
+                                : "text-muted-foreground hover:text-foreground hover:bg-muted/30 hover:translate-x-1 border-l-transparent hover:border-l-foreground/50"
+                            }`}
+                          >
+                            {item.label[language]}
+                          </Link>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
 
           </nav>
 
@@ -437,16 +490,55 @@ const Header = () => {
 
               <div className="h-px bg-border" />
 
-              {/* Leasing Link */}
-              <Link
-                to="/leasing"
-                onClick={() => setMenuOpen(false)}
-                className={`py-3 text-lg transition-colors duration-300 ${
-                  isActive("/leasing") ? "text-foreground" : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                {language === "en" ? "Leasing" : "التأجير"}
-              </Link>
+              {/* Leasing Section - Collapsible */}
+              <div>
+                <button
+                  onClick={() => setMobileLeasingOpen(!mobileLeasingOpen)}
+                  className={`w-full flex items-center justify-between py-3 text-lg transition-colors duration-300 ${
+                    isLeasingActive ? "text-foreground" : "text-muted-foreground"
+                  }`}
+                >
+                  <span>{language === "en" ? "Leasing" : "التأجير"}</span>
+                  <ChevronDown 
+                    size={18} 
+                    className={`transition-transform duration-300 ${mobileLeasingOpen ? "rotate-180" : ""}`}
+                  />
+                </button>
+                <AnimatePresence>
+                  {mobileLeasingOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="pl-4 pb-2 space-y-1">
+                        {leasingSubItems.map((item, index) => (
+                          <motion.div
+                            key={item.key}
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.2, delay: index * 0.05 }}
+                          >
+                            <Link
+                              to={item.href}
+                              onClick={() => setMenuOpen(false)}
+                              className={`block py-2 text-base transition-all duration-300 border-l-2 pl-4 ${
+                                isActive(item.href)
+                                  ? "text-foreground border-foreground"
+                                  : "text-muted-foreground hover:text-foreground border-transparent hover:border-foreground/50"
+                              }`}
+                            >
+                              {item.label[language]}
+                            </Link>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
 
             </div>
           </nav>
