@@ -422,16 +422,16 @@ const translations: Record<string, Record<Language, string>> = {
   "elevator.closing": { en: "The elevator system transforms vertical distance into moments of transition—efficient, composed, and purposeful.", ar: "يحول نظام المصاعد المسافة العمودية إلى لحظات انتقال—فعالة ومتزنة وهادفة." },
 
   // Legacy Section
-  "legacy.label": { en: "Heritage", ar: "التراث" },
-  "legacy.title": { en: "From Cinema Grounds to Skyline Icon", ar: "من أرض السينما إلى أيقونة الأفق" },
-  "legacy.subtitle": { en: "Where cultural memory and architectural ambition converge, Al Hamra Tower rises as a living testament to Kuwait's transformation.", ar: "حيث تتلاقى الذاكرة الثقافية والطموح المعماري، يرتفع برج الحمراء كشاهد حي على تحول الكويت." },
+  "legacy.label": { en: "Rising with Purpose", ar: "الارتقاء بهدف" },
+  "legacy.title": { en: "Al Hamra Business Tower — Rising with Purpose", ar: "برج الحمراء للأعمال — الارتقاء بهدف" },
+  "legacy.subtitle": { en: "A sculptural tower shaped by climate intelligence, urban ambition, and architectural precision in the heart of Kuwait City's skyline.", ar: "برج نحتي شكّلته الذكاء المناخي والطموح الحضري والدقة المعمارية في قلب أفق مدينة الكويت." },
   "legacy.hero.alt": { en: "Kuwait City panorama at sunset", ar: "بانوراما مدينة الكويت عند الغروب" },
   
   // Legacy Origins
-  "legacy.origins.heading": { en: "A Place of Gathering, Reborn", ar: "مكان للتجمع، يولد من جديد" },
-  "legacy.origins.p1": { en: "Before the tower reached skyward, this site held a different significance. In the 1960s, it was home to Kuwait's first cinema and entertainment venue—a cultural gathering place where generations of Kuwaitis shared stories, celebrated, and connected.", ar: "قبل أن يمتد البرج نحو السماء، حمل هذا الموقع أهمية مختلفة. في الستينيات، كان موطناً لأول سينما ومكان ترفيه في الكويت—مكان تجمع ثقافي حيث شارك أجيال من الكويتيين القصص واحتفلوا وتواصلوا." },
-  "legacy.origins.p2": { en: "That spirit of gathering endures. What began as a place for community entertainment has evolved into a landmark that anchors business, culture, and civic pride—transforming while honoring what came before.", ar: "روح التجمع هذه تستمر. ما بدأ كمكان للترفيه المجتمعي تطور إلى معلم يرسخ الأعمال والثقافة والفخر المدني—يتحول مع تكريم ما سبقه." },
-  "legacy.origins.quote": { en: "From a place where stories were shown to a place where futures are built.", ar: "من مكان عُرضت فيه القصص إلى مكان تُبنى فيه المستقبل." },
+  "legacy.origins.heading": { en: "A Bold Vision Realized", ar: "رؤية جريئة تتحقق" },
+  "legacy.origins.p1": { en: "Al Hamra Business Tower represents a bold vision realized — a landmark that rises seamlessly from Kuwait City's commercial core. Designed by Skidmore, Owings & Merrill, the tower's unique form responds directly to environmental conditions, maximizing panoramic views while minimizing solar heat gain. Its asymmetrical, carved geometry is not decorative but purposeful: each floor plate is subtly rotated and a portion sculpted away to create an elegant tapering silhouette that balances transparency and enclosure.", ar: "يمثل برج الحمراء للأعمال رؤية جريئة تحققت — معلم يرتفع بسلاسة من القلب التجاري لمدينة الكويت. صممه سكيدمور وأوينغز وميريل، يستجيب شكل البرج الفريد مباشرة للظروف البيئية، معززاً الإطلالات البانورامية مع تقليل اكتساب الحرارة الشمسية. هندسته المنحوتة غير المتماثلة ليست زخرفية بل هادفة: كل طابق يدور بدقة وجزء منه منحوت لخلق صورة ظلية أنيقة متدرجة توازن بين الشفافية والإحاطة." },
+  "legacy.origins.p2": { en: "This performance-driven design transforms solar and climatic challenges into a defining architectural expression. The solid limestone-clad south façade acts as a passive solar shield against intense sun, while the glazed northern, eastern, and western faces offer expansive views toward Kuwait Bay and the wider city.", ar: "يحوّل هذا التصميم القائم على الأداء التحديات الشمسية والمناخية إلى تعبير معماري مميز. تعمل الواجهة الجنوبية المكسوة بالحجر الجيري كدرع شمسي سلبي ضد أشعة الشمس الشديدة، بينما توفر الواجهات الزجاجية الشمالية والشرقية والغربية إطلالات واسعة نحو خليج الكويت والمدينة الأوسع." },
+  "legacy.origins.quote": { en: "Construction began in 2005 and was completed in 2011, delivering a 412-metre (approx.) tower that stands as the tallest building in Kuwait and one of the most distinctive sculptural high-rises in the world.", ar: "بدأ البناء في ٢٠٠٥ واكتمل في ٢٠١١، ليقدم برجاً بارتفاع ٤١٢ متراً تقريباً يقف كأطول مبنى في الكويت وأحد أكثر ناطحات السحاب النحتية تميزاً في العالم." },
   "legacy.origins.historic.alt": { en: "Historic view of the site", ar: "منظر تاريخي للموقع" },
   "legacy.origins.historic.label": { en: "The Site's Heritage", ar: "تراث الموقع" },
   "legacy.origins.modern.alt": { en: "Al Hamra Tower today", ar: "برج الحمراء اليوم" },
@@ -451,10 +451,10 @@ const translations: Record<string, Record<Language, string>> = {
   "legacy.timeline.icon.desc": { en: "An internationally celebrated landmark housing Kuwait's leading enterprises.", ar: "معلم معترف به دولياً يستضيف المؤسسات الرائدة في الكويت." },
 
   // Legacy Design
-  "legacy.design.label": { en: "Achievement", ar: "الإنجاز" },
-  "legacy.design.heading": { en: "A Sculpted Landmark in the Heart of Kuwait City", ar: "معلم منحوت في قلب مدينة الكويت" },
-  "legacy.design.p1": { en: "Designed by world-renowned architects Skidmore, Owings & Merrill, Al Hamra Tower stands as the tallest structure in Kuwait and the tallest carved concrete skyscraper in the world at 413 meters—a singular achievement in structural engineering and sculptural form.", ar: "صممه المعماريون ذوو الشهرة العالمية سكيدمور وأوينغز وميريل، يقف برج الحمراء كأطول هيكل في الكويت وأطول ناطحة سحاب خرسانية منحوتة في العالم بارتفاع ٤١٣ متراً—إنجاز فريد في الهندسة الإنشائية والشكل النحتي." },
-  "legacy.design.p2": { en: "The tower's distinctive 60-degree twist from base to crown was not merely aesthetic ambition—it emerged from rigorous environmental analysis, optimizing solar exposure while creating an ever-changing silhouette that responds to Kuwait's climate and context.", ar: "لم يكن التواء البرج المميز بستين درجة من القاعدة إلى التاج مجرد طموح جمالي—بل نشأ من تحليل بيئي دقيق، يحسن التعرض للشمس مع خلق صورة ظلية متغيرة باستمرار تستجيب لمناخ الكويت وسياقها." },
+  "legacy.design.label": { en: "Impact", ar: "الأثر" },
+  "legacy.design.heading": { en: "Environmental Responsiveness Meets Timeless Form", ar: "الاستجابة البيئية تلتقي بالشكل الخالد" },
+  "legacy.design.p1": { en: "A striking combination of environmental responsiveness, structural clarity, and timeless form — Al Hamra Business Tower elevates both skyline and city identity.", ar: "مزيج لافت من الاستجابة البيئية والوضوح الهيكلي والشكل الخالد — يرفع برج الحمراء للأعمال كلاً من الأفق وهوية المدينة." },
+  "legacy.design.p2": { en: "Constructed over six years, the tower features over 70 floors of premium office space and a dramatic central lobby that anchors its presence on the street and within the broader Al Hamra destination.", ar: "بُني على مدى ست سنوات، يضم البرج أكثر من ٧٠ طابقاً من المساحات المكتبية المتميزة وردهة مركزية مذهلة ترسخ حضوره في الشارع وضمن وجهة الحمراء الأوسع." },
   "legacy.stat.height": { en: "Architectural Height", ar: "الارتفاع المعماري" },
   "legacy.stat.floors": { en: "Total Floors", ar: "إجمالي الطوابق" },
   "legacy.stat.twist": { en: "Sculptural Twist", ar: "اللفة النحتية" },
@@ -463,10 +463,10 @@ const translations: Record<string, Record<Language, string>> = {
   "legacy.design.image.caption": { en: "Designed by Skidmore, Owings & Merrill", ar: "من تصميم سكيدمور وأوينغز وميريل" },
 
   // Legacy Impact
-  "legacy.impact.label": { en: "Cultural Significance", ar: "الأهمية الثقافية" },
-  "legacy.impact.heading": { en: "Design, Achievement, and Global Recognition", ar: "التصميم والإنجاز والاعتراف العالمي" },
-  "legacy.impact.p1": { en: "Since its completion in 2011, Al Hamra Tower has become an enduring symbol of Kuwait's modern identity—recognized internationally and celebrated for its sculptural form that responds intelligently to climate and urban context.", ar: "منذ اكتماله في ٢٠١١، أصبح برج الحمراء رمزاً دائماً لهوية الكويت الحديثة—معترف به دولياً ومُحتفى به لشكله النحتي الذي يستجيب بذكاء للمناخ والسياق الحضري." },
-  "legacy.impact.p2": { en: "The tower has earned recognition from leading architectural institutions worldwide, establishing Kuwait's presence in the global conversation about innovative high-rise design and sustainable urban development.", ar: "حصل البرج على تقدير من المؤسسات المعمارية الرائدة عالمياً، مؤسساً حضور الكويت في الحوار العالمي حول التصميم المبتكر للمباني الشاهقة والتنمية الحضرية المستدامة." },
+  "legacy.impact.label": { en: "Tower Narrative", ar: "سردية البرج" },
+  "legacy.impact.heading": { en: "Form, Strategy, and Skyline Presence", ar: "الشكل والاستراتيجية وحضور الأفق" },
+  "legacy.impact.p1": { en: "This page is part of the Tower narrative — refine with imagery that reinforces form, environmental strategy, and skyline presence.", ar: "هذه الصفحة جزء من سردية البرج — تُعزز بالصور التي تؤكد الشكل والاستراتيجية البيئية وحضور الأفق." },
+  "legacy.impact.p2": { en: "Al Hamra Business Tower stands as a defining element of Kuwait City's skyline and commercial district, anchoring a broader mixed-use complex that integrates office, retail, and lifestyle environments.", ar: "يقف برج الحمراء للأعمال كعنصر محدد لأفق مدينة الكويت ومنطقتها التجارية، راسخاً مجمعاً أوسع متعدد الاستخدامات يدمج بيئات المكاتب والتجزئة ونمط الحياة." },
   "legacy.impact.recognition": { en: "International Recognition", ar: "الاعتراف الدولي" },
   "legacy.impact.image.alt": { en: "Al Hamra Tower illuminated at night", ar: "برج الحمراء مضاء في الليل" },
 
@@ -511,8 +511,8 @@ const translations: Record<string, Record<Language, string>> = {
   "legacy.founders.vision": { en: "We envisioned a tower that would not simply occupy the skyline, but define it—a landmark that speaks to Kuwait's past while reaching toward its future.", ar: "تخيلنا برجاً لا يشغل الأفق فحسب، بل يحدده—معلم يتحدث عن ماضي الكويت بينما يمتد نحو مستقبلها." },
   
   // Legacy Closing
-  "legacy.closing.quote": { en: "Al Hamra Tower is not merely a building—it is a living legacy, rooted in local culture, shaped by architectural ambition, and reaching toward a future that honors what came before.", ar: "برج الحمراء ليس مجرد مبنى—إنه إرث حي، متجذر في الثقافة المحلية، شكله الطموح المعماري، ويتجه نحو مستقبل يكرم ما سبقه." },
-  "legacy.closing.attribution": { en: "A Testament to Kuwait's Transformation", ar: "شهادة على تحول الكويت" },
+  "legacy.closing.quote": { en: "A tower shaped by climate, craft, and ambition — Al Hamra Business Tower was conceived as a landmark that reflects both environmental intelligence and structural clarity. Its sculpted geometry is not decorative — it is performance-driven.", ar: "برج شكّله المناخ والحرفة والطموح — صُمم برج الحمراء للأعمال كمعلم يعكس الذكاء البيئي والوضوح الهيكلي. هندسته المنحوتة ليست زخرفية — إنها قائمة على الأداء." },
+  "legacy.closing.attribution": { en: "Construction Period: 2005–2011", ar: "فترة البناء: ٢٠٠٥–٢٠١١" },
 
   // History Parallax Timeline
   "history.timeline.label": { en: "Historical Journey", ar: "الرحلة التاريخية" },
@@ -583,8 +583,8 @@ const translations: Record<string, Record<Language, string>> = {
   "footer.terms": { en: "Terms of Use", ar: "شروط الاستخدام" },
 
   // Construction Story
-  "construction.sectionLabel": { en: "Construction Story", ar: "قصة البناء" },
-  "construction.sectionTitle": { en: "Crafting the Icon: Al Hamra Tower Construction", ar: "صناعة الأيقونة: بناء برج الحمراء" },
+  "construction.sectionLabel": { en: "Construction Journey", ar: "رحلة البناء" },
+  "construction.sectionTitle": { en: "Six Years of Precision", ar: "ست سنوات من الدقة" },
   "construction.tapForDetails": { en: "Tap for details", ar: "انقر للتفاصيل" },
   "construction.significance": { en: "Significance", ar: "الأهمية" },
   
