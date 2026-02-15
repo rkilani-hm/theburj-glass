@@ -10,10 +10,8 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [towerDropdownOpen, setTowerDropdownOpen] = useState(false);
-  const [connectDropdownOpen, setConnectDropdownOpen] = useState(false);
   // Mobile accordion states
   const [mobileTowerOpen, setMobileTowerOpen] = useState(false);
-  const [mobileConnectOpen, setMobileConnectOpen] = useState(false);
   const location = useLocation();
   
 
@@ -26,29 +24,22 @@ const Header = () => {
   }, []);
 
   const towerSubItems = [
-    { key: "nav.tower.bydina", href: "/tower", label: { en: "The Tower", ar: "البرج" } },
-    { key: "nav.tower.dashboard", href: "/tower/dashboard", label: { en: "Technical Dashboard", ar: "لوحة التحكم الفنية" } },
+    { key: "nav.tower.overview", href: "/tower", label: { en: "Overview", ar: "نظرة عامة" } },
     { key: "nav.tower.rising", href: "/tower/rising", label: { en: "Rising", ar: "الصعود" } },
-    { key: "nav.tower.architecture", href: "/tower/architecture", label: { en: "Architectural Design", ar: "التصميم المعماري" } },
-    { key: "nav.tower.engineering", href: "/tower/engineering", label: { en: "Structural Design", ar: "التصميم الإنشائي" } },
-    { key: "nav.tower.recognition", href: "/tower/recognition", label: { en: "Awards", ar: "الجوائز" } },
-  ];
-
-  const connectSubItems = [
-    { key: "nav.location", href: "/location", label: { en: "Location & Accessibility", ar: "الموقع والوصول" } },
-    { key: "nav.leasing", href: "/leasing", label: { en: "Leasing", ar: "التأجير" } },
-    { key: "nav.contact", href: "/contact", label: { en: "Contact Us", ar: "تواصل معنا" } },
+    { key: "nav.tower.design", href: "/tower/design", label: { en: "Design & Engineering", ar: "التصميم والهندسة" } },
+    { key: "nav.tower.recognition", href: "/tower/recognition", label: { en: "Awards & Recognition", ar: "الجوائز والتقدير" } },
   ];
 
   const navItems = [
     { key: "nav.business", href: "/business" },
-    { key: "nav.services", href: "/services" },
-    { key: "nav.sustainability", href: "/tower/sustainability", label: { en: "Sustainability", ar: "الاستدامة" } },
+    { key: "nav.services", href: "/services", label: { en: "Services & Facilities", ar: "الخدمات والمرافق" } },
+    { key: "nav.sustainability", href: "/tower/sustainability", label: { en: "Sustainability & Innovation", ar: "الاستدامة والابتكار" } },
+    { key: "nav.location", href: "/location", label: { en: "Location & Access", ar: "الموقع والوصول" } },
+    { key: "nav.leasing", href: "/leasing", label: { en: "Leasing & Contact", ar: "التأجير والتواصل" } },
   ];
 
   const isActive = (href: string) => location.pathname === href;
   const isTowerActive = location.pathname.startsWith("/tower");
-  const isConnectActive = ["/leasing", "/location", "/contact"].includes(location.pathname);
 
   // Always use dark text - backgrounds are always light (images or white)
 
@@ -139,65 +130,10 @@ const Header = () => {
                     : "text-charcoal-light hover:text-charcoal-dark"
                 }`}
               >
-                {t(item.key)}
+                {item.label ? item.label[language] : t(item.key)}
               </Link>
             ))}
 
-            {/* Connect Dropdown */}
-            <div 
-              className="relative"
-              onMouseEnter={() => setConnectDropdownOpen(true)}
-              onMouseLeave={() => setConnectDropdownOpen(false)}
-            >
-              <button
-                className={`flex items-center gap-1 text-sm font-semibold tracking-wide transition-colors duration-300 ${
-                  isConnectActive
-                    ? "text-charcoal-dark"
-                    : "text-charcoal-light hover:text-charcoal-dark"
-                }`}
-              >
-                {t("nav.connect")}
-                <ChevronDown 
-                  size={14} 
-                  className={`transition-transform duration-300 ${connectDropdownOpen ? "rotate-180" : ""}`}
-                />
-              </button>
-
-              {/* Dropdown Menu */}
-              <AnimatePresence>
-                {connectDropdownOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -8 }}
-                    transition={{ duration: 0.2 }}
-                    className="absolute top-full right-0 pt-2"
-                  >
-                    <div className="glass border border-border/50 shadow-lg min-w-[180px] overflow-hidden">
-                      {connectSubItems.map((item, index) => (
-                        <motion.div
-                          key={item.key}
-                          initial={{ opacity: 0, x: -10 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ duration: 0.2, delay: index * 0.05 }}
-                        >
-                          <Link
-                            to={item.href}
-                            className={`block px-5 py-3 text-sm tracking-wide transition-all duration-300 border-b border-border/50 last:border-0 border-l-2 ${
-                              isActive(item.href)
-                                ? "text-foreground bg-muted/50 border-l-foreground"
-                                : "text-muted-foreground hover:text-foreground hover:bg-muted/30 hover:translate-x-1 border-l-transparent hover:border-l-foreground/50"
-                            }`}
-                          >
-                            {item.label[language]}
-                          </Link>
-                        </motion.div>
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
           </nav>
 
           {/* Language Toggle & Mobile Menu */}
@@ -289,61 +225,10 @@ const Header = () => {
                       : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
-                  {t(item.key)}
+                  {item.label ? item.label[language] : t(item.key)}
                 </Link>
               ))}
 
-              <div className="h-px bg-border" />
-
-              {/* Connect Section - Collapsible */}
-              <div>
-                <button
-                  onClick={() => setMobileConnectOpen(!mobileConnectOpen)}
-                  className={`w-full flex items-center justify-between py-3 text-lg transition-colors duration-300 ${
-                    isConnectActive ? "text-foreground" : "text-muted-foreground"
-                  }`}
-                >
-                  <span>{t("nav.connect")}</span>
-                  <ChevronDown 
-                    size={18} 
-                    className={`transition-transform duration-300 ${mobileConnectOpen ? "rotate-180" : ""}`}
-                  />
-                </button>
-                <AnimatePresence>
-                  {mobileConnectOpen && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="overflow-hidden"
-                    >
-                      <div className="pl-4 pb-2 space-y-1">
-                        {connectSubItems.map((item, index) => (
-                          <motion.div
-                            key={item.key}
-                            initial={{ opacity: 0, x: -10 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.2, delay: index * 0.05 }}
-                          >
-                            <Link
-                              to={item.href}
-                              onClick={() => setMenuOpen(false)}
-                              className={`block py-2 text-base transition-all duration-300 border-l-2 pl-4 ${
-                                isActive(item.href)
-                                  ? "text-foreground border-foreground"
-                                  : "text-muted-foreground hover:text-foreground border-transparent hover:border-foreground/50"
-                              }`}
-                            >
-                              {item.label[language]}
-                            </Link>
-                          </motion.div>
-                        ))}
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
             </div>
           </nav>
         </div>

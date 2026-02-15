@@ -13,16 +13,14 @@ import Home from "./pages/Home";
 import Tower from "./pages/Tower";
 import Origins from "./pages/tower/Origins";
 import Rising from "./pages/tower/Rising";
-import Architecture from "./pages/tower/Architecture";
-import Engineering from "./pages/tower/Engineering";
+import DesignEngineering from "./pages/tower/DesignEngineering";
 import Sustainability from "./pages/tower/Sustainability";
 import Recognition from "./pages/tower/Recognition";
 import Dashboard from "./pages/tower/Dashboard";
 import Business from "./pages/Business";
 import Services from "./pages/Services";
 import Location from "./pages/Location";
-import Contact from "./pages/Contact";
-import Leasing from "./pages/Leasing";
+import LeasingContact from "./pages/LeasingContact";
 import Presentation from "./pages/Presentation";
 import NotFound from "./pages/NotFound";
 
@@ -38,8 +36,9 @@ const AnimatedRoutes = () => {
         <Route path="/tower" element={<PageTransition><Tower /></PageTransition>} />
         <Route path="/tower/origins" element={<PageTransition><Origins /></PageTransition>} />
         <Route path="/tower/rising" element={<PageTransition><Rising /></PageTransition>} />
-        <Route path="/tower/architecture" element={<PageTransition><Architecture /></PageTransition>} />
-        <Route path="/tower/engineering" element={<PageTransition><Engineering /></PageTransition>} />
+        <Route path="/tower/design" element={<PageTransition><DesignEngineering /></PageTransition>} />
+        <Route path="/tower/architecture" element={<Navigate to="/tower/design" replace />} />
+        <Route path="/tower/engineering" element={<Navigate to="/tower/design" replace />} />
         <Route path="/tower/sustainability" element={<PageTransition><Sustainability /></PageTransition>} />
         <Route path="/tower/recognition" element={<PageTransition><Recognition /></PageTransition>} />
         <Route path="/tower/dashboard" element={<PageTransition><Dashboard /></PageTransition>} />
@@ -48,8 +47,8 @@ const AnimatedRoutes = () => {
         <Route path="/business" element={<PageTransition><Business /></PageTransition>} />
         <Route path="/services" element={<PageTransition><Services /></PageTransition>} />
         <Route path="/location" element={<PageTransition><Location /></PageTransition>} />
-        <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
-        <Route path="/leasing" element={<PageTransition><Leasing /></PageTransition>} />
+        <Route path="/leasing" element={<PageTransition><LeasingContact /></PageTransition>} />
+        <Route path="/contact" element={<Navigate to="/leasing" replace />} />
         <Route path="/presentation" element={<Presentation />} />
         <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
       </Routes>

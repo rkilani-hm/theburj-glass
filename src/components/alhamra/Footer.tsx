@@ -2,14 +2,15 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { ArrowUp } from "lucide-react";
 
 const Footer = () => {
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
 
   const navLinks = [
-    { key: "nav.tower", href: "#presence" },
-    { key: "nav.perspective", href: "#perspective" },
-    { key: "nav.business", href: "#business" },
-    { key: "nav.services", href: "#services" },
-    { key: "nav.contact", href: "#contact" },
+    { label: { en: "The Tower", ar: "البرج" }, href: "/tower" },
+    { label: { en: "Business", ar: "الأعمال" }, href: "/business" },
+    { label: { en: "Services & Facilities", ar: "الخدمات والمرافق" }, href: "/services" },
+    { label: { en: "Sustainability", ar: "الاستدامة" }, href: "/tower/sustainability" },
+    { label: { en: "Location & Access", ar: "الموقع والوصول" }, href: "/location" },
+    { label: { en: "Leasing & Contact", ar: "التأجير والتواصل" }, href: "/leasing" },
   ];
 
   const scrollToTop = () => {
@@ -52,11 +53,11 @@ const Footer = () => {
             <nav className="grid grid-cols-2 gap-x-6 gap-y-3">
               {navLinks.map((link) => (
                 <a
-                  key={link.key}
+                  key={link.href}
                   href={link.href}
                   className="text-sm text-primary-foreground/60 hover:text-primary-foreground transition-colors duration-300"
                 >
-                  {t(link.key)}
+                  {link.label[language]}
                 </a>
               ))}
             </nav>
