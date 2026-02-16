@@ -577,6 +577,26 @@ const translations: Record<string, Record<Language, string>> = {
   "rising.hero.title": { en: "Rising: The Al Hamra Story", ar: "صعود يحمل معنى" },
   "rising.hero.subtitle": { en: "From vision to reality: the seven-year journey of creating Kuwait's most iconic landmark", ar: "تم تصور برج الحمراء للأعمال كمعلم معماري يستجيب لبيئته الحضرية والمناخية من خلال تصميم هادف وواضح." },
 
+  // Home Page
+  "home.about": { en: "The Address", ar: "العنوان" },
+  "home.intro.title": { en: "A New Center of Gravity", ar: "مركز جاذبية جديد" },
+  "home.intro.p1": { en: "True distinction is not merely built — it is curated. Rising from the pulse of Kuwait's commercial core, Al Hamra Tower is not just a building. It is a statement of intent. Where the skyline ends, your legacy begins.", ar: "التميز الحقيقي لا يُبنى فحسب — بل يُصاغ بعناية. يرتفع من نبض القلب التجاري للكويت، برج الحمراء ليس مجرد مبنى. إنه بيان نوايا. حيث ينتهي الأفق، يبدأ إرثك." },
+  "home.intro.p2": { en: "Here, every line is intentional, every view is framed like a masterwork, and every moment is calibrated for those who demand the exceptional. Merging visionary ambition with climate-responsive engineering, the tower creates a workspace experience that transcends the ordinary.", ar: "هنا، كل خط مقصود، كل إطلالة مؤطرة كتحفة فنية، وكل لحظة معايرة لمن يطلبون الاستثنائي. يمزج البرج بين الطموح الرؤيوي والهندسة المستجيبة للمناخ ليخلق تجربة عمل تتجاوز المألوف." },
+  "home.explore.tower": { en: "Discover the Tower", ar: "اكتشف البرج" },
+  "home.manifesto.label": { en: "Engineering Excellence", ar: "التميز الهندسي" },
+  "home.manifesto.title": { en: "Defying the Impossible", ar: "تحدي المستحيل" },
+  "home.manifesto.p1": { en: "To build the extraordinary requires the courage to challenge the laws of physics. Al Hamra Tower stands as a testament to human ingenuity — a sculpted hyper-tower engineered to dominate the elements and define the skyline for generations.", ar: "بناء الاستثنائي يتطلب الشجاعة لتحدي قوانين الفيزياء. يقف برج الحمراء شاهداً على براعة الإنسان — برج منحوت مُهندَس للسيطرة على العناصر وتحديد الأفق للأجيال القادمة." },
+  "home.manifesto.p2": { en: "With a carved limestone façade that reflects the changing moods of the Arabian sky and a structural core designed for the next century, this is a fortress of modern innovation. A home for enterprises that do not just watch history happen, but make it.", ar: "بواجهة من الحجر الجيري المنحوت تعكس تقلبات السماء العربية وقلب هيكلي مصمم للقرن القادم، هذه قلعة الابتكار الحديث. موطن للمؤسسات التي لا تراقب التاريخ فحسب، بل تصنعه." },
+  "home.facts.architect": { en: "Architect", ar: "المعماري" },
+  "home.facts.completed": { en: "Completed", ar: "الإنجاز" },
+  "home.facts.contractor": { en: "Contractor", ar: "المقاول" },
+  "home.facts.rank": { en: "World Rank", ar: "التصنيف العالمي" },
+  "home.cta.label": { en: "Elevate Your Business", ar: "ارتقِ بأعمالك" },
+  "home.cta.title": { en: "Your Next Address Awaits", ar: "عنوانك القادم ينتظرك" },
+  "home.cta.desc": { en: "A limited collection of premium office spaces remains at Kuwait's most prestigious commercial address. Register your interest for a private consultation with our leasing team.", ar: "مجموعة محدودة من المساحات المكتبية المتميزة متوفرة في العنوان التجاري الأرقى في الكويت. سجل اهتمامك لاستشارة خاصة مع فريق التأجير لدينا." },
+  "home.cta.leasing": { en: "Request Private Viewing", ar: "طلب جولة خاصة" },
+  "home.cta.contact": { en: "Enquire Discreetly", ar: "استفسر بسرية" },
+
   // Footer
   "footer.rights": { en: "All rights reserved.", ar: "جميع الحقوق محفوظة." },
   "footer.privacy": { en: "Privacy Policy", ar: "سياسة الخصوصية" },

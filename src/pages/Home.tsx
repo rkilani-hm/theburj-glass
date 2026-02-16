@@ -10,10 +10,12 @@ import { ArrowRight, Phone, Mail, MapPin } from "lucide-react";
 
 import towerAerialSunset from "@/assets/tower-aerial-sunset.png";
 import kuwaitSkylineNight from "@/assets/kuwait-skyline-night.png";
+import somTowerDetail from "@/assets/som-tower-detail.jpg";
 
 const Home = () => {
   const { t } = useLanguage();
   const { ref: introRef, isInView: introInView } = useScrollReveal();
+  const { ref: manifestoRef, isInView: manifestoInView } = useScrollReveal();
   const { ref: featuresRef, isInView: featuresInView } = useScrollReveal();
   const { ref: ctaRef, isInView: ctaInView } = useScrollReveal();
 
@@ -36,10 +38,10 @@ const Home = () => {
   ];
 
   const quickFacts = [
-    { label: t("home.facts.architect") || "Architect", value: "Skidmore, Owings & Merrill" },
-    { label: t("home.facts.completed") || "Completed", value: "2011" },
-    { label: t("home.facts.contractor") || "Contractor", value: "Samsung Engineering" },
-    { label: t("home.facts.rank") || "World Rank", value: "#23 Tallest" },
+    { label: t("home.facts.architect"), value: "Skidmore, Owings & Merrill" },
+    { label: t("home.facts.completed"), value: "2011" },
+    { label: t("home.facts.contractor"), value: "Samsung Engineering" },
+    { label: t("home.facts.rank"), value: "#23 Tallest" },
   ];
 
   return (
@@ -48,7 +50,7 @@ const Home = () => {
       <main>
         <HeroSection />
 
-        {/* Introduction Section */}
+        {/* Introduction — "A New Center of Gravity" */}
         <section className="py-section bg-background texture-noise">
           <div className="container mx-auto px-6 lg:px-12">
             <div ref={introRef} className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
@@ -61,23 +63,23 @@ const Home = () => {
                 <div className="flex items-center gap-4 mb-6">
                   <div className="w-12 h-px bg-border" />
                   <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
-                    {t("home.about") || "About"}
+                    {t("home.about")}
                   </span>
                 </div>
                 <h2 className="text-headline font-light tracking-wide text-foreground mb-8">
-                  {t("home.intro.title") || "An Architectural Marvel"}
+                  {t("home.intro.title")}
                 </h2>
                 <p className="text-body-lg text-muted-foreground leading-relaxed mb-6">
-                  {t("home.intro.p1") || "Al Hamra Tower stands as a testament to visionary architecture and engineering excellence. Its distinctive twisting form is not merely aesthetic—it maximizes natural light while minimizing solar heat gain."}
+                  {t("home.intro.p1")}
                 </p>
                 <p className="text-body text-muted-foreground leading-relaxed mb-8">
-                  {t("home.intro.p2") || "Completed in 2011, the tower has redefined Kuwait's commercial landscape, offering world-class amenities in an address of unparalleled prestige."}
+                  {t("home.intro.p2")}
                 </p>
                 <Link 
                   to="/tower" 
                   className="inline-flex items-center gap-3 text-foreground hover:text-muted-foreground transition-colors group"
                 >
-                  <span className="text-sm uppercase tracking-wider">{t("home.explore.tower") || "Explore the Tower"}</span>
+                  <span className="text-sm uppercase tracking-wider">{t("home.explore.tower")}</span>
                   <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
                 </Link>
               </motion.div>
@@ -164,7 +166,62 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Journey Timeline Section - Page Previews */}
+        {/* Manifesto — "Defying the Impossible" */}
+        <section className="py-section bg-background texture-noise">
+          <div className="container mx-auto px-6 lg:px-12">
+            <div ref={manifestoRef} className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+              <motion.div
+                initial="hidden"
+                animate={manifestoInView ? "visible" : "hidden"}
+                variants={revealVariants.slideRight}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="relative group lg:order-1"
+              >
+                <div className="aspect-[4/5] overflow-hidden bg-muted">
+                  <img
+                    src={somTowerDetail}
+                    alt="Al Hamra Tower sculptural facade detail"
+                    className="w-full h-full object-cover transition-transform duration-700 ease-out-expo group-hover:scale-105"
+                  />
+                </div>
+                <div className="absolute -bottom-6 -right-6 w-32 h-32 border border-border -z-10" />
+              </motion.div>
+
+              <motion.div
+                initial="hidden"
+                animate={manifestoInView ? "visible" : "hidden"}
+                variants={revealVariants.slideLeft}
+                transition={{ duration: 0.8 }}
+                className="lg:order-0"
+              >
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-12 h-px bg-border" />
+                  <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
+                    {t("home.manifesto.label")}
+                  </span>
+                </div>
+                <h2 className="text-headline font-light tracking-wide text-foreground mb-8">
+                  {t("home.manifesto.title")}
+                </h2>
+                <p className="text-body-lg text-muted-foreground leading-relaxed mb-6">
+                  {t("home.manifesto.p1")}
+                </p>
+                <p className="text-body text-muted-foreground leading-relaxed mb-8">
+                  {t("home.manifesto.p2")}
+                </p>
+                <Link 
+                  to="/tower/design-engineering" 
+                  className="inline-flex items-center gap-3 text-foreground hover:text-muted-foreground transition-colors group"
+                >
+                  <span className="text-sm uppercase tracking-wider">{t("home.manifesto.label")}</span>
+                  <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+                </Link>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* Journey Timeline Section */}
         <HomeJourneyTimeline />
 
         {/* CTA Section with Image */}
@@ -190,7 +247,7 @@ const Home = () => {
                 >
                   <div className="w-12 h-px bg-background/40" />
                   <span className="text-xs uppercase tracking-[0.3em] text-background/60">
-                    {t("home.cta.label") || "Get Started"}
+                    {t("home.cta.label")}
                   </span>
                 </motion.div>
 
@@ -201,7 +258,7 @@ const Home = () => {
                   transition={{ duration: 0.6, delay: 0.1 }}
                   className="text-headline font-light tracking-wide text-background mb-6"
                 >
-                  {t("home.cta.title") || "Ready to Elevate Your Business?"}
+                  {t("home.cta.title")}
                 </motion.h2>
 
                 <motion.p
@@ -211,7 +268,7 @@ const Home = () => {
                   transition={{ duration: 0.6, delay: 0.2 }}
                   className="text-body-lg text-background/80 mb-10 max-w-xl"
                 >
-                  {t("home.cta.desc") || "Discover premium office spaces and world-class amenities at Kuwait's most prestigious address. Contact our leasing team to schedule a private tour."}
+                  {t("home.cta.desc")}
                 </motion.p>
 
                 <motion.div
@@ -225,14 +282,14 @@ const Home = () => {
                     to="/leasing"
                     className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-background text-foreground hover:bg-background/90 transition-colors group"
                   >
-                    <span className="text-sm uppercase tracking-wider">{t("home.cta.leasing") || "Explore Leasing"}</span>
+                    <span className="text-sm uppercase tracking-wider">{t("home.cta.leasing")}</span>
                     <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
                   </Link>
                   <Link 
                     to="/contact"
                     className="inline-flex items-center justify-center gap-3 px-8 py-4 border border-background/40 text-background hover:bg-background/10 transition-colors group"
                   >
-                    <span className="text-sm uppercase tracking-wider">{t("home.cta.contact") || "Contact Us"}</span>
+                    <span className="text-sm uppercase tracking-wider">{t("home.cta.contact")}</span>
                   </Link>
                 </motion.div>
 
