@@ -1,7 +1,7 @@
 import Header from "@/components/alhamra/Header";
 import HeroSection from "@/components/alhamra/HeroSection";
 import Footer from "@/components/alhamra/Footer";
-import HomeJourneyTimeline from "@/components/alhamra/HomeJourneyTimeline";
+import HomePageLinks from "@/components/alhamra/HomePageLinks";
 import { motion } from "framer-motion";
 import { useScrollReveal, revealVariants } from "@/hooks/useScrollReveal";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -221,8 +221,8 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Journey Timeline Section */}
-        <HomeJourneyTimeline />
+        {/* Explore Pages Section */}
+        <HomePageLinks />
 
         {/* CTA Section with Image */}
         <section className="relative overflow-hidden">

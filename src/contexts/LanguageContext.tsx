@@ -597,6 +597,27 @@ const translations: Record<string, Record<Language, string>> = {
   "home.cta.leasing": { en: "Request Private Viewing", ar: "طلب جولة خاصة" },
   "home.cta.contact": { en: "Enquire Discreetly", ar: "استفسر بسرية" },
 
+  // Home Page Links
+  "home.links.label": { en: "Explore", ar: "استكشف" },
+  "home.links.title": { en: "Arrive. Ascend. Belong.", ar: "صِل. ارتقِ. انتمِ." },
+  "home.links.subtitle": { en: "Four dimensions of an exceptional address.", ar: "أربعة أبعاد لعنوان استثنائي." },
+  "home.link.tower.title": { en: "The Tower", ar: "البرج" },
+  "home.link.tower.subtitle": { en: "Architecture & Engineering", ar: "العمارة والهندسة" },
+  "home.link.tower.desc": { en: "A sculpted masterpiece by SOM — where climate-responsive design meets structural innovation. Discover the story behind Kuwait's tallest landmark.", ar: "تحفة نحتية من SOM — حيث يلتقي التصميم المستجيب للمناخ بالابتكار الهيكلي. اكتشف القصة وراء أطول معلم في الكويت." },
+  "home.link.tower.cta": { en: "Explore the Tower", ar: "استكشف البرج" },
+  "home.link.business.title": { en: "Business", ar: "الأعمال" },
+  "home.link.business.subtitle": { en: "Workspace & Enterprise", ar: "بيئة العمل والمؤسسات" },
+  "home.link.business.desc": { en: "Premium office environments designed for the demands of modern enterprise. Flexible floor plates, vertical connectivity, and an address that commands respect.", ar: "بيئات مكتبية متميزة مصممة لمتطلبات المؤسسات الحديثة. طوابق مرنة، اتصال عمودي، وعنوان يفرض الاحترام." },
+  "home.link.business.cta": { en: "Discover the Workspace", ar: "اكتشف بيئة العمل" },
+  "home.link.experience.title": { en: "Experience", ar: "التجربة" },
+  "home.link.experience.subtitle": { en: "Services & Sustainability", ar: "الخدمات والاستدامة" },
+  "home.link.experience.desc": { en: "Beyond workspace — a complete ecosystem. From 24/7 concierge to smart building systems, every detail calibrated for seamless daily operations.", ar: "ما وراء بيئة العمل — نظام بيئي متكامل. من الكونسيرج على مدار الساعة إلى أنظمة المباني الذكية، كل تفصيل معاير لعمليات يومية سلسة." },
+  "home.link.experience.cta": { en: "Experience the Services", ar: "اكتشف الخدمات" },
+  "home.link.leasing.title": { en: "Leasing", ar: "التأجير" },
+  "home.link.leasing.subtitle": { en: "Opportunities & Inquiry", ar: "الفرص والاستفسار" },
+  "home.link.leasing.desc": { en: "A limited collection of premium office spaces at Kuwait's most prestigious commercial address. Request availability and schedule a private viewing.", ar: "مجموعة محدودة من المساحات المكتبية المتميزة في العنوان التجاري الأرقى في الكويت. اطلب التوفر وجدول جولة خاصة." },
+  "home.link.leasing.cta": { en: "View Opportunities", ar: "عرض الفرص" },
+
   // Footer
   "footer.rights": { en: "All rights reserved.", ar: "جميع الحقوق محفوظة." },
   "footer.privacy": { en: "Privacy Policy", ar: "سياسة الخصوصية" },
