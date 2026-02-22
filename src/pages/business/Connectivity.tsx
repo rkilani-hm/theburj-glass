@@ -62,8 +62,8 @@ const Connectivity = () => {
                 transition={{ duration: 0.6 }}
               >
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-px bg-border" />
-                  <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">04</span>
+                  <div className="w-12 h-px bg-silk-gold/40" />
+                  <span className="text-xs uppercase tracking-[0.3em] text-champagne">04</span>
                 </div>
                 <h1 className="text-headline font-light tracking-wide text-foreground mb-8">
                   {language === "en" ? "Connectivity & Integration" : "الاتصال والتكامل"}
@@ -139,10 +139,10 @@ const Connectivity = () => {
                   variants={revealVariants.fadeUp}
                   transition={{ duration: 0.6, delay: 0.1 + index * 0.1 }}
                   whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                  className="p-8 bg-background border border-border hover:border-foreground transition-all duration-300 group"
+                  className="p-8 liquid-glass-subtle bg-background/80 hover:border-silk-gold/40 transition-all duration-300 group"
                 >
-                  <div className="w-14 h-14 border border-border flex items-center justify-center mb-6 transition-all duration-300 group-hover:bg-foreground group-hover:border-foreground">
-                    <item.icon size={24} className="text-muted-foreground transition-colors duration-300 group-hover:text-background" />
+                  <div className="w-14 h-14 border border-silk-gold/20 flex items-center justify-center mb-6 transition-all duration-300 group-hover:bg-silk-gold/10 group-hover:border-silk-gold/40">
+                    <item.icon size={24} className="text-muted-foreground transition-colors duration-300 group-hover:text-silk-gold" />
                   </div>
                   <h4 className="text-lg font-medium text-foreground mb-3">{item.title}</h4>
                   <p className="text-sm text-muted-foreground">{item.desc}</p>
@@ -210,7 +210,7 @@ const Connectivity = () => {
                   transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
                   className="text-center"
                 >
-                  <p className="text-3xl lg:text-4xl font-light text-foreground mb-2">{stat.value}</p>
+                  <p className="text-3xl lg:text-4xl font-light text-silk-gold mb-2">{stat.value}</p>
                   <p className="text-sm text-muted-foreground uppercase tracking-wider">{stat.label}</p>
                 </motion.div>
               ))}

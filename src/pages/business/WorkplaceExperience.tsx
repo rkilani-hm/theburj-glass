@@ -60,8 +60,8 @@ const WorkplaceExperience = () => {
                 transition={{ duration: 0.6 }}
                 className="flex items-center gap-4 mb-6"
               >
-                <div className="w-12 h-px bg-border" />
-                <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">01</span>
+                <div className="w-12 h-px bg-silk-gold/40" />
+                <span className="text-xs uppercase tracking-[0.3em] text-champagne">01</span>
               </motion.div>
 
               <motion.h2 
@@ -123,13 +123,13 @@ const WorkplaceExperience = () => {
                       >
                         <div className="flex items-start gap-4 mb-6">
                           <span className="text-xs text-muted-foreground font-mono mt-1">0{index + 1}</span>
-                          <div className="w-12 h-12 border border-border flex items-center justify-center transition-all duration-300 group-hover:bg-muted group-hover:border-muted-foreground">
-                            <item.icon size={20} className="text-muted-foreground transition-colors duration-300 group-hover:text-foreground" />
+                          <div className="w-12 h-12 border border-silk-gold/20 flex items-center justify-center transition-all duration-300 group-hover:bg-silk-gold/10 group-hover:border-silk-gold/40">
+                            <item.icon size={20} className="text-muted-foreground transition-colors duration-300 group-hover:text-silk-gold" />
                           </div>
                         </div>
                         <h3 className="text-lg font-medium text-foreground mb-3">{item.title}</h3>
                         <p className="text-muted-foreground leading-relaxed">{item.description}</p>
-                        <div className="mt-6 w-12 h-px bg-border transition-all duration-500 group-hover:w-24 group-hover:bg-muted-foreground" />
+                        <div className="mt-6 w-12 h-px bg-silk-gold/30 transition-all duration-500 group-hover:w-24 group-hover:bg-silk-gold" />
                       </motion.div>
                     ))}
                   </div>
@@ -158,7 +158,7 @@ const WorkplaceExperience = () => {
                       transition={{ duration: 0.6, delay: 0.1 + index * 0.1 }}
                       className="text-center"
                     >
-                      <p className="text-5xl lg:text-6xl font-light text-background mb-3">{stat.value}</p>
+                      <p className="text-5xl lg:text-6xl font-light text-silk-gold mb-3">{stat.value}</p>
                       <p className="text-sm uppercase tracking-[0.2em] text-background/80 mb-2">{stat.label}</p>
                       <p className="text-sm text-background/60">{stat.desc}</p>
                     </motion.div>
