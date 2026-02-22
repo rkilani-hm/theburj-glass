@@ -92,8 +92,8 @@ const OfficeSpaces = () => {
               className="mb-16"
             >
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-px bg-border" />
-                <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">02</span>
+                <div className="w-12 h-px bg-silk-gold/40" />
+                <span className="text-xs uppercase tracking-[0.3em] text-champagne">02</span>
               </div>
               <h1 className="text-headline font-light tracking-wide text-foreground mb-6">
                 {language === "en" ? "Office Spaces & Floor Plans" : "المساحات المكتبية ومخططات الطوابق"}
@@ -141,8 +141,8 @@ const OfficeSpaces = () => {
               className="mb-16 max-w-3xl"
             >
               <div className="flex items-center gap-4 mb-8">
-                <div className="w-16 h-px bg-border" />
-                <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
+                <div className="w-16 h-px bg-silk-gold/40" />
+                <span className="text-xs uppercase tracking-[0.3em] text-champagne">
                   {language === "en" ? "Configurations" : "التكوينات"}
                 </span>
               </div>
@@ -164,7 +164,7 @@ const OfficeSpaces = () => {
                   animate={plansInView ? "visible" : "hidden"}
                   variants={revealVariants.fadeUp}
                   transition={{ duration: 0.6, delay: 0.1 + index * 0.1 }}
-                  className="group border-t border-border py-12 first:border-t-0"
+                  className="group border-t border-silk-gold/15 py-12 first:border-t-0"
                 >
                   <div className="grid lg:grid-cols-12 gap-8 items-start">
                     <div className="lg:col-span-1">
@@ -192,7 +192,7 @@ const OfficeSpaces = () => {
               animate={plansInView ? "visible" : "hidden"}
               variants={revealVariants.fadeUp}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className="mt-16 pt-12 border-t border-border"
+              className="mt-16 pt-12 border-t border-silk-gold/15"
             >
               <p className="text-sm text-muted-foreground max-w-2xl">
                 {language === "en"
@@ -233,10 +233,10 @@ const OfficeSpaces = () => {
                   variants={revealVariants.fadeUp}
                   transition={{ duration: 0.6, delay: 0.1 + index * 0.1 }}
                   whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                  className="p-8 bg-background border border-border hover:border-foreground transition-all duration-300 group"
+                  className="p-8 liquid-glass-subtle bg-background/80 hover:border-silk-gold/40 transition-all duration-300 group"
                 >
-                  <div className="w-14 h-14 border border-border flex items-center justify-center mb-6 transition-all duration-300 group-hover:bg-foreground group-hover:border-foreground">
-                    <feature.icon size={24} className="text-muted-foreground transition-colors duration-300 group-hover:text-background" />
+                  <div className="w-14 h-14 border border-silk-gold/20 flex items-center justify-center mb-6 transition-all duration-300 group-hover:bg-silk-gold/10 group-hover:border-silk-gold/40">
+                    <feature.icon size={24} className="text-muted-foreground transition-colors duration-300 group-hover:text-silk-gold" />
                   </div>
                   <h4 className="text-lg font-medium text-foreground mb-3">{feature.title}</h4>
                   <p className="text-sm text-muted-foreground">{feature.desc}</p>

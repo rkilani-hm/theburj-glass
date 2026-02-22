@@ -100,7 +100,7 @@ const SkyLobbiesSection = () => {
                     animate={contentInView ? "visible" : "hidden"}
                     variants={revealVariants.slideLeft}
                     transition={{ duration: 0.6, delay: 0.4 + index * 0.15 }}
-                    className="bg-background/95 backdrop-blur-sm border border-border px-4 py-3 shadow-lg"
+                    className="liquid-glass-subtle bg-background/80 px-4 py-3"
                   >
                     <div className="flex items-baseline gap-2">
                       <span className="text-2xl font-light text-foreground">{level.floor}</span>
@@ -148,7 +148,7 @@ const SkyLobbiesSection = () => {
               </div>
 
               {/* Quote Block */}
-              <div className="border-l-2 border-border pl-6 py-4">
+              <div className="border-l-2 border-silk-gold/40 pl-6 py-4">
                 <p className="text-lg text-foreground/80 italic leading-relaxed">
                   {t("skylobbies.quote")}
                 </p>
@@ -180,8 +180,8 @@ const SkyLobbiesSection = () => {
                 className="group"
               >
                 <div className="flex items-start gap-4 mb-4">
-                  <div className="w-12 h-12 border border-border flex items-center justify-center transition-all duration-300 group-hover:bg-muted group-hover:border-muted-foreground">
-                    <feature.icon size={20} className="text-muted-foreground transition-colors duration-300 group-hover:text-foreground" />
+                  <div className="w-12 h-12 border border-silk-gold/20 flex items-center justify-center transition-all duration-300 group-hover:bg-silk-gold/10 group-hover:border-silk-gold/40">
+                    <feature.icon size={20} className="text-muted-foreground transition-colors duration-300 group-hover:text-silk-gold" />
                   </div>
                 </div>
                 <h4 className="text-lg font-medium text-foreground mb-2">
@@ -190,7 +190,7 @@ const SkyLobbiesSection = () => {
                 <p className="text-muted-foreground leading-relaxed">
                   {feature.description}
                 </p>
-                <div className="mt-4 w-12 h-px bg-border transition-all duration-500 group-hover:w-20 group-hover:bg-muted-foreground" />
+                <div className="mt-4 w-12 h-px bg-silk-gold/30 transition-all duration-500 group-hover:w-20 group-hover:bg-silk-gold" />
               </motion.div>
             ))}
           </div>
