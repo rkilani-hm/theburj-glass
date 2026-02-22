@@ -22,8 +22,8 @@ const Inquiry = () => {
               className="mb-16"
             >
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-px bg-border" />
-                <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">02</span>
+                <div className="w-12 h-px bg-silk-gold/40" />
+                <span className="text-xs uppercase tracking-[0.3em] text-champagne">02</span>
               </div>
               <h1 className="text-4xl lg:text-5xl font-light tracking-tight mb-8">
                 {t("contact.title") || "Get in Touch"}
@@ -48,7 +48,7 @@ const Inquiry = () => {
                   </label>
                   <input
                     type="text"
-                    className="w-full bg-transparent border-b-2 border-border py-4 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-foreground transition-colors duration-300"
+                    className="w-full bg-transparent border-b-2 border-silk-gold/20 py-4 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-silk-gold transition-colors duration-300"
                     placeholder={t("contact.name.placeholder") || "Your name"}
                   />
                 </div>
@@ -58,7 +58,7 @@ const Inquiry = () => {
                   </label>
                   <input
                     type="email"
-                    className="w-full bg-transparent border-b-2 border-border py-4 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-foreground transition-colors duration-300"
+                    className="w-full bg-transparent border-b-2 border-silk-gold/20 py-4 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-silk-gold transition-colors duration-300"
                     placeholder={t("contact.email.placeholder") || "your@email.com"}
                   />
                 </div>
@@ -70,7 +70,7 @@ const Inquiry = () => {
                 </label>
                 <input
                   type="text"
-                  className="w-full bg-transparent border-b-2 border-border py-4 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-foreground transition-colors duration-300"
+                  className="w-full bg-transparent border-b-2 border-silk-gold/20 py-4 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-silk-gold transition-colors duration-300"
                   placeholder={t("contact.subject.placeholder") || "Subject of inquiry"}
                 />
               </div>
@@ -81,7 +81,7 @@ const Inquiry = () => {
                 </label>
                 <textarea
                   rows={5}
-                  className="w-full bg-transparent border-b-2 border-border py-4 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-foreground transition-colors duration-300 resize-none"
+                  className="w-full bg-transparent border-b-2 border-silk-gold/20 py-4 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-silk-gold transition-colors duration-300 resize-none"
                   placeholder={t("contact.message.placeholder") || "Your message"}
                 />
               </div>

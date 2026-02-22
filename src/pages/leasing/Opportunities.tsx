@@ -61,8 +61,8 @@ const LeasingOpportunities = () => {
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-px bg-border" />
-                  <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">06</span>
+                  <div className="w-12 h-px bg-silk-gold/40" />
+                  <span className="text-xs uppercase tracking-[0.3em] text-champagne">06</span>
                 </div>
                 <span className="text-sm tracking-[0.3em] uppercase text-muted-foreground mb-6 block">{t("leasing.subtitle")}</span>
                 <h1 className="text-4xl lg:text-6xl font-light tracking-tight mb-8">{t("leasing.title")}</h1>
@@ -89,8 +89,8 @@ const LeasingOpportunities = () => {
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
               {highlights.map((highlight, index) => (
                 <motion.div key={index} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.1 }} className="group">
-                  <div className="w-14 h-14 border border-border flex items-center justify-center mb-4 transition-all duration-300 group-hover:bg-foreground group-hover:border-foreground">
-                    <highlight.icon size={24} className="text-muted-foreground transition-colors duration-300 group-hover:text-background" />
+                  <div className="w-14 h-14 border border-silk-gold/20 flex items-center justify-center mb-4 transition-all duration-300 group-hover:bg-silk-gold/10 group-hover:border-silk-gold/40">
+                    <highlight.icon size={24} className="text-muted-foreground transition-colors duration-300 group-hover:text-silk-gold" />
                   </div>
                   <h3 className="text-lg font-medium mb-2">{highlight.title}</h3>
                   <p className="text-sm text-muted-foreground">{highlight.desc}</p>
@@ -105,8 +105,8 @@ const LeasingOpportunities = () => {
           <div className="container mx-auto px-6 lg:px-12">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="mb-20 max-w-3xl">
               <div className="flex items-center gap-4 mb-8">
-                <div className="w-16 h-px bg-border" />
-                <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">{t("leasing.configurations") || "Configurations"}</span>
+                <div className="w-16 h-px bg-silk-gold/40" />
+                <span className="text-xs uppercase tracking-[0.3em] text-champagne">{t("leasing.configurations") || "Configurations"}</span>
               </div>
               <h2 className="text-3xl lg:text-4xl font-light tracking-tight mb-6">{t("leasing.plans.title")}</h2>
               <p className="text-body-lg text-muted-foreground leading-relaxed">{t("leasing.plans.desc") || "Flexible configurations designed to accommodate businesses of every scale, from boutique operations to multinational headquarters."}</p>
@@ -114,7 +114,7 @@ const LeasingOpportunities = () => {
             
             <div className="space-y-0">
               {floorPlans.map((plan, index) => (
-                <motion.div key={plan.type} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: index * 0.1 }} className="group border-t border-border py-12 first:border-t-0">
+                <motion.div key={plan.type} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: index * 0.1 }} className="group border-t border-silk-gold/15 py-12 first:border-t-0">
                   <div className="grid lg:grid-cols-12 gap-8 items-start">
                     <div className="lg:col-span-1"><span className="text-xs text-muted-foreground tracking-wider">0{index + 1}</span></div>
                     <div className="lg:col-span-4">
@@ -136,7 +136,7 @@ const LeasingOpportunities = () => {
               ))}
             </div>
 
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.4 }} className="mt-16 pt-12 border-t border-border">
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.4 }} className="mt-16 pt-12 border-t border-silk-gold/15">
               <p className="text-sm text-muted-foreground max-w-2xl">{t("leasing.inquiry.note") || "All configurations are subject to availability and can be customized to meet specific operational requirements. Contact our leasing team for detailed floor plans and specifications."}</p>
             </motion.div>
           </div>
@@ -152,11 +152,11 @@ const LeasingOpportunities = () => {
                 <p className="text-body text-muted-foreground leading-relaxed">{t("leasing.interior.p2") || "3.2-meter ceiling heights create an atmosphere of openness and possibility, while premium finishes and materials reflect the tower's commitment to quality at every level."}</p>
                 <div className="grid grid-cols-2 gap-8 pt-6">
                   <div>
-                    <p className="text-3xl font-light text-foreground">3.2m</p>
+                    <p className="text-3xl font-light text-silk-gold">3.2m</p>
                     <p className="text-sm text-muted-foreground mt-1">{t("leasing.ceiling") || "Ceiling Height"}</p>
                   </div>
                   <div>
-                    <p className="text-3xl font-light text-foreground">360°</p>
+                    <p className="text-3xl font-light text-silk-gold">360°</p>
                     <p className="text-sm text-muted-foreground mt-1">{t("leasing.views") || "Panoramic Views"}</p>
                   </div>
                 </div>

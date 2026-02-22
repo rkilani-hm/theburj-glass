@@ -49,8 +49,8 @@ const Downloads = () => {
               className="mb-16"
             >
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-px bg-border" />
-                <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">03</span>
+                <div className="w-12 h-px bg-silk-gold/40" />
+                <span className="text-xs uppercase tracking-[0.3em] text-champagne">03</span>
               </div>
               <h1 className="text-4xl lg:text-5xl font-light tracking-tight mb-8">
                 {language === "en" ? "Downloads" : "التنزيلات"}
@@ -70,12 +70,12 @@ const Downloads = () => {
                   animate={headerInView ? "visible" : "hidden"}
                   variants={revealVariants.fadeUp}
                   transition={{ duration: 0.6, delay: 0.1 + index * 0.1 }}
-                  className="group border-t border-border py-10 first:border-t-0"
+                  className="group border-t border-silk-gold/15 py-10 first:border-t-0"
                 >
                   <div className="grid lg:grid-cols-12 gap-8 items-center">
                     <div className="lg:col-span-1">
-                      <div className="w-12 h-12 border border-border flex items-center justify-center transition-all duration-300 group-hover:bg-foreground group-hover:border-foreground">
-                        <item.icon size={20} className="text-muted-foreground transition-colors duration-300 group-hover:text-background" />
+                      <div className="w-12 h-12 border border-silk-gold/20 flex items-center justify-center transition-all duration-300 group-hover:bg-silk-gold/10 group-hover:border-silk-gold/40">
+                        <item.icon size={20} className="text-muted-foreground transition-colors duration-300 group-hover:text-silk-gold" />
                       </div>
                     </div>
                     <div className="lg:col-span-4">
