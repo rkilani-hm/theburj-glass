@@ -93,7 +93,7 @@ const Footer = () => {
                   <a
                     key={social.label}
                     href="#"
-                    className="w-10 h-10 border border-primary-foreground/20 flex items-center justify-center text-xs text-primary-foreground/60 hover:bg-primary-foreground/10 hover:text-primary-foreground transition-all duration-300"
+                    className="w-10 h-10 border border-silk-gold/20 flex items-center justify-center text-xs text-primary-foreground/60 hover:bg-silk-gold/20 hover:text-primary-foreground hover:border-silk-gold/40 transition-all duration-300 rounded-lg"
                     aria-label={social.label}
                   >
                     {social.abbr}

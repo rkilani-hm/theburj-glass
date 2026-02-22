@@ -94,11 +94,11 @@ const TowerTabbedDashboard = () => {
           transition={{ duration: 0.6 }}
           className="flex items-center justify-center gap-4 mb-6"
         >
-          <div className="w-12 h-px bg-border" />
-          <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
+          <div className="w-12 h-px bg-silk-gold/40" />
+          <span className="text-xs uppercase tracking-[0.3em] text-champagne">
             {language === "en" ? "Overview" : "نظرة عامة"}
           </span>
-          <div className="w-12 h-px bg-border" />
+          <div className="w-12 h-px bg-silk-gold/40" />
         </motion.div>
 
         {/* Title */}
@@ -120,14 +120,14 @@ const TowerTabbedDashboard = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="flex justify-center mb-8"
           >
-            <TabsList className="bg-card border border-border p-1 h-auto flex-wrap">
+            <TabsList className="liquid-glass-subtle bg-background/60 p-1 h-auto flex-wrap">
               {tabsData.map((tab) => {
                 const Icon = tab.icon;
                 return (
                   <TabsTrigger
                     key={tab.id}
                     value={tab.id}
-                    className="px-6 py-3 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground flex items-center gap-2 text-sm transition-all duration-300"
+                    className="px-6 py-3 data-[state=active]:bg-silk-gold data-[state=active]:text-white flex items-center gap-2 text-sm transition-all duration-300 rounded-2xl"
                   >
                     <Icon className="w-4 h-4" />
                     <span className="hidden sm:inline">{tab.label[language]}</span>
@@ -146,7 +146,7 @@ const TowerTabbedDashboard = () => {
               transition={{ duration: 0.8, delay: 0.3 }}
               className="relative order-2 lg:order-1"
             >
-              <div className="relative aspect-[3/4] max-w-sm mx-auto rounded-sm overflow-hidden shadow-2xl">
+              <div className="relative aspect-[3/4] max-w-sm mx-auto rounded-2xl overflow-hidden shadow-2xl">
                 <img
                   src={towerVertical}
                   alt="Al Hamra Tower"
@@ -168,12 +168,12 @@ const TowerTabbedDashboard = () => {
                     height: activeData.imagePosition.height,
                   }}
                 >
-                  <div className="absolute inset-0 border-2 border-primary/60 bg-primary/10" />
+                  <div className="absolute inset-0 border-2 border-silk-gold/60 bg-silk-gold/10" />
                   {/* Corner Accents */}
-                  <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-primary" />
-                  <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-primary" />
-                  <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-primary" />
-                  <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-primary" />
+                  <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-silk-gold" />
+                  <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-silk-gold" />
+                  <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-silk-gold" />
+                  <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-silk-gold" />
                 </motion.div>
               </div>
             </motion.div>
@@ -188,12 +188,12 @@ const TowerTabbedDashboard = () => {
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: dir === "rtl" ? 30 : -30 }}
                       transition={{ duration: 0.4 }}
-                      className="bg-card border border-border p-8 lg:p-10"
+                      className="liquid-glass-subtle bg-background/80 p-8 lg:p-10 relative overflow-hidden"
                     >
                       {/* Card Header */}
                       <div className="mb-6">
                         <div className="flex items-center gap-3 mb-3">
-                          <div className="w-10 h-10 flex items-center justify-center bg-primary text-primary-foreground">
+                          <div className="w-10 h-10 flex items-center justify-center bg-silk-gold/10 border border-silk-gold/30 rounded-xl text-silk-gold">
                             <tab.icon className="w-5 h-5" />
                           </div>
                           <div>
@@ -202,7 +202,7 @@ const TowerTabbedDashboard = () => {
                             </h2>
                           </div>
                         </div>
-                        <p className="text-lg text-primary font-light">
+                        <p className="text-lg text-silk-gold font-light">
                           {tab.subtitle[language]}
                         </p>
                       </div>
@@ -220,7 +220,7 @@ const TowerTabbedDashboard = () => {
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.3, delay: 0.2 + idx * 0.1 }}
-                            className="text-center p-4 bg-secondary/50 border border-border/50"
+                            className="text-center p-4 bg-background/50 border border-silk-gold/15 rounded-xl"
                           >
                             <p className="text-2xl lg:text-3xl font-light text-foreground tabular-nums">
                               {stat.value}
@@ -233,7 +233,7 @@ const TowerTabbedDashboard = () => {
                       </div>
 
                       {/* Accent Line */}
-                      <div className={`absolute top-0 ${dir === "rtl" ? "right-0" : "left-0"} w-1 h-full bg-primary`} />
+                      <div className={`absolute top-0 ${dir === "rtl" ? "right-0" : "left-0"} w-1 h-full bg-silk-gold/50 rounded-full`} />
                     </motion.div>
                   </TabsContent>
                 ))}

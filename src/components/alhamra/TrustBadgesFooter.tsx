@@ -3,21 +3,9 @@ import { motion } from "framer-motion";
 import { Award, Leaf, ShieldCheck } from "lucide-react";
 
 const certifications = [
-  {
-    icon: Award,
-    code: "ISO 9001:2015",
-    title: { en: "Quality Management", ar: "إدارة الجودة" },
-  },
-  {
-    icon: Leaf,
-    code: "ISO 14001:2015",
-    title: { en: "Environmental", ar: "الإدارة البيئية" },
-  },
-  {
-    icon: ShieldCheck,
-    code: "ISO 45001:2018",
-    title: { en: "Health & Safety", ar: "الصحة والسلامة" },
-  },
+  { icon: Award, code: "ISO 9001:2015", title: { en: "Quality Management", ar: "إدارة الجودة" } },
+  { icon: Leaf, code: "ISO 14001:2015", title: { en: "Environmental", ar: "الإدارة البيئية" } },
+  { icon: ShieldCheck, code: "ISO 45001:2018", title: { en: "Health & Safety", ar: "الصحة والسلامة" } },
 ];
 
 const TrustBadgesFooter = () => {
@@ -29,13 +17,13 @@ const TrustBadgesFooter = () => {
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
-      className="fixed bottom-0 left-0 right-0 z-30 bg-card/80 backdrop-blur-md border-t border-border"
+      className="fixed bottom-0 left-0 right-0 z-30 liquid-glass bg-background/85 border-t border-silk-gold/15"
     >
       <div className="container mx-auto px-6 py-4">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           {/* Label */}
           <div className="flex items-center gap-2">
-            <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
+            <span className="text-xs uppercase tracking-[0.2em] text-champagne">
               {language === "en" ? "Certified Excellence" : "التميز المعتمد"}
             </span>
           </div>
@@ -53,7 +41,7 @@ const TrustBadgesFooter = () => {
                   transition={{ duration: 0.4, delay: index * 0.1 }}
                   className="flex items-center gap-2 group"
                 >
-                  <div className="w-8 h-8 flex items-center justify-center bg-secondary border border-border group-hover:bg-foreground group-hover:text-background transition-all duration-300">
+                  <div className="w-8 h-8 flex items-center justify-center bg-silk-gold/10 border border-silk-gold/20 rounded-lg group-hover:bg-silk-gold group-hover:text-white transition-all duration-300">
                     <IconComponent className="w-4 h-4" />
                   </div>
                   <div className="hidden sm:block">

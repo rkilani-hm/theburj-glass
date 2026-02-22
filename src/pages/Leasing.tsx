@@ -79,8 +79,8 @@ const Leasing = () => {
                 transition={{ duration: 0.8 }}
               >
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-px bg-border" />
-                  <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">05</span>
+                  <div className="w-12 h-px bg-silk-gold/40" />
+                  <span className="text-xs uppercase tracking-[0.3em] text-champagne">05</span>
                 </div>
                 <span className="text-sm tracking-[0.3em] uppercase text-muted-foreground mb-6 block">
                   {t("leasing.subtitle")}
@@ -136,8 +136,8 @@ const Leasing = () => {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   className="group"
                 >
-                  <div className="w-14 h-14 border border-border flex items-center justify-center mb-4 transition-all duration-300 group-hover:bg-foreground group-hover:border-foreground">
-                    <highlight.icon size={24} className="text-muted-foreground transition-colors duration-300 group-hover:text-background" />
+                  <div className="w-14 h-14 border border-silk-gold/20 flex items-center justify-center mb-4 rounded-xl transition-all duration-300 group-hover:bg-silk-gold group-hover:border-silk-gold">
+                    <highlight.icon size={24} className="text-champagne transition-colors duration-300 group-hover:text-white" />
                   </div>
                   <h3 className="text-lg font-medium mb-2">{highlight.title}</h3>
                   <p className="text-sm text-muted-foreground">{highlight.desc}</p>
@@ -158,8 +158,8 @@ const Leasing = () => {
               className="mb-20 max-w-3xl"
             >
               <div className="flex items-center gap-4 mb-8">
-                <div className="w-16 h-px bg-border" />
-                <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
+                <div className="w-16 h-px bg-silk-gold/40" />
+                <span className="text-xs uppercase tracking-[0.3em] text-champagne">
                   {t("leasing.configurations") || "Configurations"}
                 </span>
               </div>
@@ -423,7 +423,7 @@ const Leasing = () => {
               </p>
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-3 px-8 py-4 bg-foreground text-background hover:bg-foreground/90 transition-colors duration-300"
+                className="inline-flex items-center gap-3 px-8 py-4 liquid-glass-subtle bg-foreground text-background hover:bg-foreground/90 transition-colors duration-300"
               >
                 {t("leasing.cta.button")}
                 <ArrowRight className="w-4 h-4" />

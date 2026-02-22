@@ -2,18 +2,8 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { 
-  Wrench, 
-  Shield, 
-  Heart, 
-  Settings, 
-  Droplets, 
-  Cpu,
-  Users,
-  Sparkles,
-  Sofa,
-  Stethoscope,
-  Building2,
-  ChevronDown
+  Wrench, Shield, Heart, Settings, Droplets, Cpu,
+  Users, Sparkles, Sofa, Stethoscope, Building2, ChevronDown
 } from "lucide-react";
 
 interface ServiceCategory {
@@ -33,21 +23,9 @@ const serviceCategories: ServiceCategory[] = [
     icon: Wrench,
     title: { en: "Facilities Management", ar: "إدارة المرافق" },
     services: [
-      { 
-        icon: Settings, 
-        name: { en: "Engineering", ar: "الهندسة" }, 
-        desc: { en: "24/7 mechanical & electrical", ar: "ميكانيكية وكهربائية ٢٤/٧" } 
-      },
-      { 
-        icon: Droplets, 
-        name: { en: "Plumbing", ar: "السباكة" }, 
-        desc: { en: "Rapid response maintenance", ar: "صيانة سريعة الاستجابة" } 
-      },
-      { 
-        icon: Cpu, 
-        name: { en: "BMS Integration", ar: "تكامل BMS" }, 
-        desc: { en: "Smart building automation", ar: "أتمتة المبنى الذكي" } 
-      },
+      { icon: Settings, name: { en: "Engineering", ar: "الهندسة" }, desc: { en: "24/7 mechanical & electrical", ar: "ميكانيكية وكهربائية ٢٤/٧" } },
+      { icon: Droplets, name: { en: "Plumbing", ar: "السباكة" }, desc: { en: "Rapid response maintenance", ar: "صيانة سريعة الاستجابة" } },
+      { icon: Cpu, name: { en: "BMS Integration", ar: "تكامل BMS" }, desc: { en: "Smart building automation", ar: "أتمتة المبنى الذكي" } },
     ],
   },
   {
@@ -55,21 +33,9 @@ const serviceCategories: ServiceCategory[] = [
     icon: Shield,
     title: { en: "Support Services", ar: "خدمات الدعم" },
     services: [
-      { 
-        icon: Users, 
-        name: { en: "Security", ar: "الأمن" }, 
-        desc: { en: "Professional 24/7 monitoring", ar: "مراقبة احترافية ٢٤/٧" } 
-      },
-      { 
-        icon: Sparkles, 
-        name: { en: "Floor Polishing", ar: "تلميع الأرضيات" }, 
-        desc: { en: "Premium marble care", ar: "عناية بالرخام الفاخر" } 
-      },
-      { 
-        icon: Sofa, 
-        name: { en: "Furniture Cleaning", ar: "تنظيف الأثاث" }, 
-        desc: { en: "Professional upholstery care", ar: "عناية احترافية بالمفروشات" } 
-      },
+      { icon: Users, name: { en: "Security", ar: "الأمن" }, desc: { en: "Professional 24/7 monitoring", ar: "مراقبة احترافية ٢٤/٧" } },
+      { icon: Sparkles, name: { en: "Floor Polishing", ar: "تلميع الأرضيات" }, desc: { en: "Premium marble care", ar: "عناية بالرخام الفاخر" } },
+      { icon: Sofa, name: { en: "Furniture Cleaning", ar: "تنظيف الأثاث" }, desc: { en: "Professional upholstery care", ar: "عناية احترافية بالمفروشات" } },
     ],
   },
   {
@@ -77,16 +43,8 @@ const serviceCategories: ServiceCategory[] = [
     icon: Heart,
     title: { en: "Wellness", ar: "الصحة" },
     services: [
-      { 
-        icon: Stethoscope, 
-        name: { en: "Emergency Clinic", ar: "عيادة الطوارئ" }, 
-        desc: { en: "On-site medical response", ar: "استجابة طبية في الموقع" } 
-      },
-      { 
-        icon: Building2, 
-        name: { en: "Health Clinics", ar: "العيادات الصحية" }, 
-        desc: { en: "Premium healthcare providers", ar: "مقدمو رعاية صحية متميزون" } 
-      },
+      { icon: Stethoscope, name: { en: "Emergency Clinic", ar: "عيادة الطوارئ" }, desc: { en: "On-site medical response", ar: "استجابة طبية في الموقع" } },
+      { icon: Building2, name: { en: "Health Clinics", ar: "العيادات الصحية" }, desc: { en: "Premium healthcare providers", ar: "مقدمو رعاية صحية متميزون" } },
     ],
   },
 ];
@@ -107,18 +65,18 @@ const ServiceHubDrawers = () => {
           className="text-center mb-12"
         >
           <div className="flex items-center justify-center gap-4 mb-4">
-            <div className="w-12 h-px bg-border" />
-            <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
+            <div className="w-12 h-px bg-silk-gold/40" />
+            <span className="text-xs uppercase tracking-[0.3em] text-champagne">
               {language === "en" ? "Service Hub" : "مركز الخدمات"}
             </span>
-            <div className="w-12 h-px bg-border" />
+            <div className="w-12 h-px bg-silk-gold/40" />
           </div>
           <h2 className="text-2xl md:text-3xl font-light text-foreground">
             {language === "en" ? "Comprehensive Support" : "دعم شامل"}
           </h2>
         </motion.div>
 
-        {/* Service Categories - Horizontal Layout */}
+        {/* Service Categories */}
         <div className="grid md:grid-cols-3 gap-4">
           {serviceCategories.map((category, index) => {
             const CategoryIcon = category.icon;
@@ -131,16 +89,16 @@ const ServiceHubDrawers = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
-                className="bg-card border border-border"
+                className="liquid-glass-subtle bg-background/80"
               >
                 {/* Category Header */}
                 <button
                   onClick={() => setExpandedCategory(isExpanded ? null : category.id)}
-                  className="w-full p-6 flex items-center justify-between hover:bg-secondary/50 transition-colors duration-300"
+                  className="w-full p-6 flex items-center justify-between hover:bg-background/50 transition-colors duration-300"
                 >
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 flex items-center justify-center bg-secondary border border-border">
-                      <CategoryIcon className="w-5 h-5 text-foreground" />
+                    <div className="w-12 h-12 flex items-center justify-center bg-silk-gold/10 border border-silk-gold/20 rounded-xl">
+                      <CategoryIcon className="w-5 h-5 text-silk-gold" />
                     </div>
                     <h3 className="text-lg font-light text-foreground">
                       {category.title[language]}
@@ -150,7 +108,7 @@ const ServiceHubDrawers = () => {
                     animate={{ rotate: isExpanded ? 180 : 0 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <ChevronDown className="w-5 h-5 text-muted-foreground" />
+                    <ChevronDown className="w-5 h-5 text-champagne" />
                   </motion.div>
                 </button>
 
@@ -173,10 +131,10 @@ const ServiceHubDrawers = () => {
                               initial={{ opacity: 0, x: dir === "rtl" ? 20 : -20 }}
                               animate={{ opacity: 1, x: 0 }}
                               transition={{ duration: 0.3, delay: sIndex * 0.1 }}
-                              className="flex items-start gap-3 p-3 bg-secondary/50 border border-border/50"
+                              className="flex items-start gap-3 p-3 bg-background/50 border border-silk-gold/10 rounded-xl"
                             >
-                              <div className="w-8 h-8 flex items-center justify-center bg-background border border-border flex-shrink-0">
-                                <ServiceIcon className="w-4 h-4 text-primary" />
+                              <div className="w-8 h-8 flex items-center justify-center bg-silk-gold/5 border border-silk-gold/15 rounded-lg flex-shrink-0">
+                                <ServiceIcon className="w-4 h-4 text-silk-gold" />
                               </div>
                               <div>
                                 <p className="text-sm font-medium text-foreground">

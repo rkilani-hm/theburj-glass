@@ -66,8 +66,8 @@ const ServicesSection = () => {
             transition={{ duration: 0.6 }}
             className="flex items-center gap-4 mb-6"
           >
-            <div className="w-12 h-px bg-border" />
-            <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">04</span>
+            <div className="w-12 h-px bg-silk-gold/40" />
+            <span className="text-xs uppercase tracking-[0.3em] text-champagne">04</span>
           </motion.div>
 
           {/* Section Title */}
@@ -143,8 +143,8 @@ const ServicesSection = () => {
                 />
               </div>
               {/* Decorative elements */}
-              <div className="absolute -bottom-6 -left-6 w-24 h-24 border border-border -z-10" />
-              <div className="absolute top-1/2 -right-3 w-6 h-px bg-muted-foreground hidden lg:block" />
+              <div className="absolute -bottom-6 -left-6 w-24 h-24 border border-silk-gold/20 rounded-xl -z-10" />
+              <div className="absolute top-1/2 -right-3 w-6 h-px bg-silk-gold/40 hidden lg:block" />
             </motion.div>
           </div>
         </div>
@@ -162,8 +162,8 @@ const ServicesSection = () => {
             className="mb-16"
           >
             <div className="flex items-center gap-4 mb-6">
-              <div className="w-12 h-px bg-border" />
-              <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
+              <div className="w-12 h-px bg-silk-gold/40" />
+              <span className="text-xs uppercase tracking-[0.3em] text-champagne">
                 {t("services.full.label") || "Full Service"}
               </span>
             </div>
@@ -184,10 +184,10 @@ const ServicesSection = () => {
                 variants={revealVariants.fadeUp}
                 transition={{ duration: 0.6, delay: 0.1 + index * 0.05 }}
                 whileHover={{ y: -4, transition: { duration: 0.3 } }}
-                className="p-6 border border-border hover:border-foreground bg-secondary/30 hover:bg-secondary transition-all duration-300 group"
+                className="p-6 liquid-glass-subtle bg-background/80 hover:border-silk-gold/40 transition-all duration-300 group"
               >
-                <div className="w-12 h-12 border border-border flex items-center justify-center mb-4 transition-all duration-300 group-hover:bg-foreground group-hover:border-foreground">
-                  <service.icon size={20} className="text-muted-foreground transition-colors duration-300 group-hover:text-background" />
+                <div className="w-12 h-12 border border-silk-gold/20 flex items-center justify-center mb-4 rounded-xl transition-all duration-300 group-hover:bg-silk-gold group-hover:border-silk-gold">
+                  <service.icon size={20} className="text-champagne transition-colors duration-300 group-hover:text-white" />
                 </div>
                 <h4 className="font-medium text-foreground mb-2">{service.title}</h4>
                 <p className="text-sm text-muted-foreground">{service.desc}</p>
@@ -258,8 +258,8 @@ const ServicesSection = () => {
                 transition={{ duration: 0.6, delay: 0.1 + index * 0.1 }}
                 className="group"
               >
-                <div className="w-14 h-14 border border-border flex items-center justify-center mb-6 transition-all duration-300 group-hover:bg-background group-hover:border-foreground">
-                  <amenity.icon size={24} className="text-muted-foreground transition-colors group-hover:text-foreground" />
+                <div className="w-14 h-14 border border-silk-gold/20 flex items-center justify-center mb-6 rounded-xl transition-all duration-300 group-hover:bg-silk-gold/10 group-hover:border-silk-gold/40">
+                  <amenity.icon size={24} className="text-champagne transition-colors group-hover:text-silk-gold" />
                 </div>
                 <h4 className="text-lg font-medium text-foreground mb-3">{amenity.title}</h4>
                 <p className="text-muted-foreground">{amenity.description}</p>
