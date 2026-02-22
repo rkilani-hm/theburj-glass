@@ -66,12 +66,23 @@
     --beige: 35 20% 87%;
     --beige-light: 38 25% 92%;
     
+    /* Silk Gold accent */
+    --silk-gold: 43 72% 49%;
+    --silk-gold-light: 43 72% 65%;
+    --champagne: 40 40% 80%;
+    
     /* Hairline divider */
     --hairline: 0 0% 0% / 0.08;
     
     /* Glassmorphism */
     --glass-bg: 45 33% 97% / 0.85;
     --glass-blur: 12px;
+    
+    /* Liquid Glassmorphism */
+    --liquid-glass-bg: 0 0% 100% / 0.05;
+    --liquid-glass-blur: 25px;
+    --liquid-glass-border: 43 72% 49% / 0.2;
+    --liquid-glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
 
     /* Gradient tokens */
     --gradient-limestone: linear-gradient(180deg, hsl(45 33% 97%) 0%, hsl(40 30% 95%) 100%);
@@ -128,8 +139,17 @@
     --beige: 0 0% 20%;
     --beige-light: 0 0% 16%;
     
+    --silk-gold: 43 72% 49%;
+    --silk-gold-light: 43 72% 55%;
+    --champagne: 40 30% 70%;
+    
     --hairline: 255 255% 255% / 0.08;
     --glass-bg: 0 0% 6% / 0.85;
+    
+    --liquid-glass-bg: 0 0% 100% / 0.04;
+    --liquid-glass-blur: 25px;
+    --liquid-glass-border: 43 72% 49% / 0.15;
+    --liquid-glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
 
     --gradient-limestone: linear-gradient(180deg, hsl(0 0% 6%) 0%, hsl(0 0% 10%) 100%);
     --gradient-cool: linear-gradient(180deg, hsl(0 0% 12%) 0%, hsl(0 0% 6%) 100%);
@@ -224,6 +244,25 @@
     background: hsl(var(--glass-bg));
     backdrop-filter: blur(var(--glass-blur));
     -webkit-backdrop-filter: blur(var(--glass-blur));
+  }
+  
+  /* Liquid Glassmorphism - Premium floating panels */
+  .liquid-glass {
+    background: hsl(var(--liquid-glass-bg));
+    backdrop-filter: blur(var(--liquid-glass-blur)) saturate(160%);
+    -webkit-backdrop-filter: blur(var(--liquid-glass-blur)) saturate(160%);
+    border: 1px solid hsl(var(--liquid-glass-border));
+    border-radius: 24px;
+    box-shadow: var(--liquid-glass-shadow);
+  }
+  
+  .liquid-glass-subtle {
+    background: hsl(0 0% 100% / 0.08);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    border: 1px solid hsl(var(--liquid-glass-border));
+    border-radius: 20px;
+    box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.06);
   }
   
   /* Sharp images - Art Gallery precision */

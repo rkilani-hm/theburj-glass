@@ -66,6 +66,11 @@ export default {
           DEFAULT: "hsl(var(--beige))",
           light: "hsl(var(--beige-light))",
         },
+        "silk-gold": {
+          DEFAULT: "hsl(var(--silk-gold))",
+          light: "hsl(var(--silk-gold-light))",
+        },
+        champagne: "hsl(var(--champagne))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
