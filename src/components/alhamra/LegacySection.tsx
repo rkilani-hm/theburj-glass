@@ -130,8 +130,8 @@ const LegacySection = () => {
               className="max-w-3xl"
             >
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-px bg-foreground/60" />
-                <span className="text-xs uppercase tracking-[0.3em] text-foreground/80">
+                <div className="w-12 h-px bg-silk-gold/60" />
+                <span className="text-xs uppercase tracking-[0.3em] text-silk-gold-light">
                   {t("legacy.label")}
                 </span>
               </div>
@@ -160,7 +160,7 @@ const LegacySection = () => {
             <h2 className="text-title font-light text-foreground mb-4">
               {t("legacy.origins.heading")}
             </h2>
-            <div className="w-16 h-px bg-foreground/30" />
+            <div className="w-16 h-px bg-silk-gold/40" />
           </motion.div>
 
           <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
@@ -360,9 +360,9 @@ const LegacySection = () => {
                 animate={foundersInView ? "visible" : "hidden"}
                 variants={revealVariants.fadeUp}
                 transition={{ duration: 0.6, delay: 0.2 + index * 0.15 }}
-                className="relative p-8 bg-muted/30 border border-border group hover:border-foreground/20 transition-colors duration-300"
+                className="relative p-8 liquid-glass-subtle bg-background/80 group hover:border-silk-gold/40 transition-colors duration-300"
               >
-                <Quote className="w-8 h-8 text-foreground/20 mb-6 group-hover:text-foreground/40 transition-colors duration-300" />
+                <Quote className="w-8 h-8 text-silk-gold/30 mb-6 group-hover:text-silk-gold/60 transition-colors duration-300" />
                 <blockquote className="mb-8">
                   <p className="text-body leading-relaxed text-foreground font-light italic">
                     "{item.quote}"
@@ -385,7 +385,7 @@ const LegacySection = () => {
             className="mt-12 text-center"
           >
             <blockquote className="max-w-3xl mx-auto relative">
-              <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-16 h-px bg-foreground/30" />
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-16 h-px bg-silk-gold/40" />
               <p className="text-title font-light text-foreground leading-relaxed pt-8">
                 {t("legacy.founders.vision")}
               </p>
@@ -416,7 +416,7 @@ const LegacySection = () => {
           {/* Horizontal Timeline */}
           <div className="relative">
             {/* Timeline line */}
-            <div className="absolute top-8 left-0 right-0 h-px bg-border hidden lg:block" />
+            <div className="absolute top-8 left-0 right-0 h-px bg-silk-gold/20 hidden lg:block" />
             
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
               {timeline.map((item, index) => (
@@ -430,7 +430,7 @@ const LegacySection = () => {
                 >
                   {/* Timeline dot */}
                   <div className="hidden lg:flex absolute top-6 left-1/2 lg:left-0 -translate-x-1/2 lg:translate-x-0 w-5 h-5 items-center justify-center">
-                    <div className="w-4 h-4 bg-background border-2 border-foreground rounded-full" />
+                    <div className="w-4 h-4 bg-background border-2 border-silk-gold rounded-full" />
                   </div>
 
                   <div className="lg:pt-16 space-y-3">
@@ -470,7 +470,7 @@ const LegacySection = () => {
                 <h2 className="text-title font-light text-foreground mb-4">
                   {t("legacy.design.heading")}
                 </h2>
-                <div className="w-16 h-px bg-foreground/30" />
+                <div className="w-16 h-px bg-silk-gold/40" />
               </div>
               
               <p className="text-body-lg text-muted-foreground leading-relaxed">
@@ -481,7 +481,7 @@ const LegacySection = () => {
               </p>
 
               {/* Key Stats */}
-              <div className="grid grid-cols-2 gap-6 pt-8 border-t border-border">
+              <div className="grid grid-cols-2 gap-6 pt-8 border-t border-silk-gold/20">
                 <div>
                   <p className="text-3xl lg:text-4xl font-light text-foreground">413m</p>
                   <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground mt-1">

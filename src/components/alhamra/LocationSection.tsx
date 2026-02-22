@@ -47,8 +47,8 @@ const LocationSection = () => {
             transition={{ duration: 0.6 }}
             className="flex items-center gap-4 mb-6"
           >
-            <div className="w-12 h-px bg-border" />
-            <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">06</span>
+            <div className="w-12 h-px bg-silk-gold/40" />
+            <span className="text-xs uppercase tracking-[0.3em] text-champagne">06</span>
           </motion.div>
 
           {/* Section Title */}
@@ -124,8 +124,8 @@ const LocationSection = () => {
                     transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
                     className="group flex items-start gap-6"
                   >
-                    <div className="w-14 h-14 border border-border flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:bg-background group-hover:border-foreground">
-                      <point.icon size={20} className="text-muted-foreground transition-colors duration-300 group-hover:text-foreground" />
+                    <div className="w-14 h-14 border border-silk-gold/20 flex items-center justify-center flex-shrink-0 rounded-xl transition-all duration-300 group-hover:bg-silk-gold group-hover:border-silk-gold">
+                      <point.icon size={20} className="text-champagne transition-colors duration-300 group-hover:text-white" />
                     </div>
                     <div>
                       <h3 className="text-foreground font-medium mb-1">{point.label}</h3>
@@ -151,8 +151,8 @@ const LocationSection = () => {
             className="mb-12"
           >
             <div className="flex items-center gap-4 mb-6">
-              <div className="w-12 h-px bg-border" />
-              <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
+              <div className="w-12 h-px bg-silk-gold/40" />
+              <span className="text-xs uppercase tracking-[0.3em] text-champagne">
                 {t("location.map.label") || "Interactive Map"}
               </span>
             </div>
@@ -185,7 +185,7 @@ const LocationSection = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-background/20 via-transparent to-background/10 pointer-events-none" />
               
               {/* Location card overlay */}
-              <div className="absolute bottom-6 left-6 bg-background/95 backdrop-blur-sm p-6 border border-border max-w-sm pointer-events-auto">
+              <div className="absolute bottom-6 left-6 liquid-glass-subtle bg-background/90 p-6 max-w-sm pointer-events-auto">
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 bg-foreground text-background flex items-center justify-center flex-shrink-0">
                     <MapPin size={18} />
@@ -218,10 +218,10 @@ const LocationSection = () => {
                 animate={mapInView ? "visible" : "hidden"}
                 variants={revealVariants.fadeUp}
                 transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-                className="group p-6 border border-border hover:border-foreground transition-colors duration-300"
+                className="group p-6 liquid-glass-subtle bg-background/80 hover:border-silk-gold/40 transition-colors duration-300"
               >
-                <div className="w-12 h-12 border border-border flex items-center justify-center mb-4 transition-all duration-300 group-hover:bg-foreground group-hover:border-foreground">
-                  <option.icon size={20} className="text-muted-foreground transition-colors duration-300 group-hover:text-background" />
+                <div className="w-12 h-12 border border-silk-gold/20 flex items-center justify-center mb-4 rounded-xl transition-all duration-300 group-hover:bg-silk-gold group-hover:border-silk-gold">
+                  <option.icon size={20} className="text-champagne transition-colors duration-300 group-hover:text-white" />
                 </div>
                 <h4 className="font-medium text-foreground mb-2">{option.label}</h4>
                 <p className="text-sm text-muted-foreground">{option.desc}</p>
@@ -259,7 +259,7 @@ const LocationSection = () => {
                 variants={revealVariants.fadeUp}
                 transition={{ duration: 0.6, delay: 0.1 + index * 0.1 }}
                 whileHover={{ y: -4, transition: { duration: 0.3 } }}
-                className="p-6 bg-background border border-border group cursor-default"
+                className="p-6 liquid-glass-subtle bg-background/80 group cursor-default hover:border-silk-gold/40 transition-colors duration-300"
               >
                 <h4 className="font-medium text-foreground mb-4 group-hover:text-primary transition-colors duration-300">
                   {landmark.name}
