@@ -127,7 +127,7 @@ const DesignEngineering = () => {
               className="grid lg:grid-cols-2 gap-16 items-center"
             >
               <div className="space-y-8">
-                <p className="text-sm uppercase tracking-widest text-primary">By Skidmore, Owings & Merrill</p>
+                <p className="text-sm uppercase tracking-widest text-champagne">By Skidmore, Owings & Merrill</p>
                 <h2 className="text-3xl lg:text-4xl font-light tracking-wide">
                   A Timeless, Elegant Marker
                 </h2>
@@ -141,7 +141,7 @@ const DesignEngineering = () => {
                   Glass curtain wall systems combined with stone cladding on solar-exposed surfaces 
                   ensure durability and performance across Kuwait's demanding climate.
                 </p>
-                <div className="grid grid-cols-2 gap-6 pt-4 border-t border-border">
+                <div className="grid grid-cols-2 gap-6 pt-4 border-t border-silk-gold/20">
                   <div>
                     <p className="text-3xl font-light">412<span className="text-lg">m</span></p>
                     <p className="text-sm text-muted-foreground">Building Height</p>
@@ -192,7 +192,7 @@ const DesignEngineering = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
-                    className="p-8 bg-background border border-border"
+                    className="p-8 liquid-glass-subtle bg-background/80 hover:border-silk-gold/40 transition-colors duration-300"
                   >
                     <h3 className="text-xl font-light mb-4">{feature.title}</h3>
                     <p className="text-muted-foreground">{feature.description}</p>
@@ -430,7 +430,7 @@ const DesignEngineering = () => {
               transition={{ duration: 0.8 }}
               className="space-y-6"
             >
-              <p className="text-sm uppercase tracking-widest text-primary">SOM Structural Engineering</p>
+              <p className="text-sm uppercase tracking-widest text-champagne">SOM Structural Engineering</p>
               <h2 className="text-3xl lg:text-4xl font-light tracking-wide">
                 Engineering Excellence
               </h2>
@@ -471,7 +471,7 @@ const DesignEngineering = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.05 }}
-                    className="p-6 border border-border bg-background text-center"
+                    className="p-6 liquid-glass-subtle bg-background/80 text-center hover:border-silk-gold/40 transition-colors duration-300"
                   >
                     <p className="text-3xl font-light mb-2">{spec.value}</p>
                     <p className="text-sm text-foreground mb-1">{spec.label}</p>
@@ -499,7 +499,7 @@ const DesignEngineering = () => {
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: index * 0.1 }}
-                      className="pb-8 border-b border-border last:border-0"
+                      className="pb-8 border-b border-silk-gold/15 last:border-0"
                     >
                       <h3 className="text-xl font-light mb-3">{item.title}</h3>
                       <p className="text-muted-foreground">{item.description}</p>
@@ -551,10 +551,10 @@ const DesignEngineering = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
-                    className="p-6 border border-border bg-background"
+                    className="p-6 liquid-glass-subtle bg-background/80 hover:border-silk-gold/40 transition-colors duration-300"
                   >
-                    <div className="w-12 h-12 bg-primary/10 flex items-center justify-center mb-4">
-                      <span className="text-primary font-light text-lg">{index + 1}</span>
+                    <div className="w-12 h-12 bg-silk-gold/10 border border-silk-gold/20 flex items-center justify-center mb-4 rounded-xl">
+                      <span className="text-silk-gold font-light text-lg">{index + 1}</span>
                     </div>
                     <h3 className="text-lg font-light mb-2">{model.name}</h3>
                     <p className="text-sm text-muted-foreground">{model.purpose}</p>
@@ -624,7 +624,7 @@ const DesignEngineering = () => {
                   quadrant, demonstrating how architectural vision and engineering constraints informed 
                   each other throughout the design process.
                 </p>
-                <div className="grid grid-cols-2 gap-8 pt-4 border-t border-border">
+                <div className="grid grid-cols-2 gap-8 pt-4 border-t border-silk-gold/20">
                   <div>
                     <p className="text-3xl font-light">7.0<span className="text-lg">m</span></p>
                     <p className="text-sm text-muted-foreground">Center of Mass Offset</p>

@@ -116,9 +116,9 @@ const Sustainability = () => {
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
               className="max-w-3xl"
             >
-              <div className="inline-flex items-center gap-2 text-primary mb-6">
+              <div className="inline-flex items-center gap-2 text-silk-gold mb-6">
                 <Leaf className="w-5 h-5" />
-              <span className="text-sm uppercase tracking-widest">Environmental Strategy</span>
+              <span className="text-sm uppercase tracking-widest text-champagne">Environmental Strategy</span>
               </div>
               <h1 className="text-4xl lg:text-6xl font-light tracking-wide text-foreground mb-6">
                 Sustainability & Innovation
@@ -154,7 +154,7 @@ const Sustainability = () => {
                 </div>
               </div>
               <div className="space-y-6">
-                <p className="text-sm uppercase tracking-widest text-primary">Form Follows Climate</p>
+                <p className="text-sm uppercase tracking-widest text-champagne">Form Follows Climate</p>
                 <h2 className="text-3xl lg:text-4xl font-light tracking-wide">
                   Operational intelligence. Real-world efficiency.
                 </h2>
@@ -182,7 +182,7 @@ const Sustainability = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
               >
-                <p className="text-sm uppercase tracking-widest text-primary mb-4">By The Numbers</p>
+                <p className="text-sm uppercase tracking-widest text-champagne mb-4">By The Numbers</p>
                 <h2 className="text-3xl lg:text-4xl font-light tracking-wide mb-4">
                   Environmental Impact
                 </h2>
@@ -243,7 +243,7 @@ const Sustainability = () => {
         <section className="py-24 px-6 lg:px-12 bg-muted/30">
           <div className="container mx-auto max-w-6xl">
             <div className="text-center mb-16">
-              <p className="text-sm uppercase tracking-widest text-primary mb-4">Performance</p>
+              <p className="text-sm uppercase tracking-widest text-champagne mb-4">Performance</p>
               <h2 className="text-3xl lg:text-4xl font-light tracking-wide">
                 Designed for Efficiency
               </h2>
@@ -257,9 +257,9 @@ const Sustainability = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1, duration: 0.6 }}
-                  className="bg-background p-8 border border-border hover:border-primary/30 transition-colors duration-300"
+                  className="liquid-glass-subtle bg-background/80 p-8 hover:border-silk-gold/40 transition-colors duration-300 group"
                 >
-                  <feature.icon className="w-10 h-10 text-primary mb-6" strokeWidth={1} />
+                  <feature.icon className="w-10 h-10 text-silk-gold mb-6" strokeWidth={1} />
                   <h3 className="text-xl font-light mb-4">{feature.title}</h3>
                   <p className="text-muted-foreground text-sm leading-relaxed">
                     {feature.description}
@@ -299,7 +299,7 @@ const Sustainability = () => {
           <div className="container mx-auto max-w-6xl">
             <div className="grid lg:grid-cols-2 gap-16 items-start">
               <div>
-                <p className="text-sm uppercase tracking-widest text-primary mb-4">Safety & Systems</p>
+                <p className="text-sm uppercase tracking-widest text-champagne mb-4">Safety & Systems</p>
                 <h2 className="text-3xl lg:text-4xl font-light tracking-wide mb-6">
                   Intelligent Protection
                 </h2>
@@ -326,9 +326,9 @@ const Sustainability = () => {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1, duration: 0.6 }}
-                    className="flex gap-6 p-6 bg-muted/30 border-l-2 border-primary/30 hover:border-primary transition-colors duration-300"
+                    className="flex gap-6 p-6 liquid-glass-subtle bg-background/80 border-l-2 border-silk-gold/30 hover:border-silk-gold transition-colors duration-300"
                   >
-                    <feature.icon className="w-8 h-8 text-primary flex-shrink-0" strokeWidth={1} />
+                    <feature.icon className="w-8 h-8 text-silk-gold flex-shrink-0" strokeWidth={1} />
                     <div>
                       <h3 className="text-lg font-light mb-2">{feature.title}</h3>
                       <p className="text-muted-foreground text-sm leading-relaxed">
@@ -436,7 +436,7 @@ const Sustainability = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <Leaf className="w-12 h-12 text-primary mx-auto mb-8" strokeWidth={1} />
+              <Leaf className="w-12 h-12 text-silk-gold mx-auto mb-8" strokeWidth={1} />
               <h2 className="text-3xl lg:text-4xl font-light tracking-wide mb-8">
                 Building for Tomorrow
               </h2>

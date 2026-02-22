@@ -82,7 +82,7 @@ const Architecture = () => {
               className="grid lg:grid-cols-2 gap-16 items-center"
             >
               <div className="space-y-8">
-                <p className="text-sm uppercase tracking-widest text-primary">By Skidmore, Owings & Merrill</p>
+                <p className="text-sm uppercase tracking-widest text-champagne">By Skidmore, Owings & Merrill</p>
                 <h2 className="text-3xl lg:text-4xl font-light tracking-wide">
                   A Timeless, Elegant Marker
                 </h2>
@@ -96,7 +96,7 @@ const Architecture = () => {
                   Glass curtain wall systems combined with stone cladding on solar-exposed surfaces 
                   ensure durability and performance across Kuwait's demanding climate.
                 </p>
-                <div className="grid grid-cols-2 gap-6 pt-4 border-t border-border">
+                <div className="grid grid-cols-2 gap-6 pt-4 border-t border-silk-gold/20">
                   <div>
                     <p className="text-3xl font-light">412<span className="text-lg">m</span></p>
                     <p className="text-sm text-muted-foreground">Building Height</p>
@@ -147,7 +147,7 @@ const Architecture = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
-                    className="p-8 bg-background border border-border"
+                    className="p-8 liquid-glass-subtle bg-background/80 hover:border-silk-gold/40 transition-colors duration-300"
                   >
                     <h3 className="text-xl font-light mb-4">{feature.title}</h3>
                     <p className="text-muted-foreground">{feature.description}</p>

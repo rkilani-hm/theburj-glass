@@ -131,7 +131,7 @@ const Origins = () => {
                   The tower's development brought together world-renowned architects, engineers, and 
                   craftsmen, each contributing their expertise to realize this unprecedented vision.
                 </p>
-                <div className="grid grid-cols-2 gap-8 pt-4 border-t border-border">
+                <div className="grid grid-cols-2 gap-8 pt-4 border-t border-silk-gold/20">
                   <div>
                     <p className="text-sm text-muted-foreground">Construction Period</p>
                     <p className="text-2xl font-light">2005 — 2011</p>
@@ -178,7 +178,7 @@ const Origins = () => {
                   tower that appeared to unfurl like a traditional Kuwaiti bisht robe. The design was 
                   selected based on its cultural resonance, sustainability, and structural feasibility.
                 </p>
-                <blockquote className="border-l-2 border-primary pl-6 italic text-foreground">
+                <blockquote className="border-l-2 border-silk-gold pl-6 italic text-foreground">
                   "A significant step forward both in terms of architectural design form and process. 
                   By leveraging the latest three-dimensional parametric modeling software, SOM brought 
                   together the realms of free-form design and the super high-rise skyscraper."
@@ -278,7 +278,7 @@ const Origins = () => {
                   creating a symbol of national pride that would inspire future generations and position 
                   Kuwait as a leader in architectural innovation.
                 </p>
-                <blockquote className="border-l-2 border-primary pl-6 italic text-foreground">
+                <blockquote className="border-l-2 border-silk-gold pl-6 italic text-foreground">
                   "We envisioned a building that would not only define our skyline but also embody the 
                   spirit of Kuwait—ambitious, resilient, and forever reaching upward."
                 </blockquote>
@@ -494,7 +494,7 @@ const Origins = () => {
             
             <div className="relative">
               {/* Timeline line */}
-              <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-border md:transform md:-translate-x-1/2" />
+              <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-silk-gold/20 md:transform md:-translate-x-1/2" />
               
               <div className="space-y-16">
                 {milestones.map((item, index) => (
@@ -509,10 +509,10 @@ const Origins = () => {
                     }`}
                   >
                     {/* Timeline dot */}
-                    <div className="absolute left-0 md:left-1/2 top-0 w-3 h-3 bg-primary rounded-full transform -translate-x-1/2 md:-translate-x-1/2" />
+                    <div className="absolute left-0 md:left-1/2 top-0 w-3 h-3 bg-silk-gold rounded-full transform -translate-x-1/2 md:-translate-x-1/2" />
                     
                     <div className={`pl-8 md:pl-0 ${index % 2 === 0 ? 'md:pr-16' : 'md:order-2 md:pl-16 md:text-left'}`}>
-                      <span className="text-3xl font-light text-primary">{item.year}</span>
+                      <span className="text-3xl font-light text-silk-gold">{item.year}</span>
                       <h3 className="text-xl font-light mt-2 mb-3">{item.title}</h3>
                       <p className="text-muted-foreground leading-relaxed">{item.event}</p>
                       <p className="text-sm text-muted-foreground/70 mt-2 italic">{item.detail}</p>
@@ -544,11 +544,11 @@ const Origins = () => {
               </p>
               <div className="inline-flex items-center gap-4 text-sm text-muted-foreground">
                 <span>412 meters</span>
-                <span className="w-px h-4 bg-border" />
+                <span className="w-px h-4 bg-silk-gold/30" />
                 <span>74 stories</span>
-                <span className="w-px h-4 bg-border" />
+                <span className="w-px h-4 bg-silk-gold/30" />
                 <span>7 years</span>
-                <span className="w-px h-4 bg-border" />
+                <span className="w-px h-4 bg-silk-gold/30" />
                 <span>1 vision</span>
               </div>
             </motion.div>
