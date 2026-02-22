@@ -26,12 +26,12 @@ const Home = () => {
       description: t("stats.height.desc")
     },
     {
-      number: "77",
+      number: "70+",
       label: t("stats.floors"),
       description: t("stats.floors.desc")
     },
     {
-      number: "195,000",
+      number: "24m",
       label: t("stats.sqm"),
       description: t("stats.sqm.desc")
     }
