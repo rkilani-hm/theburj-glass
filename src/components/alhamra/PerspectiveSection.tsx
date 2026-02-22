@@ -35,8 +35,8 @@ const PerspectiveSection = () => {
             transition={{ duration: 0.6 }}
             className="flex items-center gap-4 mb-6"
           >
-            <div className="w-12 h-px bg-border" />
-            <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">02</span>
+            <div className="w-12 h-px bg-silk-gold/40" />
+            <span className="text-xs uppercase tracking-[0.3em] text-champagne">02</span>
           </motion.div>
 
           {/* Section Title */}
@@ -116,8 +116,8 @@ const PerspectiveSection = () => {
               className="space-y-8"
             >
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-px bg-border" />
-                <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
+                <div className="w-12 h-px bg-silk-gold/40" />
+                <span className="text-xs uppercase tracking-[0.3em] text-champagne">
                   {t("perspective.vision.label")}
                 </span>
               </div>
@@ -147,7 +147,7 @@ const PerspectiveSection = () => {
                   className="w-full h-full object-cover transition-transform duration-700 ease-out-expo group-hover:scale-105"
                 />
               </div>
-              <div className="absolute -top-4 -right-4 w-full h-full border border-border -z-10 transition-transform duration-500 group-hover:translate-x-2 group-hover:translate-y-2" />
+              <div className="absolute -top-4 -right-4 w-full h-full border border-silk-gold/20 -z-10 transition-transform duration-500 group-hover:translate-x-2 group-hover:translate-y-2 rounded-xl" />
             </motion.div>
           </div>
         </div>
@@ -222,8 +222,8 @@ const PerspectiveSection = () => {
             className="mb-12"
           >
             <div className="flex items-center gap-4 mb-6">
-              <div className="w-12 h-px bg-border" />
-              <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
+              <div className="w-12 h-px bg-silk-gold/40" />
+              <span className="text-xs uppercase tracking-[0.3em] text-champagne">
                 {t("perspective.gallery.label")}
               </span>
             </div>
@@ -362,7 +362,7 @@ const PerspectiveSection = () => {
                   className="w-full h-full object-cover transition-transform duration-700 ease-out-expo group-hover:scale-105"
                 />
               </div>
-              <div className="absolute -bottom-4 -left-4 w-32 h-32 border border-border -z-10" />
+              <div className="absolute -bottom-4 -left-4 w-32 h-32 border border-silk-gold/20 -z-10 rounded-xl" />
             </motion.div>
 
             {/* Text Column */}
@@ -382,7 +382,7 @@ const PerspectiveSection = () => {
               <p className="text-body text-muted-foreground leading-relaxed">
                 {t("perspective.horizon.p2")}
               </p>
-              <div className="pt-4 border-t border-border">
+              <div className="pt-4 border-t border-silk-gold/20">
                 <p className="text-sm uppercase tracking-[0.2em] text-muted-foreground">
                   {t("perspective.horizon.stat.label")}
                 </p>

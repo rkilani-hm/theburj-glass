@@ -51,8 +51,8 @@ const ContactSection = () => {
               transition={{ duration: 0.8 }}
             >
               <div className="flex items-center gap-4 mb-4">
-                <div className="w-12 h-px bg-white/50" />
-                <span className="text-xs uppercase tracking-[0.3em] text-white/70">07</span>
+                <div className="w-12 h-px bg-silk-gold/60" />
+                <span className="text-xs uppercase tracking-[0.3em] text-silk-gold-light">07</span>
               </div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-light tracking-wide text-white">
                 {t("contact.title")}
@@ -92,7 +92,7 @@ const ContactSection = () => {
                 </label>
                 <input
                   type="text"
-                  className="w-full bg-transparent border-b-2 border-border py-4 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-foreground transition-colors duration-300"
+                  className="w-full bg-transparent border-b-2 border-border py-4 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-silk-gold transition-colors duration-300"
                   placeholder={t("contact.name.placeholder") || "Your name"}
                 />
               </div>
@@ -104,7 +104,7 @@ const ContactSection = () => {
                 </label>
                 <input
                   type="email"
-                  className="w-full bg-transparent border-b-2 border-border py-4 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-foreground transition-colors duration-300"
+                  className="w-full bg-transparent border-b-2 border-border py-4 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-silk-gold transition-colors duration-300"
                   placeholder={t("contact.email.placeholder") || "your@email.com"}
                 />
               </div>
@@ -117,7 +117,7 @@ const ContactSection = () => {
               </label>
               <input
                 type="text"
-                className="w-full bg-transparent border-b-2 border-border py-4 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-foreground transition-colors duration-300"
+                className="w-full bg-transparent border-b-2 border-border py-4 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-silk-gold transition-colors duration-300"
                 placeholder={t("contact.subject.placeholder") || "Subject of inquiry"}
               />
             </div>
@@ -129,7 +129,7 @@ const ContactSection = () => {
               </label>
               <textarea
                 rows={5}
-                className="w-full bg-transparent border-b-2 border-border py-4 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-foreground transition-colors duration-300 resize-none"
+                className="w-full bg-transparent border-b-2 border-border py-4 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-silk-gold transition-colors duration-300 resize-none"
                 placeholder={t("contact.message.placeholder") || "Your message"}
               />
             </div>
@@ -159,11 +159,11 @@ const ContactSection = () => {
                 animate={formInView ? "visible" : "hidden"}
                 variants={revealVariants.fadeUp}
                 transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
-                className="group p-6 border border-border/50 hover:border-border transition-colors duration-300"
+                className="group p-6 liquid-glass-subtle bg-background/80 hover:border-silk-gold/40 transition-colors duration-300"
               >
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 flex items-center justify-center border border-border group-hover:border-foreground transition-colors duration-300">
-                    <detail.icon size={18} className="text-muted-foreground group-hover:text-foreground transition-colors duration-300" />
+                  <div className="w-10 h-10 flex items-center justify-center border border-silk-gold/20 rounded-xl group-hover:bg-silk-gold group-hover:border-silk-gold transition-colors duration-300">
+                    <detail.icon size={18} className="text-champagne group-hover:text-white transition-colors duration-300" />
                   </div>
                   <div>
                     <h3 className="text-xs text-muted-foreground uppercase tracking-[0.2em] mb-2">
@@ -201,7 +201,7 @@ const ContactSection = () => {
           className="grayscale hover:grayscale-0 transition-all duration-700"
         />
         <div className="absolute bottom-6 left-6 right-6 md:left-auto md:right-12 md:bottom-12">
-          <div className="bg-background/95 backdrop-blur-sm p-6 md:p-8 max-w-sm border border-border">
+          <div className="liquid-glass-subtle bg-background/90 p-6 md:p-8 max-w-sm">
             <h3 className="text-sm uppercase tracking-[0.2em] text-muted-foreground mb-3">
               {t("contact.visit") || "Visit Us"}
             </h3>
