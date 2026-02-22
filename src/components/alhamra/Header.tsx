@@ -332,7 +332,7 @@ const Header = () => {
             menuOpen ? "max-h-[700px] opacity-100" : "max-h-0 opacity-0"
           }`}
         >
-          <nav className="py-6 border-t border-border/50 glass">
+          <nav className="py-6 border-t border-silk-gold/20 liquid-glass bg-background/90 rounded-none">
             <div className="flex flex-col gap-2">
               {/* Tower Section - Collapsible */}
               <div>
@@ -370,8 +370,8 @@ const Header = () => {
                               onClick={() => setMenuOpen(false)}
                               className={`block py-2 text-base transition-all duration-300 border-l-2 pl-4 ${
                                 isActive(item.href)
-                                  ? "text-foreground border-foreground"
-                                  : "text-muted-foreground hover:text-foreground border-transparent hover:border-foreground/50"
+                                  ? "text-foreground border-silk-gold"
+                                  : "text-muted-foreground hover:text-foreground border-transparent hover:border-silk-gold/50"
                               }`}
                             >
                               {item.label[language]}
@@ -384,7 +384,7 @@ const Header = () => {
                 </AnimatePresence>
               </div>
 
-              <div className="h-px bg-border" />
+              <div className="h-px bg-silk-gold/15" />
 
               {/* Business Section - Collapsible */}
               <div>
@@ -422,8 +422,8 @@ const Header = () => {
                               onClick={() => setMenuOpen(false)}
                               className={`block py-2 text-base transition-all duration-300 border-l-2 pl-4 ${
                                 isActive(item.href)
-                                  ? "text-foreground border-foreground"
-                                  : "text-muted-foreground hover:text-foreground border-transparent hover:border-foreground/50"
+                                  ? "text-foreground border-silk-gold"
+                                  : "text-muted-foreground hover:text-foreground border-transparent hover:border-silk-gold/50"
                               }`}
                             >
                               {item.label[language]}
@@ -436,7 +436,7 @@ const Header = () => {
                 </AnimatePresence>
               </div>
 
-              <div className="h-px bg-border" />
+              <div className="h-px bg-silk-gold/15" />
 
               {/* Experience Section - Collapsible */}
               <div>
@@ -474,8 +474,8 @@ const Header = () => {
                               onClick={() => setMenuOpen(false)}
                               className={`block py-2 text-base transition-all duration-300 border-l-2 pl-4 ${
                                 isActive(item.href)
-                                  ? "text-foreground border-foreground"
-                                  : "text-muted-foreground hover:text-foreground border-transparent hover:border-foreground/50"
+                                  ? "text-foreground border-silk-gold"
+                                  : "text-muted-foreground hover:text-foreground border-transparent hover:border-silk-gold/50"
                               }`}
                             >
                               {item.label[language]}
@@ -488,7 +488,7 @@ const Header = () => {
                 </AnimatePresence>
               </div>
 
-              <div className="h-px bg-border" />
+              <div className="h-px bg-silk-gold/15" />
 
               {/* Leasing Section - Collapsible */}
               <div>
@@ -526,8 +526,8 @@ const Header = () => {
                               onClick={() => setMenuOpen(false)}
                               className={`block py-2 text-base transition-all duration-300 border-l-2 pl-4 ${
                                 isActive(item.href)
-                                  ? "text-foreground border-foreground"
-                                  : "text-muted-foreground hover:text-foreground border-transparent hover:border-foreground/50"
+                                  ? "text-foreground border-silk-gold"
+                                  : "text-muted-foreground hover:text-foreground border-transparent hover:border-silk-gold/50"
                               }`}
                             >
                               {item.label[language]}
