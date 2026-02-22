@@ -2,6 +2,7 @@ import { Building2, Users, Server, Headphones, Globe, Shield, Zap, Award } from 
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
 import { useScrollReveal, revealVariants } from "@/hooks/useScrollReveal";
+import FloatingGlassBlobs from "./FloatingGlassBlobs";
 import cityViewInterior from "@/assets/city-view-interior.jpg";
 import towerAerialDay from "@/assets/tower-aerial-day.png";
 import cityLandscape from "@/assets/city-landscape.jpg";
@@ -58,8 +59,9 @@ const BusinessSection = () => {
   return (
     <section id="business" className="bg-background relative">
       {/* Hero Section */}
-      <div className="py-section texture-noise">
-        <div className="container mx-auto px-6 lg:px-12">
+      <div className="py-section texture-noise relative">
+        <FloatingGlassBlobs variant="gold" intensity="subtle" />
+        <div className="container mx-auto px-6 lg:px-12 relative z-10">
           {/* Section Label */}
           <motion.div 
             ref={headerRef}

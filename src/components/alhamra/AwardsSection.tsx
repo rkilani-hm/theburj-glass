@@ -2,6 +2,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
 import { useScrollReveal, revealVariants } from "@/hooks/useScrollReveal";
 import { Award, Trophy, Star, Medal, Crown } from "lucide-react";
+import FloatingGlassBlobs from "./FloatingGlassBlobs";
 
 const AwardsSection = () => {
   const { t } = useLanguage();
@@ -17,8 +18,9 @@ const AwardsSection = () => {
   ];
 
   return (
-    <section className="py-section bg-secondary">
-      <div className="container mx-auto px-6 lg:px-12">
+    <section className="py-section bg-secondary relative">
+      <FloatingGlassBlobs variant="gold" intensity="subtle" />
+      <div className="container mx-auto px-6 lg:px-12 relative z-10">
         {/* Section Header */}
         <motion.div
           ref={sectionRef}

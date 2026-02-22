@@ -1,10 +1,11 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { 
+import {
   Wrench, Shield, Heart, Settings, Droplets, Cpu,
   Users, Sparkles, Sofa, Stethoscope, Building2, ChevronDown
 } from "lucide-react";
+import FloatingGlassBlobs from "./FloatingGlassBlobs";
 
 interface ServiceCategory {
   id: string;
@@ -54,8 +55,9 @@ const ServiceHubDrawers = () => {
   const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
 
   return (
-    <section className="py-16 bg-secondary/50">
-      <div className="container mx-auto px-6 lg:px-12">
+    <section className="py-16 bg-secondary/50 relative">
+      <FloatingGlassBlobs variant="cool" intensity="subtle" />
+      <div className="container mx-auto px-6 lg:px-12 relative z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

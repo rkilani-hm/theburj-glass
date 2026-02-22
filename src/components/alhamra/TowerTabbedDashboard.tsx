@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import towerVertical from "@/assets/som-tower-vertical.jpg";
 import { Mountain, Layers, Building2 } from "lucide-react";
+import FloatingGlassBlobs from "./FloatingGlassBlobs";
 
 interface TabData {
   id: string;
@@ -85,6 +86,9 @@ const TowerTabbedDashboard = () => {
       <div className="absolute inset-0 opacity-[0.02]">
         <div className="absolute inset-0 architectural-grid" />
       </div>
+      
+      {/* Floating Glass Blobs */}
+      <FloatingGlassBlobs variant="gold" />
 
       <div className="container mx-auto px-6 lg:px-12">
         {/* Section Label */}
