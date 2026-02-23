@@ -4,50 +4,26 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import heroVideo from "@/assets/hero-video.mp4";
 
-const LetterDrop = ({ text, className, delay = 0 }: { text: string; className?: string; delay?: number }) => {
-  const letters = text.split("");
-  
-  return (
-    <span className={className}>
-      {letters.map((letter, index) => (
-        <motion.span
-          key={index}
-          initial={{ opacity: 0, y: -80 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: 1.2,
-            delay: delay + index * 0.05,
-            ease: [0.22, 1, 0.36, 1],
-          }}
-          className="inline-block"
-          style={{ whiteSpace: letter === " " ? "pre" : "normal" }}
-        >
-          {letter === " " ? "\u00A0" : letter}
-        </motion.span>
-      ))}
-    </span>
-  );
-};
-
-const RotatingText = ({ 
+const FadeBlurText = ({ 
   texts, 
   currentIndex, 
-  initialDelay = 0.5 
+  delay = 0 
 }: { 
   texts: string[]; 
   currentIndex: number; 
-  initialDelay?: number;
+  delay?: number;
 }) => {
   return (
     <AnimatePresence mode="wait">
       <motion.span
         key={currentIndex}
-        initial={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.3 }}
+        initial={{ opacity: 0, filter: "blur(8px)" }}
+        animate={{ opacity: 1, filter: "blur(0px)" }}
+        exit={{ opacity: 0, filter: "blur(8px)" }}
+        transition={{ duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] }}
         className="inline-block"
       >
-        <LetterDrop key={`${currentIndex}-${texts[currentIndex]}`} text={texts[currentIndex]} delay={initialDelay} />
+        {texts[currentIndex]}
       </motion.span>
     </AnimatePresence>
   );
@@ -117,19 +93,19 @@ const HeroContent = () => {
       transition={{ duration: 2, ease: [0.22, 1, 0.36, 1] }}
     >
       {/* Liquid Glass Panel */}
-      <div className="liquid-glass px-8 py-10 md:px-12 md:py-14 max-w-2xl">
-        <h1 className="text-3xl md:text-4xl lg:text-5xl font-light tracking-tight text-white drop-shadow-sm">
-          <RotatingText texts={headlines} currentIndex={currentIndex} initialDelay={0.8} />
+      <div className="liquid-glass px-6 py-7 md:px-8 md:py-9 max-w-lg">
+        <h1 className="text-xl md:text-2xl lg:text-3xl font-light tracking-tight text-white drop-shadow-sm">
+          <FadeBlurText texts={headlines} currentIndex={currentIndex} delay={0.3} />
         </h1>
-        <p className="mt-6 text-base md:text-lg text-white/80 font-light tracking-wide">
-          <RotatingText texts={sublines} currentIndex={currentIndex} initialDelay={1.6} />
+        <p className="mt-4 text-sm md:text-base text-white/80 font-light tracking-wide">
+          <FadeBlurText texts={sublines} currentIndex={currentIndex} delay={0.6} />
         </p>
         {/* Gold accent line */}
         <motion.div 
-          className="mt-8 h-px w-24 bg-gradient-to-r from-silk-gold to-transparent"
+          className="mt-5 h-px w-16 bg-gradient-to-r from-silk-gold to-transparent"
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
-          transition={{ duration: 1.5, delay: 2, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 1.5, delay: 1.2, ease: [0.22, 1, 0.36, 1] }}
           style={{ originX: 0 }}
         />
       </div>
