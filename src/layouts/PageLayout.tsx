@@ -24,7 +24,7 @@ const PageLayout = ({ children }: PageLayoutProps) => {
       <div
         style={{
           opacity: isLoading ? 0 : 1,
-          filter: isLoading ? "blur(4px)" : "blur(0px)",
+          ...(isLoading ? { filter: "blur(4px)" } : {}),
           transition: "opacity 0.6s ease-out, filter 0.6s ease-out",
         }}
       >
