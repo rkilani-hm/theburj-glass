@@ -93,11 +93,11 @@ const HeroContent = () => {
       transition={{ duration: 2, ease: [0.22, 1, 0.36, 1] }}
     >
       {/* Liquid Glass Panel */}
-      <div className="liquid-glass px-6 py-7 md:px-8 md:py-9 max-w-lg">
-        <h1 className="text-xl md:text-2xl lg:text-3xl font-light tracking-tight text-white drop-shadow-sm">
+      <div className="liquid-glass px-5 py-6 md:px-7 md:py-8 max-w-sm">
+        <h1 className="text-lg md:text-xl lg:text-2xl font-light tracking-tight text-white drop-shadow-sm">
           <FadeBlurText texts={headlines} currentIndex={currentIndex} delay={0.3} />
         </h1>
-        <p className="mt-4 text-sm md:text-base text-white/80 font-light tracking-wide">
+        <p className="mt-3 text-xs md:text-sm text-white/80 font-light tracking-wide">
           <FadeBlurText texts={sublines} currentIndex={currentIndex} delay={0.6} />
         </p>
         {/* Gold accent line */}
