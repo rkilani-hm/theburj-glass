@@ -66,10 +66,8 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out-expo ${
-        scrolled
-          ? "glass border-b border-border/50"
-          : "bg-transparent"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out-expo liquid-glass border-b border-silk-gold/15 ${
+        scrolled ? "shadow-lg" : ""
       }`}
     >
       <div className="container mx-auto px-6 lg:px-12">
