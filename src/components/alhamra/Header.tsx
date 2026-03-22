@@ -1,8 +1,3 @@
-/**
- * Al Hamra Tower — Bottom Navigation
- * fluid.glass style: centered floating pill, NOT full-width
- */
-
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -10,22 +5,22 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import alHamraLogo from "@/assets/al-hamra-logo.png";
 
 const PRIMARY_NAV = [
-  { label: { en: "The Tower",  ar: "البرج"    }, href: "/tower"                         },
-  { label: { en: "Business",   ar: "الأعمال"   }, href: "/business/workplace-experience"  },
-  { label: { en: "Leasing",    ar: "التأجير"   }, href: "/leasing/opportunities"          },
-  { label: { en: "Location",   ar: "الموقع"    }, href: "/location"                       },
-  { label: { en: "Contact",    ar: "التواصل"   }, href: "/leasing/contact"                },
+  { label: { en: "The Tower",  ar: "البرج"  },  href: "/tower"                         },
+  { label: { en: "Business",   ar: "الأعمال" },  href: "/business/workplace-experience"  },
+  { label: { en: "Leasing",    ar: "التأجير" },  href: "/leasing/opportunities"          },
+  { label: { en: "Location",   ar: "الموقع"  },  href: "/location"                       },
+  { label: { en: "Contact",    ar: "التواصل" },  href: "/leasing/contact"                },
 ];
 
 const SECONDARY_NAV = [
-  { label: { en: "Overview",        ar: "نظرة عامة"   }, href: "/tower"                          },
-  { label: { en: "Rising",          ar: "الصعود"       }, href: "/tower/rising"                   },
-  { label: { en: "Design",          ar: "التصميم"      }, href: "/tower/design"                   },
-  { label: { en: "Sustainability",  ar: "الاستدامة"    }, href: "/tower/sustainability"            },
-  { label: { en: "Office Spaces",   ar: "المكاتب"      }, href: "/business/office-spaces"         },
-  { label: { en: "Inquiry",         ar: "استفسار"      }, href: "/leasing/inquiry"                },
-  { label: { en: "Downloads",       ar: "التنزيلات"    }, href: "/leasing/downloads"              },
-  { label: { en: "Services",        ar: "الخدمات"      }, href: "/services"                       },
+  { label: { en: "Overview",       ar: "نظرة عامة"  }, href: "/tower"                          },
+  { label: { en: "Rising",         ar: "الصعود"      }, href: "/tower/rising"                   },
+  { label: { en: "Design",         ar: "التصميم"     }, href: "/tower/design"                   },
+  { label: { en: "Sustainability",  ar: "الاستدامة"  }, href: "/tower/sustainability"            },
+  { label: { en: "Office Spaces",  ar: "المكاتب"     }, href: "/business/office-spaces"         },
+  { label: { en: "Inquiry",        ar: "استفسار"     }, href: "/leasing/inquiry"                },
+  { label: { en: "Downloads",      ar: "التنزيلات"   }, href: "/leasing/downloads"              },
+  { label: { en: "Services",       ar: "الخدمات"     }, href: "/services"                       },
 ];
 
 export default function Header() {
@@ -42,7 +37,16 @@ export default function Header() {
   const isActive = (href: string) =>
     location.pathname === href || location.pathname.startsWith(href + "/");
 
-  /* ── Shared text-color helper for nav items ── */
+  /* ── Derive current page label ── */
+  const currentPage = (() => {
+    const all = [...PRIMARY_NAV, ...SECONDARY_NAV];
+    // Find deepest match (most specific path first)
+    const sorted = all.slice().sort((a, b) => b.href.length - a.href.length);
+    const match = sorted.find(n => isActive(n.href));
+    if (match) return match.label[language];
+    return language === "en" ? "Home" : "الرئيسية";
+  })();
+
   const navColor = (active: boolean) =>
     open
       ? active ? "#FAFAF8" : "#555"
@@ -50,9 +54,9 @@ export default function Header() {
 
   return (
     <>
-      {/* ══════════════════════════════════════════════════════
-          FULL-SCREEN OVERLAY — clips upward from the pill
-          ══════════════════════════════════════════════════════ */}
+      {/* ════════════════════════════════════════════════
+          FULL-SCREEN OVERLAY
+          ════════════════════════════════════════════════ */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -66,7 +70,7 @@ export default function Header() {
             <div className="flex-1 overflow-y-auto container-fluid py-16 lg:py-24">
               <div className="grid lg:grid-cols-12 gap-16 items-start">
 
-                {/* Left col — large serif nav */}
+                {/* Left: large serif nav */}
                 <nav className="lg:col-span-7 flex flex-col gap-1">
                   {PRIMARY_NAV.map((item, i) => (
                     <motion.div key={item.href}
@@ -81,15 +85,15 @@ export default function Header() {
                         style={{ borderColor: "#1E1E1E" }}
                       >
                         <span style={{
-                          fontFamily: "var(--font-sans)", fontSize: "11px",
-                          color: "#444", letterSpacing: "0.1em", minWidth: 24, paddingTop: 6,
+                          fontFamily: "var(--font-sans)", fontSize: "10px",
+                          color: "#444", letterSpacing: "0.1em", minWidth: 22, paddingTop: 6,
                         }}>
                           {String(i + 1).padStart(2, "0")}
                         </span>
                         <span
                           className="font-serif font-light transition-colors duration-300"
                           style={{
-                            fontSize: "clamp(2.2rem, 5vw, 5rem)",
+                            fontSize: "clamp(2rem, 4.5vw, 4.5rem)",
                             lineHeight: 1.1,
                             letterSpacing: "-0.025em",
                             color: isActive(item.href) ? "#FAFAF8" : "#444",
@@ -100,7 +104,7 @@ export default function Header() {
                           {item.label[language]}
                         </span>
                         <span className="ml-auto self-center font-sans font-light opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all duration-300"
-                          style={{ color: "#FAFAF8", fontSize: "1.1rem" }}>
+                          style={{ color: "#FAFAF8", fontSize: "1rem" }}>
                           →
                         </span>
                       </Link>
@@ -108,20 +112,20 @@ export default function Header() {
                   ))}
                 </nav>
 
-                {/* Right col — secondary + contact */}
+                {/* Right: secondary + contact */}
                 <div className="lg:col-span-5 flex flex-col gap-10">
                   <motion.nav className="flex flex-col gap-3"
                     initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.4, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                   >
-                    <p style={{ fontFamily: "var(--font-sans)", fontSize: "10px", letterSpacing: "0.2em",
+                    <p style={{ fontFamily: "var(--font-sans)", fontSize: "9px", letterSpacing: "0.2em",
                       textTransform: "uppercase", color: "#444", marginBottom: 8 }}>
                       Quick links
                     </p>
                     {SECONDARY_NAV.map(item => (
                       <Link key={item.href} to={item.href} onClick={() => setOpen(false)}
-                        style={{ fontFamily: "var(--font-sans)", fontSize: "13px", fontWeight: 300,
-                          letterSpacing: "0.06em", color: "#555", transition: "color 0.2s" }}
+                        style={{ fontFamily: "var(--font-sans)", fontSize: "12px", fontWeight: 300,
+                          letterSpacing: "0.05em", color: "#555", transition: "color 0.2s" }}
                         onMouseEnter={e => (e.currentTarget.style.color = "#FAFAF8")}
                         onMouseLeave={e => (e.currentTarget.style.color = "#555")}
                       >
@@ -132,20 +136,20 @@ export default function Header() {
 
                   <div style={{ height: 1, background: "#1E1E1E" }} />
 
-                  <motion.div className="flex flex-col gap-4"
+                  <motion.div className="flex flex-col gap-3"
                     initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.5, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                   >
-                    <p style={{ fontFamily: "var(--font-sans)", fontSize: "10px", letterSpacing: "0.2em",
+                    <p style={{ fontFamily: "var(--font-sans)", fontSize: "9px", letterSpacing: "0.2em",
                       textTransform: "uppercase", color: "#444" }}>
                       Contact
                     </p>
                     {[
-                      { text: "+965 2227 5000", href: "tel:+96522275000" },
-                      { text: "leasing@alhamratower.com", href: "mailto:leasing@alhamratower.com" },
+                      { text: "+965 2227 5000",            href: "tel:+96522275000" },
+                      { text: "leasing@alhamratower.com",  href: "mailto:leasing@alhamratower.com" },
                     ].map(c => (
                       <a key={c.href} href={c.href}
-                        style={{ fontFamily: "var(--font-sans)", fontSize: "13px", fontWeight: 300,
+                        style={{ fontFamily: "var(--font-sans)", fontSize: "12px", fontWeight: 300,
                           letterSpacing: "0.04em", color: "#555", transition: "color 0.2s" }}
                         onMouseEnter={e => (e.currentTarget.style.color = "#FAFAF8")}
                         onMouseLeave={e => (e.currentTarget.style.color = "#555")}
@@ -153,7 +157,7 @@ export default function Header() {
                         {c.text}
                       </a>
                     ))}
-                    <p style={{ fontFamily: "var(--font-sans)", fontSize: "12px", fontWeight: 300, color: "#444" }}>
+                    <p style={{ fontFamily: "var(--font-sans)", fontSize: "11px", fontWeight: 300, color: "#444" }}>
                       Sharq District, Kuwait City
                     </p>
                   </motion.div>
@@ -165,8 +169,8 @@ export default function Header() {
                     <Link to="/leasing/opportunities" onClick={() => setOpen(false)}
                       style={{
                         display: "inline-flex", alignItems: "center", gap: 10,
-                        padding: "13px 28px", background: "#FAFAF8", color: "#1A1A1A",
-                        fontFamily: "var(--font-sans)", fontSize: "12px", fontWeight: 400,
+                        padding: "12px 24px", background: "#FAFAF8", color: "#1A1A1A",
+                        fontFamily: "var(--font-sans)", fontSize: "11px", fontWeight: 400,
                         letterSpacing: "0.08em", textTransform: "uppercase", transition: "background 0.25s",
                       }}
                       onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = "#E8E8E8")}
@@ -182,67 +186,66 @@ export default function Header() {
         )}
       </AnimatePresence>
 
-      {/* ══════════════════════════════════════════════════════
-          FLOATING PILL NAV — centered, NOT full-width
-          fluid.glass: hovers above the bottom edge
-          ══════════════════════════════════════════════════════ */}
+      {/* ════════════════════════════════════════════════
+          FLOATING PILL — centered, smaller, no burger
+          ════════════════════════════════════════════════ */}
       <div
         className="fixed bottom-0 left-0 right-0 z-50"
         style={{
-          /* outer wrapper: just centers the pill */
           display: "flex",
           justifyContent: "center",
-          padding: "0 clamp(1rem, 4vw, 2rem) clamp(0.75rem, 2vw, 1.25rem)",
-          pointerEvents: "none",           /* let clicks pass through padding */
+          padding: "0 clamp(1rem, 4vw, 2rem) clamp(0.75rem, 2vw, 1rem)",
+          pointerEvents: "none",
         }}
       >
-        {/* ── The pill itself ── */}
         <div
           style={{
             width: "100%",
-            maxWidth: 900,
-            height: "var(--nav-h)",
+            maxWidth: 640,           /* ← smaller pill */
+            height: 52,              /* ← slimmer height */
             background: open ? "#111111" : "#FFFFFF",
             border: `1px solid ${open ? "#222" : "#E8E8E8"}`,
             borderRadius: 9999,
             transition: "background 0.5s ease, border-color 0.5s ease",
             boxShadow: open
               ? "0 8px 48px rgba(0,0,0,0.55)"
-              : "0 4px 32px rgba(0,0,0,0.10), 0 1px 6px rgba(0,0,0,0.06)",
+              : "0 4px 24px rgba(0,0,0,0.09), 0 1px 4px rgba(0,0,0,0.05)",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            padding: "0 clamp(1.2rem, 2.5vw, 2rem)",
-            pointerEvents: "auto",           /* re-enable clicks on pill */
+            padding: "0 clamp(1rem, 2vw, 1.5rem)",
+            pointerEvents: "auto",
           }}
         >
-
           {/* ── Logo ── */}
           <Link to="/" onClick={() => setOpen(false)} style={{ flexShrink: 0 }}>
             <motion.img
               src={alHamraLogo}
               alt="Al Hamra Tower"
               style={{
-                height: 34,
+                height: 28,
                 width: "auto",
                 objectFit: "contain",
                 filter: open ? "brightness(0) invert(1)" : "none",
                 transition: "filter 0.4s ease",
               }}
-              whileHover={{ opacity: 0.7 }}
+              whileHover={{ opacity: 0.65 }}
               transition={{ duration: 0.2 }}
             />
           </Link>
 
           {/* ── Center quick links (desktop only) ── */}
-          <nav className="hidden lg:flex items-center gap-7">
+          <nav className="hidden lg:flex items-center gap-6">
             {PRIMARY_NAV.slice(0, 4).map(item => (
               <Link key={item.href} to={item.href}
                 style={{
-                  fontFamily: "var(--font-sans)", fontSize: "11px", fontWeight: 400,
-                  letterSpacing: "0.1em", textTransform: "uppercase",
+                  fontFamily: "var(--font-sans)",
+                  fontSize: "10px",           /* ← smaller */
+                  fontWeight: 400,
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
                   color: navColor(isActive(item.href)),
-                  transition: "color 0.25s ease",
+                  transition: "color 0.22s ease",
                 }}
                 onMouseEnter={e => (e.currentTarget.style.color = open ? "#FAFAF8" : "#1A1A1A")}
                 onMouseLeave={e => (e.currentTarget.style.color = navColor(isActive(item.href)))}
@@ -252,18 +255,24 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* ── Right: language + Menu toggle ── */}
-          <div className="flex items-center gap-5">
+          {/* ── Right: language + toggle ── */}
+          <div className="flex items-center gap-4">
 
             {/* Language */}
             <button
               onClick={toggleLanguage}
               style={{
-                fontFamily: "var(--font-sans)", fontSize: "11px", fontWeight: 400,
-                letterSpacing: "0.1em", textTransform: "uppercase",
-                color: navColor(false), cursor: "pointer",
-                background: "none", border: "none", padding: 0,
-                transition: "color 0.25s ease",
+                fontFamily: "var(--font-sans)",
+                fontSize: "10px",
+                fontWeight: 400,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                color: navColor(false),
+                cursor: "pointer",
+                background: "none",
+                border: "none",
+                padding: 0,
+                transition: "color 0.22s ease",
               }}
               onMouseEnter={e => (e.currentTarget.style.color = open ? "#FAFAF8" : "#1A1A1A")}
               onMouseLeave={e => (e.currentTarget.style.color = navColor(false))}
@@ -271,48 +280,48 @@ export default function Header() {
               {language === "en" ? "عربي" : "EN"}
             </button>
 
-            {/* ── "Menu" / "Close" text + animated lines ── */}
+            {/* ── Toggle: shows current page name (closed) or "Close" (open) ── */}
             <button
               onClick={() => setOpen(v => !v)}
-              className="flex items-center gap-2.5"
               style={{
-                fontFamily: "var(--font-sans)", fontSize: "12px", fontWeight: 400,
-                letterSpacing: "0.1em", textTransform: "uppercase",
+                fontFamily: "var(--font-sans)",
+                fontSize: "10px",
+                fontWeight: 400,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
                 color: open ? "#FAFAF8" : "#1A1A1A",
-                cursor: "pointer", background: "none", border: "none", padding: 0,
+                cursor: "pointer",
+                background: "none",
+                border: "none",
+                padding: 0,
                 transition: "color 0.3s ease",
+                minWidth: 56,
+                textAlign: "right",
               }}
             >
               <AnimatePresence mode="wait">
                 {open ? (
                   <motion.span key="close"
-                    initial={{ opacity: 0, y: 5 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -5 }}
+                    initial={{ opacity: 0, y: 5 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -5 }}
                     transition={{ duration: 0.18 }}
+                    style={{ display: "block" }}
                   >
                     Close
                   </motion.span>
                 ) : (
-                  <motion.span key="menu"
-                    initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 5 }}
+                  <motion.span key="page"
+                    initial={{ opacity: 0, y: -5 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 5 }}
                     transition={{ duration: 0.18 }}
+                    style={{ display: "block" }}
                   >
-                    Menu
+                    {currentPage}
                   </motion.span>
                 )}
               </AnimatePresence>
-
-              {/* Three lines → X */}
-              <div style={{ width: 18, height: 12, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-                <motion.span style={{ display: "block", height: 1, background: open ? "#FAFAF8" : "#1A1A1A", transformOrigin: "center", transition: "background 0.3s" }}
-                  animate={open ? { rotate: 45, y: 5.5 } : { rotate: 0, y: 0 }}
-                  transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }} />
-                <motion.span style={{ display: "block", height: 1, background: open ? "#FAFAF8" : "#1A1A1A", transition: "background 0.3s" }}
-                  animate={open ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
-                  transition={{ duration: 0.2 }} />
-                <motion.span style={{ display: "block", height: 1, background: open ? "#FAFAF8" : "#1A1A1A", transformOrigin: "center", transition: "background 0.3s" }}
-                  animate={open ? { rotate: -45, y: -5.5 } : { rotate: 0, y: 0 }}
-                  transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }} />
-              </div>
             </button>
           </div>
         </div>
