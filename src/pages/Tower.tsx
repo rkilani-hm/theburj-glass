@@ -29,7 +29,7 @@ const PageHero = ({ title, subtitle, image, overline }: PageHeroProps) => {
       {/* BG image parallax */}
       <motion.div className="absolute inset-0" style={{ y }}>
         <img src={image} alt={title} className="w-full h-full object-cover" style={{ objectPosition: "center 20%" }} />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(8,8,8,1) 0%, rgba(8,8,8,0.5) 40%, rgba(8,8,8,0.15) 100%)" }} />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(250,250,247,1) 0%, rgba(250,250,247,0.5) 40%, rgba(250,250,247,0.15) 100%)" }} />
       </motion.div>
 
       {/* Content */}
@@ -47,7 +47,7 @@ const PageHero = ({ title, subtitle, image, overline }: PageHeroProps) => {
             {title}
           </h1>
           {subtitle && (
-            <p className="text-white/50 max-w-xl" style={{ fontSize: "1.05rem", lineHeight: 1.8, fontWeight: 300 }}>
+            <p className="text-foreground/50 max-w-xl" style={{ fontSize: "1.05rem", lineHeight: 1.8, fontWeight: 300 }}>
               {subtitle}
             </p>
           )}
@@ -70,7 +70,7 @@ const SubNav = ({ active }: { active: string }) => {
     <div
       className="sticky top-16 z-30 py-4 px-6"
       style={{
-        background: "rgba(8,8,8,0.85)",
+        background: "rgba(250,250,247,0.85)",
         backdropFilter: "blur(30px)",
         borderBottom: "1px solid rgba(255,255,255,0.06)",
       }}
@@ -87,9 +87,9 @@ const SubNav = ({ active }: { active: string }) => {
                 letterSpacing: "0.1em",
                 textTransform: "uppercase",
                 fontWeight: 300,
-                background: active === l.href ? "rgba(201,169,110,0.12)" : "transparent",
-                color: active === l.href ? "hsl(var(--silk-gold))" : "rgba(255,255,255,0.4)",
-                border: active === l.href ? "1px solid rgba(201,169,110,0.2)" : "1px solid transparent",
+                background: active === l.href ? "rgba(74,107,138,0.12)" : "transparent",
+                color: active === l.href ? "hsl(var(--sky))" : "rgba(255,255,255,0.4)",
+                border: active === l.href ? "1px solid rgba(74,107,138,0.2)" : "1px solid transparent",
                 textDecoration: "none",
               }}
             >
@@ -115,10 +115,10 @@ const StatBlock = ({ value, unit, label }: { value: string; unit: string; label:
       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
     >
       <div className="flex items-end gap-1">
-        <span className="font-serif font-light text-white" style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)", lineHeight: 1, letterSpacing: "-0.03em" }}>{value}</span>
-        <span className="text-silk-gold font-light mb-1" style={{ fontSize: "1rem" }}>{unit}</span>
+        <span className="font-serif font-light text-foreground" style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)", lineHeight: 1, letterSpacing: "-0.03em" }}>{value}</span>
+        <span className="text-sky font-light mb-1" style={{ fontSize: "1rem" }}>{unit}</span>
       </div>
-      <p className="text-white/35" style={{ fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase" }}>{label}</p>
+      <p className="text-foreground/35" style={{ fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase" }}>{label}</p>
     </motion.div>
   );
 };
@@ -185,11 +185,11 @@ const FeatureRow = ({
         </p>
         <Link
           to={link}
-          className="glass inline-flex items-center gap-3 px-6 py-3 text-white/70 hover:text-white transition-all duration-300 group"
+          className="glass inline-flex items-center gap-3 px-6 py-3 text-foreground/70 hover:text-white transition-all duration-300 group"
           style={{ fontSize: "11px", letterSpacing: "0.15em", textTransform: "uppercase", textDecoration: "none" }}
         >
           <span>{linkLabel}</span>
-          <ArrowRight size={13} className="text-silk-gold group-hover:translate-x-1 transition-transform" />
+          <ArrowRight size={13} className="text-sky group-hover:translate-x-1 transition-transform" />
         </Link>
       </motion.div>
     </div>
@@ -217,7 +217,7 @@ const Tower = () => {
       <SubNav active="/tower" />
 
       {/* ── Key stats band ── */}
-      <section style={{ background: "rgba(14,14,14,0.6)", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
+      <section style={{ background: "rgba(244,241,236,0.6)", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
         <div className="container mx-auto px-6 lg:px-12 py-12">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
             <StatBlock value="413" unit="m"  label="Total Height" />
@@ -272,12 +272,12 @@ const Tower = () => {
           viewport={{ once: true }}
           transition={{ duration: 2.5, ease: "easeOut" }}
         />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(8,8,8,0.7) 0%, rgba(8,8,8,0.3) 50%, rgba(8,8,8,0.6) 100%)" }} />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(250,250,247,0.7) 0%, rgba(250,250,247,0.3) 50%, rgba(250,250,247,0.6) 100%)" }} />
         {/* Quote overlay */}
         <div className="absolute inset-0 flex items-center justify-center">
           <RevealBlock>
             <blockquote
-              className="font-serif font-light italic text-white/80 text-center max-w-2xl px-8"
+              className="font-serif font-light italic text-foreground/80 text-center max-w-2xl px-8"
               style={{ fontSize: "clamp(1.2rem, 2.5vw, 2rem)", lineHeight: 1.5, letterSpacing: "-0.01em" }}
             >
               "A structure of absolute presence, designed to endure beyond trends."
@@ -322,7 +322,7 @@ const Tower = () => {
       {/* ── Integrated ecosystem ── */}
       <section
         className="section-luxury"
-        style={{ background: "rgba(10,10,10,0.8)" }}
+        style={{ background: "rgba(250,250,247,0.8)" }}
       >
         <div className="container mx-auto px-6 lg:px-12">
           <RevealBlock>
@@ -364,29 +364,29 @@ const Tower = () => {
                   className="p-8 h-full"
                   style={{
                     background: "rgba(255,255,255,0.03)",
-                    border: "1px solid rgba(255,255,255,0.07)",
+                    border: "1px solid rgba(0,0,0,0.05)",
                     borderRadius: 24,
                     transition: "border-color 0.3s",
                   }}
-                  onMouseEnter={e => ((e.currentTarget as HTMLDivElement).style.borderColor = "rgba(201,169,110,0.2)")}
-                  onMouseLeave={e => ((e.currentTarget as HTMLDivElement).style.borderColor = "rgba(255,255,255,0.07)")}
+                  onMouseEnter={e => ((e.currentTarget as HTMLDivElement).style.borderColor = "rgba(74,107,138,0.2)")}
+                  onMouseLeave={e => ((e.currentTarget as HTMLDivElement).style.borderColor = "rgba(0,0,0,0.05)")}
                 >
                   <div className="flex items-start justify-between mb-6">
                     <span
-                      className="flex items-center justify-center text-silk-gold"
-                      style={{ width: 40, height: 40, background: "rgba(201,169,110,0.08)", border: "1px solid rgba(201,169,110,0.15)", borderRadius: 12, fontSize: "1.1rem" }}
+                      className="flex items-center justify-center text-sky"
+                      style={{ width: 40, height: 40, background: "rgba(74,107,138,0.08)", border: "1px solid rgba(74,107,138,0.15)", borderRadius: 12, fontSize: "1.1rem" }}
                     >
                       {card.icon}
                     </span>
                     <span
-                      className="text-silk-gold"
-                      style={{ fontSize: "9px", letterSpacing: "0.2em", textTransform: "uppercase", background: "rgba(201,169,110,0.08)", padding: "4px 10px", borderRadius: 50, border: "1px solid rgba(201,169,110,0.15)" }}
+                      className="text-sky"
+                      style={{ fontSize: "9px", letterSpacing: "0.2em", textTransform: "uppercase", background: "rgba(74,107,138,0.08)", padding: "4px 10px", borderRadius: 50, border: "1px solid rgba(74,107,138,0.15)" }}
                     >
                       {card.tag}
                     </span>
                   </div>
-                  <h4 className="font-serif font-light text-white/85 mb-3" style={{ fontSize: "1.15rem", letterSpacing: "-0.01em" }}>{card.title}</h4>
-                  <p className="text-white/40" style={{ fontSize: "0.85rem", lineHeight: 1.8, fontWeight: 300 }}>{card.desc}</p>
+                  <h4 className="font-serif font-light text-foreground/85 mb-3" style={{ fontSize: "1.15rem", letterSpacing: "-0.01em" }}>{card.title}</h4>
+                  <p className="text-foreground/40" style={{ fontSize: "0.85rem", lineHeight: 1.8, fontWeight: 300 }}>{card.desc}</p>
                 </div>
               </RevealBlock>
             ))}
@@ -421,10 +421,10 @@ const Tower = () => {
                   </div>
                   <div className="mt-4">
                     <div className="flex items-center justify-between">
-                      <h4 className="font-serif font-light text-white/80 group-hover:text-white transition-colors" style={{ fontSize: "1.05rem" }}>{item.label}</h4>
-                      <ArrowRight size={13} className="text-silk-gold opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300" />
+                      <h4 className="font-serif font-light text-foreground/80 group-hover:text-white transition-colors" style={{ fontSize: "1.05rem" }}>{item.label}</h4>
+                      <ArrowRight size={13} className="text-sky opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300" />
                     </div>
-                    <p className="text-white/35 mt-1" style={{ fontSize: "11px", letterSpacing: "0.08em" }}>{item.sub}</p>
+                    <p className="text-foreground/35 mt-1" style={{ fontSize: "11px", letterSpacing: "0.08em" }}>{item.sub}</p>
                   </div>
                 </Link>
               </RevealBlock>

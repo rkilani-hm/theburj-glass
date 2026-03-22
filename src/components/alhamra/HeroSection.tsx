@@ -2,52 +2,43 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { motion, useScroll, useTransform, useSpring, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import { ChevronDown } from "lucide-react";
-import heroTower from "@/assets/tower-full-blue-sky.png";
+import heroTower   from "@/assets/tower-full-blue-sky.png";
+import skylineBg   from "@/assets/kuwait-skyline-day.png";
 
-/* ── Animated altitude counter ── */
-const AltitudeCounter = ({ target = 412, duration = 2200 }: { target?: number; duration?: number }) => {
+/* ── Altitude counter ── */
+const AltitudeCounter = () => {
   const [count, setCount] = useState(0);
-  const [started, setStarted] = useState(false);
-
   useEffect(() => {
-    const timer = setTimeout(() => setStarted(true), 800);
-    return () => clearTimeout(timer);
+    const t = setTimeout(() => {
+      const start = performance.now();
+      const dur = 2000;
+      const tick = (now: number) => {
+        const p = Math.min((now - start) / dur, 1);
+        const e = 1 - Math.pow(1 - p, 3);
+        setCount(Math.round(e * 412));
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    }, 700);
+    return () => clearTimeout(t);
   }, []);
-
-  useEffect(() => {
-    if (!started) return;
-    const start = performance.now();
-    const ease = (t: number) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-    const animate = (now: number) => {
-      const elapsed = now - start;
-      const progress = Math.min(elapsed / duration, 1);
-      setCount(Math.round(ease(progress) * target));
-      if (progress < 1) requestAnimationFrame(animate);
-    };
-    requestAnimationFrame(animate);
-  }, [started, target, duration]);
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
       className="flex items-end gap-2"
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
     >
       <span
-        className="font-serif font-light leading-none"
-        style={{
-          fontSize: "clamp(3.5rem, 9vw, 7rem)",
-          color: "hsl(var(--silk-gold))",
-          letterSpacing: "-0.03em",
-          textShadow: "0 0 80px rgba(201,169,110,0.4)",
-        }}
+        className="font-serif leading-none text-sky-dark"
+        style={{ fontSize: "clamp(3rem, 8vw, 6rem)", fontWeight: 300, letterSpacing: "-0.04em" }}
       >
         {count}
       </span>
       <span
-        className="mb-2 font-light text-white/40"
-        style={{ fontSize: "clamp(1rem, 2vw, 1.5rem)", letterSpacing: "0.15em" }}
+        className="mb-2 text-sky font-light"
+        style={{ fontSize: "clamp(1rem, 2vw, 1.4rem)", letterSpacing: "0.1em" }}
       >
         m
       </span>
@@ -55,261 +46,153 @@ const AltitudeCounter = ({ target = 412, duration = 2200 }: { target?: number; d
   );
 };
 
-/* ── Floating glass ambient orbs ── */
-const AmbientOrbs = () => (
-  <div className="absolute inset-0 overflow-hidden pointer-events-none">
-    <motion.div
-      className="absolute rounded-full"
-      style={{
-        width: "50vw", height: "50vw",
-        background: "radial-gradient(circle, rgba(201,169,110,0.06) 0%, transparent 65%)",
-        filter: "blur(80px)",
-        top: "10%", right: "-10%",
-      }}
-      animate={{ scale: [1, 1.15, 1], opacity: [0.6, 1, 0.6] }}
-      transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-    />
-    <motion.div
-      className="absolute rounded-full"
-      style={{
-        width: "40vw", height: "40vw",
-        background: "radial-gradient(circle, rgba(120,100,200,0.04) 0%, transparent 65%)",
-        filter: "blur(100px)",
-        bottom: "5%", left: "-5%",
-      }}
-      animate={{ scale: [1, 1.2, 1], opacity: [0.4, 0.7, 0.4] }}
-      transition={{ duration: 16, repeat: Infinity, ease: "easeInOut", delay: 3 }}
-    />
-  </div>
-);
-
-/* ── Scroll indicator ── */
-const ScrollIndicator = ({ label }: { label: string }) => (
-  <motion.div
-    className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-20"
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    transition={{ delay: 2.8, duration: 1 }}
-  >
-    <span className="label-subtle text-white/30" style={{ fontSize: "9px" }}>{label}</span>
-    <div className="relative w-px h-14 overflow-hidden">
-      <motion.div
-        className="absolute top-0 left-0 w-full"
-        style={{ background: "linear-gradient(180deg, hsl(var(--silk-gold)/0.7), transparent)", height: "100%" }}
-        animate={{ y: ["-100%", "200%"] }}
-        transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-      />
-    </div>
-    <ChevronDown size={14} className="text-white/20" />
-  </motion.div>
-);
-
-/* ── Particle dust ── */
-const Particles = () => {
-  const particles = Array.from({ length: 18 }, (_, i) => ({
+/* ── Parallax sky particles (subtle dust motes) ── */
+const DustMotes = () => {
+  const motes = Array.from({ length: 12 }, (_, i) => ({
     id: i,
-    x: `${10 + Math.random() * 80}%`,
-    delay: Math.random() * 6,
-    duration: 6 + Math.random() * 8,
-    drift: (Math.random() - 0.5) * 60,
-    size: 1 + Math.random() * 1.5,
+    x: `${15 + Math.random() * 70}%`,
+    delay: Math.random() * 8,
+    dur: 10 + Math.random() * 8,
+    size: 1.5 + Math.random() * 2,
+    drift: (Math.random() - 0.5) * 40,
   }));
-
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {particles.map((p) => (
-        <motion.div
-          key={p.id}
-          className="absolute rounded-full"
-          style={{
-            left: p.x, bottom: "15%",
-            width: p.size, height: p.size,
-            background: "rgba(201,169,110,0.5)",
-          }}
-          animate={{
-            y: [0, -140],
-            x: [0, p.drift],
-            opacity: [0, 0.8, 0],
-            scale: [1, 0.3],
-          }}
-          transition={{
-            duration: p.duration,
-            delay: p.delay,
-            repeat: Infinity,
-            ease: "easeOut",
-          }}
+      {motes.map(m => (
+        <motion.div key={m.id} className="absolute rounded-full"
+          style={{ left: m.x, bottom: "20%", width: m.size, height: m.size, background: "rgba(74,107,138,0.25)" }}
+          animate={{ y: [0, -100], x: [0, m.drift], opacity: [0, 0.6, 0], scale: [1, 0.4] }}
+          transition={{ duration: m.dur, delay: m.delay, repeat: Infinity, ease: "easeOut" }}
         />
       ))}
     </div>
   );
 };
 
-/* ══════════════════════════════════════════════════════════
-   HERO SECTION — 3D Tower Parallax + Scroll Zoom
-   ══════════════════════════════════════════════════════════ */
+/* ════════════════════════════════════════════════════
+   HERO — Light limestone, 3D tower, scroll parallax
+   ════════════════════════════════════════════════════ */
 const HeroSection = () => {
   const { t } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
-  const [textIndex, setTextIndex] = useState(0);
+  const [textIdx, setTextIdx] = useState(0);
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  });
+  const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end start"] });
 
-  /* Scroll-driven transforms */
-  const towerScale     = useTransform(scrollYProgress, [0, 1], [1, 1.35]);
-  const towerY         = useTransform(scrollYProgress, [0, 1], [0, -80]);
-  const towerOpacity   = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.35], [1, 0]);
-  const contentY       = useTransform(scrollYProgress, [0, 0.35], [0, -60]);
-  const overlayOpacity = useTransform(scrollYProgress, [0, 0.5], [0, 0.7]);
+  const towerScale     = useSpring(useTransform(scrollYProgress, [0, 1], [1, 1.3]),  { stiffness: 60, damping: 20 });
+  const towerY         = useSpring(useTransform(scrollYProgress, [0, 1], [0, -60]),  { stiffness: 80, damping: 25 });
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
+  const contentY       = useTransform(scrollYProgress, [0, 0.4], [0, -50]);
 
-  /* Spring smoothing */
-  const springScale = useSpring(towerScale, { stiffness: 60, damping: 20 });
-  const springY     = useSpring(towerY,     { stiffness: 80, damping: 25 });
-
-  /* Headline rotation — 6s (fixed from 20s) */
-  const headlines = [
-    { en: t("hero.headline"),  ar: t("hero.headline")  },
-    { en: t("hero.headline2"), ar: t("hero.headline2") },
-  ];
-
+  const headlines = [t("hero.headline"), t("hero.headline2")];
   useEffect(() => {
-    const timer = setInterval(() => setTextIndex((i) => (i + 1) % headlines.length), 6000);
-    return () => clearInterval(timer);
+    const id = setInterval(() => setTextIdx(i => (i + 1) % headlines.length), 6000);
+    return () => clearInterval(id);
   }, [headlines.length]);
 
   return (
     <section
       ref={containerRef}
-      className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden"
-      style={{ background: "#080808" }}
+      className="relative flex items-center overflow-hidden"
+      style={{ height: "100svh", minHeight: 600, background: "hsl(var(--background))" }}
     >
-      {/* ── Ambient background ── */}
-      <div className="absolute inset-0 arch-grid opacity-20" />
-      <AmbientOrbs />
-      <Particles />
+      {/* Subtle arch grid */}
+      <div className="absolute inset-0 arch-grid opacity-60 pointer-events-none" />
 
-      {/* ── Scroll darkening overlay ── */}
-      <motion.div
-        className="absolute inset-0 bg-black z-10"
-        style={{ opacity: overlayOpacity }}
-      />
+      {/* Sky blue ambient glow — top */}
+      <div className="absolute top-0 left-0 right-0 h-96 pointer-events-none"
+        style={{ background: "radial-gradient(ellipse 80% 100% at 60% 0%, rgba(74,107,138,0.07) 0%, transparent 70%)" }} />
 
-      {/* ── 3D Tower (parallax + scroll zoom) ── */}
+      {/* Dust motes */}
+      <DustMotes />
+
+      {/* ── Tower parallax ── */}
       <div className="absolute inset-0 flex items-end justify-center overflow-hidden">
         <motion.div
-          style={{
-            scale: springScale,
-            y: springY,
-            opacity: towerOpacity,
-          }}
+          style={{ scale: towerScale, y: towerY, x: "-50%" }}
           className="absolute bottom-0 left-1/2"
-          initial={{ x: "-50%", opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1, x: "-50%" }}
-          transition={{ duration: 2.2, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+          initial={{ opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 2, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
         >
-          {/* Tower image — primary with glow */}
           <img
             src={heroTower}
             alt="Al Hamra Tower"
-            className="tower-glow"
             style={{
-              height: "88vh",
+              height: "90vh",
               width: "auto",
               objectFit: "contain",
-              objectPosition: "bottom center",
-              filter: "drop-shadow(0 0 80px rgba(201,169,110,0.15)) drop-shadow(0 0 200px rgba(201,169,110,0.07)) brightness(0.92) contrast(1.05)",
-              maskImage: "linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%)",
-              WebkitMaskImage: "linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%)",
+              objectPosition: "bottom",
+              filter: "drop-shadow(0 0 60px rgba(74,107,138,0.10)) brightness(1.02) contrast(1.02)",
+              maskImage: "linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 100%)",
+              WebkitMaskImage: "linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 100%)",
             }}
           />
         </motion.div>
 
-        {/* Ground fog gradient */}
-        <div
-          className="absolute bottom-0 left-0 right-0 pointer-events-none z-10"
-          style={{
-            height: "45vh",
-            background: "linear-gradient(to top, #080808 0%, rgba(8,8,8,0.8) 30%, transparent 100%)",
-          }}
-        />
+        {/* Ground fade */}
+        <div className="absolute bottom-0 left-0 right-0 pointer-events-none z-10"
+          style={{ height: "40vh", background: "linear-gradient(to top, hsl(var(--background)) 0%, rgba(250,250,247,0.7) 40%, transparent 100%)" }} />
       </div>
 
-      {/* ── Hero Content ── */}
+      {/* ── Content — left side ── */}
       <motion.div
-        className="relative z-20 w-full container mx-auto px-6 lg:px-12"
+        className="relative z-20 container mx-auto px-6 lg:px-14 w-full"
         style={{ opacity: contentOpacity, y: contentY }}
       >
-        <div className="flex flex-col items-start max-w-xl">
-
+        <div className="max-w-lg">
           {/* Overline */}
-          <motion.div
-            className="flex items-center gap-4 mb-6"
-            initial={{ opacity: 0, x: -30 }}
+          <motion.div className="flex items-center gap-4 mb-5"
+            initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           >
-            <span className="gold-line animate-line-draw" style={{ animationDelay: "0.8s" }} />
-            <span className="overline tracking-[0.35em]">Kuwait City</span>
+            <span className="sky-line animate-line-draw" style={{ animationDelay: "0.6s" }} />
+            <span className="overline">Kuwait City</span>
           </motion.div>
 
-          {/* Altitude counter */}
-          <AltitudeCounter target={412} duration={2000} />
+          {/* Altitude number */}
+          <AltitudeCounter />
 
-          {/* Label under counter */}
-          <motion.p
-            className="label-subtle text-white/30 mb-8 mt-1"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 1.2 }}
+          <motion.p className="label-subtle text-muted-foreground mb-8 mt-1"
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+            transition={{ delay: 1.1, duration: 0.8 }}
           >
-            Above ground level
+            Metres above ground level
           </motion.p>
 
           {/* Rotating headline */}
-          <div className="min-h-[3.5rem] mb-6" style={{ overflow: "hidden" }}>
+          <div style={{ minHeight: "3.2rem", overflow: "hidden", marginBottom: "1.5rem" }}>
             <AnimatePresence mode="wait">
-              <motion.h1
-                key={textIndex}
-                className="font-serif font-light text-white"
-                style={{ fontSize: "clamp(1.3rem, 2.8vw, 2.2rem)", lineHeight: 1.2, letterSpacing: "-0.01em" }}
-                initial={{ opacity: 0, filter: "blur(8px)", y: 16 }}
+              <motion.h1 key={textIdx}
+                className="font-serif font-light text-foreground"
+                style={{ fontSize: "clamp(1.4rem, 2.8vw, 2.3rem)", lineHeight: 1.25, letterSpacing: "-0.01em" }}
+                initial={{ opacity: 0, filter: "blur(6px)", y: 12 }}
                 animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
-                exit={{ opacity: 0, filter: "blur(6px)", y: -12 }}
-                transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                exit={{ opacity: 0, filter: "blur(4px)", y: -10 }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               >
-                {headlines[textIndex].en}
+                {headlines[textIdx]}
               </motion.h1>
             </AnimatePresence>
           </div>
 
-          {/* CTA row */}
-          <motion.div
-            className="flex items-center gap-6"
-            initial={{ opacity: 0, y: 20 }}
+          {/* CTAs */}
+          <motion.div className="flex items-center gap-5"
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 1.6, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ delay: 1.5, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           >
-            <a
-              href="/leasing/opportunities"
-              className="glass-gold px-6 py-3 text-white/90 hover:text-white transition-all duration-300 group flex items-center gap-3"
-              style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase" }}
+            <a href="/leasing/opportunities"
+              className="glass-sky px-6 py-3 text-sky-dark hover:text-sky transition-all duration-300 group inline-flex items-center gap-3"
+              style={{ fontSize: "11px", letterSpacing: "0.18em", textTransform: "uppercase", textDecoration: "none", fontWeight: 400 }}
             >
               <span>Explore Leasing</span>
-              <motion.span
-                className="text-silk-gold"
-                animate={{ x: [0, 4, 0] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              >
-                →
-              </motion.span>
+              <motion.span className="text-sky" animate={{ x: [0, 4, 0] }} transition={{ duration: 2, repeat: Infinity }}>→</motion.span>
             </a>
-            <a
-              href="/tower"
-              className="text-white/40 hover:text-white/70 transition-colors duration-300"
-              style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase" }}
+            <a href="/tower"
+              className="text-muted-foreground hover:text-foreground transition-colors duration-300"
+              style={{ fontSize: "11px", letterSpacing: "0.18em", textTransform: "uppercase", textDecoration: "none" }}
             >
               The Tower
             </a>
@@ -317,39 +200,43 @@ const HeroSection = () => {
         </div>
       </motion.div>
 
-      {/* ── Bottom stat strip ── */}
+      {/* ── Right stat column ── */}
       <motion.div
-        className="absolute bottom-16 right-6 lg:right-12 z-20 flex flex-col items-end gap-1"
-        initial={{ opacity: 0, x: 30 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1.2, delay: 2, ease: [0.16, 1, 0.3, 1] }}
+        className="absolute right-8 lg:right-14 bottom-20 z-20 flex flex-col items-end gap-3"
         style={{ opacity: contentOpacity as any }}
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 2, duration: 1, ease: [0.16, 1, 0.3, 1] }}
       >
-        {[
-          { value: "413", unit: "m", label: "Height" },
-          { value: "80", unit: "+", label: "Floors" },
-          { value: "2011", unit: "", label: "Completed" },
-        ].map((stat, i) => (
-          <motion.div
-            key={stat.label}
-            className="text-right"
-            initial={{ opacity: 0, x: 20 }}
+        {[{ v: "413", u: "m", l: "Height" }, { v: "80+", u: "", l: "Floors" }, { v: "2011", u: "", l: "Completed" }].map((s, i) => (
+          <motion.div key={s.l} className="text-right"
+            initial={{ opacity: 0, x: 16 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 2.2 + i * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ delay: 2.1 + i * 0.1, duration: 0.7 }}
           >
             <div className="flex items-baseline justify-end gap-1">
-              <span className="font-serif font-light text-white/80" style={{ fontSize: "1.1rem", letterSpacing: "-0.02em" }}>
-                {stat.value}
-              </span>
-              <span className="text-silk-gold font-light" style={{ fontSize: "0.75rem" }}>{stat.unit}</span>
+              <span className="font-serif font-light text-foreground/75" style={{ fontSize: "1.1rem", letterSpacing: "-0.02em" }}>{s.v}</span>
+              {s.u && <span className="text-sky text-xs">{s.u}</span>}
             </div>
-            <p className="label-subtle text-white/25" style={{ fontSize: "8px" }}>{stat.label}</p>
+            <p className="label-subtle text-stone-warm" style={{ fontSize: "8px" }}>{s.l}</p>
           </motion.div>
         ))}
       </motion.div>
 
       {/* ── Scroll indicator ── */}
-      <ScrollIndicator label={t("hero.scroll") || "Scroll"} />
+      <motion.div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-20"
+        initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.8, duration: 0.8 }}
+      >
+        <span className="label-subtle text-muted-foreground/60" style={{ fontSize: "9px" }}>{t("hero.scroll") || "Scroll"}</span>
+        <div className="relative w-px h-12 overflow-hidden rounded-full" style={{ background: "hsl(var(--border))" }}>
+          <motion.div className="absolute top-0 left-0 w-full"
+            style={{ background: "linear-gradient(180deg, hsl(var(--sky)), transparent)", height: "100%" }}
+            animate={{ y: ["-100%", "200%"] }}
+            transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+          />
+        </div>
+        <ChevronDown size={14} className="text-stone-warm" />
+      </motion.div>
     </section>
   );
 };
