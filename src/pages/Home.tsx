@@ -1,312 +1,376 @@
+import { useRef } from "react";
 import Header from "@/components/alhamra/Header";
 import HeroSection from "@/components/alhamra/HeroSection";
 import Footer from "@/components/alhamra/Footer";
-import { motion } from "framer-motion";
-import { useScrollReveal, revealVariants } from "@/hooks/useScrollReveal";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "react-router-dom";
-import { ArrowRight, Phone, Mail, MapPin } from "lucide-react";
+import { ArrowRight, MapPin, Phone, Mail } from "lucide-react";
+import useCountUp from "@/hooks/useCountUp";
 
+/* ── assets ── */
 import towerAerialSunset from "@/assets/tower-aerial-sunset.png";
-import somTowerSkyline from "@/assets/som-tower-skyline.jpg";
-import interiorLobby from "@/assets/interior-lobby.jpg";
+import somTowerSkyline   from "@/assets/som-tower-skyline.jpg";
+import interiorLobby     from "@/assets/interior-lobby.jpg";
 import skylineReflection from "@/assets/skyline-reflection.png";
 import kuwaitSkylineNight from "@/assets/kuwait-skyline-night.png";
+import towerFacadeTwisted from "@/assets/tower-facade-twisted.png";
+import towerLowAngle      from "@/assets/tower-lowangle-clouds.png";
+import lobbyArches        from "@/assets/lobby-arches.jpg";
+import towerAerialDay     from "@/assets/tower-aerial-day.png";
+import skylinePark        from "@/assets/skyline-park-panorama.jpg";
+import officeCorr         from "@/assets/office-corridor.jpg";
 
-/* Floating glass blobs for spatial depth */
-const FloatingBlobs = () => (
-  <div className="absolute inset-0 overflow-hidden pointer-events-none">
-    <motion.div
-      className="absolute w-64 h-64 rounded-full"
-      style={{
-        background: "radial-gradient(circle, hsl(43 72% 49% / 0.06) 0%, transparent 70%)",
-        filter: "blur(50px)",
-        top: "30%",
-        right: "10%",
-      }}
-      animate={{ y: [0, -20, 0] }}
-      transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-    />
-    <motion.div
-      className="absolute w-48 h-48 rounded-full"
-      style={{
-        background: "radial-gradient(circle, hsl(270 30% 50% / 0.04) 0%, transparent 70%)",
-        filter: "blur(40px)",
-        bottom: "20%",
-        left: "5%",
-      }}
-      animate={{ y: [0, 15, 0] }}
-      transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}
-    />
+/* ── Section header ── */
+const SectionLabel = ({ label, title, center = false }: { label: string; title: string; center?: boolean }) => (
+  <div className={`mb-14 ${center ? "text-center" : ""}`}>
+    <div className={`flex items-center gap-4 mb-5 ${center ? "justify-center" : ""}`}>
+      {!center && <span className="gold-line" style={{ width: 32 }} />}
+      <span className="overline">{label}</span>
+      {center && <span className="gold-line" style={{ width: 32, transform: "scaleX(-1)" }} />}
+      {center && <span className="gold-line" style={{ width: 32 }} />}
+    </div>
+    <h2 className="font-serif font-light text-foreground"
+      style={{ fontSize: "clamp(1.8rem, 3.5vw, 3.5rem)", letterSpacing: "-0.025em", lineHeight: 1.15 }}>
+      {title}
+    </h2>
   </div>
 );
 
+/* ── Animated stat card ── */
+const StatCard = ({ value, unit, label, desc, delay = 0 }: {
+  value: number; unit: string; label: string; desc: string; delay?: number;
+}) => {
+  const { count, ref, isInView } = useCountUp({ end: value, duration: 1800, delay: delay * 1000 });
+
+  return (
+    <motion.div
+      ref={ref}
+      className="glass-medium p-8 group cursor-default"
+      style={{ borderRadius: "24px" }}
+      initial={{ opacity: 0, y: 50 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.9, delay, ease: [0.16, 1, 0.3, 1] }}
+      whileHover={{ y: -8, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } }}
+    >
+      <div className="flex items-end gap-2 mb-3">
+        <span
+          className="font-serif font-light text-foreground transition-colors duration-300 group-hover:text-silk-gold"
+          style={{ fontSize: "clamp(2.8rem, 5vw, 4.5rem)", lineHeight: 1, letterSpacing: "-0.03em" }}
+        >
+          {count}
+        </span>
+        <span className="text-silk-gold font-light mb-2" style={{ fontSize: "1.2rem" }}>{unit}</span>
+      </div>
+      <p className="label-subtle text-muted-foreground mb-4 group-hover:text-foreground/60 transition-colors">{label}</p>
+      <div
+        className="mb-4"
+        style={{ height: 1, background: "linear-gradient(90deg, rgba(201,169,110,0.5), transparent)" }}
+      />
+      <p className="text-muted-foreground/70 group-hover:text-muted-foreground transition-colors"
+        style={{ fontSize: "0.825rem", lineHeight: 1.6 }}>
+        {desc}
+      </p>
+    </motion.div>
+  );
+};
+
+/* ── Parallax image section ── */
+const ParallaxImage = ({ src, alt, height = "60vh" }: { src: string; alt: string; height?: string }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const y = useTransform(scrollYProgress, [0, 1], ["8%", "-8%"]);
+
+  return (
+    <div ref={ref} className="overflow-hidden rounded-glass" style={{ height }}>
+      <motion.img
+        src={src} alt={alt}
+        style={{ y, scale: 1.18 }}
+        className="w-full h-full object-cover"
+      />
+    </div>
+  );
+};
+
+/* ── Horizontal scroll feature card ── */
+const FeatureCard = ({ image, title, subtitle, link, delay = 0 }: {
+  image: string; title: string; subtitle: string; link: string; delay?: number;
+}) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 60, scale: 0.96 }}
+      animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+      transition={{ duration: 1, delay, ease: [0.16, 1, 0.3, 1] }}
+    >
+      <Link to={link} className="block group">
+        <div className="relative overflow-hidden rounded-glass" style={{ aspectRatio: "3/4" }}>
+          <motion.img
+            src={image} alt={title}
+            className="w-full h-full object-cover"
+            whileHover={{ scale: 1.06 }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          />
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+          {/* Label */}
+          <div className="absolute bottom-0 left-0 right-0 p-6">
+            <div
+              className="liquid-glass px-5 py-4"
+              style={{
+                background: "rgba(8,8,8,0.6)",
+                backdropFilter: "blur(20px)",
+                border: "1px solid rgba(255,255,255,0.08)",
+              }}
+            >
+              <p className="label-subtle text-white/50 mb-1">{subtitle}</p>
+              <div className="flex items-center justify-between">
+                <h3 className="font-serif font-light text-white" style={{ fontSize: "1.1rem" }}>{title}</h3>
+                <motion.span
+                  className="text-silk-gold"
+                  animate={{ x: [0, 4, 0] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                >
+                  →
+                </motion.span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Link>
+    </motion.div>
+  );
+};
+
+/* ── Full masonry gallery row ── */
+const GalleryRow = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const images = [
+    { src: towerFacadeTwisted, span: "col-span-2 row-span-2", h: "380px" },
+    { src: lobbyArches,        span: "col-span-1",            h: "180px" },
+    { src: officeCorr,         span: "col-span-1",            h: "180px" },
+    { src: towerLowAngle,      span: "col-span-1",            h: "180px" },
+    { src: towerAerialDay,     span: "col-span-1",            h: "180px" },
+  ];
+
+  return (
+    <div ref={ref} className="grid grid-cols-4 gap-3" style={{ gridAutoRows: "auto" }}>
+      {images.map((img, i) => (
+        <motion.div
+          key={i}
+          className={`${img.span} overflow-hidden rounded-glass-sm group cursor-pointer`}
+          style={{ height: img.h }}
+          initial={{ opacity: 0, scale: 0.97 }}
+          animate={isInView ? { opacity: 1, scale: 1 } : {}}
+          transition={{ duration: 0.9, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+          whileHover={{ zIndex: 10 }}
+        >
+          <motion.img
+            src={img.src}
+            alt="Al Hamra Tower"
+            className="w-full h-full object-cover"
+            whileHover={{ scale: 1.07 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          />
+        </motion.div>
+      ))}
+    </div>
+  );
+};
+
+/* ════════════════════════════════════════════════════════
+   HOME PAGE
+   ════════════════════════════════════════════════════════ */
 const Home = () => {
   const { t } = useLanguage();
-  const { ref: introRef, isInView: introInView } = useScrollReveal();
-  const { ref: featuresRef, isInView: featuresInView } = useScrollReveal();
-  const { ref: linksRef, isInView: linksInView } = useScrollReveal();
-  const { ref: ctaRef, isInView: ctaInView } = useScrollReveal();
-
-  const features = [
-    { number: "412m", label: t("stats.height"), description: t("stats.height.desc") },
-    { number: "70+", label: t("stats.floors"), description: t("stats.floors.desc") },
-    { number: "24m", label: t("stats.sqm"), description: t("stats.sqm.desc") },
-  ];
-
-  const pageLinks = [
-    {
-      title: t("home.link.tower.title") || "The Tower",
-      subtitle: t("home.link.tower.subtitle") || "Architecture & Engineering",
-      image: somTowerSkyline,
-      link: "/tower",
-    },
-    {
-      title: t("home.link.business.title") || "Business",
-      subtitle: t("home.link.business.subtitle") || "Workspace & Enterprise",
-      image: interiorLobby,
-      link: "/business",
-    },
-    {
-      title: t("home.link.experience.title") || "Experience",
-      subtitle: t("home.link.experience.subtitle") || "Services & Sustainability",
-      image: skylineReflection,
-      link: "/services",
-    },
-  ];
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
       <Header />
       <main>
+
+        {/* ── HERO ── */}
         <HeroSection />
 
-        {/* Introduction with Liquid Glass Card */}
-        <section className="py-24 md:py-32 bg-background relative">
-          <FloatingBlobs />
-          <div className="container mx-auto px-6 lg:px-12 relative z-10">
-            <div ref={introRef} className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+        {/* ── STATS — Glass cards with count-up ── */}
+        <section className="section-luxury bg-background relative">
+          <div className="absolute inset-0 arch-grid opacity-30 pointer-events-none" />
+          <div className="container mx-auto px-6 lg:px-12 relative">
+            <SectionLabel label={t("home.about") || "The Tower"} title={t("home.intro.title") || "A Structure of Absolute Presence"} />
+            <div className="grid md:grid-cols-3 gap-5 mb-16">
+              <StatCard value={413} unit="m"  label={t("stats.height") || "Height"} desc={t("stats.height.desc") || "Among the tallest in the Gulf region"} delay={0} />
+              <StatCard value={80}  unit="+"  label={t("stats.floors") || "Floors"} desc={t("stats.floors.desc") || "Premium commercial office floors"} delay={0.12} />
+              <StatCard value={24}  unit="K+" label={t("stats.sqm")    || "sq.m GLA"} desc={t("stats.sqm.desc") || "Grade A leasable office space"} delay={0.24} />
+            </div>
+            {/* Intro body text */}
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
               <motion.div
-                initial="hidden"
-                animate={introInView ? "visible" : "hidden"}
-                variants={revealVariants.slideLeft}
-                transition={{ duration: 0.8 }}
+                initial={{ opacity: 0, x: -40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
               >
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-px bg-silk-gold/40" />
-                  <span className="text-xs uppercase tracking-[0.3em] text-champagne">
-                    {t("home.about")}
-                  </span>
-                </div>
-                <h2 className="text-headline font-light tracking-wide text-foreground mb-8">
-                  {t("home.intro.title")}
-                </h2>
-                <p className="text-body-lg text-muted-foreground leading-relaxed mb-8">
-                  {t("home.intro.p1")}
+                <p className="text-muted-foreground leading-relaxed mb-6" style={{ fontSize: "1.05rem", lineHeight: 1.9 }}>
+                  {t("home.intro.p1") || "Al Hamra Tower stands as Kuwait's most significant architectural achievement. A structure of absolute presence, designed to endure beyond trends and cycles."}
                 </p>
-                <Link 
-                  to="/tower" 
-                  className="inline-flex items-center gap-3 px-6 py-3 liquid-glass-subtle text-foreground hover:text-silk-gold transition-colors group"
+                <Link
+                  to="/tower"
+                  className="glass-gold inline-flex items-center gap-3 px-6 py-3 text-white/80 hover:text-white transition-all duration-300 group"
+                  style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase" }}
                 >
-                  <span className="text-sm uppercase tracking-wider">{t("home.explore.tower")}</span>
-                  <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+                  <span>{t("home.explore.tower") || "Explore the Tower"}</span>
+                  <ArrowRight size={14} className="text-silk-gold transition-transform group-hover:translate-x-1" />
                 </Link>
               </motion.div>
-
               <motion.div
-                initial="hidden"
-                animate={introInView ? "visible" : "hidden"}
-                variants={revealVariants.slideRight}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="relative group"
+                initial={{ opacity: 0, x: 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 1, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
               >
-                <div className="aspect-[4/5] overflow-hidden rounded-2xl">
-                  <img
-                    src={towerAerialSunset}
-                    alt="Al Hamra Tower aerial view at sunset"
-                    className="w-full h-full object-cover transition-transform duration-700 ease-out-expo group-hover:scale-105"
-                  />
-                </div>
-                {/* Gold corner accent */}
-                <div className="absolute -bottom-4 -left-4 w-24 h-24 border border-silk-gold/20 rounded-xl -z-10" />
+                <ParallaxImage src={towerAerialSunset} alt="Al Hamra Tower aerial" height="420px" />
               </motion.div>
             </div>
           </div>
         </section>
 
-        {/* Stats — Liquid Glass Cards */}
-        <section className="py-20 md:py-28 bg-secondary/50 relative">
+        {/* ── EXPLORE — 3-card grid ── */}
+        <section className="section-luxury bg-card/40 relative overflow-hidden">
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{ background: "radial-gradient(ellipse 80% 60% at 50% 100%, rgba(201,169,110,0.04) 0%, transparent 70%)" }}
+          />
           <div className="container mx-auto px-6 lg:px-12">
-            <div ref={featuresRef} className="grid md:grid-cols-3 gap-6 lg:gap-8">
-              {features.map((feature, index) => (
-                <motion.div
-                  key={index}
-                  initial="hidden"
-                  animate={featuresInView ? "visible" : "hidden"}
-                  variants={revealVariants.fadeUp}
-                  transition={{ duration: 0.6, delay: index * 0.15 }}
-                  whileHover={{ y: -8, transition: { duration: 0.3, ease: "easeOut" } }}
-                  className="liquid-glass-subtle p-8 text-center lg:text-left cursor-default group hover:border-silk-gold/40 transition-all duration-500"
-                >
-                  <motion.p 
-                    className="text-5xl lg:text-6xl font-light text-foreground mb-2 tracking-tight group-hover:text-silk-gold transition-colors duration-300"
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={featuresInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-                    transition={{ duration: 0.8, delay: 0.3 + index * 0.15, ease: "easeOut" }}
-                  >
-                    {feature.number}
-                  </motion.p>
-                  <p className="text-sm uppercase tracking-[0.2em] text-muted-foreground mb-3 group-hover:text-foreground transition-colors duration-300">
-                    {feature.label}
-                  </p>
-                  <motion.div 
-                    className="w-8 h-px bg-silk-gold/30 mb-3 mx-auto lg:mx-0 transition-all duration-500 group-hover:w-16 group-hover:bg-silk-gold"
-                    initial={{ scaleX: 0 }}
-                    animate={featuresInView ? { scaleX: 1 } : { scaleX: 0 }}
-                    transition={{ duration: 0.6, delay: 0.5 + index * 0.15 }}
-                    style={{ originX: 0 }}
-                  />
-                  <p className="text-sm text-muted-foreground group-hover:text-foreground/80 transition-colors duration-300">
-                    {feature.description}
-                  </p>
-                </motion.div>
-              ))}
+            <SectionLabel
+              label={t("home.links.label") || "Explore"}
+              title={t("home.links.title") || "Arrive. Ascend. Belong."}
+              center
+            />
+            <div className="grid md:grid-cols-3 gap-5">
+              <FeatureCard image={somTowerSkyline} title={t("home.link.tower.title") || "The Tower"} subtitle={t("home.link.tower.subtitle") || "Architecture & Engineering"} link="/tower" delay={0} />
+              <FeatureCard image={interiorLobby}   title={t("home.link.business.title") || "Business"} subtitle={t("home.link.business.subtitle") || "Workspace & Enterprise"} link="/business" delay={0.1} />
+              <FeatureCard image={skylineReflection} title={t("home.link.experience.title") || "Experience"} subtitle={t("home.link.experience.subtitle") || "Services & Sustainability"} link="/services" delay={0.2} />
             </div>
           </div>
         </section>
 
-        {/* Explore Pages — Compact Glass Grid */}
-        <section className="py-24 md:py-32 bg-background relative">
-          <FloatingBlobs />
-          <div className="container mx-auto px-6 lg:px-12 relative z-10">
+        {/* ── GALLERY ── */}
+        <section className="section-luxury bg-background">
+          <div className="container mx-auto px-6 lg:px-12">
+            <SectionLabel label="Gallery" title="Captured in Light" />
+            <GalleryRow />
             <motion.div
-              ref={linksRef}
-              initial={{ opacity: 0, y: 30 }}
-              animate={linksInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-16"
+              className="mt-8 text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
             >
-              <div className="flex items-center justify-center gap-4 mb-6">
-                <div className="w-12 h-px bg-silk-gold/40" />
-                <span className="text-xs uppercase tracking-[0.3em] text-champagne">
-                  {t("home.links.label") || "Explore"}
-                </span>
-                <div className="w-12 h-px bg-silk-gold/40" />
-              </div>
-              <h2 className="text-headline font-light tracking-wide text-foreground">
-                {t("home.links.title") || "Arrive. Ascend. Belong."}
-              </h2>
+              <Link
+                to="/tower/design"
+                className="glass inline-flex items-center gap-3 px-7 py-3 text-white/70 hover:text-white transition-all duration-300 group"
+                style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase" }}
+              >
+                <span>View Architecture</span>
+                <ArrowRight size={13} className="text-silk-gold group-hover:translate-x-1 transition-transform" />
+              </Link>
             </motion.div>
-
-            <div className="grid md:grid-cols-3 gap-6">
-              {pageLinks.map((page, index) => (
-                <motion.div
-                  key={index}
-                  initial="hidden"
-                  animate={linksInView ? "visible" : "hidden"}
-                  variants={revealVariants.fadeUp}
-                  transition={{ duration: 0.6, delay: 0.1 + index * 0.15 }}
-                >
-                  <Link to={page.link} className="block group">
-                    <div className="relative overflow-hidden rounded-2xl aspect-[3/4]">
-                      <img
-                        src={page.image}
-                        alt={page.title}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/20 to-transparent" />
-                      
-                      {/* Liquid glass label at bottom */}
-                      <div className="absolute bottom-0 left-0 right-0 p-6">
-                        <div className="liquid-glass px-5 py-4">
-                          <span className="text-xs uppercase tracking-[0.2em] text-white/60 block mb-1">
-                            {page.subtitle}
-                          </span>
-                          <div className="flex items-center justify-between">
-                            <h3 className="text-lg font-light text-white">{page.title}</h3>
-                            <ArrowRight size={16} className="text-silk-gold transition-transform group-hover:translate-x-1" />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className="relative overflow-hidden">
+        {/* ── CTA — Night skyline full bleed ── */}
+        <section className="relative overflow-hidden" style={{ minHeight: "70vh" }}>
+          {/* Background */}
           <div className="absolute inset-0">
-            <img
+            <motion.img
               src={kuwaitSkylineNight}
               alt="Kuwait skyline at night"
               className="w-full h-full object-cover"
+              initial={{ scale: 1.05 }}
+              whileInView={{ scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 2.5, ease: "easeOut" }}
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-foreground/90 via-foreground/75 to-foreground/60" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/50" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
           </div>
-          
+
+          {/* Floating gold orb */}
+          <div
+            className="absolute top-1/3 right-1/4 w-96 h-96 rounded-full pointer-events-none"
+            style={{
+              background: "radial-gradient(circle, rgba(201,169,110,0.08) 0%, transparent 65%)",
+              filter: "blur(60px)",
+            }}
+          />
+
+          {/* Content */}
           <div className="container mx-auto px-6 lg:px-12 relative z-10">
-            <div ref={ctaRef} className="py-24 lg:py-32">
-              <div className="max-w-2xl">
-                <motion.div
-                  initial="hidden"
-                  animate={ctaInView ? "visible" : "hidden"}
-                  variants={revealVariants.fadeUp}
-                  transition={{ duration: 0.6 }}
+            <div className="py-28 lg:py-36 max-w-2xl">
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <div className="flex items-center gap-4 mb-6">
+                  <span className="gold-line" style={{ width: 32 }} />
+                  <span className="overline text-silk-gold/70">{t("home.cta.label") || "Leasing"}</span>
+                </div>
+                <h2
+                  className="font-serif font-light text-white mb-6"
+                  style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)", letterSpacing: "-0.025em", lineHeight: 1.15 }}
                 >
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="w-12 h-px bg-silk-gold/40" />
-                    <span className="text-xs uppercase tracking-[0.3em] text-silk-gold-light/70">
-                      {t("home.cta.label")}
-                    </span>
-                  </div>
+                  {t("home.cta.title") || "Claim Your Position Above the City"}
+                </h2>
+                <p className="text-white/55 mb-10" style={{ fontSize: "1rem", lineHeight: 1.9, maxWidth: "480px" }}>
+                  {t("home.cta.desc") || "Join Kuwait's most prestigious business address. Premium office space designed for organisations that lead."}
+                </p>
 
-                  <h2 className="text-headline font-light tracking-wide text-white mb-6">
-                    {t("home.cta.title")}
-                  </h2>
+                {/* CTA Buttons */}
+                <div className="flex flex-col sm:flex-row gap-4 mb-12">
+                  <Link
+                    to="/leasing/opportunities"
+                    className="glass-gold inline-flex items-center justify-center gap-3 px-8 py-4 text-white hover:text-white transition-all duration-300 group"
+                    style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase" }}
+                  >
+                    <span>{t("home.cta.leasing") || "View Leasing Options"}</span>
+                    <ArrowRight size={14} className="text-silk-gold group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                  <Link
+                    to="/leasing/contact"
+                    className="glass inline-flex items-center justify-center gap-3 px-8 py-4 text-white/70 hover:text-white transition-all duration-300"
+                    style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase" }}
+                  >
+                    <span>{t("home.cta.contact") || "Speak with Leasing"}</span>
+                  </Link>
+                </div>
 
-                  <p className="text-body-lg text-white/70 mb-10 max-w-xl">
-                    {t("home.cta.desc")}
-                  </p>
-
-                  <div className="flex flex-col sm:flex-row gap-4 mb-10">
-                    <Link 
-                      to="/leasing"
-                      className="liquid-glass inline-flex items-center justify-center gap-3 px-8 py-4 text-white hover:bg-white/10 transition-colors group"
-                    >
-                      <span className="text-sm uppercase tracking-wider">{t("home.cta.leasing")}</span>
-                      <ArrowRight size={16} className="text-silk-gold transition-transform group-hover:translate-x-1" />
-                    </Link>
-                    <Link 
-                      to="/contact"
-                      className="inline-flex items-center justify-center gap-3 px-8 py-4 border border-white/20 rounded-xl text-white hover:bg-white/5 transition-colors group"
-                    >
-                      <span className="text-sm uppercase tracking-wider">{t("home.cta.contact")}</span>
-                    </Link>
-                  </div>
-
-                  {/* Contact Quick Info */}
-                  <div className="flex flex-wrap gap-8 pt-8 border-t border-silk-gold/20">
-                    <div className="flex items-center gap-3 text-white/50">
-                      <Phone size={14} className="text-silk-gold/60" />
-                      <span className="text-sm">+965 2227 5000</span>
+                {/* Contact strip */}
+                <div
+                  className="flex flex-wrap gap-8 pt-8"
+                  style={{ borderTop: "1px solid rgba(201,169,110,0.15)" }}
+                >
+                  {[
+                    { icon: Phone, text: "+965 2227 5000" },
+                    { icon: Mail,  text: "leasing@alhamratower.com" },
+                    { icon: MapPin, text: "Sharq, Kuwait City" },
+                  ].map(({ icon: Icon, text }) => (
+                    <div key={text} className="flex items-center gap-2 text-white/35">
+                      <Icon size={12} className="text-silk-gold/50" />
+                      <span style={{ fontSize: "0.8rem" }}>{text}</span>
                     </div>
-                    <div className="flex items-center gap-3 text-white/50">
-                      <Mail size={14} className="text-silk-gold/60" />
-                      <span className="text-sm">leasing@alhamratower.com</span>
-                    </div>
-                    <div className="flex items-center gap-3 text-white/50">
-                      <MapPin size={14} className="text-silk-gold/60" />
-                      <span className="text-sm">Sharq, Kuwait City</span>
-                    </div>
-                  </div>
-                </motion.div>
-              </div>
+                  ))}
+                </div>
+              </motion.div>
             </div>
           </div>
         </section>
+
       </main>
       <Footer />
     </div>

@@ -8,7 +8,7 @@ interface PageLayoutProps {
 
 const PageLayout = ({ children }: PageLayoutProps) => {
   const { isLoading, handleComplete, minDuration } = useInitialLoad({
-    minDuration: 7000,
+    minDuration: 2500,
     sessionKey: "alhamra_loader_shown",
   });
 
