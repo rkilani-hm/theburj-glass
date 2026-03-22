@@ -46,7 +46,7 @@
     --ease-smooth: cubic-bezier(0.45, 0, 0.55, 1);
 
     /* ── Bottom nav height ── */
-    --nav-h: 64px;
+    --nav-h: 90px;   /* 60px pill + 30px bottom padding */
 
     /* ── Sidebar (shadcn compat) ── */
     --sidebar-background:         0 0% 98%;
