@@ -23,11 +23,16 @@ const SECONDARY_NAV = [
   { label: { en: "Services",       ar: "الخدمات"   }, href: "/services"               },
 ];
 
+/* Height of the pill + its bottom padding — must match --nav-h in CSS */
+const PILL_H    = 52;   /* px */
+const PILL_BOT  = 16;  /* px — bottom padding in the wrapper */
+const POPUP_GAP =  6;  /* px gap between popup bottom and pill top */
+
 export default function Header() {
   const { language, toggleLanguage } = useLanguage();
   const [open, setOpen] = useState(false);
   const location = useLocation();
-  const wrapperRef = useRef<HTMLDivElement>(null);
+  const pillRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => { setOpen(false); }, [location.pathname]);
 
@@ -35,12 +40,13 @@ export default function Header() {
   useEffect(() => {
     if (!open) return;
     const handler = (e: MouseEvent) => {
-      if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
+      if (pillRef.current && !pillRef.current.contains(e.target as Node)) {
         setOpen(false);
       }
     };
-    document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
+    /* small delay so the toggle click doesn't immediately re-close */
+    const id = setTimeout(() => document.addEventListener("mousedown", handler), 10);
+    return () => { clearTimeout(id); document.removeEventListener("mousedown", handler); };
   }, [open]);
 
   const isActive = (href: string) =>
@@ -53,211 +59,186 @@ export default function Header() {
     return match ? match.label[language] : (language === "en" ? "Home" : "الرئيسية");
   })();
 
+  /*
+   * POPUP — position:fixed, measured from bottom of viewport.
+   * This avoids ALL overflow / pointer-events clipping issues.
+   * bottom = pill height + bottom padding + gap
+   */
+  const popupBottom = PILL_H + PILL_BOT + POPUP_GAP;
+
   return (
-    /*
-     * Outer: fixed to bottom, full-width centering wrapper.
-     * pointer-events:none so the padding areas are click-through.
-     */
-    <div
-      className="fixed bottom-0 left-0 right-0 z-50"
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "flex-end",
-        padding: "0 clamp(1rem, 4vw, 2rem) clamp(0.75rem, 2vw, 1rem)",
-        pointerEvents: "none",
-      }}
-    >
-      {/*
-       * Inner: this is the SINGLE positioned ancestor for both the pill
-       * AND the popup card.  It is exactly as wide as the pill (maxWidth 640).
-       * position:relative here so popup's position:absolute is relative to IT.
-       */}
-      <div
-        ref={wrapperRef}
-        style={{
-          position: "relative",
-          width: "100%",
-          maxWidth: 640,
-          pointerEvents: "auto",   /* re-enable clicks for the whole widget */
-        }}
-      >
-        {/* ══════════════════════════════════════════════════
-            POPUP CARD — positioned above the pill
-            bottom: 100% puts its bottom flush with pill top,
-            then we add a 6px gap with marginBottom on the card.
-            ══════════════════════════════════════════════════ */}
-        <AnimatePresence>
-          {open && (
-            <motion.div
-              initial={{ opacity: 0, y: 10, scale: 0.98 }}
-              animate={{ opacity: 1, y: 0,  scale: 1    }}
-              exit={{   opacity: 0, y: 10,  scale: 0.98 }}
-              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-              style={{
-                position: "absolute",
-                bottom: "calc(100% + 6px)",  /* 6px gap above the pill */
-                left: 0,
-                right: 0,
-                background: "#FFFFFF",
-                border: "1px solid #E8E8E8",
-                borderRadius: 20,
-                boxShadow: "0 16px 64px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06)",
-                overflow: "hidden",
-                zIndex: 10,
-              }}
-            >
-              {/* Two-column content */}
-              <div
-                style={{
-                  padding: "24px 24px 20px",
-                  display: "grid",
-                  gridTemplateColumns: "1fr 1fr",
-                  gap: 20,
-                }}
-              >
-                {/* Left: primary serif nav */}
-                <nav style={{ display: "flex", flexDirection: "column", gap: 0 }}>
-                  {PRIMARY_NAV.map((item, i) => (
-                    <motion.div
-                      key={item.href}
-                      initial={{ opacity: 0, x: -8 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: i * 0.04, duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+    <>
+      {/* ════════════════════════════════════════════════════
+          POPUP CARD
+          position:fixed, centred, sits above the pill
+          Works on both desktop and mobile — no overflow tricks
+          ════════════════════════════════════════════════════ */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            key="popup"
+            initial={{ opacity: 0, y: 12, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0,  scale: 1    }}
+            exit={{   opacity: 0, y: 12,  scale: 0.98 }}
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            style={{
+              /* Fixed to viewport — immune to any parent overflow / pointer-events */
+              position: "fixed",
+              bottom: popupBottom,
+              left: "50%",
+              transform: "translateX(-50%)",
+              width: "calc(100vw - clamp(2rem, 8vw, 4rem))",
+              maxWidth: 640,
+              zIndex: 9999,
+
+              background: "#FFFFFF",
+              border: "1px solid #E8E8E8",
+              borderRadius: 20,
+              boxShadow: "0 16px 64px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06)",
+              overflow: "hidden",
+            }}
+          >
+            {/* Two-column body */}
+            <div style={{
+              padding: "24px 24px 20px",
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: 20,
+            }}>
+              {/* Left — primary serif links */}
+              <nav style={{ display: "flex", flexDirection: "column" }}>
+                {PRIMARY_NAV.map((item, i) => (
+                  <motion.div key={item.href}
+                    initial={{ opacity: 0, x: -8 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.04, duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                    <Link to={item.href} onClick={() => setOpen(false)}
+                      style={{
+                        display: "flex", alignItems: "center", justifyContent: "space-between",
+                        padding: "8px 0",
+                        borderBottom: "1px solid #F2F2F2",
+                        fontFamily: "var(--font-serif)",
+                        fontSize: "1.15rem",
+                        fontWeight: 400,
+                        letterSpacing: "-0.015em",
+                        color: isActive(item.href) ? "#1A1A1A" : "#AAAAAA",
+                        transition: "color 0.18s",
+                        textDecoration: "none",
+                      }}
+                      onMouseEnter={e => (e.currentTarget.style.color = "#1A1A1A")}
+                      onMouseLeave={e => (e.currentTarget.style.color = isActive(item.href) ? "#1A1A1A" : "#AAAAAA")}
                     >
-                      <Link
-                        to={item.href}
-                        onClick={() => setOpen(false)}
+                      <span>{item.label[language]}</span>
+                      {isActive(item.href) && (
+                        <span style={{ fontSize: "10px", color: "#BBBBBB" }}>→</span>
+                      )}
+                    </Link>
+                  </motion.div>
+                ))}
+              </nav>
+
+              {/* Right — secondary + contact */}
+              <motion.div style={{ display: "flex", flexDirection: "column", gap: 16 }}
+                initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+                transition={{ delay: 0.12, duration: 0.3 }}
+              >
+                <div>
+                  <p style={{ fontFamily: "var(--font-sans)", fontSize: "9px", letterSpacing: "0.2em",
+                    textTransform: "uppercase", color: "#BBBBBB", marginBottom: 8 }}>
+                    Quick links
+                  </p>
+                  <div style={{ display: "flex", flexDirection: "column" }}>
+                    {SECONDARY_NAV.map(item => (
+                      <Link key={item.href} to={item.href} onClick={() => setOpen(false)}
                         style={{
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "space-between",
-                          padding: "8px 0",
-                          borderBottom: "1px solid #F2F2F2",
-                          fontFamily: "var(--font-serif)",
-                          fontSize: "1.15rem",
-                          fontWeight: 400,
-                          letterSpacing: "-0.015em",
-                          color: isActive(item.href) ? "#1A1A1A" : "#AAAAAA",
-                          transition: "color 0.18s",
-                          textDecoration: "none",
+                          fontFamily: "var(--font-sans)", fontSize: "11px", fontWeight: 300,
+                          letterSpacing: "0.03em", color: "#AAAAAA",
+                          padding: "4px 0", borderBottom: "1px solid #F5F5F5",
+                          transition: "color 0.15s", textDecoration: "none",
                         }}
                         onMouseEnter={e => (e.currentTarget.style.color = "#1A1A1A")}
-                        onMouseLeave={e => (e.currentTarget.style.color = isActive(item.href) ? "#1A1A1A" : "#AAAAAA")}
+                        onMouseLeave={e => (e.currentTarget.style.color = "#AAAAAA")}
                       >
-                        <span>{item.label[language]}</span>
-                        {isActive(item.href) && (
-                          <span style={{ fontSize: "10px", color: "#BBBBBB" }}>→</span>
-                        )}
+                        {item.label[language]}
                       </Link>
-                    </motion.div>
-                  ))}
-                </nav>
-
-                {/* Right: secondary links + contact */}
-                <motion.div
-                  style={{ display: "flex", flexDirection: "column", gap: 16 }}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.12, duration: 0.35 }}
-                >
-                  {/* Quick links */}
-                  <div>
-                    <p style={{
-                      fontFamily: "var(--font-sans)", fontSize: "9px", letterSpacing: "0.2em",
-                      textTransform: "uppercase", color: "#BBBBBB", marginBottom: 8,
-                    }}>
-                      Quick links
-                    </p>
-                    <div style={{ display: "flex", flexDirection: "column" }}>
-                      {SECONDARY_NAV.map(item => (
-                        <Link
-                          key={item.href}
-                          to={item.href}
-                          onClick={() => setOpen(false)}
-                          style={{
-                            fontFamily: "var(--font-sans)", fontSize: "11px", fontWeight: 300,
-                            letterSpacing: "0.03em", color: "#AAAAAA", padding: "4px 0",
-                            borderBottom: "1px solid #F5F5F5",
-                            transition: "color 0.15s", textDecoration: "none",
-                          }}
-                          onMouseEnter={e => (e.currentTarget.style.color = "#1A1A1A")}
-                          onMouseLeave={e => (e.currentTarget.style.color = "#AAAAAA")}
-                        >
-                          {item.label[language]}
-                        </Link>
-                      ))}
-                    </div>
+                    ))}
                   </div>
+                </div>
 
-                  {/* Contact */}
-                  <div>
-                    <p style={{
-                      fontFamily: "var(--font-sans)", fontSize: "9px", letterSpacing: "0.2em",
-                      textTransform: "uppercase", color: "#BBBBBB", marginBottom: 8,
-                    }}>
-                      Contact
-                    </p>
-                    <a href="tel:+96522275000"
-                      style={{ display: "block", fontFamily: "var(--font-sans)", fontSize: "11px",
-                        fontWeight: 300, color: "#AAAAAA", marginBottom: 3,
-                        transition: "color 0.15s", textDecoration: "none" }}
-                      onMouseEnter={e => (e.currentTarget.style.color = "#1A1A1A")}
-                      onMouseLeave={e => (e.currentTarget.style.color = "#AAAAAA")}
-                    >
-                      +965 2227 5000
-                    </a>
-                    <a href="mailto:leasing@alhamratower.com"
-                      style={{ display: "block", fontFamily: "var(--font-sans)", fontSize: "10px",
-                        fontWeight: 300, color: "#BBBBBB",
-                        transition: "color 0.15s", textDecoration: "none" }}
-                      onMouseEnter={e => (e.currentTarget.style.color = "#1A1A1A")}
-                      onMouseLeave={e => (e.currentTarget.style.color = "#BBBBBB")}
-                    >
-                      leasing@alhamratower.com
-                    </a>
-                  </div>
-                </motion.div>
-              </div>
+                <div>
+                  <p style={{ fontFamily: "var(--font-sans)", fontSize: "9px", letterSpacing: "0.2em",
+                    textTransform: "uppercase", color: "#BBBBBB", marginBottom: 8 }}>
+                    Contact
+                  </p>
+                  <a href="tel:+96522275000"
+                    style={{ display: "block", fontFamily: "var(--font-sans)", fontSize: "11px",
+                      fontWeight: 300, color: "#AAAAAA", marginBottom: 4,
+                      transition: "color 0.15s", textDecoration: "none" }}
+                    onMouseEnter={e => (e.currentTarget.style.color = "#1A1A1A")}
+                    onMouseLeave={e => (e.currentTarget.style.color = "#AAAAAA")}
+                  >
+                    +965 2227 5000
+                  </a>
+                  <a href="mailto:leasing@alhamratower.com"
+                    style={{ display: "block", fontFamily: "var(--font-sans)", fontSize: "10px",
+                      fontWeight: 300, color: "#BBBBBB",
+                      transition: "color 0.15s", textDecoration: "none" }}
+                    onMouseEnter={e => (e.currentTarget.style.color = "#1A1A1A")}
+                    onMouseLeave={e => (e.currentTarget.style.color = "#BBBBBB")}
+                  >
+                    leasing@alhamratower.com
+                  </a>
+                </div>
+              </motion.div>
+            </div>
 
-              {/* Bottom CTA strip */}
-              <div style={{
-                borderTop: "1px solid #F0F0F0",
-                padding: "12px 24px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                background: "#FAFAF8",
-              }}>
-                <p style={{ fontFamily: "var(--font-sans)", fontSize: "10px", color: "#BBBBBB", letterSpacing: "0.06em" }}>
-                  Sharq District, Kuwait City
-                </p>
-                <Link
-                  to="/leasing/opportunities"
-                  onClick={() => setOpen(false)}
-                  style={{
-                    fontFamily: "var(--font-sans)", fontSize: "10px", fontWeight: 400,
-                    letterSpacing: "0.1em", textTransform: "uppercase",
-                    color: "#1A1A1A", textDecoration: "none",
-                    display: "inline-flex", alignItems: "center", gap: 5,
-                  }}
-                  onMouseEnter={e => ((e.currentTarget as HTMLElement).style.opacity = "0.55")}
-                  onMouseLeave={e => ((e.currentTarget as HTMLElement).style.opacity = "1")}
-                >
-                  Get in touch →
-                </Link>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+            {/* Bottom CTA strip */}
+            <div style={{
+              borderTop: "1px solid #F0F0F0", padding: "12px 24px",
+              display: "flex", alignItems: "center", justifyContent: "space-between",
+              background: "#FAFAF8",
+            }}>
+              <p style={{ fontFamily: "var(--font-sans)", fontSize: "10px",
+                color: "#BBBBBB", letterSpacing: "0.06em" }}>
+                Sharq District, Kuwait City
+              </p>
+              <Link to="/leasing/opportunities" onClick={() => setOpen(false)}
+                style={{
+                  fontFamily: "var(--font-sans)", fontSize: "10px", fontWeight: 400,
+                  letterSpacing: "0.1em", textTransform: "uppercase",
+                  color: "#1A1A1A", textDecoration: "none",
+                  display: "inline-flex", alignItems: "center", gap: 5,
+                  transition: "opacity 0.2s",
+                }}
+                onMouseEnter={e => ((e.currentTarget as HTMLElement).style.opacity = "0.5")}
+                onMouseLeave={e => ((e.currentTarget as HTMLElement).style.opacity = "1")}
+              >
+                Get in touch →
+              </Link>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-        {/* ══════════════════════════════════════════════════
-            FLOATING PILL
-            ══════════════════════════════════════════════════ */}
+      {/* ════════════════════════════════════════════════════
+          FLOATING PILL — always at bottom, centred
+          ════════════════════════════════════════════════════ */}
+      <div
+        style={{
+          position: "fixed",
+          bottom: PILL_BOT,
+          left: "50%",
+          transform: "translateX(-50%)",
+          width: "calc(100vw - clamp(2rem, 8vw, 4rem))",
+          maxWidth: 640,
+          zIndex: 9999,
+        }}
+      >
         <div
+          ref={pillRef}
           style={{
-            width: "100%",
-            height: 52,
+            height: PILL_H,
             background: "#FFFFFF",
             border: "1px solid #E8E8E8",
             borderRadius: 9999,
@@ -269,27 +250,20 @@ export default function Header() {
             alignItems: "center",
             justifyContent: "space-between",
             padding: "0 clamp(1rem, 2vw, 1.5rem)",
-            position: "relative",
-            zIndex: 1,
           }}
         >
           {/* Logo */}
-          <Link to="/" onClick={() => setOpen(false)} style={{ flexShrink: 0 }}>
-            <motion.img
-              src={alHamraLogo}
-              alt="Al Hamra Tower"
+          <Link to="/" style={{ flexShrink: 0 }}>
+            <motion.img src={alHamraLogo} alt="Al Hamra Tower"
               style={{ height: 28, width: "auto", objectFit: "contain" }}
-              whileHover={{ opacity: 0.6 }}
-              transition={{ duration: 0.2 }}
+              whileHover={{ opacity: 0.6 }} transition={{ duration: 0.2 }}
             />
           </Link>
 
-          {/* Center links — desktop only */}
+          {/* Center quick links — desktop only */}
           <nav className="hidden lg:flex" style={{ alignItems: "center", gap: 24 }}>
             {PRIMARY_NAV.slice(0, 4).map(item => (
-              <Link
-                key={item.href}
-                to={item.href}
+              <Link key={item.href} to={item.href}
                 style={{
                   fontFamily: "var(--font-sans)", fontSize: "10px", fontWeight: 400,
                   letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none",
@@ -304,10 +278,9 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* Language + page toggle */}
+          {/* Language + page name toggle */}
           <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-            <button
-              onClick={toggleLanguage}
+            <button onClick={toggleLanguage}
               style={{
                 fontFamily: "var(--font-sans)", fontSize: "10px", fontWeight: 400,
                 letterSpacing: "0.1em", textTransform: "uppercase",
@@ -320,33 +293,27 @@ export default function Header() {
               {language === "en" ? "عربي" : "EN"}
             </button>
 
-            <button
-              onClick={() => setOpen(v => !v)}
+            <button onClick={() => setOpen(v => !v)}
               style={{
                 fontFamily: "var(--font-sans)", fontSize: "10px", fontWeight: 400,
                 letterSpacing: "0.1em", textTransform: "uppercase",
                 color: open ? "#AAAAAA" : "#1A1A1A",
                 cursor: "pointer", background: "none", border: "none", padding: 0,
                 transition: "color 0.2s",
-                minWidth: 48,
-                textAlign: "right",
+                minWidth: 48, textAlign: "right",
               }}
             >
               <AnimatePresence mode="wait">
                 {open ? (
                   <motion.span key="close"
                     initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }}
-                    transition={{ duration: 0.14 }}
-                    style={{ display: "block" }}
-                  >
+                    transition={{ duration: 0.14 }} style={{ display: "block" }}>
                     Close
                   </motion.span>
                 ) : (
                   <motion.span key="page"
                     initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 4 }}
-                    transition={{ duration: 0.14 }}
-                    style={{ display: "block" }}
-                  >
+                    transition={{ duration: 0.14 }} style={{ display: "block" }}>
                     {currentPage}
                   </motion.span>
                 )}
@@ -355,6 +322,6 @@ export default function Header() {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
