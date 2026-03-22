@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -9,63 +10,71 @@ import PageLayout from "./layouts/PageLayout";
 import PageTransition from "./components/alhamra/PageTransition";
 import ScrollToTop from "./components/alhamra/ScrollToTop";
 import FloatingContact from "./components/alhamra/FloatingContact";
-import Home from "./pages/Home";
-import Tower from "./pages/Tower";
-import Origins from "./pages/tower/Origins";
-import Rising from "./pages/tower/Rising";
-import DesignEngineering from "./pages/tower/DesignEngineering";
-import Sustainability from "./pages/tower/Sustainability";
-import Recognition from "./pages/tower/Recognition";
-import Dashboard from "./pages/tower/Dashboard";
-import Business from "./pages/Business";
-import WorkplaceExperience from "./pages/business/WorkplaceExperience";
-import OfficeSpaces from "./pages/business/OfficeSpaces";
-import VerticalTransportation from "./pages/business/VerticalTransportation";
-import Connectivity from "./pages/business/Connectivity";
-import Services from "./pages/Services";
-import Location from "./pages/Location";
-import LeasingOpportunities from "./pages/leasing/Opportunities";
-import LeasingInquiry from "./pages/leasing/Inquiry";
-import LeasingDownloads from "./pages/leasing/Downloads";
-import LeasingContactPage from "./pages/leasing/Contact";
-import Presentation from "./pages/Presentation";
-import NotFound from "./pages/NotFound";
 
-const queryClient = new QueryClient();
+/* ── All pages lazy-loaded — split into separate JS chunks ── */
+const Home               = lazy(() => import("./pages/Home"));
+const Tower              = lazy(() => import("./pages/Tower"));
+const Origins            = lazy(() => import("./pages/tower/Origins"));
+const Rising             = lazy(() => import("./pages/tower/Rising"));
+const DesignEngineering  = lazy(() => import("./pages/tower/DesignEngineering"));
+const Sustainability     = lazy(() => import("./pages/tower/Sustainability"));
+const Recognition        = lazy(() => import("./pages/tower/Recognition"));
+const Dashboard          = lazy(() => import("./pages/tower/Dashboard"));
+const Business           = lazy(() => import("./pages/Business"));
+const WorkplaceExperience= lazy(() => import("./pages/business/WorkplaceExperience"));
+const OfficeSpaces       = lazy(() => import("./pages/business/OfficeSpaces"));
+const VerticalTransportation = lazy(() => import("./pages/business/VerticalTransportation"));
+const Connectivity       = lazy(() => import("./pages/business/Connectivity"));
+const Services           = lazy(() => import("./pages/Services"));
+const Location           = lazy(() => import("./pages/Location"));
+const LeasingOpportunities = lazy(() => import("./pages/leasing/Opportunities"));
+const LeasingInquiry     = lazy(() => import("./pages/leasing/Inquiry"));
+const LeasingDownloads   = lazy(() => import("./pages/leasing/Downloads"));
+const LeasingContactPage = lazy(() => import("./pages/leasing/Contact"));
+const Presentation       = lazy(() => import("./pages/Presentation"));
+const NotFound           = lazy(() => import("./pages/NotFound"));
+
+/* Minimal loading fallback — no flash */
+const PageLoading = () => (
+  <div style={{ minHeight: "100svh", background: "#fff" }} />
+);
+
+const queryClient = new QueryClient({
+  defaultOptions: { queries: { staleTime: 5 * 60 * 1000 } },
+});
 
 const AnimatedRoutes = () => {
   const location = useLocation();
-
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<PageTransition><Home /></PageTransition>} />
-        <Route path="/tower" element={<PageTransition><Tower /></PageTransition>} />
-        <Route path="/tower/origins" element={<PageTransition><Origins /></PageTransition>} />
-        <Route path="/tower/rising" element={<PageTransition><Rising /></PageTransition>} />
-        <Route path="/tower/design" element={<PageTransition><DesignEngineering /></PageTransition>} />
-        <Route path="/tower/architecture" element={<Navigate to="/tower/design" replace />} />
-        <Route path="/tower/engineering" element={<Navigate to="/tower/design" replace />} />
+        <Route path="/"          element={<PageTransition><Home /></PageTransition>} />
+        <Route path="/tower"     element={<PageTransition><Tower /></PageTransition>} />
+        <Route path="/tower/origins"       element={<PageTransition><Origins /></PageTransition>} />
+        <Route path="/tower/rising"        element={<PageTransition><Rising /></PageTransition>} />
+        <Route path="/tower/design"        element={<PageTransition><DesignEngineering /></PageTransition>} />
+        <Route path="/tower/architecture"  element={<Navigate to="/tower/design" replace />} />
+        <Route path="/tower/engineering"   element={<Navigate to="/tower/design" replace />} />
         <Route path="/tower/sustainability" element={<PageTransition><Sustainability /></PageTransition>} />
-        <Route path="/tower/recognition" element={<PageTransition><Recognition /></PageTransition>} />
-        <Route path="/tower/dashboard" element={<PageTransition><Dashboard /></PageTransition>} />
-        <Route path="/perspective" element={<Navigate to="/tower/rising" replace />} />
-        <Route path="/legacy" element={<Navigate to="/tower/rising" replace />} />
-        <Route path="/business" element={<Navigate to="/business/workplace-experience" replace />} />
-        <Route path="/business/workplace-experience" element={<PageTransition><WorkplaceExperience /></PageTransition>} />
-        <Route path="/business/office-spaces" element={<PageTransition><OfficeSpaces /></PageTransition>} />
+        <Route path="/tower/recognition"   element={<PageTransition><Recognition /></PageTransition>} />
+        <Route path="/tower/dashboard"     element={<PageTransition><Dashboard /></PageTransition>} />
+        <Route path="/perspective"         element={<Navigate to="/tower/rising" replace />} />
+        <Route path="/legacy"              element={<Navigate to="/tower/rising" replace />} />
+        <Route path="/business"            element={<Navigate to="/business/workplace-experience" replace />} />
+        <Route path="/business/workplace-experience"    element={<PageTransition><WorkplaceExperience /></PageTransition>} />
+        <Route path="/business/office-spaces"           element={<PageTransition><OfficeSpaces /></PageTransition>} />
         <Route path="/business/vertical-transportation" element={<PageTransition><VerticalTransportation /></PageTransition>} />
-        <Route path="/business/connectivity" element={<PageTransition><Connectivity /></PageTransition>} />
-        <Route path="/services" element={<PageTransition><Services /></PageTransition>} />
-        <Route path="/location" element={<PageTransition><Location /></PageTransition>} />
-        <Route path="/leasing" element={<Navigate to="/leasing/opportunities" replace />} />
-        <Route path="/leasing/opportunities" element={<PageTransition><LeasingOpportunities /></PageTransition>} />
-        <Route path="/leasing/inquiry" element={<PageTransition><LeasingInquiry /></PageTransition>} />
-        <Route path="/leasing/downloads" element={<PageTransition><LeasingDownloads /></PageTransition>} />
-        <Route path="/leasing/contact" element={<PageTransition><LeasingContactPage /></PageTransition>} />
-        <Route path="/contact" element={<Navigate to="/leasing/contact" replace />} />
-        <Route path="/presentation" element={<Presentation />} />
-        <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
+        <Route path="/business/connectivity"            element={<PageTransition><Connectivity /></PageTransition>} />
+        <Route path="/services"                element={<PageTransition><Services /></PageTransition>} />
+        <Route path="/location"                element={<PageTransition><Location /></PageTransition>} />
+        <Route path="/leasing"                 element={<Navigate to="/leasing/opportunities" replace />} />
+        <Route path="/leasing/opportunities"   element={<PageTransition><LeasingOpportunities /></PageTransition>} />
+        <Route path="/leasing/inquiry"         element={<PageTransition><LeasingInquiry /></PageTransition>} />
+        <Route path="/leasing/downloads"       element={<PageTransition><LeasingDownloads /></PageTransition>} />
+        <Route path="/leasing/contact"         element={<PageTransition><LeasingContactPage /></PageTransition>} />
+        <Route path="/contact"                 element={<Navigate to="/leasing/contact" replace />} />
+        <Route path="/presentation"            element={<Presentation />} />
+        <Route path="*"                        element={<PageTransition><NotFound /></PageTransition>} />
       </Routes>
     </AnimatePresence>
   );
@@ -80,7 +89,9 @@ const App = () => (
         <BrowserRouter>
           <ScrollToTop />
           <PageLayout>
-            <AnimatedRoutes />
+            <Suspense fallback={<PageLoading />}>
+              <AnimatedRoutes />
+            </Suspense>
           </PageLayout>
           <FloatingContact />
         </BrowserRouter>
