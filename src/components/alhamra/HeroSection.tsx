@@ -50,7 +50,7 @@ export default function HeroSection() {
           </motion.p>
 
           {/* Main headline */}
-          <div style={{ overflow: "hidden", marginBottom: 6 }}>
+          <div style={{ overflow: "hidden", marginBottom: 4 }}>
             <motion.h1 style={{
               fontFamily: "var(--font-display)",
               fontSize: "clamp(4rem, 11vw, 12rem)",
