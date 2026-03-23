@@ -76,7 +76,7 @@ const Origins = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background overflow-x-hidden">
+    <div style={{ minHeight: "100vh", background: "#fff", overflowX: "hidden" }}>
       <Header />
       <main style={{ paddingTop: "var(--nav-h)" }}>
         {/* Hero Section */}
@@ -106,7 +106,7 @@ const Origins = () => {
 
         {/* Introduction Section */}
         <section className="py-24 px-6 lg:px-12">
-          <div className="container mx-auto max-w-6xl">
+          <div className="container-fluid">
             <motion.div
               ref={contentReveal.ref}
               initial="hidden"
@@ -155,7 +155,7 @@ const Origins = () => {
 
         {/* The Competition */}
         <section className="py-24 px-6 lg:px-12 bg-muted/30">
-          <div className="container mx-auto max-w-6xl">
+          <div className="container-fluid">
             <motion.div
               ref={competitionReveal.ref}
               initial="hidden"
@@ -178,7 +178,7 @@ const Origins = () => {
                   tower that appeared to unfurl like a traditional Kuwaiti bisht robe. The design was 
                   selected based on its cultural resonance, sustainability, and structural feasibility.
                 </p>
-                <blockquote className="border-l-2 border-silk-gold pl-6 italic text-foreground">
+                <blockquote className="border-l-2 border-border pl-6 italic text-foreground">
                   "A significant step forward both in terms of architectural design form and process. 
                   By leveraging the latest three-dimensional parametric modeling software, SOM brought 
                   together the realms of free-form design and the super high-rise skyscraper."
@@ -198,7 +198,7 @@ const Origins = () => {
 
         {/* Site Constraints */}
         <section className="py-24 px-6 lg:px-12">
-          <div className="container mx-auto max-w-6xl">
+          <div className="container-fluid">
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -248,7 +248,7 @@ const Origins = () => {
 
         {/* The Founders' Vision */}
         <section className="py-24 px-6 lg:px-12 bg-muted/30">
-          <div className="container mx-auto max-w-6xl">
+          <div className="container-fluid">
             <motion.div
               ref={foundersReveal.ref}
               initial="hidden"
@@ -278,7 +278,7 @@ const Origins = () => {
                   creating a symbol of national pride that would inspire future generations and position 
                   Kuwait as a leader in architectural innovation.
                 </p>
-                <blockquote className="border-l-2 border-silk-gold pl-6 italic text-foreground">
+                <blockquote className="border-l-2 border-border pl-6 italic text-foreground">
                   "We envisioned a building that would not only define our skyline but also embody the 
                   spirit of Kuwait—ambitious, resilient, and forever reaching upward."
                 </blockquote>
@@ -289,7 +289,7 @@ const Origins = () => {
 
         {/* Design Philosophy */}
         <section className="py-24 px-6 lg:px-12">
-          <div className="container mx-auto max-w-6xl">
+          <div className="container-fluid">
             <motion.div
               ref={visionReveal.ref}
               initial="hidden"
@@ -351,7 +351,7 @@ const Origins = () => {
 
         {/* Construction Phases */}
         <section className="py-24 px-6 lg:px-12 bg-muted/30">
-          <div className="container mx-auto max-w-6xl">
+          <div className="container-fluid">
             <motion.div
               ref={constructionReveal.ref}
               initial="hidden"
@@ -423,7 +423,7 @@ const Origins = () => {
 
         {/* Historical Gallery */}
         <section className="py-24 px-6 lg:px-12 bg-charcoal-900">
-          <div className="container mx-auto max-w-6xl">
+          <div className="container-fluid">
             <motion.div
               ref={galleryReveal.ref}
               initial="hidden"
@@ -483,7 +483,7 @@ const Origins = () => {
 
         {/* Timeline Section */}
         <section className="py-24 px-6 lg:px-12">
-          <div className="container mx-auto max-w-5xl">
+          <div className="container-fluid">
             <h2 className="text-3xl lg:text-4xl font-light tracking-wide text-center mb-6">
               Journey to Completion
             </h2>
@@ -527,7 +527,7 @@ const Origins = () => {
 
         {/* Legacy Statement */}
         <section className="py-32 px-6 lg:px-12 bg-muted/30">
-          <div className="container mx-auto max-w-4xl text-center">
+          <div className="container-fluid">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}

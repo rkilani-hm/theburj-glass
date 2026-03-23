@@ -25,7 +25,7 @@ const PerspectiveSection = () => {
     <section id="perspective" className="bg-secondary relative">
       {/* Hero Section */}
       <div className="py-16">
-        <div className="container mx-auto px-6 lg:px-12">
+        <div className="container-fluid">
           {/* Section Label */}
           <motion.div 
             ref={headerRef}
@@ -83,7 +83,7 @@ const PerspectiveSection = () => {
           </div>
         </motion.div>
 
-        <div className="container mx-auto px-6 lg:px-12">
+        <div className="container-fluid">
           {/* Caption */}
           <motion.div 
             ref={captionRef}
@@ -105,7 +105,7 @@ const PerspectiveSection = () => {
 
       {/* Vision Section */}
       <div className="py-16 bg-background ">
-        <div className="container mx-auto px-6 lg:px-12">
+        <div className="container-fluid">
           <div ref={visionRef} className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             {/* Text Column */}
             <motion.div
@@ -155,7 +155,7 @@ const PerspectiveSection = () => {
 
       {/* Time of Day Views */}
       <div className="py-16 bg-secondary">
-        <div className="container mx-auto px-6 lg:px-12">
+        <div className="container-fluid">
           <motion.div 
             ref={viewsRef}
             initial="hidden"
@@ -212,7 +212,7 @@ const PerspectiveSection = () => {
 
       {/* Gallery Grid */}
       <div className="py-16 bg-background">
-        <div className="container mx-auto px-6 lg:px-12">
+        <div className="container-fluid">
           <motion.div
             ref={galleryRef}
             initial="hidden"
@@ -345,7 +345,7 @@ const PerspectiveSection = () => {
 
       {/* Horizon Statement */}
       <div className="py-16 bg-secondary">
-        <div className="container mx-auto px-6 lg:px-12">
+        <div className="container-fluid">
           <div ref={horizonRef} className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             {/* Image Column */}
             <motion.div

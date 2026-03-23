@@ -28,7 +28,7 @@ const DashboardFooter = ({ language }: DashboardFooterProps) => {
       transition={{ duration: 0.6, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
     >
       <div className="bg-white/80 backdrop-blur-xl border-t border-slate-200 shadow-lg shadow-slate-200/30">
-        <div className="container mx-auto px-3 lg:px-8 py-3">
+        <div className="container-fluid">
           <div className="flex items-center justify-between gap-2">
             {/* Main buttons - scrollable on mobile */}
             <div className="flex items-center gap-1.5 md:gap-3 flex-1 overflow-x-auto scrollbar-hide">

@@ -90,7 +90,7 @@ const TowerTabbedDashboard = () => {
       {/* Floating Glass Blobs */}
       <FloatingGlassBlobs variant="gold" />
 
-      <div className="container mx-auto px-6 lg:px-12">
+      <div className="container-fluid">
         {/* Section Label */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -172,12 +172,12 @@ const TowerTabbedDashboard = () => {
                     height: activeData.imagePosition.height,
                   }}
                 >
-                  <div className="absolute inset-0 border-2 border-silk-gold/60 bg-muted" />
+                  <div className="absolute inset-0 border-2 border-border bg-muted" />
                   {/* Corner Accents */}
-                  <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-silk-gold" />
-                  <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-silk-gold" />
-                  <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-silk-gold" />
-                  <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-silk-gold" />
+                  <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-border" />
+                  <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-border" />
+                  <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-border" />
+                  <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-border" />
                 </motion.div>
               </div>
             </motion.div>
@@ -224,7 +224,7 @@ const TowerTabbedDashboard = () => {
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.3, delay: 0.2 + idx * 0.1 }}
-                            className="text-center p-4 bg-background/50 border border-silk-gold/15 rounded-xl"
+                            className="text-center p-4 bg-background/50 border border-border rounded-xl"
                           >
                             <p className="text-2xl lg:text-3xl font-light text-foreground tabular-nums">
                               {stat.value}

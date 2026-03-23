@@ -157,7 +157,7 @@ const HomeJourneyTimeline = () => {
 
   return (
     <section ref={containerRef} className="py-20 lg:py-28 bg-background relative overflow-hidden">
-      <div className="container mx-auto px-6 lg:px-12">
+      <div className="container-fluid">
         {/* Section Header */}
         <motion.div 
           initial={{ opacity: 0, y: 30 }}

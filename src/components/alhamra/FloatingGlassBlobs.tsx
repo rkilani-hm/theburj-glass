@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 
 interface FloatingGlassBlobsProps {
-  /** Visual variant — "gold" uses warm silk-gold tones, "cool" uses blue-violet */
+  /** Visual variant — "gold" uses warm warm tones, "cool" uses blue-violet */
   variant?: "gold" | "cool";
   /** Intensity: controls opacity multiplier */
   intensity?: "subtle" | "normal";

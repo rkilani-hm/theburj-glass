@@ -87,7 +87,7 @@ const DesignEngineering = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background overflow-x-hidden">
+    <div style={{ minHeight: "100vh", background: "#fff", overflowX: "hidden" }}>
       <Header />
       <main style={{ paddingTop: "var(--nav-h)" }}>
         {/* Hero Section */}
@@ -117,7 +117,7 @@ const DesignEngineering = () => {
 
         {/* Design Philosophy */}
         <section className="py-24 px-6 lg:px-12">
-          <div className="container mx-auto max-w-6xl">
+          <div className="container-fluid">
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -173,7 +173,7 @@ const DesignEngineering = () => {
 
         {/* Architectural Features */}
         <section className="py-24 px-6 lg:px-12 bg-muted/30">
-          <div className="container mx-auto max-w-6xl">
+          <div className="container-fluid">
             <motion.div
               ref={featuresReveal.ref}
               initial="hidden"
@@ -205,7 +205,7 @@ const DesignEngineering = () => {
 
         {/* Interactive Floor Plan Selector */}
         <section className="py-24 px-6 lg:px-12">
-          <div className="container mx-auto max-w-5xl">
+          <div className="container-fluid">
             <motion.div
               ref={floorPlanReveal.ref}
               initial="hidden"
@@ -220,7 +220,7 @@ const DesignEngineering = () => {
 
         {/* Grand Lobby Section */}
         <section className="py-24 px-6 lg:px-12">
-          <div className="container mx-auto max-w-6xl">
+          <div className="container-fluid">
             <motion.div
               ref={lobbyReveal.ref}
               initial="hidden"
@@ -267,7 +267,7 @@ const DesignEngineering = () => {
 
         {/* Lamella Structure */}
         <section className="py-24 px-6 lg:px-12 bg-muted/30">
-          <div className="container mx-auto max-w-6xl">
+          <div className="container-fluid">
             <motion.div
               ref={lamellaReveal.ref}
               initial="hidden"
@@ -307,7 +307,7 @@ const DesignEngineering = () => {
 
         {/* Entrance Gallery */}
         <section className="py-24 px-6 lg:px-12">
-          <div className="container mx-auto max-w-6xl">
+          <div className="container-fluid">
             <h2 className="text-3xl font-light tracking-wide text-center mb-16">
               Arrival Experience
             </h2>
@@ -354,7 +354,7 @@ const DesignEngineering = () => {
 
         {/* Observation Deck */}
         <section className="py-24 px-6 lg:px-12 bg-charcoal-900">
-          <div className="container mx-auto max-w-6xl">
+          <div className="container-fluid">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div className="space-y-8">
                 <h2 className="text-3xl lg:text-4xl font-light tracking-wide text-white">
@@ -396,7 +396,7 @@ const DesignEngineering = () => {
 
         {/* Facade Detail */}
         <section className="py-24 px-6 lg:px-12">
-          <div className="container mx-auto max-w-4xl">
+          <div className="container-fluid">
             <motion.div
               initial={{ opacity: 0, scale: 0.98 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -421,7 +421,7 @@ const DesignEngineering = () => {
 
         {/* Engineering Overview */}
         <section className="py-24 px-6 lg:px-12 bg-muted/30">
-          <div className="container mx-auto max-w-4xl text-center">
+          <div className="container-fluid">
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -452,7 +452,7 @@ const DesignEngineering = () => {
 
         {/* Specifications Grid */}
         <section className="py-24 px-6 lg:px-12">
-          <div className="container mx-auto max-w-6xl">
+          <div className="container-fluid">
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -485,7 +485,7 @@ const DesignEngineering = () => {
 
         {/* Structural Innovations */}
         <section className="py-24 px-6 lg:px-12 bg-muted/30">
-          <div className="container mx-auto max-w-6xl">
+          <div className="container-fluid">
             <div className="grid lg:grid-cols-2 gap-16 items-start">
               <div>
                 <h2 className="text-3xl font-light tracking-wide mb-12">
@@ -499,7 +499,7 @@ const DesignEngineering = () => {
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: index * 0.1 }}
-                      className="pb-8 border-b border-silk-gold/15 last:border-0"
+                      className="pb-8 border-b border-border last:border-0"
                     >
                       <h3 className="text-xl font-light mb-3">{item.title}</h3>
                       <p className="text-muted-foreground">{item.description}</p>
@@ -527,7 +527,7 @@ const DesignEngineering = () => {
 
         {/* Analysis & Design Models */}
         <section className="py-24 px-6 lg:px-12">
-          <div className="container mx-auto max-w-6xl">
+          <div className="container-fluid">
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -567,7 +567,7 @@ const DesignEngineering = () => {
 
         {/* Performance Stats */}
         <section className="py-24 px-6 lg:px-12 bg-charcoal-900">
-          <div className="container mx-auto max-w-4xl text-center">
+          <div className="container-fluid">
             <h2 className="text-3xl font-light tracking-wide text-white mb-16">
               Performance Metrics
             </h2>
@@ -595,7 +595,7 @@ const DesignEngineering = () => {
 
         {/* Load Path Visualization */}
         <section className="py-24 px-6 lg:px-12">
-          <div className="container mx-auto max-w-6xl">
+          <div className="container-fluid">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <motion.div
                 initial={{ opacity: 0, scale: 0.98 }}
@@ -641,7 +641,7 @@ const DesignEngineering = () => {
 
         {/* Research Credit */}
         <section className="py-24 px-6 lg:px-12 bg-muted/30">
-          <div className="container mx-auto max-w-4xl text-center">
+          <div className="container-fluid">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -666,7 +666,7 @@ const DesignEngineering = () => {
 
         {/* Collaborators */}
         <section className="py-24 px-6 lg:px-12">
-          <div className="container mx-auto max-w-4xl text-center">
+          <div className="container-fluid">
             <h2 className="text-2xl font-light tracking-wide mb-12">Project Collaborators</h2>
             <div className="grid md:grid-cols-4 gap-8">
               {[

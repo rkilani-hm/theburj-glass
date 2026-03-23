@@ -43,7 +43,7 @@ const SkyLobbiesSection = () => {
       {/* Subtle vertical motion indicator */}
       <div className="absolute left-8 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-border to-transparent opacity-30" />
       
-      <div className="container mx-auto px-6 lg:px-12">
+      <div className="container-fluid">
         {/* Section Header */}
         <motion.div
           ref={headerRef}

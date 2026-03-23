@@ -6,9 +6,9 @@ import PerspectiveSection from "@/components/alhamra/PerspectiveSection";
 
 const Rising = () => {
   return (
-    <div className="min-h-screen bg-background overflow-x-hidden">
+    <div style={{ minHeight: "100vh", background: "#fff", overflowX: "hidden" }}>
       <Header />
-      <main className="pt-20">
+      <main style={{ paddingTop: "var(--nav-h)" }}>
         {/* Legacy Section - Heritage & Origins */}
         <LegacySection />
         

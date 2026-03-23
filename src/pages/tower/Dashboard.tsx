@@ -94,7 +94,7 @@ const Dashboard = () => {
       <Header />
 
       {/* Tower Image Container - Shows full image */}
-      <div className="relative pt-20 pb-24">
+      <div style={{ paddingTop: "var(--nav-h)", paddingBottom: "6rem", position: "relative" }}>
         <img
           src={towerBackground}
           alt="Al Hamra Tower"

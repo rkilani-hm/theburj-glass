@@ -102,7 +102,7 @@ const ElevatorSystemVisualization = () => {
 
   return (
     <div ref={containerRef} className="py-20 bg-background relative overflow-hidden">
-      <div className="container mx-auto px-6 lg:px-12">
+      <div className="container-fluid">
         {/* Section Header */}
         <motion.div
           ref={headerRef}

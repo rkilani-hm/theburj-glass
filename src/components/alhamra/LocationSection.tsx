@@ -37,7 +37,7 @@ const LocationSection = () => {
     <section id="location" className="bg-background relative">
       {/* Hero Section */}
       <div className="py-20 lg:py-28 bg-secondary ">
-        <div className="container mx-auto px-6 lg:px-12">
+        <div className="container-fluid">
           {/* Section Label */}
           <motion.div 
             ref={headerRef}
@@ -141,7 +141,7 @@ const LocationSection = () => {
 
       {/* Enhanced Google Maps Section */}
       <div className="py-20 lg:py-28 bg-background">
-        <div className="container mx-auto px-6 lg:px-12">
+        <div className="container-fluid">
           <motion.div
             ref={mapRef}
             initial="hidden"
@@ -233,7 +233,7 @@ const LocationSection = () => {
 
       {/* Nearby Landmarks */}
       <div className="py-20 lg:py-28 bg-secondary">
-        <div className="container mx-auto px-6 lg:px-12">
+        <div className="container-fluid">
           <motion.div
             ref={contextRef}
             initial="hidden"

@@ -58,7 +58,7 @@ const Recognition = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background overflow-x-hidden">
+    <div style={{ minHeight: "100vh", background: "#fff", overflowX: "hidden" }}>
       <Header />
       <main style={{ paddingTop: "var(--nav-h)" }}>
         {/* Hero Section */}
@@ -88,7 +88,7 @@ const Recognition = () => {
 
         {/* CTBUH Research Paper Highlight */}
         <section className="py-24 px-6 lg:px-12 bg-primary/5">
-          <div className="container mx-auto max-w-4xl">
+          <div className="container-fluid">
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -116,7 +116,7 @@ const Recognition = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="p-6 bg-white/60 backdrop-blur bg-background/80 hover:border-silk-gold/40 transition-colors duration-300"
+                  className="p-6 bg-white/60 backdrop-blur bg-background/80 hover:border-border transition-colors duration-300"
                 >
                   <p className="text-sm text-muted-foreground mb-2">{item.label}</p>
                   <p className="font-light">{item.value}</p>
@@ -128,7 +128,7 @@ const Recognition = () => {
 
         {/* Awards Timeline */}
         <section className="py-24 px-6 lg:px-12">
-          <div className="container mx-auto max-w-4xl">
+          <div className="container-fluid">
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -147,8 +147,8 @@ const Recognition = () => {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
-                    className={`flex gap-6 items-start p-6 bg-white/60 backdrop-blur bg-background/80 hover:border-silk-gold/40 transition-colors duration-300 ${
-                      award.highlight ? 'border-silk-gold/50' : ''
+                    className={`flex gap-6 items-start p-6 bg-white/60 backdrop-blur bg-background/80 hover:border-border transition-colors duration-300 ${
+                      award.highlight ? 'border-black/20' : 'border-border'
                     }`}
                   >
                     <div className={`flex-shrink-0 w-16 h-16 flex items-center justify-center rounded-xl border ${
@@ -175,7 +175,7 @@ const Recognition = () => {
 
         {/* Recognition Quote */}
         <section className="py-24 px-6 lg:px-12 bg-muted/30">
-          <div className="container mx-auto max-w-4xl text-center">
+          <div className="container-fluid">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -198,7 +198,7 @@ const Recognition = () => {
 
         {/* Global Standing */}
         <section className="py-24 px-6 lg:px-12">
-          <div className="container mx-auto max-w-6xl">
+          <div className="container-fluid">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <motion.div
                 initial={{ opacity: 0, scale: 0.98 }}
@@ -243,7 +243,7 @@ const Recognition = () => {
 
         {/* Engineering Contribution */}
         <section className="py-24 px-6 lg:px-12 bg-charcoal-900">
-          <div className="container mx-auto max-w-6xl">
+          <div className="container-fluid">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div className="space-y-8">
                 <h2 className="text-3xl font-light tracking-wide text-white">

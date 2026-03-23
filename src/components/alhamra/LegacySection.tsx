@@ -120,7 +120,7 @@ const LegacySection = () => {
         </motion.div>
         
         <div className="absolute inset-0 flex items-end">
-          <div className="container mx-auto px-6 lg:px-12 pb-16 lg:pb-24">
+          <div className="container-fluid">
             <motion.div 
               ref={headerRef}
               initial="hidden"
@@ -148,7 +148,7 @@ const LegacySection = () => {
 
       {/* Origins Section - Cinema to Tower */}
       <div className="py-16 bg-background">
-        <div className="container mx-auto px-6 lg:px-12">
+        <div className="container-fluid">
           <motion.div 
             ref={originsRef}
             initial="hidden"
@@ -231,7 +231,7 @@ const LegacySection = () => {
 
       {/* Archival Gallery Section */}
       <div className="py-16 bg-muted/30">
-        <div className="container mx-auto px-6 lg:px-12">
+        <div className="container-fluid">
           <motion.div 
             ref={archivalRef}
             initial="hidden"
@@ -281,7 +281,7 @@ const LegacySection = () => {
 
       {/* Before/After Comparison Section */}
       <div className="py-16 bg-background">
-        <div className="container mx-auto px-6 lg:px-12">
+        <div className="container-fluid">
           <motion.div 
             ref={comparisonRef}
             initial="hidden"
@@ -332,7 +332,7 @@ const LegacySection = () => {
 
       {/* Founders' Vision Section */}
       <div className="py-16 bg-background">
-        <div className="container mx-auto px-6 lg:px-12">
+        <div className="container-fluid">
           <motion.div 
             ref={foundersRef}
             initial="hidden"
@@ -396,7 +396,7 @@ const LegacySection = () => {
 
       {/* Timeline Section */}
       <div className="py-16 bg-muted/30">
-        <div className="container mx-auto px-6 lg:px-12">
+        <div className="container-fluid">
           <motion.div 
             ref={evolutionRef}
             initial="hidden"
@@ -430,7 +430,7 @@ const LegacySection = () => {
                 >
                   {/* Timeline dot */}
                   <div className="hidden lg:flex absolute top-6 left-1/2 lg:left-0 -translate-x-1/2 lg:translate-x-0 w-5 h-5 items-center justify-center">
-                    <div className="w-4 h-4 bg-background border-2 border-silk-gold rounded-full" />
+                    <div className="w-4 h-4 bg-background border-2 border-border rounded-full" />
                   </div>
 
                   <div className="lg:pt-16 space-y-3">
@@ -453,7 +453,7 @@ const LegacySection = () => {
 
       {/* Design & Achievement Section */}
       <div className="py-16 bg-background">
-        <div className="container mx-auto px-6 lg:px-12">
+        <div className="container-fluid">
           <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
             <motion.div
               ref={designRef}
@@ -533,7 +533,7 @@ const LegacySection = () => {
 
       {/* Urban & Cultural Impact */}
       <div className="py-16 bg-foreground text-background">
-        <div className="container mx-auto px-6 lg:px-12">
+        <div className="container-fluid">
           <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             <motion.div
               ref={impactRef}
@@ -598,7 +598,7 @@ const LegacySection = () => {
 
       {/* Legacy in the Heart of the City */}
       <div className="py-16 bg-background">
-        <div className="container mx-auto px-6 lg:px-12">
+        <div className="container-fluid">
           <motion.div 
             ref={heartRef}
             initial="hidden"

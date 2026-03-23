@@ -11,7 +11,7 @@ const Presentation = () => {
     <div className="min-h-screen bg-white print:bg-white">
       {/* Print-hidden header */}
       <div className="print:hidden fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur border-b border-border">
-        <div className="container mx-auto max-w-4xl px-6 py-4 flex items-center justify-between">
+        <div className="container-fluid">
           <Link to="/" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
             <ArrowLeft className="w-4 h-4" />
             <span className="text-sm">Back to Site</span>
@@ -27,7 +27,7 @@ const Presentation = () => {
       </div>
 
       {/* Document Content */}
-      <div className="container mx-auto max-w-4xl px-6 py-24 print:py-12 print:px-12">
+      <div className="container-fluid">
         
         {/* Cover */}
         <motion.div

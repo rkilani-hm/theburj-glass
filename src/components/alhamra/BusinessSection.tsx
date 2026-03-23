@@ -61,7 +61,7 @@ const BusinessSection = () => {
       {/* Hero Section */}
       <div className="py-20 lg:py-28  relative">
         <FloatingGlassBlobs variant="gold" intensity="subtle" />
-        <div className="container mx-auto px-6 lg:px-12 relative z-10">
+        <div className="container-fluid">
           {/* Section Label */}
           <motion.div 
             ref={headerRef}
@@ -166,7 +166,7 @@ const BusinessSection = () => {
 
       {/* Stats Section */}
       <div className="py-20 lg:py-28 bg-foreground">
-        <div className="container mx-auto px-6 lg:px-12">
+        <div className="container-fluid">
           <motion.div
             ref={statsRef}
             initial="hidden"
@@ -199,7 +199,7 @@ const BusinessSection = () => {
 
       {/* Advantages Grid */}
       <div className="py-20 lg:py-28 bg-secondary">
-        <div className="container mx-auto px-6 lg:px-12">
+        <div className="container-fluid">
           <motion.div
             ref={tenantsRef}
             initial="hidden"
@@ -296,7 +296,7 @@ const BusinessSection = () => {
 
       {/* Global Address Section */}
       <div ref={additionalRef} className="py-20 lg:py-28 bg-background ">
-        <div className="container mx-auto px-6 lg:px-12">
+        <div className="container-fluid">
           <motion.h3
             initial="hidden"
             animate={additionalInView ? "visible" : "hidden"}

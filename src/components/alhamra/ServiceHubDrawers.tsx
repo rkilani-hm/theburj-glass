@@ -57,7 +57,7 @@ const ServiceHubDrawers = () => {
   return (
     <section className="py-16 bg-secondary/50 relative">
       <FloatingGlassBlobs variant="cool" intensity="subtle" />
-      <div className="container mx-auto px-6 lg:px-12 relative z-10">
+      <div className="container-fluid">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -133,9 +133,9 @@ const ServiceHubDrawers = () => {
                               initial={{ opacity: 0, x: dir === "rtl" ? 20 : -20 }}
                               animate={{ opacity: 1, x: 0 }}
                               transition={{ duration: 0.3, delay: sIndex * 0.1 }}
-                              className="flex items-start gap-3 p-3 bg-background/50 border border-silk-gold/10 rounded-xl"
+                              className="flex items-start gap-3 p-3 bg-background/50 border border-border rounded-xl"
                             >
-                              <div className="w-8 h-8 flex items-center justify-center bg-foreground/5 border border-silk-gold/15 rounded-lg flex-shrink-0">
+                              <div className="w-8 h-8 flex items-center justify-center bg-foreground/5 border border-border rounded-lg flex-shrink-0">
                                 <ServiceIcon className="w-4 h-4 text-foreground/60" />
                               </div>
                               <div>

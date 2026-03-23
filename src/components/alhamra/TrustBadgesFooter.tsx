@@ -17,9 +17,9 @@ const TrustBadgesFooter = () => {
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
-      className="fixed bottom-0 left-0 right-0 z-30 bg-white/80 backdrop-blur border border-border bg-background/85 border-t border-silk-gold/15"
+      className="fixed bottom-0 left-0 right-0 z-30 bg-white/80 backdrop-blur border border-border bg-background/85 border-t border-border"
     >
-      <div className="container mx-auto px-6 py-4">
+      <div className="container-fluid">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           {/* Label */}
           <div className="flex items-center gap-2">

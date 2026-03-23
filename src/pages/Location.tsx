@@ -4,9 +4,9 @@ import Footer from "@/components/alhamra/Footer";
 
 const Location = () => {
   return (
-    <div className="min-h-screen bg-background overflow-x-hidden">
+    <div style={{ minHeight: "100vh", background: "#fff", overflowX: "hidden" }}>
       <Header />
-      <main className="pt-24">
+      <main style={{ paddingTop: "var(--nav-h)" }}>
         <LocationSection />
       </main>
       <Footer />

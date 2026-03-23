@@ -74,7 +74,7 @@ const Sustainability = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background overflow-x-hidden">
+    <div style={{ minHeight: "100vh", background: "#fff", overflowX: "hidden" }}>
       <Header />
       <main style={{ paddingTop: "var(--nav-h)" }}>
         {/* Hero Section */}
@@ -96,7 +96,7 @@ const Sustainability = () => {
           </div>
 
           {/* Breadcrumb */}
-          <div className="container mx-auto px-6 lg:px-12 pt-8">
+          <div className="container-fluid">
             <nav className="text-sm text-muted-foreground">
               <span>Home</span>
               <span className="mx-2">|</span>
@@ -107,7 +107,7 @@ const Sustainability = () => {
           </div>
 
           {/* Content */}
-          <div className="container mx-auto px-6 lg:px-12 py-24 relative z-10">
+          <div className="container-fluid">
             <motion.div
               ref={heroReveal.ref}
               initial="hidden"
@@ -132,7 +132,7 @@ const Sustainability = () => {
 
         {/* Introduction Section */}
         <section className="py-24 px-6 lg:px-12">
-          <div className="container mx-auto max-w-6xl">
+          <div className="container-fluid">
             <motion.div
               ref={introReveal.ref}
               initial="hidden"
@@ -174,7 +174,7 @@ const Sustainability = () => {
 
         {/* Animated Energy Stats Infographic */}
         <section className="py-24 px-6 lg:px-12 bg-gradient-to-b from-background to-muted/30">
-          <div className="container mx-auto max-w-6xl">
+          <div className="container-fluid">
             <div className="text-center mb-16">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -241,7 +241,7 @@ const Sustainability = () => {
 
         {/* Energy Efficiency Grid */}
         <section className="py-24 px-6 lg:px-12 bg-muted/30">
-          <div className="container mx-auto max-w-6xl">
+          <div className="container-fluid">
             <div className="text-center mb-16">
               <p className="text-sm uppercase tracking-widest text-stone mb-4">Performance</p>
               <h2 className="text-3xl lg:text-4xl font-light tracking-wide">
@@ -257,7 +257,7 @@ const Sustainability = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1, duration: 0.6 }}
-                  className="bg-white/60 backdrop-blur bg-background/80 p-8 hover:border-silk-gold/40 transition-colors duration-300 group"
+                  className="bg-white/60 backdrop-blur bg-background/80 p-8 hover:border-border transition-colors duration-300 group"
                 >
                   <feature.icon className="w-10 h-10 text-stone mb-6" strokeWidth={1} />
                   <h3 className="text-xl font-light mb-4">{feature.title}</h3>
@@ -296,7 +296,7 @@ const Sustainability = () => {
 
         {/* Safety & Systems Section */}
         <section className="py-24 px-6 lg:px-12">
-          <div className="container mx-auto max-w-6xl">
+          <div className="container-fluid">
             <div className="grid lg:grid-cols-2 gap-16 items-start">
               <div>
                 <p className="text-sm uppercase tracking-widest text-stone mb-4">Safety & Systems</p>
@@ -326,7 +326,7 @@ const Sustainability = () => {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1, duration: 0.6 }}
-                    className="flex gap-6 p-6 bg-white/60 backdrop-blur bg-background/80 border-l-2 border-black/15 hover:border-silk-gold transition-colors duration-300"
+                    className="flex gap-6 p-6 bg-white/60 backdrop-blur bg-background/80 border-l-2 border-black/15 hover:border-border transition-colors duration-300"
                   >
                     <feature.icon className="w-8 h-8 text-stone flex-shrink-0" strokeWidth={1} />
                     <div>
@@ -344,7 +344,7 @@ const Sustainability = () => {
 
         {/* Safety Systems Infographic */}
         <section className="py-24 px-6 lg:px-12 bg-charcoal-900 overflow-hidden">
-          <div className="container mx-auto max-w-6xl">
+          <div className="container-fluid">
             <div className="text-center mb-16">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -407,7 +407,7 @@ const Sustainability = () => {
 
         {/* Recognition Banner */}
         <section className="py-20 px-6 lg:px-12 bg-muted/30">
-          <div className="container mx-auto max-w-4xl text-center">
+          <div className="container-fluid">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -429,7 +429,7 @@ const Sustainability = () => {
 
         {/* Closing Statement */}
         <section className="py-32 px-6 lg:px-12">
-          <div className="container mx-auto max-w-4xl text-center">
+          <div className="container-fluid">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}

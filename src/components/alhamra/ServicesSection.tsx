@@ -56,7 +56,7 @@ const ServicesSection = () => {
     <section id="services" className="bg-background relative">
       {/* Hero Section */}
       <div className="py-20 lg:py-28 bg-secondary">
-        <div className="container mx-auto px-6 lg:px-12">
+        <div className="container-fluid">
           {/* Section Label */}
           <motion.div 
             ref={headerRef}
@@ -152,7 +152,7 @@ const ServicesSection = () => {
 
       {/* Premium Services Grid */}
       <div className="py-20 lg:py-28 bg-background ">
-        <div className="container mx-auto px-6 lg:px-12">
+        <div className="container-fluid">
           <motion.div
             ref={diningRef}
             initial="hidden"
@@ -237,7 +237,7 @@ const ServicesSection = () => {
 
       {/* Amenities Grid */}
       <div ref={amenitiesRef} className="py-20 lg:py-28 bg-secondary">
-        <div className="container mx-auto px-6 lg:px-12">
+        <div className="container-fluid">
           <motion.h3
             initial="hidden"
             animate={amenitiesInView ? "visible" : "hidden"}

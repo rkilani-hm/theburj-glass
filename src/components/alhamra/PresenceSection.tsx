@@ -62,7 +62,7 @@ const PresenceSection = () => {
     <section id="presence" className="bg-background relative">
       {/* Hero Section */}
       <div className="py-20 lg:py-28 ">
-        <div className="container mx-auto px-6 lg:px-12">
+        <div className="container-fluid">
           {/* Section Label */}
           <motion.div 
             ref={sectionRef}
@@ -162,7 +162,7 @@ const PresenceSection = () => {
 
       {/* Stats Row */}
       <div className="py-20 lg:py-28 bg-secondary">
-        <div className="container mx-auto px-6 lg:px-12">
+        <div className="container-fluid">
           <motion.div 
             ref={statsRef}
             initial="hidden"
@@ -196,7 +196,7 @@ const PresenceSection = () => {
 
       {/* Architectural Features */}
       <div className="py-20 lg:py-28 bg-background ">
-        <div className="container mx-auto px-6 lg:px-12">
+        <div className="container-fluid">
           <motion.div
             ref={architectureRef}
             initial="hidden"
@@ -290,7 +290,7 @@ const PresenceSection = () => {
 
       {/* Interior Spaces */}
       <div className="py-20 lg:py-28 bg-secondary">
-        <div className="container mx-auto px-6 lg:px-12">
+        <div className="container-fluid">
           <div ref={interiorRef} className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             {/* Images */}
             <motion.div
@@ -356,7 +356,7 @@ const PresenceSection = () => {
 
       {/* Tower Details Gallery */}
       <div className="py-20 lg:py-28 bg-background">
-        <div className="container mx-auto px-6 lg:px-12">
+        <div className="container-fluid">
           <motion.div
             ref={detailsRef}
             initial="hidden"
@@ -424,7 +424,7 @@ const PresenceSection = () => {
 
       {/* Tower Facts */}
       <div className="py-20 lg:py-28 bg-secondary">
-        <div className="container mx-auto px-6 lg:px-12">
+        <div className="container-fluid">
           <motion.div
             ref={factsRef}
             initial="hidden"
@@ -477,7 +477,7 @@ const PresenceSection = () => {
 
       {/* Aerial Perspectives */}
       <div className="py-20 lg:py-28 bg-background ">
-        <div className="container mx-auto px-6 lg:px-12">
+        <div className="container-fluid">
           <motion.div
             ref={aerialRef}
             initial="hidden"
@@ -562,7 +562,7 @@ const PresenceSection = () => {
 
       {/* Grand Entrance */}
       <div className="py-20 lg:py-28 bg-secondary">
-        <div className="container mx-auto px-6 lg:px-12">
+        <div className="container-fluid">
           <div ref={entranceRef} className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             {/* Text */}
             <motion.div
@@ -618,7 +618,7 @@ const PresenceSection = () => {
 
       {/* Night Illumination */}
       <div className="py-20 lg:py-28 bg-foreground">
-        <div className="container mx-auto px-6 lg:px-12">
+        <div className="container-fluid">
           <motion.div
             ref={nightRef}
             initial="hidden"
@@ -669,7 +669,7 @@ const PresenceSection = () => {
 
       {/* Extended Aerial Gallery */}
       <div className="py-20 lg:py-28 bg-background ">
-        <div className="container mx-auto px-6 lg:px-12">
+        <div className="container-fluid">
           <motion.div
             ref={galleryRef}
             initial="hidden"

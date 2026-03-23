@@ -44,7 +44,7 @@ const ContactSection = () => {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
         <div className="absolute inset-0 flex items-end">
-          <div className="container mx-auto px-6 lg:px-12 pb-12">
+          <div className="container-fluid">
             <motion.div 
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -63,7 +63,7 @@ const ContactSection = () => {
       </div>
 
       {/* Main Content */}
-      <div className="container mx-auto px-6 lg:px-12 py-20 lg:py-32">
+      <div className="container-fluid">
         <motion.p 
           ref={headerRef}
           initial="hidden"
@@ -92,7 +92,7 @@ const ContactSection = () => {
                 </label>
                 <input
                   type="text"
-                  className="w-full bg-transparent border-b-2 border-border py-4 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-silk-gold transition-colors duration-300"
+                  className="w-full bg-transparent border-b-2 border-border py-4 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-border transition-colors duration-300"
                   placeholder={t("contact.name.placeholder") || "Your name"}
                 />
               </div>
@@ -104,7 +104,7 @@ const ContactSection = () => {
                 </label>
                 <input
                   type="email"
-                  className="w-full bg-transparent border-b-2 border-border py-4 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-silk-gold transition-colors duration-300"
+                  className="w-full bg-transparent border-b-2 border-border py-4 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-border transition-colors duration-300"
                   placeholder={t("contact.email.placeholder") || "your@email.com"}
                 />
               </div>
@@ -117,7 +117,7 @@ const ContactSection = () => {
               </label>
               <input
                 type="text"
-                className="w-full bg-transparent border-b-2 border-border py-4 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-silk-gold transition-colors duration-300"
+                className="w-full bg-transparent border-b-2 border-border py-4 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-border transition-colors duration-300"
                 placeholder={t("contact.subject.placeholder") || "Subject of inquiry"}
               />
             </div>
@@ -129,7 +129,7 @@ const ContactSection = () => {
               </label>
               <textarea
                 rows={5}
-                className="w-full bg-transparent border-b-2 border-border py-4 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-silk-gold transition-colors duration-300 resize-none"
+                className="w-full bg-transparent border-b-2 border-border py-4 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-border transition-colors duration-300 resize-none"
                 placeholder={t("contact.message.placeholder") || "Your message"}
               />
             </div>

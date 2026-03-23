@@ -99,7 +99,7 @@ const ConstructionStory = () => {
     >
       {/* Section Header */}
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
-        <div className="container mx-auto px-6 lg:px-12">
+        <div className="container-fluid">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             {/* Tower SVG Visualization */}
             <div className={`relative flex justify-center ${isArabic ? "lg:order-2" : ""}`}>

@@ -24,7 +24,7 @@ const ContinuitySection = () => {
         ∞
       </div>
 
-      <div className="container mx-auto px-6 lg:px-12 relative">
+      <div className="container-fluid">
         {/* Section Label */}
         <motion.div 
           ref={headerRef}

@@ -134,7 +134,7 @@ const ParallaxHistoryTimeline = () => {
 
   return (
     <div ref={containerRef} className="relative py-16 bg-muted/20">
-      <div className="container mx-auto px-6 lg:px-12">
+      <div className="container-fluid">
         {/* Section Header */}
         <motion.div
           ref={headerRef}

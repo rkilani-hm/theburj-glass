@@ -70,7 +70,7 @@ const CollapsibleSystemPulse = () => {
           ) : (
             <motion.div key="expanded" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="p-6 space-y-6">
               {/* Header */}
-              <div className="border-b border-silk-gold/15 pb-4">
+              <div className="border-b border-border pb-4">
                 <h3 className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-1">
                   {language === "en" ? "System Pulse" : "نبض النظام"}
                 </h3>
@@ -93,7 +93,7 @@ const CollapsibleSystemPulse = () => {
                     >
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
-                          <div className="w-8 h-8 flex items-center justify-center bg-muted border border-silk-gold/15 rounded-lg">
+                          <div className="w-8 h-8 flex items-center justify-center bg-muted border border-border rounded-lg">
                             <IconComponent className="w-4 h-4 text-foreground/60" />
                           </div>
                           <span className="text-sm text-foreground">{metric.label[language]}</span>
@@ -139,7 +139,7 @@ const CollapsibleSystemPulse = () => {
               </div>
 
               {/* Live Indicator */}
-              <div className="border-t border-silk-gold/15 pt-4 flex items-center gap-2">
+              <div className="border-t border-border pt-4 flex items-center gap-2">
                 <motion.div animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 2, repeat: Infinity }} className="w-2 h-2 rounded-full bg-green-500" />
                 <span className="text-xs text-muted-foreground">{language === "en" ? "All Systems Operational" : "جميع الأنظمة تعمل"}</span>
               </div>
