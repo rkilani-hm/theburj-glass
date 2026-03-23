@@ -47,23 +47,23 @@ const CollapsibleSystemPulse = () => {
         dir === "rtl" ? "left-4" : "right-4"
       }`}
     >
-      <div className="relative liquid-glass bg-background/90 shadow-xl">
+      <div className="relative bg-white/80 backdrop-blur border border-border bg-background/90 shadow-xl">
         {/* Collapse Toggle */}
         <button
           onClick={() => setIsCollapsed(!isCollapsed)}
-          className={`absolute top-1/2 -translate-y-1/2 w-6 h-12 bg-background/90 border border-silk-gold/20 flex items-center justify-center hover:bg-silk-gold/10 transition-colors rounded-sm ${
+          className={`absolute top-1/2 -translate-y-1/2 w-6 h-12 bg-background/90 border border-border flex items-center justify-center hover:bg-muted transition-colors rounded-sm ${
             dir === "rtl" ? "right-full border-r-0" : "left-full border-l-0"
           }`}
           aria-label={isCollapsed ? "Expand panel" : "Collapse panel"}
         >
-          <CollapseIcon className="w-4 h-4 text-champagne" />
+          <CollapseIcon className="w-4 h-4 text-muted-foreground" />
         </button>
 
         <AnimatePresence mode="wait">
           {isCollapsed ? (
             <motion.div key="collapsed" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="p-4">
               <div className="flex flex-col items-center gap-3">
-                <Activity className="w-5 h-5 text-silk-gold" />
+                <Activity className="w-5 h-5 text-foreground/60" />
                 <motion.div animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 2, repeat: Infinity }} className="w-2 h-2 rounded-full bg-green-500" />
               </div>
             </motion.div>
@@ -71,7 +71,7 @@ const CollapsibleSystemPulse = () => {
             <motion.div key="expanded" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="p-6 space-y-6">
               {/* Header */}
               <div className="border-b border-silk-gold/15 pb-4">
-                <h3 className="text-xs uppercase tracking-[0.2em] text-champagne mb-1">
+                <h3 className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-1">
                   {language === "en" ? "System Pulse" : "نبض النظام"}
                 </h3>
                 <p className="text-sm text-foreground font-light">
@@ -93,8 +93,8 @@ const CollapsibleSystemPulse = () => {
                     >
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
-                          <div className="w-8 h-8 flex items-center justify-center bg-silk-gold/10 border border-silk-gold/15 rounded-lg">
-                            <IconComponent className="w-4 h-4 text-silk-gold" />
+                          <div className="w-8 h-8 flex items-center justify-center bg-muted border border-silk-gold/15 rounded-lg">
+                            <IconComponent className="w-4 h-4 text-foreground/60" />
                           </div>
                           <span className="text-sm text-foreground">{metric.label[language]}</span>
                         </div>
@@ -127,7 +127,7 @@ const CollapsibleSystemPulse = () => {
                       {metric.isSavings && (
                         <div ref={savingsRef} className="space-y-1">
                           <div className="flex items-baseline gap-1">
-                            <span className="text-2xl font-light text-silk-gold tabular-nums">{savingsCount}</span>
+                            <span className="text-2xl font-light text-foreground/60 tabular-nums">{savingsCount}</span>
                             <span className="text-sm text-muted-foreground">{language === "en" ? "Million KWD" : "مليون د.ك"}</span>
                           </div>
                           <p className="text-xs text-muted-foreground">{language === "en" ? "Saved for public/private budgets" : "تم توفيرها للميزانيات العامة/الخاصة"}</p>

@@ -51,8 +51,8 @@ const ContactSection = () => {
               transition={{ duration: 0.8 }}
             >
               <div className="flex items-center gap-4 mb-4">
-                <div className="w-12 h-px bg-silk-gold/60" />
-                <span className="text-xs uppercase tracking-[0.3em] text-silk-gold-light">07</span>
+                <div className="w-12 h-px bg-foreground/60" />
+                <span className="text-xs uppercase tracking-[0.3em] text-foreground/60-light">07</span>
               </div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-light tracking-wide text-white">
                 {t("contact.title")}
@@ -70,7 +70,7 @@ const ContactSection = () => {
           animate={headerInView ? "visible" : "hidden"}
           variants={revealVariants.fadeUp}
           transition={{ duration: 0.6 }}
-          className="text-body-lg text-muted-foreground mb-20 max-w-2xl"
+          className="text-base text-muted-foreground mb-20 max-w-2xl"
         >
           {t("contact.intro")}
         </motion.p>
@@ -159,11 +159,11 @@ const ContactSection = () => {
                 animate={formInView ? "visible" : "hidden"}
                 variants={revealVariants.fadeUp}
                 transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
-                className="group p-6 liquid-glass-subtle bg-background/80 hover:border-silk-gold/40 transition-colors duration-300"
+                className="group p-6 bg-white/60 backdrop-blur bg-background/80 hover:border-border transition-colors duration-300"
               >
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 flex items-center justify-center border border-silk-gold/20 rounded-xl group-hover:bg-silk-gold group-hover:border-silk-gold transition-colors duration-300">
-                    <detail.icon size={18} className="text-champagne group-hover:text-white transition-colors duration-300" />
+                  <div className="w-10 h-10 flex items-center justify-center border border-border rounded-xl group-hover:bg-foreground group-hover:border-foreground transition-colors duration-300">
+                    <detail.icon size={18} className="text-muted-foreground group-hover:text-white transition-colors duration-300" />
                   </div>
                   <div>
                     <h3 className="text-xs text-muted-foreground uppercase tracking-[0.2em] mb-2">
@@ -201,7 +201,7 @@ const ContactSection = () => {
           className="grayscale hover:grayscale-0 transition-all duration-700"
         />
         <div className="absolute bottom-6 left-6 right-6 md:left-auto md:right-12 md:bottom-12">
-          <div className="liquid-glass-subtle bg-background/90 p-6 md:p-8 max-w-sm">
+          <div className="bg-white/60 backdrop-blur bg-background/90 p-6 md:p-8 max-w-sm">
             <h3 className="text-sm uppercase tracking-[0.2em] text-muted-foreground mb-3">
               {t("contact.visit") || "Visit Us"}
             </h3>

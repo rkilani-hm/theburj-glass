@@ -33,7 +33,7 @@ const IntegratedEcosystemSection = () => {
   ];
 
   return (
-    <section className="py-section bg-secondary texture-noise">
+    <section className="py-20 lg:py-28 bg-secondary ">
       <div className="container mx-auto px-6 lg:px-12">
         {/* Section Header */}
         <motion.div
@@ -51,10 +51,10 @@ const IntegratedEcosystemSection = () => {
             </span>
             <div className="w-12 h-px bg-border" />
           </div>
-          <h2 className="text-headline font-light tracking-wide text-foreground mb-6">
+          <h2 className="text-4xl lg:text-5xl font-light tracking-tight font-light tracking-wide text-foreground mb-6">
             {t("tower.ecosystem.title")}
           </h2>
-          <p className="text-body-lg text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-base text-muted-foreground max-w-3xl mx-auto">
             {t("tower.ecosystem.intro")}
           </p>
         </motion.div>

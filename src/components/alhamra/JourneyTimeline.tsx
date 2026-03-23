@@ -185,7 +185,7 @@ const JourneyTimeline = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mt-16 text-center"
         >
-          <p className="text-body-lg text-muted-foreground italic">
+          <p className="text-base text-muted-foreground italic">
             {t("journey.closing")}
           </p>
         </motion.div>

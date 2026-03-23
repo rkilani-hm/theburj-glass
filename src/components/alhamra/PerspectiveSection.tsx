@@ -35,8 +35,8 @@ const PerspectiveSection = () => {
             transition={{ duration: 0.6 }}
             className="flex items-center gap-4 mb-6"
           >
-            <div className="w-12 h-px bg-silk-gold/40" />
-            <span className="text-xs uppercase tracking-[0.3em] text-champagne">02</span>
+            <div className="w-12 h-px bg-foreground/40" />
+            <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">02</span>
           </motion.div>
 
           {/* Section Title */}
@@ -45,7 +45,7 @@ const PerspectiveSection = () => {
             animate={headerInView ? "visible" : "hidden"}
             variants={revealVariants.fadeUp}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-headline font-light tracking-wide text-foreground mb-8"
+            className="text-4xl lg:text-5xl font-light tracking-tight font-light tracking-wide text-foreground mb-8"
           >
             {t("perspective.title")}
           </motion.h2>
@@ -56,7 +56,7 @@ const PerspectiveSection = () => {
             animate={headerInView ? "visible" : "hidden"}
             variants={revealVariants.fadeUp}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-body-lg text-muted-foreground max-w-3xl mb-20"
+            className="text-base text-muted-foreground max-w-3xl mb-20"
           >
             {t("perspective.intro")}
           </motion.p>
@@ -104,7 +104,7 @@ const PerspectiveSection = () => {
       </div>
 
       {/* Vision Section */}
-      <div className="py-16 bg-background texture-noise">
+      <div className="py-16 bg-background ">
         <div className="container mx-auto px-6 lg:px-12">
           <div ref={visionRef} className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             {/* Text Column */}
@@ -116,15 +116,15 @@ const PerspectiveSection = () => {
               className="space-y-8"
             >
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-px bg-silk-gold/40" />
-                <span className="text-xs uppercase tracking-[0.3em] text-champagne">
+                <div className="w-12 h-px bg-foreground/40" />
+                <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
                   {t("perspective.vision.label")}
                 </span>
               </div>
-              <h3 className="text-subheadline font-light text-foreground">
+              <h3 className="text-2xl lg:text-3xl font-light font-light text-foreground">
                 {t("perspective.vision.title")}
               </h3>
-              <p className="text-body-lg text-muted-foreground leading-relaxed">
+              <p className="text-base text-muted-foreground leading-relaxed">
                 {t("perspective.vision.p1")}
               </p>
               <p className="text-body text-muted-foreground leading-relaxed">
@@ -147,7 +147,7 @@ const PerspectiveSection = () => {
                   className="w-full h-full object-cover transition-transform duration-700 ease-out-expo group-hover:scale-105"
                 />
               </div>
-              <div className="absolute -top-4 -right-4 w-full h-full border border-silk-gold/20 -z-10 transition-transform duration-500 group-hover:translate-x-2 group-hover:translate-y-2 rounded-xl" />
+              <div className="absolute -top-4 -right-4 w-full h-full border border-border -z-10 transition-transform duration-500 group-hover:translate-x-2 group-hover:translate-y-2 rounded-xl" />
             </motion.div>
           </div>
         </div>
@@ -164,7 +164,7 @@ const PerspectiveSection = () => {
             transition={{ duration: 0.6 }}
             className="mb-12"
           >
-            <h3 className="text-subheadline font-light text-foreground mb-4">
+            <h3 className="text-2xl lg:text-3xl font-light font-light text-foreground mb-4">
               {t("perspective.timeofday.title")}
             </h3>
             <p className="text-body text-muted-foreground max-w-2xl">
@@ -222,12 +222,12 @@ const PerspectiveSection = () => {
             className="mb-12"
           >
             <div className="flex items-center gap-4 mb-6">
-              <div className="w-12 h-px bg-silk-gold/40" />
-              <span className="text-xs uppercase tracking-[0.3em] text-champagne">
+              <div className="w-12 h-px bg-foreground/40" />
+              <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
                 {t("perspective.gallery.label")}
               </span>
             </div>
-            <h3 className="text-subheadline font-light text-foreground">
+            <h3 className="text-2xl lg:text-3xl font-light font-light text-foreground">
               {t("perspective.gallery.title")}
             </h3>
           </motion.div>
@@ -362,7 +362,7 @@ const PerspectiveSection = () => {
                   className="w-full h-full object-cover transition-transform duration-700 ease-out-expo group-hover:scale-105"
                 />
               </div>
-              <div className="absolute -bottom-4 -left-4 w-32 h-32 border border-silk-gold/20 -z-10 rounded-xl" />
+              <div className="absolute -bottom-4 -left-4 w-32 h-32 border border-border -z-10 rounded-xl" />
             </motion.div>
 
             {/* Text Column */}
@@ -373,16 +373,16 @@ const PerspectiveSection = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="space-y-8 order-1 lg:order-2"
             >
-              <h3 className="text-subheadline font-light text-foreground">
+              <h3 className="text-2xl lg:text-3xl font-light font-light text-foreground">
                 {t("perspective.horizon.title")}
               </h3>
-              <p className="text-body-lg text-muted-foreground leading-relaxed">
+              <p className="text-base text-muted-foreground leading-relaxed">
                 {t("perspective.horizon.p1")}
               </p>
               <p className="text-body text-muted-foreground leading-relaxed">
                 {t("perspective.horizon.p2")}
               </p>
-              <div className="pt-4 border-t border-silk-gold/20">
+              <div className="pt-4 border-t border-border">
                 <p className="text-sm uppercase tracking-[0.2em] text-muted-foreground">
                   {t("perspective.horizon.stat.label")}
                 </p>

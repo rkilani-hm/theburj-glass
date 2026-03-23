@@ -28,7 +28,7 @@ const SmartInfrastructureSection = () => {
   ];
 
   return (
-    <section className="py-section bg-background texture-noise">
+    <section className="py-20 lg:py-28 bg-background ">
       <div className="container mx-auto px-6 lg:px-12">
         {/* Section Header */}
         <motion.div
@@ -45,10 +45,10 @@ const SmartInfrastructureSection = () => {
               {t("tower.infra.label")}
             </span>
           </div>
-          <h2 className="text-headline font-light tracking-wide text-foreground mb-6">
+          <h2 className="text-4xl lg:text-5xl font-light tracking-tight font-light tracking-wide text-foreground mb-6">
             {t("tower.infra.title")}
           </h2>
-          <p className="text-body-lg text-muted-foreground max-w-3xl">
+          <p className="text-base text-muted-foreground max-w-3xl">
             {t("tower.infra.intro")}
           </p>
         </motion.div>
@@ -103,7 +103,7 @@ const SmartInfrastructureSection = () => {
               <h3 className="text-2xl font-light text-foreground mb-3">
                 {t("tower.infra.efficiency")}
               </h3>
-              <p className="text-body-lg text-muted-foreground">
+              <p className="text-base text-muted-foreground">
                 {t("tower.infra.savings")}
               </p>
             </div>

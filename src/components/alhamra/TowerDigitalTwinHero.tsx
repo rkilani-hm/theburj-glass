@@ -17,7 +17,7 @@ const hotspots: HotspotData[] = [
     id: "apex",
     position: { top: "8%", left: "52%" },
     title: { en: "The Apex", ar: "القمة" },
-    subtitle: { en: "413 Meters", ar: "٤١٣ متر" },
+    subtitle: { en: "413 Meters", ar: "٤١٢ متر" },
     details: { 
       en: "Kuwait's tallest sculpted skyscraper, piercing the clouds as a symbol of national ambition.", 
       ar: "أطول ناطحة سحاب منحوتة في الكويت، تخترق الغيوم كرمز للطموح الوطني." 

@@ -1,127 +1,113 @@
+import { useRef } from "react";
+import { Link } from "react-router-dom";
+import { motion, useInView } from "framer-motion";
 import Header from "@/components/alhamra/Header";
 import Footer from "@/components/alhamra/Footer";
-import { useLanguage } from "@/contexts/LanguageContext";
-import { ArrowRight, FileText, Image, BookOpen } from "lucide-react";
-import { motion } from "framer-motion";
-import { useScrollReveal, revealVariants } from "@/hooks/useScrollReveal";
-import officeCorridor from "@/assets/office-corridor.jpg";
-import cityViewInterior from "@/assets/city-view-interior.jpg";
-import towerTopClouds from "@/assets/tower-top-clouds.png";
-import cityLandscape from "@/assets/city-landscape.jpg";
 
-const Downloads = () => {
-  const { language } = useLanguage();
-  const { ref: headerRef, isInView: headerInView } = useScrollReveal();
+const R = ({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-40px" });
+  return (
+    <motion.div ref={ref}
+      initial={{ opacity: 0, y: 22 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.85, delay, ease: [0.16, 1, 0.3, 1] }}>
+      {children}
+    </motion.div>
+  );
+};
 
-  const downloadItems = [
-    {
-      icon: FileText,
-      title: language === "en" ? "Corporate Brochure" : "كتيب الشركة",
-      desc: language === "en" ? "Complete overview of Al Hamra Tower — architecture, services, and leasing information." : "نظرة شاملة على برج الحمراء — الهندسة المعمارية والخدمات ومعلومات التأجير.",
-      format: "PDF • 12 MB",
-    },
-    {
-      icon: Image,
-      title: language === "en" ? "Floor Plans" : "مخططات الطوابق",
-      desc: language === "en" ? "Detailed floor plan layouts for executive, full-floor, and corporate headquarters configurations." : "مخططات تفصيلية للطوابق للتكوينات التنفيذية والطابق الكامل ومقار الشركات.",
-      format: "PDF • 8 MB",
-    },
-    {
-      icon: BookOpen,
-      title: language === "en" ? "Media Kit" : "الملف الإعلامي",
-      desc: language === "en" ? "High-resolution images, logos, and press materials for media use." : "صور عالية الدقة وشعارات ومواد صحفية للاستخدام الإعلامي.",
-      format: "ZIP • 45 MB",
-    },
-  ];
+const DOCS = [
+  { cat: "Overview",       title: "Building Overview Brochure",     desc: "Architecture, amenities, and specifications summary.",    pages: "12 pages", format: "PDF" },
+  { cat: "Overview",       title: "Amenities & Facilities Guide",    desc: "Sky Lounge, Health Club, Parking, and all tenant services.", pages: "8 pages",  format: "PDF" },
+  { cat: "Floor Plans",    title: "Typical Floor Layout",           desc: "Standard office floor — column-free 2,300 m² plate.",     pages: "2 pages",  format: "PDF" },
+  { cat: "Floor Plans",    title: "Executive Suites Plan",          desc: "250–500 m² corner configurations.",                       pages: "2 pages",  format: "PDF" },
+  { cat: "Floor Plans",    title: "Executive Floors 74 & 75",       desc: "Summit level layouts at 327–338m.",                       pages: "4 pages",  format: "PDF" },
+  { cat: "Technical",      title: "MEP Specifications",             desc: "Mechanical, electrical, and plumbing technical data.",     pages: "20 pages", format: "PDF" },
+  { cat: "Technical",      title: "Connectivity & IT Infrastructure", desc: "Fibre, power, substations, and smart building specs.",   pages: "10 pages", format: "PDF" },
+  { cat: "Technical",      title: "Fit-Out Design Guide",           desc: "Standards and requirements for tenant fit-outs.",          pages: "24 pages", format: "PDF" },
+];
+
+export default function Downloads() {
+  const categories = [...new Set(DOCS.map(d => d.cat))];
 
   return (
-    <div className="min-h-screen bg-background overflow-x-hidden">
+    <div style={{ minHeight: "100vh", background: "#fff", overflowX: "hidden" }}>
       <Header />
-      <main className="pt-24">
-        <section className="py-20 lg:py-32 bg-background texture-noise">
-          <div className="container mx-auto px-6 lg:px-12">
-            <motion.div
-              ref={headerRef}
-              initial="hidden"
-              animate={headerInView ? "visible" : "hidden"}
-              variants={revealVariants.fadeUp}
-              transition={{ duration: 0.6 }}
-              className="mb-16"
-            >
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-px bg-silk-gold/40" />
-                <span className="text-xs uppercase tracking-[0.3em] text-champagne">03</span>
-              </div>
-              <h1 className="text-4xl lg:text-5xl font-light tracking-tight mb-8">
-                {language === "en" ? "Downloads" : "التنزيلات"}
-              </h1>
-              <p className="text-body-lg text-muted-foreground max-w-2xl">
-                {language === "en"
-                  ? "Access brochures, floor plans, and media materials for Al Hamra Tower."
-                  : "الوصول إلى الكتيبات ومخططات الطوابق والمواد الإعلامية لبرج الحمراء."}
-              </p>
-            </motion.div>
+      <main style={{ paddingTop: "var(--nav-h)" }}>
+        <section style={{ padding: "clamp(5rem, 10vw, 10rem) 0" }}>
+          <div className="container-fluid">
 
-            <div className="space-y-0">
-              {downloadItems.map((item, index) => (
-                <motion.div
-                  key={index}
-                  initial="hidden"
-                  animate={headerInView ? "visible" : "hidden"}
-                  variants={revealVariants.fadeUp}
-                  transition={{ duration: 0.6, delay: 0.1 + index * 0.1 }}
-                  className="group border-t border-silk-gold/15 py-10 first:border-t-0"
-                >
-                  <div className="grid lg:grid-cols-12 gap-8 items-center">
-                    <div className="lg:col-span-1">
-                      <div className="w-12 h-12 border border-silk-gold/20 flex items-center justify-center transition-all duration-300 group-hover:bg-silk-gold/10 group-hover:border-silk-gold/40">
-                        <item.icon size={20} className="text-muted-foreground transition-colors duration-300 group-hover:text-silk-gold" />
+            {/* Header */}
+            <div className="grid lg:grid-cols-12 gap-12 mb-16">
+              <div className="lg:col-span-5">
+                <R><p className="eyebrow" style={{ marginBottom: 18 }}>Leasing · Downloads</p></R>
+                <R delay={0.08}>
+                  <h1 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2.2rem, 4vw, 4.5rem)", fontWeight: 400, lineHeight: 1.06, letterSpacing: "-0.025em", color: "var(--black)" }}>
+                    Technical documents &amp; floor plans.
+                  </h1>
+                </R>
+              </div>
+              <div className="lg:col-span-5 lg:col-start-8 lg:pt-16">
+                <R delay={0.15}>
+                  <p style={{ fontFamily: "var(--font-sans)", fontSize: "0.95rem", fontWeight: 300, lineHeight: 1.85, color: "var(--graphite)", marginBottom: 28 }}>
+                    All documents below are available to registered leasing inquiries. 
+                    Submit an inquiry to receive access credentials and a personalised 
+                    document pack from our leasing team.
+                  </p>
+                  <Link to="/leasing/inquiry" className="btn-primary">Request Full Document Access</Link>
+                </R>
+              </div>
+            </div>
+
+            {/* Document list by category */}
+            {categories.map((cat, ci) => (
+              <div key={cat} style={{ marginBottom: "clamp(3rem, 5vw, 4rem)" }}>
+                <R delay={ci * 0.04}>
+                  <p className="eyebrow" style={{ marginBottom: 16, paddingBottom: 14, borderBottom: "1px solid var(--rule-light)" }}>{cat}</p>
+                </R>
+                {DOCS.filter(d => d.cat === cat).map((doc, i) => (
+                  <R key={doc.title} delay={0.04 + i * 0.04}>
+                    <div className="grid lg:grid-cols-12 gap-6 items-center"
+                      style={{ padding: "clamp(1.2rem, 2.5vw, 2rem) 0", borderBottom: "1px solid var(--rule-light)" }}>
+                      <div className="lg:col-span-5">
+                        <h3 style={{ fontFamily: "var(--font-display)", fontSize: "1.25rem", fontWeight: 400, letterSpacing: "-0.01em", color: "var(--black)", marginBottom: 6 }}>{doc.title}</h3>
+                        <p style={{ fontFamily: "var(--font-sans)", fontSize: "12px", fontWeight: 300, color: "var(--stone)" }}>{doc.desc}</p>
+                      </div>
+                      <div className="lg:col-span-2">
+                        <span className="eyebrow">{doc.pages}</span>
+                      </div>
+                      <div className="lg:col-span-2">
+                        <span style={{ fontFamily: "var(--font-sans)", fontSize: "10px", letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--ash)", padding: "5px 10px", border: "1px solid var(--rule-light)" }}>{doc.format}</span>
+                      </div>
+                      <div className="lg:col-span-3" style={{ display: "flex", justifyContent: "flex-end" }}>
+                        <Link to="/leasing/inquiry"
+                          style={{ fontFamily: "var(--font-sans)", fontSize: "10px", letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--ash)", transition: "color 0.2s" }}
+                          onMouseEnter={e => (e.currentTarget.style.color = "var(--black)")}
+                          onMouseLeave={e => (e.currentTarget.style.color = "var(--ash)")}>
+                          Request →
+                        </Link>
                       </div>
                     </div>
-                    <div className="lg:col-span-4">
-                      <h3 className="text-xl font-medium text-foreground mb-1">{item.title}</h3>
-                      <span className="text-xs text-muted-foreground/70 tracking-wider">{item.format}</span>
-                    </div>
-                    <div className="lg:col-span-5">
-                      <p className="text-sm text-muted-foreground">{item.desc}</p>
-                    </div>
-                    <div className="lg:col-span-2 flex justify-end">
-                      <button className="group/btn flex items-center gap-3 px-6 py-3 bg-primary text-primary-foreground text-sm uppercase tracking-[0.15em] hover:bg-primary/90 transition-all duration-300">
-                        <span>{language === "en" ? "Download" : "تحميل"}</span>
-                        <ArrowRight size={14} className="transition-transform duration-300 group-hover/btn:translate-x-1" />
-                      </button>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
+                  </R>
+                ))}
+              </div>
+            ))}
 
-        {/* Gallery */}
-        <section className="py-24 lg:py-32 bg-secondary">
-          <div className="container mx-auto px-6 lg:px-12">
-            <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-3xl lg:text-4xl font-light tracking-tight mb-12">
-              {language === "en" ? "Workspace Gallery" : "معرض مساحات العمل"}
-            </motion.h2>
-            <div className="grid md:grid-cols-3 gap-6">
-              {[officeCorridor, cityViewInterior, towerTopClouds].map((src, index) => (
-                <motion.div key={index} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: index * 0.1 }} className="aspect-[4/3] overflow-hidden group relative">
-                  <img src={src} alt="" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-foreground/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                </motion.div>
-              ))}
-            </div>
-            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.3 }} className="mt-6 aspect-[21/9] overflow-hidden group relative">
-              <img src={cityLandscape} alt="Kuwait City landscape" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-gradient-to-t from-foreground/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            </motion.div>
+            <R delay={0.1}>
+              <div style={{ marginTop: "clamp(3rem, 5vw, 4rem)", padding: "clamp(2rem, 4vw, 4rem)", background: "var(--limestone)", display: "flex", flexWrap: "wrap", gap: 24, alignItems: "center", justifyContent: "space-between" }}>
+                <div>
+                  <h3 style={{ fontFamily: "var(--font-display)", fontSize: "1.8rem", fontWeight: 400, letterSpacing: "-0.02em", color: "var(--black)", marginBottom: 8 }}>Need a custom pack?</h3>
+                  <p style={{ fontFamily: "var(--font-sans)", fontSize: "0.9rem", fontWeight: 300, color: "var(--graphite)" }}>
+                    Our leasing team can prepare a tailored document package for your specific requirements.
+                  </p>
+                </div>
+                <Link to="/leasing/contact" className="btn-ghost-dark">Contact Leasing →</Link>
+              </div>
+            </R>
           </div>
         </section>
       </main>
       <Footer />
     </div>
   );
-};
-
-export default Downloads;
+}

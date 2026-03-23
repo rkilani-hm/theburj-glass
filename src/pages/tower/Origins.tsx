@@ -78,7 +78,7 @@ const Origins = () => {
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
       <Header />
-      <main className="pt-24">
+      <main style={{ paddingTop: "var(--nav-h)" }}>
         {/* Hero Section */}
         <section className="relative h-[70vh] overflow-hidden">
           <img 
@@ -131,7 +131,7 @@ const Origins = () => {
                   The tower's development brought together world-renowned architects, engineers, and 
                   craftsmen, each contributing their expertise to realize this unprecedented vision.
                 </p>
-                <div className="grid grid-cols-2 gap-8 pt-4 border-t border-silk-gold/20">
+                <div className="grid grid-cols-2 gap-8 pt-4 border-t border-border">
                   <div>
                     <p className="text-sm text-muted-foreground">Construction Period</p>
                     <p className="text-2xl font-light">2005 — 2011</p>
@@ -494,7 +494,7 @@ const Origins = () => {
             
             <div className="relative">
               {/* Timeline line */}
-              <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-silk-gold/20 md:transform md:-translate-x-1/2" />
+              <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-foreground/20 md:transform md:-translate-x-1/2" />
               
               <div className="space-y-16">
                 {milestones.map((item, index) => (
@@ -509,10 +509,10 @@ const Origins = () => {
                     }`}
                   >
                     {/* Timeline dot */}
-                    <div className="absolute left-0 md:left-1/2 top-0 w-3 h-3 bg-silk-gold rounded-full transform -translate-x-1/2 md:-translate-x-1/2" />
+                    <div className="absolute left-0 md:left-1/2 top-0 w-3 h-3 bg-foreground rounded-full transform -translate-x-1/2 md:-translate-x-1/2" />
                     
                     <div className={`pl-8 md:pl-0 ${index % 2 === 0 ? 'md:pr-16' : 'md:order-2 md:pl-16 md:text-left'}`}>
-                      <span className="text-3xl font-light text-silk-gold">{item.year}</span>
+                      <span className="text-3xl font-light text-foreground">{item.year}</span>
                       <h3 className="text-xl font-light mt-2 mb-3">{item.title}</h3>
                       <p className="text-muted-foreground leading-relaxed">{item.event}</p>
                       <p className="text-sm text-muted-foreground/70 mt-2 italic">{item.detail}</p>
@@ -544,11 +544,11 @@ const Origins = () => {
               </p>
               <div className="inline-flex items-center gap-4 text-sm text-muted-foreground">
                 <span>412 meters</span>
-                <span className="w-px h-4 bg-silk-gold/30" />
+                <span className="w-px h-4 bg-foreground/30" />
                 <span>74 stories</span>
-                <span className="w-px h-4 bg-silk-gold/30" />
+                <span className="w-px h-4 bg-foreground/30" />
                 <span>7 years</span>
-                <span className="w-px h-4 bg-silk-gold/30" />
+                <span className="w-px h-4 bg-foreground/30" />
                 <span>1 vision</span>
               </div>
             </motion.div>

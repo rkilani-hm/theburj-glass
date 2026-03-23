@@ -60,7 +60,7 @@ const LeasingContact = () => {
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
       <Header />
-      <main className="pt-24">
+      <main style={{ paddingTop: "var(--nav-h)" }}>
         {/* Hero Section */}
         <section className="py-24 lg:py-32 bg-secondary relative overflow-hidden">
           <div className="absolute inset-0">
@@ -114,7 +114,7 @@ const LeasingContact = () => {
         </section>
 
         {/* Highlights Section */}
-        <section className="py-20 bg-background texture-noise">
+        <section className="py-20 bg-background ">
           <div className="container mx-auto px-6 lg:px-12">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
@@ -166,7 +166,7 @@ const LeasingContact = () => {
               <h2 className="text-3xl lg:text-4xl font-light tracking-tight mb-6">
                 {t("leasing.plans.title")}
               </h2>
-              <p className="text-body-lg text-muted-foreground leading-relaxed">
+              <p className="text-base text-muted-foreground leading-relaxed">
                 {t("leasing.plans.desc") || "Flexible configurations designed to accommodate businesses of every scale, from boutique operations to multinational headquarters."}
               </p>
             </motion.div>
@@ -241,7 +241,7 @@ const LeasingContact = () => {
                 <h2 className="text-3xl lg:text-4xl font-light tracking-tight">
                   {t("leasing.interior.title") || "Designed for Excellence"}
                 </h2>
-                <p className="text-body-lg text-muted-foreground leading-relaxed">
+                <p className="text-base text-muted-foreground leading-relaxed">
                   {t("leasing.interior.p1") || "Every office space in Al Hamra Tower is designed with the modern enterprise in mind. Floor-to-ceiling windows flood interiors with natural light while offering unobstructed views of the city and Gulf."}
                 </p>
                 <p className="text-body text-muted-foreground leading-relaxed">

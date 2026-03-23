@@ -32,7 +32,7 @@ const ServiceExcellenceSection = () => {
   ];
 
   return (
-    <section className="py-section bg-secondary">
+    <section className="py-20 lg:py-28 bg-secondary">
       <div className="container mx-auto px-6 lg:px-12">
         {/* Section Header */}
         <motion.div
@@ -49,10 +49,10 @@ const ServiceExcellenceSection = () => {
               {t("tower.service.label")}
             </span>
           </div>
-          <h2 className="text-headline font-light tracking-wide text-foreground mb-6">
+          <h2 className="text-4xl lg:text-5xl font-light tracking-tight font-light tracking-wide text-foreground mb-6">
             {t("tower.service.title")}
           </h2>
-          <p className="text-body-lg text-muted-foreground max-w-3xl">
+          <p className="text-base text-muted-foreground max-w-3xl">
             {t("tower.service.intro")}
           </p>
         </motion.div>

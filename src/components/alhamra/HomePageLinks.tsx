@@ -63,7 +63,7 @@ const HomePageLinks = () => {
   ];
 
   return (
-    <section className="py-section bg-background">
+    <section className="py-20 lg:py-28 bg-background">
       <div className="container mx-auto px-6 lg:px-12">
         {/* Section Header */}
         <motion.div
@@ -80,7 +80,7 @@ const HomePageLinks = () => {
             </span>
             <div className="w-12 h-px bg-border" />
           </div>
-          <h2 className="text-headline font-light tracking-wide text-foreground mb-4">
+          <h2 className="text-4xl lg:text-5xl font-light tracking-tight font-light tracking-wide text-foreground mb-4">
             {t("home.links.title") || "Arrive. Ascend. Belong."}
           </h2>
           <p className="text-body text-muted-foreground max-w-xl mx-auto">
@@ -141,7 +141,7 @@ const PageLinkCard = ({ page, index }: { page: PageLinkItem; index: number }) =>
               {page.subtitle}
             </span>
 
-            <h3 className="text-subheadline font-light text-foreground mb-4 tracking-wide">
+            <h3 className="text-2xl lg:text-3xl font-light font-light text-foreground mb-4 tracking-wide">
               {page.title}
             </h3>
 

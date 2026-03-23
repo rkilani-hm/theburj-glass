@@ -1,199 +1,190 @@
+import { useRef } from "react";
+import { Link } from "react-router-dom";
+import { motion, useInView } from "framer-motion";
 import Header from "@/components/alhamra/Header";
 import Footer from "@/components/alhamra/Footer";
-import { useLanguage } from "@/contexts/LanguageContext";
-import { Eye, Key, Star, Sparkles, Building2, Ruler, Users, Calendar } from "lucide-react";
-import { motion } from "framer-motion";
-import towerAerial from "@/assets/tower-aerial.png";
-import skylineParkPanorama from "@/assets/skyline-park-panorama.jpg";
-import cityViewInterior from "@/assets/city-view-interior.jpg";
-import interiorLobby from "@/assets/interior-lobby.jpg";
-import towerAerialBalcony from "@/assets/tower-aerial-balcony.jpg";
+import towerAerialSea  from "@/assets/tower-aerial-sea.jpg";
+import skylinePark     from "@/assets/skyline-park-panorama.jpg";
+import somObservation  from "@/assets/som-observation.jpg";
 
-const LeasingOpportunities = () => {
-  const { t } = useLanguage();
-
-  const floorPlans = [
-    {
-      type: t("leasing.type.executive"),
-      size: "250 - 500",
-      unit: t("leasing.sqm"),
-      features: [t("leasing.feature.corner"), t("leasing.feature.view"), t("leasing.feature.private")],
-    },
-    {
-      type: t("leasing.type.full"),
-      size: "1,200 - 1,800",
-      unit: t("leasing.sqm"),
-      features: [t("leasing.feature.floor"), t("leasing.feature.elevator"), t("leasing.feature.reception")],
-    },
-    {
-      type: t("leasing.type.corporate"),
-      size: "3,000+",
-      unit: t("leasing.sqm"),
-      features: [t("leasing.feature.multi"), t("leasing.feature.branding"), t("leasing.feature.dedicated")],
-    },
-  ];
-
-  const highlights = [
-    { icon: Eye, title: t("leasing.highlight1.title") || "Panoramic Views", desc: t("leasing.highlight1.desc") || "360-degree views of Kuwait City and the Arabian Gulf from upper floors" },
-    { icon: Key, title: t("leasing.highlight2.title") || "Flexible Layouts", desc: t("leasing.highlight2.desc") || "Customizable floor plans to match your operational requirements" },
-    { icon: Star, title: t("leasing.highlight3.title") || "Premium Finishes", desc: t("leasing.highlight3.desc") || "High-end materials and finishes throughout common areas" },
-    { icon: Sparkles, title: t("leasing.highlight4.title") || "Smart Building", desc: t("leasing.highlight4.desc") || "Integrated building management systems for efficiency" },
-  ];
-
-  const amenities = [
-    { icon: Building2, label: t("leasing.amenity.lobby") },
-    { icon: Ruler, label: t("leasing.amenity.ceiling") },
-    { icon: Users, label: t("leasing.amenity.conference") },
-    { icon: Calendar, label: t("leasing.amenity.flexible") },
-  ];
-
+const R = ({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-60px" });
   return (
-    <div className="min-h-screen bg-background overflow-x-hidden">
+    <motion.div ref={ref}
+      initial={{ opacity: 0, y: 28 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.95, delay, ease: [0.16, 1, 0.3, 1] }}>
+      {children}
+    </motion.div>
+  );
+};
+
+const TYPES = [
+  { n: "01", type: "Executive Suite",          size: "250 – 500 m²",  floors: "Select floors",   cta: "Enquire" },
+  { n: "02", type: "Full-Floor Headquarters",  size: "1,200 – 2,300 m²", floors: "Floors 6 – 73", cta: "Enquire" },
+  { n: "03", type: "Executive Floors 74 & 75", size: "By arrangement", floors: "327 – 338m",      cta: "Enquire" },
+  { n: "04", type: "Multi-Floor Campus",       size: "3,000+ m²",     floors: "Contiguous",      cta: "Enquire" },
+];
+
+const REASONS = [
+  { v: "412m",  l: "Prestige",       d: "Kuwait's tallest address — visible from every part of the city." },
+  { v: "92%",   l: "Occupancy",      d: "Consistently in demand. Limited availability at any given time." },
+  { v: "2,300", l: "m² per floor",   d: "Kuwait's largest typical floor plate for maximum flexibility." },
+  { v: "24/7",  l: "Management",     d: "World-class facilities team. Zero unplanned building outages since 2011." },
+];
+
+export default function LeasingOpportunities() {
+  return (
+    <div style={{ minHeight: "100vh", background: "#fff", overflowX: "hidden" }}>
       <Header />
-      <main className="pt-24">
-        {/* Hero Section */}
-        <section className="py-24 lg:py-32 bg-secondary relative overflow-hidden">
-          <div className="absolute inset-0">
-            <img src={towerAerial} alt="Al Hamra Tower aerial view" className="w-full h-full object-cover opacity-20" />
-            <div className="absolute inset-0 bg-gradient-to-r from-secondary via-secondary/90 to-secondary/70" />
-          </div>
-          <div className="container mx-auto px-6 lg:px-12 relative z-10">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-px bg-silk-gold/40" />
-                  <span className="text-xs uppercase tracking-[0.3em] text-champagne">06</span>
-                </div>
-                <span className="text-sm tracking-[0.3em] uppercase text-muted-foreground mb-6 block">{t("leasing.subtitle")}</span>
-                <h1 className="text-4xl lg:text-6xl font-light tracking-tight mb-8">{t("leasing.title")}</h1>
-                <p className="text-lg lg:text-xl text-muted-foreground leading-relaxed mb-8">{t("leasing.intro")}</p>
-                <p className="text-body text-muted-foreground leading-relaxed">
-                  {t("leasing.intro2") || "Whether you're seeking an executive suite for a growing team or full-floor headquarters for an established enterprise, Al Hamra Tower offers configurations to match your ambition."}
-                </p>
-              </motion.div>
-              <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }} className="hidden lg:block">
-                <div className="aspect-[4/3] overflow-hidden">
-                  <img src={skylineParkPanorama} alt="Kuwait City panorama" className="w-full h-full object-cover" />
-                </div>
-              </motion.div>
-            </div>
-          </div>
-        </section>
+      <main style={{ paddingTop: "var(--nav-h)" }}>
 
-        {/* Highlights */}
-        <section className="py-20 bg-background texture-noise">
-          <div className="container mx-auto px-6 lg:px-12">
-            <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-2xl lg:text-3xl font-light tracking-tight mb-12">
-              {t("leasing.highlights.title") || "Why Al Hamra Tower"}
-            </motion.h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {highlights.map((highlight, index) => (
-                <motion.div key={index} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.1 }} className="group">
-                  <div className="w-14 h-14 border border-silk-gold/20 flex items-center justify-center mb-4 transition-all duration-300 group-hover:bg-silk-gold/10 group-hover:border-silk-gold/40">
-                    <highlight.icon size={24} className="text-muted-foreground transition-colors duration-300 group-hover:text-silk-gold" />
-                  </div>
-                  <h3 className="text-lg font-medium mb-2">{highlight.title}</h3>
-                  <p className="text-sm text-muted-foreground">{highlight.desc}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Space Configurations */}
-        <section className="py-24 lg:py-32 bg-secondary">
-          <div className="container mx-auto px-6 lg:px-12">
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="mb-20 max-w-3xl">
-              <div className="flex items-center gap-4 mb-8">
-                <div className="w-16 h-px bg-silk-gold/40" />
-                <span className="text-xs uppercase tracking-[0.3em] text-champagne">{t("leasing.configurations") || "Configurations"}</span>
+        {/* Hero */}
+        <section style={{ position: "relative", height: "70vh", minHeight: 480, overflow: "hidden" }}>
+          <img src={towerAerialSea} alt="Al Hamra Tower aerial view over the Gulf" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 30%" }} />
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(10,10,10,0.90) 0%, rgba(10,10,10,0.3) 50%, rgba(10,10,10,0.5) 100%)" }} />
+          <div style={{ position: "absolute", bottom: 0, left: 0, right: 0 }} className="container-fluid">
+            <div style={{ paddingBottom: "clamp(3rem, 5vw, 5rem)" }}>
+              <motion.p className="eyebrow-light" style={{ marginBottom: 14 }}
+                initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.3 }}>
+                Leasing · Available Spaces
+              </motion.p>
+              <div style={{ overflow: "hidden" }}>
+                <motion.h1 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2.8rem, 7vw, 8rem)", fontWeight: 300, lineHeight: 0.96, letterSpacing: "-0.035em", color: "#fff", margin: 0 }}
+                  initial={{ y: "105%" }} animate={{ y: 0 }} transition={{ duration: 1.1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}>
+                  Your office above Kuwait City.
+                </motion.h1>
               </div>
-              <h2 className="text-3xl lg:text-4xl font-light tracking-tight mb-6">{t("leasing.plans.title")}</h2>
-              <p className="text-body-lg text-muted-foreground leading-relaxed">{t("leasing.plans.desc") || "Flexible configurations designed to accommodate businesses of every scale, from boutique operations to multinational headquarters."}</p>
-            </motion.div>
-            
-            <div className="space-y-0">
-              {floorPlans.map((plan, index) => (
-                <motion.div key={plan.type} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: index * 0.1 }} className="group border-t border-silk-gold/15 py-12 first:border-t-0">
-                  <div className="grid lg:grid-cols-12 gap-8 items-start">
-                    <div className="lg:col-span-1"><span className="text-xs text-muted-foreground tracking-wider">0{index + 1}</span></div>
+            </div>
+          </div>
+        </section>
+
+        {/* Why Al Hamra */}
+        <section style={{ background: "var(--limestone)", padding: "clamp(5rem, 10vw, 10rem) 0" }}>
+          <div className="container-fluid">
+            <R style={{ marginBottom: "clamp(3rem, 5vw, 5rem)" }}>
+              <p className="eyebrow" style={{ marginBottom: 16 }}>Why Al Hamra</p>
+              <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2rem, 4vw, 4.5rem)", fontWeight: 400, lineHeight: 1.06, letterSpacing: "-0.025em", color: "var(--black)", maxWidth: 640 }}>
+                The address that signals seriousness.
+              </h2>
+            </R>
+
+            <div style={{ borderTop: "1px solid var(--rule-light)" }}>
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-0">
+                {REASONS.map((r, i) => (
+                  <R key={r.l} delay={i * 0.07}>
+                    <div style={{ padding: "clamp(2rem, 4vw, 3.5rem) 0", borderBottom: "1px solid var(--rule-light)", paddingLeft: i > 0 ? "clamp(1.5rem, 3vw, 3rem)" : 0, borderLeft: i > 0 ? "1px solid var(--rule-light)" : "none" }}>
+                      <div style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2rem, 4vw, 4rem)", fontWeight: 300, color: "var(--black)", letterSpacing: "-0.04em", marginBottom: 8 }}>{r.v}</div>
+                      <p className="eyebrow" style={{ marginBottom: 10 }}>{r.l}</p>
+                      <p style={{ fontFamily: "var(--font-sans)", fontSize: "12px", fontWeight: 300, lineHeight: 1.65, color: "var(--stone)" }}>{r.d}</p>
+                    </div>
+                  </R>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Space types */}
+        <section style={{ background: "#fff", padding: "clamp(5rem, 10vw, 10rem) 0" }}>
+          <div className="container-fluid">
+            <R style={{ marginBottom: "clamp(3rem, 5vw, 5rem)" }}>
+              <p className="eyebrow" style={{ marginBottom: 16 }}>Space Configurations</p>
+              <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2rem, 4vw, 4.5rem)", fontWeight: 400, lineHeight: 1.06, letterSpacing: "-0.025em", color: "var(--black)" }}>
+                Every scale of ambition.
+              </h2>
+            </R>
+
+            <div style={{ borderTop: "1px solid var(--rule-light)" }}>
+              {TYPES.map((t, i) => (
+                <R key={t.n} delay={i * 0.05}>
+                  <div className="grid lg:grid-cols-12 gap-6 items-center"
+                    style={{ padding: "clamp(1.5rem, 3vw, 2.5rem) 0", borderBottom: "1px solid var(--rule-light)" }}>
+                    <div className="lg:col-span-1">
+                      <span style={{ fontFamily: "var(--font-sans)", fontSize: "10px", letterSpacing: "0.18em", color: "var(--ash)" }}>{t.n}</span>
+                    </div>
                     <div className="lg:col-span-4">
-                      <h3 className="text-2xl lg:text-3xl font-light tracking-tight mb-3 group-hover:text-foreground/80 transition-colors duration-300">{plan.type}</h3>
-                      <div className="flex items-baseline gap-2">
-                        <span className="text-lg text-muted-foreground">{plan.size}</span>
-                        <span className="text-sm text-muted-foreground/70">{plan.unit}</span>
-                      </div>
+                      <h3 style={{ fontFamily: "var(--font-display)", fontSize: "1.4rem", fontWeight: 400, letterSpacing: "-0.01em", color: "var(--black)" }}>{t.type}</h3>
                     </div>
-                    <div className="lg:col-span-5">
-                      <div className="flex flex-wrap gap-x-6 gap-y-2">
-                        {plan.features.map((feature, i) => (
-                          <span key={i} className="text-sm text-muted-foreground relative before:content-[''] before:absolute before:-left-3 before:top-1/2 before:-translate-y-1/2 before:w-1 before:h-1 before:bg-muted-foreground/50 before:rounded-full first:before:hidden">{feature}</span>
-                        ))}
-                      </div>
+                    <div className="lg:col-span-3">
+                      <p style={{ fontFamily: "var(--font-display)", fontSize: "1.2rem", fontWeight: 300, color: "var(--graphite)", letterSpacing: "-0.015em" }}>{t.size}</p>
+                    </div>
+                    <div className="lg:col-span-2">
+                      <p className="eyebrow">{t.floors}</p>
+                    </div>
+                    <div className="lg:col-span-2" style={{ display: "flex", justifyContent: "flex-end" }}>
+                      <Link to="/leasing/inquiry" style={{ fontFamily: "var(--font-sans)", fontSize: "10px", letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--ash)", transition: "color 0.2s" }}
+                        onMouseEnter={e => (e.currentTarget.style.color = "var(--black)")}
+                        onMouseLeave={e => (e.currentTarget.style.color = "var(--ash)")}>
+                        {t.cta} →
+                      </Link>
                     </div>
                   </div>
-                </motion.div>
+                </R>
               ))}
             </div>
 
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.4 }} className="mt-16 pt-12 border-t border-silk-gold/15">
-              <p className="text-sm text-muted-foreground max-w-2xl">{t("leasing.inquiry.note") || "All configurations are subject to availability and can be customized to meet specific operational requirements. Contact our leasing team for detailed floor plans and specifications."}</p>
-            </motion.div>
+            <R delay={0.1} style={{ marginTop: "clamp(3rem, 5vw, 4rem)" }}>
+              <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
+                <Link to="/leasing/inquiry" className="btn-primary">Submit an Inquiry</Link>
+                <Link to="/leasing/downloads" className="btn-ghost-dark">Download Floor Plans →</Link>
+              </div>
+            </R>
           </div>
         </section>
 
-        {/* Interior Showcase */}
-        <section className="py-24 lg:py-32 bg-background">
-          <div className="container mx-auto px-6 lg:px-12">
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
-              <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="space-y-6">
-                <h2 className="text-3xl lg:text-4xl font-light tracking-tight">{t("leasing.interior.title") || "Designed for Excellence"}</h2>
-                <p className="text-body-lg text-muted-foreground leading-relaxed">{t("leasing.interior.p1") || "Every office space in Al Hamra Tower is designed with the modern enterprise in mind. Floor-to-ceiling windows flood interiors with natural light while offering unobstructed views of the city and Gulf."}</p>
-                <p className="text-body text-muted-foreground leading-relaxed">{t("leasing.interior.p2") || "3.2-meter ceiling heights create an atmosphere of openness and possibility, while premium finishes and materials reflect the tower's commitment to quality at every level."}</p>
-                <div className="grid grid-cols-2 gap-8 pt-6">
-                  <div>
-                    <p className="text-3xl font-light text-silk-gold">3.2m</p>
-                    <p className="text-sm text-muted-foreground mt-1">{t("leasing.ceiling") || "Ceiling Height"}</p>
-                  </div>
-                  <div>
-                    <p className="text-3xl font-light text-silk-gold">360°</p>
-                    <p className="text-sm text-muted-foreground mt-1">{t("leasing.views") || "Panoramic Views"}</p>
-                  </div>
+        {/* Image pair */}
+        <section style={{ background: "var(--black)", padding: "clamp(5rem, 10vw, 10rem) 0" }}>
+          <div className="container-fluid">
+            <div className="grid lg:grid-cols-2 gap-3">
+              <R>
+                <div style={{ aspectRatio: "4/3", overflow: "hidden" }}>
+                  <motion.img src={skylinePark} alt="Kuwait skyline from Al Hamra" loading="lazy"
+                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                    whileHover={{ scale: 1.04 }} transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }} />
                 </div>
-              </motion.div>
-              <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.2 }} className="grid grid-cols-2 gap-4">
-                <div className="aspect-[3/4] overflow-hidden group">
-                  <img src={cityViewInterior} alt="Premium office with city views" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                <p className="eyebrow-light" style={{ marginTop: 14 }}>Kuwait City Skyline</p>
+              </R>
+              <R delay={0.1}>
+                <div style={{ aspectRatio: "4/3", overflow: "hidden", marginTop: "clamp(2rem, 4vw, 4rem)" }}>
+                  <motion.img src={somObservation} alt="Views from upper floors" loading="lazy"
+                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                    whileHover={{ scale: 1.04 }} transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }} />
                 </div>
-                <div className="aspect-[3/4] overflow-hidden group mt-8">
-                  <img src={interiorLobby} alt="Executive lobby" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                </div>
-              </motion.div>
+                <p className="eyebrow-light" style={{ marginTop: 14 }}>Upper Floor Views</p>
+              </R>
             </div>
           </div>
         </section>
 
-        {/* Amenities */}
-        <section className="py-24 lg:py-32 bg-foreground text-background">
-          <div className="container mx-auto px-6 lg:px-12">
-            <h2 className="text-3xl lg:text-4xl font-light tracking-tight mb-16">{t("leasing.amenities.title")}</h2>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-              {amenities.map((amenity, index) => (
-                <motion.div key={amenity.label} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.1 }} className="flex flex-col items-center text-center">
-                  <amenity.icon className="w-10 h-10 mb-4 opacity-80" />
-                  <span className="text-sm tracking-wide">{amenity.label}</span>
-                </motion.div>
-              ))}
+        {/* CTA */}
+        <section style={{ background: "var(--black)", padding: "clamp(5rem, 10vw, 8rem) 0", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+          <div className="container-fluid">
+            <div className="grid lg:grid-cols-12 items-center gap-12">
+              <div className="lg:col-span-7">
+                <R>
+                  <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2.5rem, 6vw, 7rem)", fontWeight: 300, lineHeight: 0.96, letterSpacing: "-0.035em", color: "#fff" }}>
+                    Begin the conversation.
+                  </h2>
+                </R>
+              </div>
+              <div className="lg:col-span-4 lg:col-start-9">
+                <R delay={0.15}>
+                  <p style={{ fontFamily: "var(--font-sans)", fontSize: "0.95rem", fontWeight: 300, lineHeight: 1.82, color: "rgba(255,255,255,0.38)", marginBottom: 32 }}>
+                    Our leasing team responds within 24 hours. Provide your requirements 
+                    and we will prepare a tailored proposal.
+                  </p>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                    <Link to="/leasing/inquiry" className="btn-primary">Submit an Inquiry →</Link>
+                    <a href="tel:+96522270222" className="btn-ghost-white">+965 222 70 222</a>
+                  </div>
+                </R>
+              </div>
             </div>
-            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="aspect-[21/9] overflow-hidden">
-              <img src={towerAerialBalcony} alt="Al Hamra Tower aerial view" className="w-full h-full object-cover opacity-80" />
-            </motion.div>
           </div>
         </section>
       </main>
       <Footer />
     </div>
   );
-};
-
-export default LeasingOpportunities;
+}

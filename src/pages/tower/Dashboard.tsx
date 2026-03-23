@@ -19,7 +19,7 @@ const Dashboard = () => {
     {
       id: "height",
       position: { x: "calc(50% + 40px)", y: "12%" },
-      title: { en: "413M HEIGHT", ar: "ارتفاع ٤١٣م" },
+      title: { en: "412M HEIGHT", ar: "ارتفاع ٤١٢م" },
       subtitle: { en: "80 FLOORS", ar: "٨٠ طابق" },
       side: "right" as const,
       description: {
@@ -27,7 +27,7 @@ const Dashboard = () => {
         ar: "يرتفع برج الحمراء 413 متراً فوق مدينة الكويت، مما يجعله أطول برج منحوت في العالم. الشكل غير المتماثل الفريد يخلق صورة ظلية مميزة على أفق المدينة."
       },
       specs: [
-        { label: { en: "Total Height", ar: "الارتفاع الكلي" }, value: "413m" },
+        { label: { en: "Total Height", ar: "الارتفاع الكلي" }, value: "412m" },
         { label: { en: "Office Floors", ar: "طوابق المكاتب" }, value: "80" },
         { label: { en: "Construction", ar: "البناء" }, value: "2005-2011" },
         { label: { en: "Rank", ar: "الترتيب" }, value: "#1 Kuwait" },

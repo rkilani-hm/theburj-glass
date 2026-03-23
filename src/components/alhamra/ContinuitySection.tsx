@@ -18,7 +18,7 @@ const ContinuitySection = () => {
   ];
 
   return (
-    <section id="continuity" className="py-section bg-background relative texture-noise overflow-hidden">
+    <section id="continuity" className="py-20 lg:py-28 bg-background relative  overflow-hidden">
       {/* Large decorative number */}
       <div className="absolute top-0 right-0 text-[20rem] lg:text-[30rem] font-light text-muted/30 leading-none select-none pointer-events-none -translate-y-20 translate-x-20">
         ∞
@@ -44,7 +44,7 @@ const ContinuitySection = () => {
           animate={headerInView ? "visible" : "hidden"}
           variants={revealVariants.fadeUp}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-headline font-light tracking-wide text-foreground mb-20"
+          className="text-4xl lg:text-5xl font-light tracking-tight font-light tracking-wide text-foreground mb-20"
         >
           {t("continuity.title")}
         </motion.h2>
@@ -56,7 +56,7 @@ const ContinuitySection = () => {
             animate={textInView ? "visible" : "hidden"}
             variants={revealVariants.fadeUp}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-body-lg text-muted-foreground leading-relaxed"
+            className="text-base text-muted-foreground leading-relaxed"
           >
             {t("continuity.p1")}
           </motion.p>
@@ -66,7 +66,7 @@ const ContinuitySection = () => {
             animate={textInView ? "visible" : "hidden"}
             variants={revealVariants.fadeUp}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-body-lg text-muted-foreground leading-relaxed"
+            className="text-base text-muted-foreground leading-relaxed"
           >
             {t("continuity.p2")}
           </motion.p>
@@ -141,7 +141,7 @@ const ContinuitySection = () => {
               <h3 className="text-title font-light text-foreground">
                 {t("continuity.vision.title") || "A Lasting Vision"}
               </h3>
-              <p className="text-body-lg text-muted-foreground leading-relaxed">
+              <p className="text-base text-muted-foreground leading-relaxed">
                 {t("continuity.vision.p1") || "Al Hamra Tower was conceived not as a moment in time, but as a statement for generations. Its design transcends trends, rooted in principles of timeless elegance and structural permanence."}
               </p>
               <p className="text-body text-muted-foreground leading-relaxed">

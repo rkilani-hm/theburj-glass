@@ -1,433 +1,188 @@
+/**
+ * Tower Overview — /tower
+ * Landing page for the Tower section. New design system only.
+ */
 import { useRef } from "react";
+import { Link } from "react-router-dom";
+import { motion, useScroll, useTransform, useSpring, useInView } from "framer-motion";
 import Header from "@/components/alhamra/Header";
 import Footer from "@/components/alhamra/Footer";
-import { motion, useScroll, useTransform, useInView } from "framer-motion";
-import { useLanguage } from "@/contexts/LanguageContext";
-import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
 
-import towerFullBlue    from "@/assets/tower-full-blue-sky.png";
-import towerNight       from "@/assets/tower-night-illuminated.jpg";
-import towerFacade      from "@/assets/tower-facade-twisted.png";
-import towerLowAngle    from "@/assets/tower-lowangle-clouds.png";
-import towerAerial      from "@/assets/tower-aerial-day.png";
-import somLobby         from "@/assets/som-lobby.jpg";
-import towerBW2         from "@/assets/tower-bw-2.png";
+import towerFull     from "@/assets/tower-full-blue-sky.png";
+import towerFacade   from "@/assets/tower-facade-twisted.png";
+import towerBW2      from "@/assets/tower-bw-2.png";
+import towerAerial   from "@/assets/tower-aerial-day.png";
+import towerLow      from "@/assets/tower-lowangle-clouds.png";
+import towerNight    from "@/assets/tower-night-illuminated.jpg";
+import towerSkyline  from "@/assets/som-tower-skyline.jpg";
 
-/* ── Shared types ── */
-interface PageHeroProps { title: string; subtitle?: string; image: string; overline: string }
-
-/* ── Page Hero — parallax tower banner ── */
-const PageHero = ({ title, subtitle, image, overline }: PageHeroProps) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
-
-  return (
-    <div ref={ref} className="relative flex items-end overflow-hidden" style={{ height: "88vh", minHeight: 520 }}>
-      {/* BG image parallax */}
-      <motion.div className="absolute inset-0" style={{ y }}>
-        <img src={image} alt={title} className="w-full h-full object-cover" style={{ objectPosition: "center 20%" }} />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(250,250,247,1) 0%, rgba(250,250,247,0.5) 40%, rgba(250,250,247,0.15) 100%)" }} />
-      </motion.div>
-
-      {/* Content */}
-      <motion.div className="relative z-10 container mx-auto px-6 lg:px-12 pb-16 lg:pb-24" style={{ opacity }}>
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
-        >
-          <div className="flex items-center gap-4 mb-5">
-            <span className="gold-line" style={{ width: 28 }} />
-            <span className="overline">{overline}</span>
-          </div>
-          <h1 className="font-serif font-light text-white mb-4" style={{ fontSize: "clamp(2.2rem, 5vw, 5rem)", letterSpacing: "-0.025em", lineHeight: 1.1 }}>
-            {title}
-          </h1>
-          {subtitle && (
-            <p className="text-foreground/50 max-w-xl" style={{ fontSize: "1.05rem", lineHeight: 1.8, fontWeight: 300 }}>
-              {subtitle}
-            </p>
-          )}
-        </motion.div>
-      </motion.div>
-    </div>
-  );
-};
-
-/* ── Sub-nav strip ── */
-const SubNav = ({ active }: { active: string }) => {
-  const links = [
-    { label: "Overview",     href: "/tower" },
-    { label: "Rising",       href: "/tower/rising" },
-    { label: "Design",       href: "/tower/design" },
-    { label: "Sustainability", href: "/tower/sustainability" },
-    { label: "Recognition",  href: "/tower/recognition" },
-  ];
-  return (
-    <div
-      className="sticky top-16 z-30 py-4 px-6"
-      style={{
-        background: "rgba(250,250,247,0.85)",
-        backdropFilter: "blur(30px)",
-        borderBottom: "1px solid rgba(255,255,255,0.06)",
-      }}
-    >
-      <div className="container mx-auto overflow-x-auto">
-        <div className="flex items-center gap-1 min-w-max">
-          {links.map((l) => (
-            <Link
-              key={l.href}
-              to={l.href}
-              className="px-4 py-2 rounded-full transition-all duration-200"
-              style={{
-                fontSize: "11px",
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                fontWeight: 300,
-                background: active === l.href ? "rgba(74,107,138,0.12)" : "transparent",
-                color: active === l.href ? "hsl(var(--sky))" : "rgba(255,255,255,0.4)",
-                border: active === l.href ? "1px solid rgba(74,107,138,0.2)" : "1px solid transparent",
-                textDecoration: "none",
-              }}
-            >
-              {l.label}
-            </Link>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-/* ── Stat block ── */
-const StatBlock = ({ value, unit, label }: { value: string; unit: string; label: string }) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true });
-  return (
-    <motion.div
-      ref={ref}
-      className="flex flex-col gap-1"
-      initial={{ opacity: 0, y: 20 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-    >
-      <div className="flex items-end gap-1">
-        <span className="font-serif font-light text-foreground" style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)", lineHeight: 1, letterSpacing: "-0.03em" }}>{value}</span>
-        <span className="text-sky font-light mb-1" style={{ fontSize: "1rem" }}>{unit}</span>
-      </div>
-      <p className="text-foreground/35" style={{ fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase" }}>{label}</p>
-    </motion.div>
-  );
-};
-
-/* ── Reveal text block ── */
-const RevealBlock = ({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 32 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 1, delay, ease: [0.16, 1, 0.3, 1] }}
-    >
-      {children}
-    </motion.div>
-  );
-};
-
-/* ── Horizontal feature row ── */
-const FeatureRow = ({
-  image, overline, title, body, link, linkLabel, reverse = false
-}: {
-  image: string; overline: string; title: string; body: string; link: string; linkLabel: string; reverse?: boolean;
-}) => {
+/* ── shared mini-reveal ── */
+const R = ({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) => {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
   return (
-    <div ref={ref} className={`grid lg:grid-cols-2 gap-12 lg:gap-20 items-center ${reverse ? "direction-rtl" : ""}`}>
-      {/* Image */}
-      <motion.div
-        initial={{ opacity: 0, x: reverse ? 40 : -40 }}
-        animate={inView ? { opacity: 1, x: 0 } : {}}
-        transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-        className={reverse ? "lg:order-2" : ""}
-      >
-        <div className="overflow-hidden rounded-glass" style={{ aspectRatio: "4/3" }}>
-          <motion.img
-            src={image} alt={title}
-            className="w-full h-full object-cover"
-            whileHover={{ scale: 1.04 }}
-            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-          />
-        </div>
-      </motion.div>
-
-      {/* Text */}
-      <motion.div
-        initial={{ opacity: 0, x: reverse ? -40 : 40 }}
-        animate={inView ? { opacity: 1, x: 0 } : {}}
-        transition={{ duration: 1.1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-        className={reverse ? "lg:order-1" : ""}
-      >
-        <div className="flex items-center gap-4 mb-5">
-          <span className="gold-line" style={{ width: 24 }} />
-          <span className="overline">{overline}</span>
-        </div>
-        <h3 className="font-serif font-light text-foreground mb-5" style={{ fontSize: "clamp(1.5rem, 2.8vw, 2.5rem)", letterSpacing: "-0.02em", lineHeight: 1.2 }}>
-          {title}
-        </h3>
-        <p className="text-muted-foreground mb-8" style={{ fontSize: "1rem", lineHeight: 1.9, fontWeight: 300 }}>
-          {body}
-        </p>
-        <Link
-          to={link}
-          className="glass inline-flex items-center gap-3 px-6 py-3 text-foreground/70 hover:text-white transition-all duration-300 group"
-          style={{ fontSize: "11px", letterSpacing: "0.15em", textTransform: "uppercase", textDecoration: "none" }}
-        >
-          <span>{linkLabel}</span>
-          <ArrowRight size={13} className="text-sky group-hover:translate-x-1 transition-transform" />
-        </Link>
-      </motion.div>
-    </div>
+    <motion.div ref={ref}
+      initial={{ opacity: 0, y: 28 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.95, delay, ease: [0.16, 1, 0.3, 1] }}
+    >{children}</motion.div>
   );
 };
 
-/* ════════════════════════════════════════
-   TOWER OVERVIEW PAGE
-   ════════════════════════════════════════ */
-const Tower = () => {
-  const { t } = useLanguage();
+export default function Tower() {
+  /* Hero parallax */
+  const heroRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
+  const heroY = useSpring(useTransform(scrollYProgress, [0, 1], ["0%", "28%"]), { stiffness: 55, damping: 22 });
+  const heroOp = useTransform(scrollYProgress, [0, 0.65], [1, 0]);
+
+  const SUB_PAGES = [
+    { label: "Origins",           sub: "Founded 2004",                  href: "/tower/origins",       img: towerBW2     },
+    { label: "Rising",            sub: "Construction 2005–2011",         href: "/tower/rising",        img: towerFacade  },
+    { label: "Design & Engineering", sub: "SOM — Bisht form",           href: "/tower/design",        img: towerLow     },
+    { label: "Sustainability",    sub: "Climate-responsive architecture", href: "/tower/sustainability",img: towerAerial  },
+    { label: "Awards",            sub: "Time Magazine 2011 and beyond",  href: "/tower/recognition",   img: towerNight   },
+    { label: "Dashboard",         sub: "Building specifications",        href: "/tower/dashboard",     img: towerSkyline },
+  ];
 
   return (
-    <div className="min-h-screen bg-background overflow-x-hidden">
+    <div style={{ minHeight: "100vh", background: "#0A0A0A", overflowX: "hidden" }}>
       <Header />
 
       {/* ── Hero ── */}
-      <PageHero
-        overline="Al Hamra Tower"
-        title={t("tower.hero.headline") || "Kuwait's Most Iconic Business Address"}
-        subtitle={t("tower.hero.height") || "A sculptural landmark defining Kuwait City's skyline."}
-        image={towerFullBlue}
-      />
-
-      <SubNav active="/tower" />
-
-      {/* ── Key stats band ── */}
-      <section style={{ background: "rgba(244,241,236,0.6)", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
-        <div className="container mx-auto px-6 lg:px-12 py-12">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
-            <StatBlock value="413" unit="m"  label="Total Height" />
-            <StatBlock value="80"  unit="+"  label="Office Floors" />
-            <StatBlock value="2011" unit=""  label="Year Completed" />
-            <StatBlock value="24K" unit="m²" label="Grade-A GLA" />
+      <section ref={heroRef} style={{ position: "relative", height: "90svh", minHeight: 560, overflow: "hidden" }}>
+        <motion.div style={{ position: "absolute", inset: 0, y: heroY }}>
+          <img src={towerFull} alt="Al Hamra Tower" style={{ width: "100%", height: "115%", objectFit: "cover", objectPosition: "center 15%" }} />
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.4) 45%, rgba(10,10,10,0.55) 100%)" }} />
+        </motion.div>
+        <motion.div style={{ position: "absolute", bottom: 0, left: 0, right: 0, opacity: heroOp }}
+          className="container-fluid" >
+          <div style={{ paddingBottom: "clamp(3rem, 6vw, 6rem)", maxWidth: 820 }}>
+            <motion.p className="eyebrow-light" style={{ marginBottom: 20 }}
+              initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}>
+              Al Hamra Tower · Kuwait City · 412m
+            </motion.p>
+            <div style={{ overflow: "hidden" }}>
+              <motion.h1 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(3.5rem, 9vw, 10rem)", fontWeight: 300, lineHeight: 0.9, letterSpacing: "-0.035em", color: "#fff", margin: 0 }}
+                initial={{ y: "105%" }} animate={{ y: 0 }}
+                transition={{ duration: 1.15, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}>
+                The Tower
+              </motion.h1>
+            </div>
+            <motion.p style={{ fontFamily: "var(--font-sans)", fontSize: "clamp(0.88rem, 1vw, 0.98rem)", fontWeight: 300, lineHeight: 1.8, color: "rgba(255,255,255,0.42)", maxWidth: 480, marginTop: 24 }}
+              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.95, ease: [0.16, 1, 0.3, 1] }}>
+              Kuwait's tallest building. The world's tallest sculpted concrete tower. 
+              A landmark defined by removal — a quarter of each floor carved away, 
+              spiralling upward like the bisht it was born from.
+            </motion.p>
           </div>
-        </div>
+        </motion.div>
       </section>
 
-      {/* ── Identity section ── */}
-      <section className="section-luxury bg-background">
-        <div className="container mx-auto px-6 lg:px-12">
+      {/* ── Identity ── */}
+      <section style={{ background: "#fff", padding: "clamp(6rem, 12vw, 12rem) 0" }}>
+        <div className="container-fluid">
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-20">
-            {/* Large headline */}
             <div className="lg:col-span-5">
-              <RevealBlock>
-                <div className="flex items-center gap-4 mb-6">
-                  <span className="gold-line" style={{ width: 28 }} />
-                  <span className="overline">Identity</span>
-                </div>
-                <h2 className="font-serif font-light text-foreground" style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)", letterSpacing: "-0.025em", lineHeight: 1.15 }}>
-                  {t("tower.hero.identity")?.split(".")[0] || "A landmark of sculpted form and refined function"}
+              <R><p className="eyebrow" style={{ marginBottom: 20 }}>Identity</p></R>
+              <R delay={0.08}>
+                <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2rem, 4vw, 4.5rem)", fontWeight: 400, lineHeight: 1.06, letterSpacing: "-0.025em", color: "var(--black)" }}>
+                  A landmark carved from conviction.
                 </h2>
-              </RevealBlock>
+              </R>
             </div>
-
-            {/* Body text */}
-            <div className="lg:col-span-7">
-              <RevealBlock delay={0.15}>
-                <p className="text-muted-foreground mb-6" style={{ fontSize: "1.05rem", lineHeight: 2, fontWeight: 300 }}>
-                  {t("tower.hero.identity") || "Al Hamra Tower stands as Kuwait's most significant architectural achievement — a structure of absolute presence, designed to endure beyond trends and cycles. Rising approximately 412–413 metres with a sculpted form, the tower blends architectural radiance with climate-responsive engineering."}
+            <div className="lg:col-span-6 lg:col-start-7 lg:pt-16">
+              <R delay={0.18}>
+                <p style={{ fontFamily: "var(--font-sans)", fontSize: "1rem", fontWeight: 300, lineHeight: 1.9, color: "var(--graphite)", marginBottom: 20 }}>
+                  Designed by Skidmore, Owings &amp; Merrill, Al Hamra Tower stands as Kuwait's 
+                  most significant architectural achievement. At 412 metres, it is the tallest 
+                  building in Kuwait and the tallest sculpted concrete tower ever constructed.
                 </p>
-                <p className="text-muted-foreground/70" style={{ fontSize: "0.9rem", lineHeight: 1.9, fontWeight: 300 }}>
-                  Designed to maximize panoramic views while reducing solar heat gain through a performance-driven form, Al Hamra Tower balances openness with environmental efficiency — representing the pinnacle of Gulf commercial architecture.
+                <p style={{ fontFamily: "var(--font-sans)", fontSize: "1rem", fontWeight: 300, lineHeight: 1.9, color: "var(--stone)", marginBottom: 36 }}>
+                  Its form emerged from a single architectural gesture — removing a quarter of 
+                  each floor plate from the south side, shifting from west to east as the tower 
+                  rises. The result: a monolithic Jura limestone wall facing the desert sun, 
+                  framed by graceful glass facades that capture the Gulf and the city skyline.
                 </p>
-              </RevealBlock>
+                <Link to="/tower/design" className="btn-arrow">Design &amp; Engineering</Link>
+              </R>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* ── Full-bleed tower image ── */}
-      <div className="relative overflow-hidden" style={{ height: "60vh" }}>
-        <motion.img
-          src={towerNight}
-          alt="Al Hamra Tower at night"
-          className="w-full h-full object-cover"
-          style={{ objectPosition: "center 30%" }}
-          initial={{ scale: 1.05 }}
-          whileInView={{ scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 2.5, ease: "easeOut" }}
-        />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(250,250,247,0.7) 0%, rgba(250,250,247,0.3) 50%, rgba(250,250,247,0.6) 100%)" }} />
-        {/* Quote overlay */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <RevealBlock>
-            <blockquote
-              className="font-serif font-light italic text-foreground/80 text-center max-w-2xl px-8"
-              style={{ fontSize: "clamp(1.2rem, 2.5vw, 2rem)", lineHeight: 1.5, letterSpacing: "-0.01em" }}
-            >
-              "A structure of absolute presence, designed to endure beyond trends."
-            </blockquote>
-          </RevealBlock>
-        </div>
-      </div>
-
-      {/* ── Feature rows ── */}
-      <section className="section-luxury bg-background">
-        <div className="container mx-auto px-6 lg:px-12">
-          <div className="flex flex-col gap-24">
-            <FeatureRow
-              image={towerFacade}
-              overline="Architecture"
-              title="Sculpted for Performance and Presence"
-              body="The tower's asymmetrical carved stone facade is more than aesthetic — it is a climate-responsive engineering decision. Each cut and curve is optimised to reduce solar heat gain while maximising natural light penetration through Kuwait's intense sun. A fusion of art and physics."
-              link="/tower/design"
-              linkLabel="Design & Engineering"
-            />
-            <FeatureRow
-              image={somLobby}
-              overline="Interior"
-              title="Lobby of Uncompromised Grandeur"
-              body="The triple-height entrance lobby sets the tone for the entire tower experience. Soaring stone arches, curated lighting, and precision-crafted finishes signal arrival at a different class of workplace — one designed for organisations that lead rather than follow."
-              link="/business/workplace-experience"
-              linkLabel="Workplace Experience"
-              reverse
-            />
-            <FeatureRow
-              image={towerLowAngle}
-              overline="The View"
-              title="412 Metres of Perspective"
-              body="At full height, Al Hamra Tower offers unrivalled panoramas across Kuwait Bay, the historic city centre, and the Arabian Gulf beyond. From the highest occupied floors, no other structure interrupts the horizon — an experience reserved exclusively for tenants."
-              link="/tower/rising"
-              linkLabel="The Rising Story"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* ── Integrated ecosystem ── */}
-      <section
-        className="section-luxury"
-        style={{ background: "rgba(250,250,247,0.8)" }}
-      >
-        <div className="container mx-auto px-6 lg:px-12">
-          <RevealBlock>
-            <div className="text-center mb-16">
-              <div className="flex items-center justify-center gap-4 mb-5">
-                <span className="gold-line" style={{ width: 24, transform: "scaleX(-1)" }} />
-                <span className="overline">{t("tower.ecosystem.label") || "Integrated Destination"}</span>
-                <span className="gold-line" style={{ width: 24 }} />
-              </div>
-              <h2 className="font-serif font-light text-foreground" style={{ fontSize: "clamp(1.8rem, 3.5vw, 3.2rem)", letterSpacing: "-0.025em" }}>
-                {t("tower.ecosystem.title") || "An Integrated Mixed-Use Destination"}
-              </h2>
-            </div>
-          </RevealBlock>
-
-          <div className="grid md:grid-cols-3 gap-5">
-            {[
-              {
-                title: t("tower.ecosystem.business.title") || "Business Tower",
-                tag: "Premium Offices",
-                desc: t("tower.ecosystem.business.desc") || "Premium office environments with efficient floor plates allowing flexible configurations.",
-                icon: "↑",
-              },
-              {
-                title: t("tower.ecosystem.shopping.title") || "Retail & Lifestyle",
-                tag: "5 Levels",
-                desc: t("tower.ecosystem.shopping.desc") || "Retail, dining, and service amenities reinforce the tower as a complete professional environment.",
-                icon: "◈",
-              },
-              {
-                title: t("tower.ecosystem.parking.title") || "Parking Complex",
-                tag: "11 Floors",
-                desc: t("tower.ecosystem.parking.desc") || "Efficient parking systems and visitor circulation ensure seamless daily experience.",
-                icon: "⊡",
-              },
-            ].map((card, i) => (
-              <RevealBlock key={card.title} delay={i * 0.12}>
-                <div
-                  className="p-8 h-full"
-                  style={{
-                    background: "rgba(255,255,255,0.03)",
-                    border: "1px solid rgba(0,0,0,0.05)",
-                    borderRadius: 24,
-                    transition: "border-color 0.3s",
-                  }}
-                  onMouseEnter={e => ((e.currentTarget as HTMLDivElement).style.borderColor = "rgba(74,107,138,0.2)")}
-                  onMouseLeave={e => ((e.currentTarget as HTMLDivElement).style.borderColor = "rgba(0,0,0,0.05)")}
-                >
-                  <div className="flex items-start justify-between mb-6">
-                    <span
-                      className="flex items-center justify-center text-sky"
-                      style={{ width: 40, height: 40, background: "rgba(74,107,138,0.08)", border: "1px solid rgba(74,107,138,0.15)", borderRadius: 12, fontSize: "1.1rem" }}
-                    >
-                      {card.icon}
-                    </span>
-                    <span
-                      className="text-sky"
-                      style={{ fontSize: "9px", letterSpacing: "0.2em", textTransform: "uppercase", background: "rgba(74,107,138,0.08)", padding: "4px 10px", borderRadius: 50, border: "1px solid rgba(74,107,138,0.15)" }}
-                    >
-                      {card.tag}
-                    </span>
-                  </div>
-                  <h4 className="font-serif font-light text-foreground/85 mb-3" style={{ fontSize: "1.15rem", letterSpacing: "-0.01em" }}>{card.title}</h4>
-                  <p className="text-foreground/40" style={{ fontSize: "0.85rem", lineHeight: 1.8, fontWeight: 300 }}>{card.desc}</p>
-                </div>
-              </RevealBlock>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Sub-page links row ── */}
-      <section className="section-luxury bg-background">
-        <div className="container mx-auto px-6 lg:px-12">
-          <RevealBlock>
-            <h2 className="font-serif font-light text-foreground mb-12" style={{ fontSize: "clamp(1.6rem, 3vw, 3rem)", letterSpacing: "-0.02em" }}>
-              Continue Exploring
-            </h2>
-          </RevealBlock>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {[
-              { label: "Rising", sub: "Construction & History", href: "/tower/rising", img: towerBW2 },
-              { label: "Design", sub: "Architecture & Engineering", href: "/tower/design", img: towerFacade },
-              { label: "Awards", sub: "Regional Recognition", href: "/tower/recognition", img: towerAerial },
-              { label: "Sustainability", sub: "Environmental Leadership", href: "/tower/sustainability", img: towerLowAngle },
-            ].map((item, i) => (
-              <RevealBlock key={item.href} delay={i * 0.08}>
-                <Link to={item.href} className="block group">
-                  <div className="overflow-hidden rounded-glass" style={{ aspectRatio: "1/1" }}>
-                    <motion.img
-                      src={item.img} alt={item.label}
-                      className="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500"
-                      whileHover={{ scale: 1.06 }}
-                      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                    />
-                  </div>
-                  <div className="mt-4">
-                    <div className="flex items-center justify-between">
-                      <h4 className="font-serif font-light text-foreground/80 group-hover:text-white transition-colors" style={{ fontSize: "1.05rem" }}>{item.label}</h4>
-                      <ArrowRight size={13} className="text-sky opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300" />
+          {/* Stats row */}
+          <div style={{ marginTop: "clamp(4rem, 8vw, 8rem)", borderTop: "1px solid var(--rule-light)" }}>
+            <div className="grid grid-cols-2 lg:grid-cols-4">
+              {[
+                { v: "412m",     l: "Height",           d: "Kuwait's tallest structure" },
+                { v: "80",       l: "Floors",            d: "Above-ground office levels" },
+                { v: "195,000",  l: "m² Total Area",     d: "Office + retail + amenities" },
+                { v: "2011",     l: "Completed",         d: "November opening" },
+              ].map((s, i) => (
+                <R key={s.l} delay={i * 0.07}>
+                  <div style={{ padding: "clamp(2rem, 4vw, 3rem) 0", paddingLeft: i > 0 ? "clamp(1.5rem, 3vw, 3rem)" : 0, borderLeft: i > 0 ? "1px solid var(--rule-light)" : "none" }}>
+                    <div style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2.5rem, 5vw, 5.5rem)", fontWeight: 300, lineHeight: 1, letterSpacing: "-0.04em", color: "var(--black)", marginBottom: 8 }}>
+                      {s.v}
                     </div>
-                    <p className="text-foreground/35 mt-1" style={{ fontSize: "11px", letterSpacing: "0.08em" }}>{item.sub}</p>
+                    <p className="eyebrow" style={{ marginBottom: 6 }}>{s.l}</p>
+                    <p style={{ fontFamily: "var(--font-sans)", fontSize: "12px", fontWeight: 300, color: "var(--ash)" }}>{s.d}</p>
+                  </div>
+                </R>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Full-bleed tower with quote ── */}
+      <section style={{ position: "relative", height: "clamp(400px, 55vw, 700px)", overflow: "hidden" }}>
+        <motion.img src={towerNight} alt="Al Hamra Tower at night"
+          style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 30%" }}
+          initial={{ scale: 1.06 }} whileInView={{ scale: 1 }} viewport={{ once: true }}
+          transition={{ duration: 2.8, ease: "easeOut" }} />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(10,10,10,0.75) 0%, rgba(10,10,10,0.3) 60%)" }} />
+        <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <R>
+            <blockquote style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1.3rem, 2.8vw, 2.8rem)", fontWeight: 300, fontStyle: "italic", color: "rgba(255,255,255,0.82)", textAlign: "center", maxWidth: 720, padding: "0 2rem", lineHeight: 1.4, letterSpacing: "-0.01em" }}>
+              "The purity of its form, expressed by a simple operation of removal,<br />makes the tower a timeless, elegant marker in the heart of Kuwait City."
+            </blockquote>
+            <p style={{ fontFamily: "var(--font-sans)", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.28)", textAlign: "center", marginTop: 24 }}>
+              Skidmore, Owings &amp; Merrill — Project Description
+            </p>
+          </R>
+        </div>
+      </section>
+
+      {/* ── Sub-page navigation ── */}
+      <section style={{ background: "var(--limestone)", padding: "clamp(6rem, 12vw, 12rem) 0" }}>
+        <div className="container-fluid">
+          <R style={{ marginBottom: "clamp(3rem, 6vw, 5rem)" }}>
+            <p className="eyebrow" style={{ marginBottom: 16 }}>Explore the Tower</p>
+            <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2rem, 4vw, 4.5rem)", fontWeight: 400, lineHeight: 1.06, letterSpacing: "-0.025em", color: "var(--black)" }}>
+              Every story begins here.
+            </h2>
+          </R>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {SUB_PAGES.map((p, i) => (
+              <R key={p.href} delay={i * 0.07}>
+                <Link to={p.href} style={{ display: "block", cursor: "pointer" }}>
+                  <div style={{ aspectRatio: "4/3", overflow: "hidden", position: "relative", marginBottom: 14 }}>
+                    <motion.img src={p.img} alt={p.label} loading="lazy"
+                      style={{ width: "100%", height: "100%", objectFit: "cover", filter: "grayscale(20%)" }}
+                      whileHover={{ scale: 1.05 }} transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }} />
+                    <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(10,10,10,0.5) 0%, transparent 50%)", opacity: 0, transition: "opacity 0.3s" }}
+                      onMouseEnter={e => (e.currentTarget.style.opacity = "1")}
+                      onMouseLeave={e => (e.currentTarget.style.opacity = "0")} />
+                  </div>
+                  <p className="eyebrow" style={{ marginBottom: 6 }}>{p.sub}</p>
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                    <h3 style={{ fontFamily: "var(--font-display)", fontSize: "1.35rem", fontWeight: 400, letterSpacing: "-0.01em", color: "var(--black)" }}>{p.label}</h3>
+                    <span style={{ fontFamily: "var(--font-sans)", fontSize: "12px", color: "var(--ash)" }}>→</span>
                   </div>
                 </Link>
-              </RevealBlock>
+              </R>
             ))}
           </div>
         </div>
@@ -436,6 +191,4 @@ const Tower = () => {
       <Footer />
     </div>
   );
-};
-
-export default Tower;
+}

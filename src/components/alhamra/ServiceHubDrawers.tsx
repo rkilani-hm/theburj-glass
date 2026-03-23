@@ -67,11 +67,11 @@ const ServiceHubDrawers = () => {
           className="text-center mb-12"
         >
           <div className="flex items-center justify-center gap-4 mb-4">
-            <div className="w-12 h-px bg-silk-gold/40" />
-            <span className="text-xs uppercase tracking-[0.3em] text-champagne">
+            <div className="w-12 h-px bg-foreground/40" />
+            <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
               {language === "en" ? "Service Hub" : "مركز الخدمات"}
             </span>
-            <div className="w-12 h-px bg-silk-gold/40" />
+            <div className="w-12 h-px bg-foreground/40" />
           </div>
           <h2 className="text-2xl md:text-3xl font-light text-foreground">
             {language === "en" ? "Comprehensive Support" : "دعم شامل"}
@@ -91,7 +91,7 @@ const ServiceHubDrawers = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
-                className="liquid-glass-subtle bg-background/80"
+                className="bg-white/60 backdrop-blur bg-background/80"
               >
                 {/* Category Header */}
                 <button
@@ -99,8 +99,8 @@ const ServiceHubDrawers = () => {
                   className="w-full p-6 flex items-center justify-between hover:bg-background/50 transition-colors duration-300"
                 >
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 flex items-center justify-center bg-silk-gold/10 border border-silk-gold/20 rounded-xl">
-                      <CategoryIcon className="w-5 h-5 text-silk-gold" />
+                    <div className="w-12 h-12 flex items-center justify-center bg-muted border border-border rounded-xl">
+                      <CategoryIcon className="w-5 h-5 text-foreground/60" />
                     </div>
                     <h3 className="text-lg font-light text-foreground">
                       {category.title[language]}
@@ -110,7 +110,7 @@ const ServiceHubDrawers = () => {
                     animate={{ rotate: isExpanded ? 180 : 0 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <ChevronDown className="w-5 h-5 text-champagne" />
+                    <ChevronDown className="w-5 h-5 text-muted-foreground" />
                   </motion.div>
                 </button>
 
@@ -135,8 +135,8 @@ const ServiceHubDrawers = () => {
                               transition={{ duration: 0.3, delay: sIndex * 0.1 }}
                               className="flex items-start gap-3 p-3 bg-background/50 border border-silk-gold/10 rounded-xl"
                             >
-                              <div className="w-8 h-8 flex items-center justify-center bg-silk-gold/5 border border-silk-gold/15 rounded-lg flex-shrink-0">
-                                <ServiceIcon className="w-4 h-4 text-silk-gold" />
+                              <div className="w-8 h-8 flex items-center justify-center bg-foreground/5 border border-silk-gold/15 rounded-lg flex-shrink-0">
+                                <ServiceIcon className="w-4 h-4 text-foreground/60" />
                               </div>
                               <div>
                                 <p className="text-sm font-medium text-foreground">

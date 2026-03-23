@@ -61,7 +61,7 @@ const PresenceSection = () => {
   return (
     <section id="presence" className="bg-background relative">
       {/* Hero Section */}
-      <div className="py-section texture-noise">
+      <div className="py-20 lg:py-28 ">
         <div className="container mx-auto px-6 lg:px-12">
           {/* Section Label */}
           <motion.div 
@@ -82,7 +82,7 @@ const PresenceSection = () => {
             animate={isInView ? "visible" : "hidden"}
             variants={revealVariants.fadeUp}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-headline font-light tracking-wide text-foreground mb-8"
+            className="text-4xl lg:text-5xl font-light tracking-tight font-light tracking-wide text-foreground mb-8"
           >
             {t("presence.title")}
           </motion.h2>
@@ -93,7 +93,7 @@ const PresenceSection = () => {
             animate={isInView ? "visible" : "hidden"}
             variants={revealVariants.fadeUp}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-body-lg text-muted-foreground max-w-3xl mb-20"
+            className="text-base text-muted-foreground max-w-3xl mb-20"
           >
             {t("tower.intro")}
           </motion.p>
@@ -108,10 +108,10 @@ const PresenceSection = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="space-y-8 lg:pr-8"
             >
-              <p className="text-body-lg text-muted-foreground leading-relaxed">
+              <p className="text-base text-muted-foreground leading-relaxed">
                 {t("presence.p1")}
               </p>
-              <p className="text-body-lg text-muted-foreground leading-relaxed">
+              <p className="text-base text-muted-foreground leading-relaxed">
                 {t("presence.p2")}
               </p>
               <div className="pt-6 border-t border-border">
@@ -161,7 +161,7 @@ const PresenceSection = () => {
       </div>
 
       {/* Stats Row */}
-      <div className="py-section bg-secondary">
+      <div className="py-20 lg:py-28 bg-secondary">
         <div className="container mx-auto px-6 lg:px-12">
           <motion.div 
             ref={statsRef}
@@ -195,7 +195,7 @@ const PresenceSection = () => {
       </div>
 
       {/* Architectural Features */}
-      <div className="py-section bg-background texture-noise">
+      <div className="py-20 lg:py-28 bg-background ">
         <div className="container mx-auto px-6 lg:px-12">
           <motion.div
             ref={architectureRef}
@@ -211,7 +211,7 @@ const PresenceSection = () => {
                 {t("tower.architecture.label")}
               </span>
             </div>
-            <h3 className="text-subheadline font-light text-foreground mb-4">
+            <h3 className="text-2xl lg:text-3xl font-light font-light text-foreground mb-4">
               {t("tower.architecture.title")}
             </h3>
             <p className="text-body text-muted-foreground max-w-2xl">
@@ -289,7 +289,7 @@ const PresenceSection = () => {
       </div>
 
       {/* Interior Spaces */}
-      <div className="py-section bg-secondary">
+      <div className="py-20 lg:py-28 bg-secondary">
         <div className="container mx-auto px-6 lg:px-12">
           <div ref={interiorRef} className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             {/* Images */}
@@ -330,10 +330,10 @@ const PresenceSection = () => {
                   {t("tower.interior.label")}
                 </span>
               </div>
-              <h3 className="text-subheadline font-light text-foreground">
+              <h3 className="text-2xl lg:text-3xl font-light font-light text-foreground">
                 {t("tower.interior.title")}
               </h3>
-              <p className="text-body-lg text-muted-foreground leading-relaxed">
+              <p className="text-base text-muted-foreground leading-relaxed">
                 {t("tower.interior.p1")}
               </p>
               <p className="text-body text-muted-foreground leading-relaxed">
@@ -355,7 +355,7 @@ const PresenceSection = () => {
       </div>
 
       {/* Tower Details Gallery */}
-      <div className="py-section bg-background">
+      <div className="py-20 lg:py-28 bg-background">
         <div className="container mx-auto px-6 lg:px-12">
           <motion.div
             ref={detailsRef}
@@ -371,7 +371,7 @@ const PresenceSection = () => {
                 {t("tower.details.label")}
               </span>
             </div>
-            <h3 className="text-subheadline font-light text-foreground">
+            <h3 className="text-2xl lg:text-3xl font-light font-light text-foreground">
               {t("tower.details.title")}
             </h3>
           </motion.div>
@@ -423,7 +423,7 @@ const PresenceSection = () => {
       </div>
 
       {/* Tower Facts */}
-      <div className="py-section bg-secondary">
+      <div className="py-20 lg:py-28 bg-secondary">
         <div className="container mx-auto px-6 lg:px-12">
           <motion.div
             ref={factsRef}
@@ -433,7 +433,7 @@ const PresenceSection = () => {
             transition={{ duration: 0.6 }}
             className="mb-16 text-center"
           >
-            <h3 className="text-subheadline font-light text-foreground">
+            <h3 className="text-2xl lg:text-3xl font-light font-light text-foreground">
               {t("tower.facts.title")}
             </h3>
           </motion.div>
@@ -476,7 +476,7 @@ const PresenceSection = () => {
       </div>
 
       {/* Aerial Perspectives */}
-      <div className="py-section bg-background texture-noise">
+      <div className="py-20 lg:py-28 bg-background ">
         <div className="container mx-auto px-6 lg:px-12">
           <motion.div
             ref={aerialRef}
@@ -492,7 +492,7 @@ const PresenceSection = () => {
                 {t("tower.aerial.label")}
               </span>
             </div>
-            <h3 className="text-subheadline font-light text-foreground mb-4">
+            <h3 className="text-2xl lg:text-3xl font-light font-light text-foreground mb-4">
               {t("tower.aerial.title")}
             </h3>
             <p className="text-body text-muted-foreground max-w-2xl">
@@ -561,7 +561,7 @@ const PresenceSection = () => {
       </div>
 
       {/* Grand Entrance */}
-      <div className="py-section bg-secondary">
+      <div className="py-20 lg:py-28 bg-secondary">
         <div className="container mx-auto px-6 lg:px-12">
           <div ref={entranceRef} className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             {/* Text */}
@@ -578,10 +578,10 @@ const PresenceSection = () => {
                   {t("tower.entrance.label")}
                 </span>
               </div>
-              <h3 className="text-subheadline font-light text-foreground">
+              <h3 className="text-2xl lg:text-3xl font-light font-light text-foreground">
                 {t("tower.entrance.title")}
               </h3>
-              <p className="text-body-lg text-muted-foreground leading-relaxed">
+              <p className="text-base text-muted-foreground leading-relaxed">
                 {t("tower.entrance.p1")}
               </p>
               <p className="text-body text-muted-foreground leading-relaxed">
@@ -617,7 +617,7 @@ const PresenceSection = () => {
       </div>
 
       {/* Night Illumination */}
-      <div className="py-section bg-foreground">
+      <div className="py-20 lg:py-28 bg-foreground">
         <div className="container mx-auto px-6 lg:px-12">
           <motion.div
             ref={nightRef}
@@ -627,7 +627,7 @@ const PresenceSection = () => {
             transition={{ duration: 0.6 }}
             className="mb-12 text-center"
           >
-            <h3 className="text-subheadline font-light text-background mb-4">
+            <h3 className="text-2xl lg:text-3xl font-light font-light text-background mb-4">
               {t("tower.night.title")}
             </h3>
             <p className="text-body text-background/70 max-w-2xl mx-auto">
@@ -668,7 +668,7 @@ const PresenceSection = () => {
       </div>
 
       {/* Extended Aerial Gallery */}
-      <div className="py-section bg-background texture-noise">
+      <div className="py-20 lg:py-28 bg-background ">
         <div className="container mx-auto px-6 lg:px-12">
           <motion.div
             ref={galleryRef}
@@ -684,7 +684,7 @@ const PresenceSection = () => {
                 {t("tower.gallery.label")}
               </span>
             </div>
-            <h3 className="text-subheadline font-light text-foreground mb-4">
+            <h3 className="text-2xl lg:text-3xl font-light font-light text-foreground mb-4">
               {t("tower.gallery.title")}
             </h3>
             <p className="text-body text-muted-foreground max-w-2xl">

@@ -130,15 +130,15 @@ const LegacySection = () => {
               className="max-w-3xl"
             >
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-px bg-silk-gold/60" />
-                <span className="text-xs uppercase tracking-[0.3em] text-silk-gold-light">
+                <div className="w-12 h-px bg-foreground/60" />
+                <span className="text-xs uppercase tracking-[0.3em] text-foreground/60-light">
                   {t("legacy.label")}
                 </span>
               </div>
-              <h1 className="text-headline lg:text-display font-light tracking-wide text-foreground mb-6">
+              <h1 className="text-4xl lg:text-5xl font-light tracking-tight lg:text-display font-light tracking-wide text-foreground mb-6">
                 {t("legacy.title")}
               </h1>
-              <p className="text-body-lg text-foreground/80 max-w-xl">
+              <p className="text-base text-foreground/80 max-w-xl">
                 {t("legacy.subtitle")}
               </p>
             </motion.div>
@@ -160,7 +160,7 @@ const LegacySection = () => {
             <h2 className="text-title font-light text-foreground mb-4">
               {t("legacy.origins.heading")}
             </h2>
-            <div className="w-16 h-px bg-silk-gold/40" />
+            <div className="w-16 h-px bg-foreground/40" />
           </motion.div>
 
           <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
@@ -211,7 +211,7 @@ const LegacySection = () => {
               transition={{ duration: 0.8, delay: 0.3 }}
               className={`space-y-8 ${isArabic ? 'lg:order-1' : ''}`}
             >
-              <p className="text-body-lg text-muted-foreground leading-relaxed">
+              <p className="text-base text-muted-foreground leading-relaxed">
                 {t("legacy.origins.p1")}
               </p>
               <p className="text-body text-muted-foreground leading-relaxed">
@@ -360,9 +360,9 @@ const LegacySection = () => {
                 animate={foundersInView ? "visible" : "hidden"}
                 variants={revealVariants.fadeUp}
                 transition={{ duration: 0.6, delay: 0.2 + index * 0.15 }}
-                className="relative p-8 liquid-glass-subtle bg-background/80 group hover:border-silk-gold/40 transition-colors duration-300"
+                className="relative p-8 bg-white/60 backdrop-blur bg-background/80 group hover:border-border transition-colors duration-300"
               >
-                <Quote className="w-8 h-8 text-silk-gold/30 mb-6 group-hover:text-silk-gold/60 transition-colors duration-300" />
+                <Quote className="w-8 h-8 text-foreground/60/30 mb-6 group-hover:text-foreground/60/60 transition-colors duration-300" />
                 <blockquote className="mb-8">
                   <p className="text-body leading-relaxed text-foreground font-light italic">
                     "{item.quote}"
@@ -385,7 +385,7 @@ const LegacySection = () => {
             className="mt-12 text-center"
           >
             <blockquote className="max-w-3xl mx-auto relative">
-              <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-16 h-px bg-silk-gold/40" />
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-16 h-px bg-foreground/40" />
               <p className="text-title font-light text-foreground leading-relaxed pt-8">
                 {t("legacy.founders.vision")}
               </p>
@@ -416,7 +416,7 @@ const LegacySection = () => {
           {/* Horizontal Timeline */}
           <div className="relative">
             {/* Timeline line */}
-            <div className="absolute top-8 left-0 right-0 h-px bg-silk-gold/20 hidden lg:block" />
+            <div className="absolute top-8 left-0 right-0 h-px bg-muted hidden lg:block" />
             
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
               {timeline.map((item, index) => (
@@ -470,10 +470,10 @@ const LegacySection = () => {
                 <h2 className="text-title font-light text-foreground mb-4">
                   {t("legacy.design.heading")}
                 </h2>
-                <div className="w-16 h-px bg-silk-gold/40" />
+                <div className="w-16 h-px bg-foreground/40" />
               </div>
               
-              <p className="text-body-lg text-muted-foreground leading-relaxed">
+              <p className="text-base text-muted-foreground leading-relaxed">
                 {t("legacy.design.p1")}
               </p>
               <p className="text-body text-muted-foreground leading-relaxed">
@@ -481,7 +481,7 @@ const LegacySection = () => {
               </p>
 
               {/* Key Stats */}
-              <div className="grid grid-cols-2 gap-6 pt-8 border-t border-silk-gold/20">
+              <div className="grid grid-cols-2 gap-6 pt-8 border-t border-border">
                 <div>
                   <p className="text-3xl lg:text-4xl font-light text-foreground">413m</p>
                   <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground mt-1">
@@ -568,7 +568,7 @@ const LegacySection = () => {
                 </h2>
               </div>
               
-              <p className="text-body-lg text-background/80 leading-relaxed">
+              <p className="text-base text-background/80 leading-relaxed">
                 {t("legacy.impact.p1")}
               </p>
               <p className="text-body text-background/70 leading-relaxed">
@@ -610,7 +610,7 @@ const LegacySection = () => {
             <h2 className="text-title font-light text-foreground mb-4">
               {t("legacy.heart.heading")}
             </h2>
-            <p className="text-body-lg text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-base text-muted-foreground max-w-3xl mx-auto">
               {t("legacy.heart.p1")}
             </p>
           </motion.div>

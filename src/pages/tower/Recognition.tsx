@@ -60,7 +60,7 @@ const Recognition = () => {
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
       <Header />
-      <main className="pt-24">
+      <main style={{ paddingTop: "var(--nav-h)" }}>
         {/* Hero Section */}
         <section className="relative h-[70vh] overflow-hidden">
           <img 
@@ -97,7 +97,7 @@ const Recognition = () => {
               transition={{ duration: 0.8 }}
               className="text-center mb-12"
             >
-              <p className="text-sm uppercase tracking-widest text-champagne mb-4">Published Research</p>
+              <p className="text-sm uppercase tracking-widest text-stone mb-4">Published Research</p>
               <h2 className="text-3xl lg:text-4xl font-light tracking-wide mb-6">
                 "Sculpted High Rise: The Al Hamra Tower"
               </h2>
@@ -116,7 +116,7 @@ const Recognition = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="p-6 liquid-glass-subtle bg-background/80 hover:border-silk-gold/40 transition-colors duration-300"
+                  className="p-6 bg-white/60 backdrop-blur bg-background/80 hover:border-silk-gold/40 transition-colors duration-300"
                 >
                   <p className="text-sm text-muted-foreground mb-2">{item.label}</p>
                   <p className="font-light">{item.value}</p>
@@ -147,20 +147,20 @@ const Recognition = () => {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
-                    className={`flex gap-6 items-start p-6 liquid-glass-subtle bg-background/80 hover:border-silk-gold/40 transition-colors duration-300 ${
+                    className={`flex gap-6 items-start p-6 bg-white/60 backdrop-blur bg-background/80 hover:border-silk-gold/40 transition-colors duration-300 ${
                       award.highlight ? 'border-silk-gold/50' : ''
                     }`}
                   >
                     <div className={`flex-shrink-0 w-16 h-16 flex items-center justify-center rounded-xl border ${
-                      award.highlight ? 'bg-silk-gold/15 border-silk-gold/30' : 'bg-silk-gold/10 border-silk-gold/20'
+                      award.highlight ? 'bg-black/8 border-black/15' : 'bg-black/5 border-black/10'
                     }`}>
-                      <award.icon className={`w-6 h-6 ${award.highlight ? 'text-silk-gold' : 'text-champagne'}`} />
+                      <award.icon className={`w-6 h-6 ${award.highlight ? 'text-stone' : 'text-stone'}`} />
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center gap-4 mb-2">
                         <span className="text-sm text-muted-foreground">{award.year}</span>
                         {award.highlight && (
-                          <span className="text-xs text-silk-gold bg-silk-gold/10 px-2 py-1 border border-silk-gold/20 rounded-lg">Foundational</span>
+                          <span className="text-xs text-stone bg-black/5 px-2 py-1 border border-black/10 rounded-lg">Foundational</span>
                         )}
                       </div>
                       <h3 className="text-lg font-light mb-1">{award.title}</h3>

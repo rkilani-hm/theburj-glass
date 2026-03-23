@@ -60,7 +60,7 @@ const Leasing = () => {
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
       <Header />
-      <main className="pt-24">
+      <main style={{ paddingTop: "var(--nav-h)" }}>
         {/* Hero Section */}
         <section className="py-24 lg:py-32 bg-secondary relative overflow-hidden">
           <div className="absolute inset-0">
@@ -79,8 +79,8 @@ const Leasing = () => {
                 transition={{ duration: 0.8 }}
               >
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-px bg-silk-gold/40" />
-                  <span className="text-xs uppercase tracking-[0.3em] text-champagne">05</span>
+                  <div className="w-12 h-px bg-foreground/40" />
+                  <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">05</span>
                 </div>
                 <span className="text-sm tracking-[0.3em] uppercase text-muted-foreground mb-6 block">
                   {t("leasing.subtitle")}
@@ -114,7 +114,7 @@ const Leasing = () => {
         </section>
 
         {/* Highlights Section */}
-        <section className="py-20 bg-background texture-noise">
+        <section className="py-20 bg-background ">
           <div className="container mx-auto px-6 lg:px-12">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
@@ -136,8 +136,8 @@ const Leasing = () => {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   className="group"
                 >
-                  <div className="w-14 h-14 border border-silk-gold/20 flex items-center justify-center mb-4 rounded-xl transition-all duration-300 group-hover:bg-silk-gold group-hover:border-silk-gold">
-                    <highlight.icon size={24} className="text-champagne transition-colors duration-300 group-hover:text-white" />
+                  <div className="w-14 h-14 border border-border flex items-center justify-center mb-4 rounded-xl transition-all duration-300 group-hover:bg-foreground group-hover:border-foreground">
+                    <highlight.icon size={24} className="text-muted-foreground transition-colors duration-300 group-hover:text-white" />
                   </div>
                   <h3 className="text-lg font-medium mb-2">{highlight.title}</h3>
                   <p className="text-sm text-muted-foreground">{highlight.desc}</p>
@@ -158,15 +158,15 @@ const Leasing = () => {
               className="mb-20 max-w-3xl"
             >
               <div className="flex items-center gap-4 mb-8">
-                <div className="w-16 h-px bg-silk-gold/40" />
-                <span className="text-xs uppercase tracking-[0.3em] text-champagne">
+                <div className="w-16 h-px bg-foreground/40" />
+                <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
                   {t("leasing.configurations") || "Configurations"}
                 </span>
               </div>
               <h2 className="text-3xl lg:text-4xl font-light tracking-tight mb-6">
                 {t("leasing.plans.title")}
               </h2>
-              <p className="text-body-lg text-muted-foreground leading-relaxed">
+              <p className="text-base text-muted-foreground leading-relaxed">
                 {t("leasing.plans.desc") || "Flexible configurations designed to accommodate businesses of every scale, from boutique operations to multinational headquarters."}
               </p>
             </motion.div>
@@ -247,7 +247,7 @@ const Leasing = () => {
                 <h2 className="text-3xl lg:text-4xl font-light tracking-tight">
                   {t("leasing.interior.title") || "Designed for Excellence"}
                 </h2>
-                <p className="text-body-lg text-muted-foreground leading-relaxed">
+                <p className="text-base text-muted-foreground leading-relaxed">
                   {t("leasing.interior.p1") || "Every office space in Al Hamra Tower is designed with the modern enterprise in mind. Floor-to-ceiling windows flood interiors with natural light while offering unobstructed views of the city and Gulf."}
                 </p>
                 <p className="text-body text-muted-foreground leading-relaxed">
@@ -407,7 +407,7 @@ const Leasing = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-24 lg:py-32 relative overflow-hidden bg-background texture-noise">
+        <section className="py-24 lg:py-32 relative overflow-hidden bg-background ">
           <div className="container mx-auto px-6 lg:px-12 text-center relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -423,7 +423,7 @@ const Leasing = () => {
               </p>
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-3 px-8 py-4 liquid-glass-subtle bg-foreground text-background hover:bg-foreground/90 transition-colors duration-300"
+                className="inline-flex items-center gap-3 px-8 py-4  bg-foreground text-background hover:bg-foreground/90 transition-colors duration-300"
               >
                 {t("leasing.cta.button")}
                 <ArrowRight className="w-4 h-4" />

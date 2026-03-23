@@ -42,7 +42,7 @@ const translations: Record<string, Record<Language, string>> = {
   "presence.height": { en: "Height", ar: "الارتفاع" },
   "presence.year": { en: "Completed", ar: "الإنجاز" },
   "presence.location": { en: "Location", ar: "الموقع" },
-  "presence.height.value": { en: "413m", ar: "٤١٣ م" },
+  "presence.height.value": { en: "412m", ar: "٤١٢ م" },
   "presence.year.value": { en: "2011", ar: "٢٠١١" },
   "presence.location.value": { en: "Kuwait City", ar: "مدينة الكويت" },
 
@@ -50,7 +50,7 @@ const translations: Record<string, Record<Language, string>> = {
   "tower.hero.label": { en: "The Tower", ar: "البرج" },
   "tower.hero.headline": { en: "Al Hamra Business Tower", ar: "برج الحمراء للأعمال" },
   "tower.hero.height": { en: "A sculptural landmark defining Kuwait City's skyline.", ar: "معلم معماري يعرّف أفق مدينة الكويت." },
-  "tower.hero.identity": { en: "Al Hamra Business Tower is the tallest building in Kuwait and one of the region's most iconic commercial addresses. Rising approximately 412–413 metres with a sculpted form, the tower blends architectural radiance with climate-responsive engineering to create a workplace destination that is both inspiring and highly functional. Its design maximizes panoramic views while reducing solar heat gain through a performance-driven form that balances openness with environmental efficiency.", ar: "يُعد برج الحمراء للأعمال أعلى مبنى في دولة الكويت وأحد أبرز العناوين التجارية في المنطقة. بارتفاع يقارب ٤١٢–٤١٣ متراً، يجمع البرج بين الإشراق المعماري والهندسة المستجيبة للمناخ ليقدم بيئة عمل راقية وعملية في آن واحد. تم تصميمه لتعظيم الإطلالات البانورامية مع تقليل اكتساب الحرارة الشمسية من خلال تكوين نحتي مدروس يوازن بين الانفتاح والكفاءة البيئية." },
+  "tower.hero.identity": { en: "Al Hamra Business Tower is the tallest building in Kuwait and one of the region's most iconic commercial addresses. Rising approximately 412–413 metres with a sculpted form, the tower blends architectural radiance with climate-responsive engineering to create a workplace destination that is both inspiring and highly functional. Its design maximizes panoramic views while reducing solar heat gain through a performance-driven form that balances openness with environmental efficiency.", ar: "يُعد برج الحمراء للأعمال أعلى مبنى في دولة الكويت وأحد أبرز العناوين التجارية في المنطقة. بارتفاع يقارب ٤١٢–٤١٢ متراً، يجمع البرج بين الإشراق المعماري والهندسة المستجيبة للمناخ ليقدم بيئة عمل راقية وعملية في آن واحد. تم تصميمه لتعظيم الإطلالات البانورامية مع تقليل اكتساب الحرارة الشمسية من خلال تكوين نحتي مدروس يوازن بين الانفتاح والكفاءة البيئية." },
 
   // Integrated Ecosystem Section
   "tower.ecosystem.label": { en: "Integrated Destination", ar: "وجهة متكاملة" },
@@ -103,7 +103,7 @@ const translations: Record<string, Record<Language, string>> = {
   "tower.trust.iso45001.desc": { en: "Standards protecting all occupants and staff.", ar: "معايير تحمي جميع الشاغلين والموظفين." },
 
   // Tower Page
-  "tower.intro": { en: "Al Hamra Business Tower is the tallest building in Kuwait and one of the region's most iconic commercial addresses. Rising approximately 412–413 metres with a sculpted form, the tower blends architectural radiance with climate-responsive engineering to create a workplace destination that is both inspiring and highly functional.", ar: "يُعد برج الحمراء للأعمال أعلى مبنى في دولة الكويت وأحد أبرز العناوين التجارية في المنطقة. بارتفاع يقارب ٤١٢–٤١٣ متراً، يجمع البرج بين الإشراق المعماري والهندسة المستجيبة للمناخ ليقدم بيئة عمل راقية وعملية في آن واحد." },
+  "tower.intro": { en: "Al Hamra Business Tower is the tallest building in Kuwait and one of the region's most iconic commercial addresses. Rising approximately 412–413 metres with a sculpted form, the tower blends architectural radiance with climate-responsive engineering to create a workplace destination that is both inspiring and highly functional.", ar: "يُعد برج الحمراء للأعمال أعلى مبنى في دولة الكويت وأحد أبرز العناوين التجارية في المنطقة. بارتفاع يقارب ٤١٢–٤١٢ متراً، يجمع البرج بين الإشراق المعماري والهندسة المستجيبة للمناخ ليقدم بيئة عمل راقية وعملية في آن واحد." },
   "tower.quote": { en: "A monument to permanence in a world of change.", ar: "نصب تذكاري للديمومة في عالم متغير." },
   "tower.architectural.height": { en: "Architectural Height", ar: "الارتفاع المعماري" },
   "tower.architecture.label": { en: "Architecture", ar: "الهندسة المعمارية" },

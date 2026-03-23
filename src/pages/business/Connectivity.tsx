@@ -1,226 +1,124 @@
-import { useLanguage } from "@/contexts/LanguageContext";
-import { motion } from "framer-motion";
-import { useScrollReveal, revealVariants } from "@/hooks/useScrollReveal";
-import { ShoppingBag, Train, Coffee, MapPin } from "lucide-react";
-import towerAerialDay from "@/assets/tower-aerial-day.png";
-import cityLandscape from "@/assets/city-landscape.jpg";
-import waterfrontPromenade from "@/assets/waterfront-promenade.jpg";
-import skylineParkPanorama from "@/assets/skyline-park-panorama.jpg";
+import { useRef } from "react";
+import { Link } from "react-router-dom";
+import { motion, useInView } from "framer-motion";
 import Header from "@/components/alhamra/Header";
 import Footer from "@/components/alhamra/Footer";
+import towerDayHud from "@/assets/tower-daylight-hud.png";
 
-const Connectivity = () => {
-  const { language } = useLanguage();
-  const { ref: heroRef, isInView: heroInView } = useScrollReveal();
-  const { ref: integrationsRef, isInView: integrationsInView } = useScrollReveal();
-  const { ref: districtRef, isInView: districtInView } = useScrollReveal();
-
-  const integrations = [
-    {
-      icon: ShoppingBag,
-      title: language === "en" ? "Al Hamra Shopping Center" : "مركز الحمراء التجاري",
-      desc: language === "en"
-        ? "Direct internal access to a premium retail destination featuring international brands, dining, and lifestyle services — all within the Al Hamra complex."
-        : "وصول داخلي مباشر إلى وجهة تسوق متميزة تضم علامات تجارية عالمية ومطاعم وخدمات أسلوب حياة.",
-    },
-    {
-      icon: Coffee,
-      title: language === "en" ? "On-Site Amenities" : "المرافق الداخلية",
-      desc: language === "en"
-        ? "Ground-floor cafés, restaurants, banking services, and business support facilities ensure daily convenience without leaving the complex."
-        : "مقاهي ومطاعم وخدمات مصرفية ومرافق دعم أعمال في الطابق الأرضي تضمن الراحة اليومية.",
-    },
-    {
-      icon: Train,
-      title: language === "en" ? "Transport Links" : "روابط النقل",
-      desc: language === "en"
-        ? "Proximity to major arterial roads and Kuwait's developing public transit infrastructure. 11-level car park with 1,100+ spaces and dedicated VIP access."
-        : "قرب من الطرق الشريانية الرئيسية والبنية التحتية للنقل العام. موقف سيارات من 11 طابقاً بأكثر من 1,100 مكان.",
-    },
-    {
-      icon: MapPin,
-      title: language === "en" ? "District Integration" : "تكامل المنطقة",
-      desc: language === "en"
-        ? "Positioned in Sharq, Kuwait City's central business district, within walking distance of government ministries, embassies, and the financial corridor."
-        : "يقع في منطقة شرق، حي الأعمال المركزي في مدينة الكويت، على مسافة قريبة من الوزارات والسفارات.",
-    },
-  ];
-
+const R = ({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-60px" });
   return (
-    <div className="min-h-screen bg-background overflow-x-hidden">
+    <motion.div ref={ref}
+      initial={{ opacity: 0, y: 28 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.95, delay, ease: [0.16, 1, 0.3, 1] }}>
+      {children}
+    </motion.div>
+  );
+};
+
+const SYSTEMS = [
+  { n: "01", title: "Fibre Optic Backbone",    body: "Dual-path fibre optic infrastructure running the full height of the tower. Multiple entry points eliminate single-point-of-failure risk. Suitable for financial trading desks and mission-critical operations." },
+  { n: "02", title: "Telecom Redundancy",      body: "All major Kuwait telecom providers available throughout the building. No single-provider dependency. Tenants choose their provider or use multiple carriers simultaneously." },
+  { n: "03", title: "Smart Building Automation", body: "Honeywell-certified building management system. Centralised monitoring of HVAC, access, power, lifts, and fire systems. Winner of Honeywell's Smartest Building in Kuwait Award." },
+  { n: "04", title: "Power Infrastructure",    body: "Five high-voltage substations at levels B2, 4, 27, 52, and 76. 100% standby generator coverage for all critical systems. Zero unplanned outages since opening in 2011." },
+  { n: "05", title: "Building-Wide Wi-Fi",     body: "Enterprise-grade wireless coverage in all common areas, lobbies, parking levels, and the Sky Lounge. Managed by the tower's facilities team." },
+];
+
+export default function Connectivity() {
+  return (
+    <div style={{ minHeight: "100vh", background: "#fff", overflowX: "hidden" }}>
       <Header />
-      <main className="pt-24">
+      <main style={{ paddingTop: "var(--nav-h)" }}>
+
         {/* Hero */}
-        <section className="bg-background relative">
-          <div className="py-section texture-noise">
-            <div className="container mx-auto px-6 lg:px-12">
-              <motion.div
-                ref={heroRef}
-                initial="hidden"
-                animate={heroInView ? "visible" : "hidden"}
-                variants={revealVariants.fadeUp}
-                transition={{ duration: 0.6 }}
-              >
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-px bg-silk-gold/40" />
-                  <span className="text-xs uppercase tracking-[0.3em] text-champagne">04</span>
-                </div>
-                <h1 className="text-headline font-light tracking-wide text-foreground mb-8">
-                  {language === "en" ? "Connectivity & Integration" : "الاتصال والتكامل"}
-                </h1>
-                <p className="text-body-lg text-muted-foreground max-w-2xl">
-                  {language === "en"
-                    ? "Al Hamra Tower is more than an office building — it is the center of a fully integrated urban district connecting retail, dining, transport, and government infrastructure."
-                    : "برج الحمراء أكثر من مبنى مكاتب — إنه مركز منطقة حضرية متكاملة تربط التجزئة والمطاعم والنقل والبنية الحكومية."}
-                </p>
-              </motion.div>
-
-              <div className="grid lg:grid-cols-2 gap-16 items-center mt-12">
-                <motion.div
-                  initial="hidden"
-                  animate={heroInView ? "visible" : "hidden"}
-                  variants={revealVariants.slideLeft}
-                  transition={{ duration: 0.8, delay: 0.2 }}
-                  className="space-y-6"
-                >
-                  <p className="text-body-lg text-muted-foreground leading-relaxed">
-                    {language === "en"
-                      ? "The Al Hamra complex integrates a premier shopping center, extensive car parking, and direct connections to Kuwait City's central business corridor — creating a self-contained environment for professionals."
-                      : "يدمج مجمع الحمراء مركز تسوق رائد ومواقف سيارات واسعة واتصالات مباشرة بممر الأعمال المركزي في مدينة الكويت."}
-                  </p>
-                  <p className="text-body text-muted-foreground leading-relaxed">
-                    {language === "en"
-                      ? "With 1,100+ parking spaces across 11 levels, VIP drop-off zones, and proximity to Kuwait's key government institutions, the tower ensures frictionless daily operations for tenants and visitors alike."
-                      : "مع أكثر من 1,100 موقف سيارات عبر 11 طابقاً ومناطق إنزال كبار الشخصيات والقرب من المؤسسات الحكومية الرئيسية."}
-                  </p>
-                </motion.div>
-
-                <motion.div
-                  initial="hidden"
-                  animate={heroInView ? "visible" : "hidden"}
-                  variants={revealVariants.slideRight}
-                  transition={{ duration: 0.8, delay: 0.3 }}
-                  className="grid grid-cols-2 gap-4"
-                >
-                  <div className="aspect-[3/4] overflow-hidden group">
-                    <img src={towerAerialDay} alt="Tower aerial view" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                  </div>
-                  <div className="aspect-[3/4] overflow-hidden group mt-8">
-                    <img src={cityLandscape} alt="Kuwait city landscape" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                  </div>
-                </motion.div>
+        <section style={{ position: "relative", height: "55vh", minHeight: 400, overflow: "hidden" }}>
+          <img src={towerDayHud} alt="Al Hamra Tower smart systems" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 20%" }} />
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(10,10,10,0.88) 0%, rgba(10,10,10,0.2) 55%, transparent 80%)" }} />
+          <div style={{ position: "absolute", bottom: 0, left: 0, right: 0 }} className="container-fluid">
+            <div style={{ paddingBottom: "clamp(2.5rem, 5vw, 5rem)" }}>
+              <motion.p className="eyebrow-light" style={{ marginBottom: 14 }}
+                initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.3 }}>
+                Business · Connectivity
+              </motion.p>
+              <div style={{ overflow: "hidden" }}>
+                <motion.h1 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2.5rem, 6vw, 7rem)", fontWeight: 300, lineHeight: 0.96, letterSpacing: "-0.03em", color: "#fff", margin: 0 }}
+                  initial={{ y: "105%" }} animate={{ y: 0 }} transition={{ duration: 1.1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}>
+                  Zero tolerance for downtime.
+                </motion.h1>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Integration Cards */}
-        <section className="py-section bg-secondary">
-          <div className="container mx-auto px-6 lg:px-12">
-            <motion.div
-              ref={integrationsRef}
-              initial="hidden"
-              animate={integrationsInView ? "visible" : "hidden"}
-              variants={revealVariants.fadeUp}
-              transition={{ duration: 0.6 }}
-              className="mb-16"
-            >
-              <h2 className="text-subheadline font-light tracking-wide text-foreground mb-6">
-                {language === "en" ? "Integrated Ecosystem" : "نظام بيئي متكامل"}
-              </h2>
-            </motion.div>
+        {/* Systems */}
+        <section style={{ padding: "clamp(5rem, 10vw, 10rem) 0" }}>
+          <div className="container-fluid">
+            <div className="grid lg:grid-cols-12 gap-12 mb-16">
+              <div className="lg:col-span-5">
+                <R><p className="eyebrow" style={{ marginBottom: 18 }}>Technical Infrastructure</p></R>
+                <R delay={0.08}>
+                  <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2rem, 4vw, 4.5rem)", fontWeight: 400, lineHeight: 1.06, letterSpacing: "-0.025em", color: "var(--black)" }}>
+                    Built for the demands of modern business.
+                  </h2>
+                </R>
+              </div>
+              <div className="lg:col-span-6 lg:col-start-7 lg:pt-16">
+                <R delay={0.18}>
+                  <p style={{ fontFamily: "var(--font-sans)", fontSize: "1rem", fontWeight: 300, lineHeight: 1.9, color: "var(--graphite)" }}>
+                    Al Hamra Tower's technical infrastructure was engineered to meet the requirements of 
+                    Kuwait's most demanding organisations — government institutions, financial services firms, 
+                    and international corporations that cannot afford interruption.
+                  </p>
+                </R>
+              </div>
+            </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {integrations.map((item, index) => (
-                <motion.div
-                  key={index}
-                  initial="hidden"
-                  animate={integrationsInView ? "visible" : "hidden"}
-                  variants={revealVariants.fadeUp}
-                  transition={{ duration: 0.6, delay: 0.1 + index * 0.1 }}
-                  whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                  className="p-8 liquid-glass-subtle bg-background/80 hover:border-silk-gold/40 transition-all duration-300 group"
-                >
-                  <div className="w-14 h-14 border border-silk-gold/20 flex items-center justify-center mb-6 transition-all duration-300 group-hover:bg-silk-gold/10 group-hover:border-silk-gold/40">
-                    <item.icon size={24} className="text-muted-foreground transition-colors duration-300 group-hover:text-silk-gold" />
+            <div style={{ borderTop: "1px solid var(--rule-light)" }}>
+              {SYSTEMS.map((s, i) => (
+                <R key={s.n} delay={i * 0.05}>
+                  <div style={{ padding: "clamp(2rem, 4vw, 3rem) 0", borderBottom: "1px solid var(--rule-light)" }}
+                    className="grid lg:grid-cols-12 gap-6 items-start">
+                    <div className="lg:col-span-1">
+                      <span style={{ fontFamily: "var(--font-sans)", fontSize: "10px", letterSpacing: "0.18em", color: "var(--ash)" }}>{s.n}</span>
+                    </div>
+                    <div className="lg:col-span-4">
+                      <h3 style={{ fontFamily: "var(--font-display)", fontSize: "1.5rem", fontWeight: 400, letterSpacing: "-0.01em", color: "var(--black)" }}>{s.title}</h3>
+                    </div>
+                    <div className="lg:col-span-7">
+                      <p style={{ fontFamily: "var(--font-sans)", fontSize: "0.95rem", fontWeight: 300, lineHeight: 1.8, color: "var(--graphite)" }}>{s.body}</p>
+                    </div>
                   </div>
-                  <h4 className="text-lg font-medium text-foreground mb-3">{item.title}</h4>
-                  <p className="text-sm text-muted-foreground">{item.desc}</p>
-                </motion.div>
+                </R>
               ))}
             </div>
-          </div>
-        </section>
 
-        {/* District Context Gallery */}
-        <section className="py-section bg-background">
-          <div className="container mx-auto px-6 lg:px-12">
-            <motion.div
-              ref={districtRef}
-              initial="hidden"
-              animate={districtInView ? "visible" : "hidden"}
-              variants={revealVariants.fadeUp}
-              transition={{ duration: 0.6 }}
-              className="mb-12"
-            >
-              <h2 className="text-subheadline font-light tracking-wide text-foreground mb-6">
-                {language === "en" ? "The Sharq District" : "منطقة شرق"}
-              </h2>
-              <p className="text-body text-muted-foreground max-w-2xl">
-                {language === "en"
-                  ? "Kuwait City's commercial heart — where governance, commerce, and culture converge."
-                  : "قلب مدينة الكويت التجاري — حيث تتلاقى الحوكمة والتجارة والثقافة."}
-              </p>
-            </motion.div>
-
-            <div className="grid lg:grid-cols-2 gap-6">
-              <motion.div
-                initial="hidden"
-                animate={districtInView ? "visible" : "hidden"}
-                variants={revealVariants.fadeUp}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="aspect-[16/9] overflow-hidden group"
-              >
-                <img src={waterfrontPromenade} alt="Kuwait waterfront promenade" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-              </motion.div>
-              <motion.div
-                initial="hidden"
-                animate={districtInView ? "visible" : "hidden"}
-                variants={revealVariants.fadeUp}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                className="aspect-[16/9] overflow-hidden group"
-              >
-                <img src={skylineParkPanorama} alt="Kuwait City panorama" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-              </motion.div>
+            {/* Stat highlight */}
+            <div style={{ marginTop: "clamp(4rem, 8vw, 8rem)", background: "var(--black)", padding: "clamp(3rem, 6vw, 6rem)" }}>
+              <div className="grid lg:grid-cols-3 gap-0">
+                {[
+                  { v: "100%", l: "Power Redundancy",   d: "5 substations across the tower" },
+                  { v: "0",    l: "Unplanned Outages",  d: "Since opening in November 2011" },
+                  { v: "24/7", l: "Monitoring",         d: "Centralised building management" },
+                ].map((s, i) => (
+                  <R key={s.l} delay={i * 0.08}>
+                    <div style={{ textAlign: "center", padding: "clamp(1.5rem, 3vw, 2.5rem)", borderLeft: i > 0 ? "1px solid rgba(255,255,255,0.06)" : "none" }}>
+                      <div style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2.5rem, 5vw, 5rem)", fontWeight: 300, color: "#fff", letterSpacing: "-0.04em", marginBottom: 10 }}>{s.v}</div>
+                      <p className="eyebrow-light" style={{ marginBottom: 6 }}>{s.l}</p>
+                      <p style={{ fontFamily: "var(--font-sans)", fontSize: "12px", fontWeight: 300, color: "rgba(255,255,255,0.28)" }}>{s.d}</p>
+                    </div>
+                  </R>
+                ))}
+              </div>
             </div>
 
-            {/* District Stats */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mt-16">
-              {[
-                { value: "1,100+", label: language === "en" ? "Parking Spaces" : "مواقف سيارات" },
-                { value: "11", label: language === "en" ? "Parking Levels" : "طوابق مواقف" },
-                { value: "200+", label: language === "en" ? "Retail Outlets" : "محل تجاري" },
-                { value: "5 min", label: language === "en" ? "To Government District" : "إلى الحي الحكومي" },
-              ].map((stat, index) => (
-                <motion.div
-                  key={index}
-                  initial="hidden"
-                  animate={districtInView ? "visible" : "hidden"}
-                  variants={revealVariants.fadeUp}
-                  transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
-                  className="text-center"
-                >
-                  <p className="text-3xl lg:text-4xl font-light text-silk-gold mb-2">{stat.value}</p>
-                  <p className="text-sm text-muted-foreground uppercase tracking-wider">{stat.label}</p>
-                </motion.div>
-              ))}
-            </div>
+            <R delay={0.1} style={{ marginTop: "clamp(3rem, 5vw, 4rem)" }}>
+              <Link to="/leasing/inquiry" className="btn-primary">Discuss Your Requirements</Link>
+            </R>
           </div>
         </section>
       </main>
       <Footer />
     </div>
   );
-};
-
-export default Connectivity;
+}

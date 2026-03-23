@@ -85,7 +85,7 @@ const CapabilitiesSection = () => {
   ];
 
   return (
-    <section className="py-section bg-background texture-noise">
+    <section className="py-20 lg:py-28 bg-background ">
       <div className="container mx-auto px-6 lg:px-12">
         {/* Section Header */}
         <motion.div
@@ -102,10 +102,10 @@ const CapabilitiesSection = () => {
               {t("capabilities.label")}
             </span>
           </div>
-          <h2 className="text-headline font-light tracking-wide text-foreground mb-6">
+          <h2 className="text-4xl lg:text-5xl font-light tracking-tight font-light tracking-wide text-foreground mb-6">
             {t("capabilities.title")}
           </h2>
-          <p className="text-body-lg text-muted-foreground max-w-3xl">
+          <p className="text-base text-muted-foreground max-w-3xl">
             {t("capabilities.desc")}
           </p>
         </motion.div>

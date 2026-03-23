@@ -15,7 +15,6 @@ import useCountUp from "@/hooks/useCountUp";
 
 gsap.registerPlugin(ScrollTrigger);
 
-import towerFull       from "@/assets/tower-full-blue-sky.png";
 import towerFacade     from "@/assets/tower-facade-twisted.png";
 import towerAerialDay  from "@/assets/tower-aerial-day.png";
 import towerNight      from "@/assets/tower-night-illuminated.jpg";
@@ -24,11 +23,8 @@ import interiorLobby   from "@/assets/interior-lobby.jpg";
 import cityView        from "@/assets/city-view-interior.jpg";
 import somObservation  from "@/assets/som-observation.jpg";
 import officeCorr      from "@/assets/office-corridor.jpg";
-import entranceDusk    from "@/assets/entrance-dusk.jpg";
 import somTowerSkyline from "@/assets/som-tower-skyline.jpg";
 import towerDetail     from "@/assets/som-tower-detail.jpg";
-import lobbyArches     from "@/assets/lobby-arches.jpg";
-import towerBW         from "@/assets/tower-bw-1.png";
 
 /* ══════════════════ ANIMATION PRIMITIVES ══════════════════ */
 
@@ -360,48 +356,6 @@ const InsideSection = () => {
   );
 };
 
-/* ══════════════════ § 5 — THE BISHT STORY ══════════════════
-   Warm stone background. Cultural narrative.              */
-const BishtSection = () => {
-  const imgRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: imgRef, offset: ["start end", "end start"] });
-  const y = useSpring(useTransform(scrollYProgress, [0, 1], ["10%", "-10%"]), { stiffness: 55, damping: 22 });
-
-  return (
-    <section style={{ background: "var(--surface)", padding: "clamp(6rem, 12vw, 12rem) 0" }}>
-      <div className="container-fluid">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          <div>
-            <Reveal style={{ marginBottom: 20 }}><p className="eyebrow">The Concept</p></Reveal>
-            <LineReveal lines={["Inspired", "by the bisht."]} size="clamp(2.5rem, 5.5vw, 7rem)" delay={0.08} />
-            <Reveal delay={0.22} style={{ marginTop: 30 }}>
-              <p style={{ fontFamily: "var(--font-sans)", fontSize: "1rem", fontWeight: 300, lineHeight: 1.88, color: "var(--ink-light)", marginBottom: 24 }}>
-                The Kuwaiti bisht — the ceremonial robe of distinction — drapes with effortless
-                gravity. SOM's design found the same quality in the tower's twisted form: a
-                single fluid gesture wrapping upward, the stone face of the south wall revealed
-                like a figure emerging from cloth.
-              </p>
-              <p style={{ fontFamily: "var(--font-sans)", fontSize: "1rem", fontWeight: 300, lineHeight: 1.88, color: "var(--ink-light)", marginBottom: 36 }}>
-                The south facade — solid Jura limestone with angled window cuts — acts as
-                both cultural reference and climatic shield, protecting interiors from Kuwait's
-                intense solar exposure while creating a monolithic presence visible across
-                the entire Gulf.
-              </p>
-              <Link to="/tower/design" className="btn-arrow">The Design Story</Link>
-            </Reveal>
-          </div>
-          <Reveal delay={0.1}>
-            <div ref={imgRef} style={{ aspectRatio: "2/3", overflow: "hidden" }}>
-              <motion.img src={towerFacade} alt="Al Hamra Tower facade" loading="lazy"
-                style={{ y, scale: 1.16, width: "100%", height: "120%", objectFit: "cover", objectPosition: "center", position: "relative", top: "-10%" }} />
-            </div>
-          </Reveal>
-        </div>
-      </div>
-    </section>
-  );
-};
-
 /* ══════════════════ § 6 — BUSINESS CARDS ══════════════════
    White background. Three office card types.              */
 const BusinessSection = () => {
@@ -491,13 +445,13 @@ const NightSection = () => {
                     The Address
                   </p>
                 </Reveal>
-                <LineReveal lines={["Kuwait's most", "consequential", "building."]}
+                <LineReveal lines={["The address", "that defines", "Kuwait City."]}
                   size="clamp(2.2rem, 5vw, 6.5rem)" color="rgba(255,255,255,0.88)" delay={0.1} />
                 <Reveal delay={0.28}>
                   <p style={{ fontFamily: "var(--font-sans)", fontSize: "0.95rem", fontWeight: 300, lineHeight: 1.80, color: "rgba(255,255,255,0.38)", maxWidth: 480, margin: "24px 0 32px" }}>
-                    At 92% occupancy, home to over 120 tenants — embassies, ministries, regional
-                    headquarters, and Kuwait's leading private enterprises. To work here is
-                    to join something permanent.
+                    Al Sharq District, Kuwait City. Adjacent to the Arabian Gulf waterfront,
+                    minutes from the diplomatic quarter and Kuwait's central government offices.
+                    The location is as deliberate as the architecture.
                   </p>
                   <Link to="/leasing/opportunities" style={{
                     display: "inline-flex", alignItems: "center", gap: 10,
@@ -575,7 +529,6 @@ export default function Home() {
         <StatsSection />
         <AwardsMarquee />
         <InsideSection />
-        <BishtSection />
         <BusinessSection />
         <NightSection />
         <LeasingCTA />

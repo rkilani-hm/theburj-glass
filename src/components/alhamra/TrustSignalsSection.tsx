@@ -30,7 +30,7 @@ const TrustSignalsSection = () => {
   ];
 
   return (
-    <section className="py-section bg-background texture-noise">
+    <section className="py-20 lg:py-28 bg-background ">
       <div className="container mx-auto px-6 lg:px-12">
         {/* Section Header */}
         <motion.div
@@ -48,7 +48,7 @@ const TrustSignalsSection = () => {
             </span>
             <div className="w-12 h-px bg-border" />
           </div>
-          <h2 className="text-headline font-light tracking-wide text-foreground">
+          <h2 className="text-4xl lg:text-5xl font-light tracking-tight font-light tracking-wide text-foreground">
             {t("tower.trust.title")}
           </h2>
         </motion.div>

@@ -59,7 +59,7 @@ const BusinessSection = () => {
   return (
     <section id="business" className="bg-background relative">
       {/* Hero Section */}
-      <div className="py-section texture-noise relative">
+      <div className="py-20 lg:py-28  relative">
         <FloatingGlassBlobs variant="gold" intensity="subtle" />
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
           {/* Section Label */}
@@ -71,8 +71,8 @@ const BusinessSection = () => {
             transition={{ duration: 0.6 }}
             className="flex items-center gap-4 mb-6"
           >
-            <div className="w-12 h-px bg-silk-gold/40" />
-            <span className="text-xs uppercase tracking-[0.3em] text-champagne">03</span>
+            <div className="w-12 h-px bg-foreground/40" />
+            <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">03</span>
           </motion.div>
 
           {/* Section Title */}
@@ -81,7 +81,7 @@ const BusinessSection = () => {
             animate={headerInView ? "visible" : "hidden"}
             variants={revealVariants.fadeUp}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-headline font-light tracking-wide text-foreground mb-8"
+            className="text-4xl lg:text-5xl font-light tracking-tight font-light tracking-wide text-foreground mb-8"
           >
             {t("business.title")}
           </motion.h2>
@@ -91,7 +91,7 @@ const BusinessSection = () => {
             animate={headerInView ? "visible" : "hidden"}
             variants={revealVariants.fadeUp}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-body-lg text-muted-foreground max-w-2xl mb-20"
+            className="text-base text-muted-foreground max-w-2xl mb-20"
           >
             {t("business.intro") || "Infrastructure designed for enterprise excellence. Every system engineered with purpose, every service calibrated for the demands of modern business."}
           </motion.p>
@@ -139,8 +139,8 @@ const BusinessSection = () => {
                     {/* Number & Icon */}
                     <div className="flex items-start gap-4 mb-6">
                       <span className="text-xs text-muted-foreground font-mono mt-1">0{index + 1}</span>
-                      <div className="w-12 h-12 border border-silk-gold/20 flex items-center justify-center rounded-xl transition-all duration-300 group-hover:bg-silk-gold/10 group-hover:border-silk-gold/40">
-                        <item.icon size={20} className="text-champagne transition-colors duration-300 group-hover:text-silk-gold" />
+                      <div className="w-12 h-12 border border-border flex items-center justify-center rounded-xl transition-all duration-300 group-hover:bg-muted group-hover:border-border">
+                        <item.icon size={20} className="text-muted-foreground transition-colors duration-300 group-hover:text-foreground/60" />
                       </div>
                     </div>
 
@@ -155,7 +155,7 @@ const BusinessSection = () => {
                     </p>
 
                     {/* Underline accent */}
-                    <div className="mt-6 w-12 h-px bg-silk-gold/30 transition-all duration-500 group-hover:w-24 group-hover:bg-silk-gold" />
+                    <div className="mt-6 w-12 h-px bg-foreground/30 transition-all duration-500 group-hover:w-24 group-hover:bg-foreground" />
                   </motion.div>
                 ))}
               </div>
@@ -165,7 +165,7 @@ const BusinessSection = () => {
       </div>
 
       {/* Stats Section */}
-      <div className="py-section bg-foreground">
+      <div className="py-20 lg:py-28 bg-foreground">
         <div className="container mx-auto px-6 lg:px-12">
           <motion.div
             ref={statsRef}
@@ -198,7 +198,7 @@ const BusinessSection = () => {
       <SkyLobbiesSection />
 
       {/* Advantages Grid */}
-      <div className="py-section bg-secondary">
+      <div className="py-20 lg:py-28 bg-secondary">
         <div className="container mx-auto px-6 lg:px-12">
           <motion.div
             ref={tenantsRef}
@@ -208,7 +208,7 @@ const BusinessSection = () => {
             transition={{ duration: 0.6 }}
             className="mb-16"
           >
-            <h3 className="text-subheadline font-light text-foreground mb-4">
+            <h3 className="text-2xl lg:text-3xl font-light font-light text-foreground mb-4">
               {t("business.advantages.title") || "The Al Hamra Advantage"}
             </h3>
             <p className="text-body text-muted-foreground max-w-2xl">
@@ -225,10 +225,10 @@ const BusinessSection = () => {
                 variants={revealVariants.fadeUp}
                 transition={{ duration: 0.6, delay: 0.1 + index * 0.1 }}
                 whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                className="p-8 liquid-glass-subtle bg-background/80 hover:border-silk-gold/40 transition-all duration-300 group"
+                className="p-8 bg-white/60 backdrop-blur bg-background/80 hover:border-border transition-all duration-300 group"
               >
-                <div className="w-14 h-14 border border-silk-gold/20 flex items-center justify-center mb-6 rounded-xl transition-all duration-300 group-hover:bg-silk-gold group-hover:border-silk-gold">
-                  <advantage.icon size={24} className="text-champagne transition-colors duration-300 group-hover:text-white" />
+                <div className="w-14 h-14 border border-border flex items-center justify-center mb-6 rounded-xl transition-all duration-300 group-hover:bg-foreground group-hover:border-foreground">
+                  <advantage.icon size={24} className="text-muted-foreground transition-colors duration-300 group-hover:text-white" />
                 </div>
                 <h4 className="text-lg font-medium text-foreground mb-3">{advantage.title}</h4>
                 <p className="text-sm text-muted-foreground">{advantage.desc}</p>
@@ -295,14 +295,14 @@ const BusinessSection = () => {
       </div>
 
       {/* Global Address Section */}
-      <div ref={additionalRef} className="py-section bg-background texture-noise">
+      <div ref={additionalRef} className="py-20 lg:py-28 bg-background ">
         <div className="container mx-auto px-6 lg:px-12">
           <motion.h3
             initial="hidden"
             animate={additionalInView ? "visible" : "hidden"}
             variants={revealVariants.fadeUp}
             transition={{ duration: 0.6 }}
-            className="text-subheadline font-light text-foreground mb-12"
+            className="text-2xl lg:text-3xl font-light font-light text-foreground mb-12"
           >
             {t("business.global.title") || "A Global Business Address"}
           </motion.h3>
@@ -315,7 +315,7 @@ const BusinessSection = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="space-y-6"
             >
-              <p className="text-body-lg text-muted-foreground leading-relaxed">
+              <p className="text-base text-muted-foreground leading-relaxed">
                 {t("business.global.p1") || "Al Hamra Tower hosts the headquarters of Kuwait's leading corporations and international enterprises. The address signals prestige, stability, and forward-thinking vision."}
               </p>
               <p className="text-body text-muted-foreground leading-relaxed">

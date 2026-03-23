@@ -156,7 +156,7 @@ const HomeJourneyTimeline = () => {
   ];
 
   return (
-    <section ref={containerRef} className="py-section bg-background relative overflow-hidden">
+    <section ref={containerRef} className="py-20 lg:py-28 bg-background relative overflow-hidden">
       <div className="container mx-auto px-6 lg:px-12">
         {/* Section Header */}
         <motion.div 
@@ -173,7 +173,7 @@ const HomeJourneyTimeline = () => {
             </span>
             <div className="w-12 h-px bg-border" />
           </div>
-          <h2 className="text-headline font-light tracking-wide text-foreground mb-6">
+          <h2 className="text-4xl lg:text-5xl font-light tracking-tight font-light tracking-wide text-foreground mb-6">
             {t("home.journey.title") || "Discover Al Hamra"}
           </h2>
           <p className="text-body text-muted-foreground max-w-2xl mx-auto">
@@ -293,7 +293,7 @@ const JourneyStopCard = ({ stop, index, isArabic }: JourneyStopCardProps) => {
           </div>
 
           {/* Title */}
-          <h3 className="text-subheadline font-light text-foreground">
+          <h3 className="text-2xl lg:text-3xl font-light font-light text-foreground">
             {stop.title}
           </h3>
 

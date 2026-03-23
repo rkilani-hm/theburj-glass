@@ -66,7 +66,7 @@ const TowerHeroSection = () => {
           <motion.p
             variants={revealVariants.fadeUp}
             transition={{ duration: 1.5, delay: 0.8 }}
-            className="text-body-lg text-muted-foreground max-w-2xl mx-auto"
+            className="text-base text-muted-foreground max-w-2xl mx-auto"
           >
             {t("tower.hero.identity")}
           </motion.p>
