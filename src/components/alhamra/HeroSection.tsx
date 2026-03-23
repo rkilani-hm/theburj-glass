@@ -37,11 +37,11 @@ export default function HeroSection() {
       {/* Content */}
       <motion.div style={{ y: contentY, opacity: rawOpacity, position: "relative", zIndex: 2 }}
         className="container-fluid">
-        <div style={{ paddingBottom: "clamp(3rem, 6vw, 6rem)", maxWidth: 900 }}>
+        <div style={{ paddingBottom: "clamp(2rem, 4vw, 4rem)", maxWidth: 900 }}>
 
           <motion.p
             style={{ fontFamily: "var(--font-sans)", fontSize: "10px", letterSpacing: "0.2em",
-              textTransform: "uppercase", color: "rgba(255,255,255,0.45)", marginBottom: 22 }}
+              textTransform: "uppercase", color: "rgba(255,255,255,0.45)", marginBottom: 14 }}
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
@@ -50,10 +50,10 @@ export default function HeroSection() {
           </motion.p>
 
           {/* Main headline */}
-          <div style={{ overflow: "hidden", marginBottom: 6 }}>
+          <div style={{ overflow: "hidden", marginBottom: 4 }}>
             <motion.h1 style={{
               fontFamily: "var(--font-display)",
-              fontSize: "clamp(4rem, 11vw, 12rem)",
+              fontSize: "clamp(3.2rem, 9vw, 10rem)",
               fontWeight: 300, lineHeight: 0.90, letterSpacing: "-0.04em",
               color: "#FFFFFF", margin: 0,
             }}
@@ -62,10 +62,10 @@ export default function HeroSection() {
               transition={{ duration: 1.2, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
             >Al Hamra</motion.h1>
           </div>
-          <div style={{ overflow: "hidden", marginBottom: 32 }}>
+          <div style={{ overflow: "hidden", marginBottom: 20 }}>
             <motion.p style={{
               fontFamily: "var(--font-display)", fontStyle: "italic",
-              fontSize: "clamp(1.3rem, 3.5vw, 4.5rem)",
+              fontSize: "clamp(1.1rem, 3vw, 3.5rem)",
               fontWeight: 300, lineHeight: 0.95, letterSpacing: "-0.02em",
               color: "rgba(255,255,255,0.42)", margin: 0,
             }}
@@ -75,23 +75,23 @@ export default function HeroSection() {
             >Business Tower</motion.p>
           </div>
 
-          <motion.div style={{ display: "flex", flexWrap: "wrap", alignItems: "flex-end", justifyContent: "space-between", gap: 24 }}
+          <motion.div style={{ display: "flex", flexWrap: "wrap", alignItems: "flex-end", justifyContent: "space-between", gap: 16 }}
             initial={{ opacity: 0, y: 22 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 1.05, ease: [0.16, 1, 0.3, 1] }}
           >
             <p style={{
-              fontFamily: "var(--font-sans)", fontSize: "clamp(0.85rem, 1vw, 0.95rem)",
+              fontFamily: "var(--font-sans)", fontSize: "clamp(0.78rem, 0.9vw, 0.88rem)",
               fontWeight: 300, lineHeight: 1.78,
               color: "rgba(255,255,255,0.38)", maxWidth: 460, margin: 0,
             }}>
               Kuwait's tallest building. The world's tallest sculpted concrete tower.
               Inspired by the bisht — a symbol rising from the desert.
             </p>
-            <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
+            <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
               <Link to="/tower" style={{
                 display: "inline-flex", alignItems: "center", gap: 10,
-                padding: "13px 28px", background: "rgba(255,255,255,0.10)",
+                padding: "10px 22px", background: "rgba(255,255,255,0.10)",
                 border: "1px solid rgba(255,255,255,0.20)",
                 fontFamily: "var(--font-sans)", fontSize: "10px", fontWeight: 400,
                 letterSpacing: "0.14em", textTransform: "uppercase",
@@ -105,7 +105,7 @@ export default function HeroSection() {
               </Link>
               <Link to="/leasing/opportunities" style={{
                 display: "inline-flex", alignItems: "center", gap: 10,
-                padding: "13px 28px", background: "#fff",
+                padding: "10px 22px", background: "#fff",
                 fontFamily: "var(--font-sans)", fontSize: "10px", fontWeight: 400,
                 letterSpacing: "0.14em", textTransform: "uppercase",
                 color: "#0F0F0E",
