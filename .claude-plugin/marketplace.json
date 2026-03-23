@@ -5,26 +5,41 @@
     "email": "dev@alhamratower.com"
   },
   "metadata": {
-    "description": "Skills and plugins for the Al Hamra Tower website project",
-    "version": "1.0.0",
-    "source": "https://github.com/anthropics/skills"
+    "description": "Skills and plugins for the Al Hamra Tower website — sourced from Anthropic and Vercel",
+    "version": "2.0.0",
+    "sources": [
+      "https://github.com/anthropics/skills",
+      "https://github.com/vercel-labs/agent-skills"
+    ]
   },
   "plugins": [
     {
       "name": "design-skills",
-      "description": "Frontend design, canvas design, theme factory, and algorithmic art for building premium UI",
+      "description": "Premium UI design, canvas artwork, themes, and algorithmic art for building visually distinctive interfaces",
       "source": "./",
       "strict": false,
       "skills": [
         "./skills/frontend-design",
         "./skills/canvas-design",
         "./skills/theme-factory",
-        "./skills/algorithmic-art"
+        "./skills/algorithmic-art",
+        "./skills/web-design-guidelines"
+      ]
+    },
+    {
+      "name": "react-skills",
+      "description": "React and Next.js best practices, composition patterns, and React Native skills from Vercel Engineering",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/react-best-practices",
+        "./skills/composition-patterns",
+        "./skills/react-native-skills"
       ]
     },
     {
       "name": "document-skills",
-      "description": "Excel, Word, PowerPoint, and PDF processing capabilities",
+      "description": "Excel, Word, PowerPoint, and PDF processing capabilities for leasing brochures and investor decks",
       "source": "./",
       "strict": false,
       "skills": [
@@ -35,8 +50,18 @@
       ]
     },
     {
+      "name": "deployment-skills",
+      "description": "Deploy to Vercel via CLI, token-based auth, git push, and environment variable management",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/deploy-to-vercel",
+        "./skills/vercel-cli-with-tokens"
+      ]
+    },
+    {
       "name": "web-skills",
-      "description": "Web artifact builder, web app testing, and Claude API integration",
+      "description": "Web artifact builder, browser automation testing, and Claude API/SDK integration reference",
       "source": "./",
       "strict": false,
       "skills": [
