@@ -2,18 +2,19 @@
   "name": "theburj-glass-skills",
   "owner": { "name": "Al Hamra Tower", "email": "dev@alhamratower.com" },
   "metadata": {
-    "description": "Skills and plugins for the Al Hamra Tower website — sourced from Anthropic, Vercel, and nextlevelbuilder",
-    "version": "3.0.0",
+    "description": "Skills and plugins for the Al Hamra Tower website — sourced from Anthropic, Vercel, nextlevelbuilder, and bencium",
+    "version": "4.0.0",
     "sources": [
       "https://github.com/anthropics/skills",
       "https://github.com/vercel-labs/agent-skills",
-      "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill"
+      "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
+      "https://github.com/bencium/bencium-marketplace"
     ]
   },
   "plugins": [
     {
       "name": "ui-ux-intelligence",
-      "description": "UI/UX Pro Max: 50+ styles, 161 color palettes, 57 font pairings, 99 UX guidelines, 25 chart types across 10 stacks. Searchable design intelligence for web and mobile.",
+      "description": "UI/UX Pro Max: 50+ styles, 161 color palettes, 57 font pairings, 99 UX guidelines, 25 chart types across 10 stacks.",
       "source": "./",
       "strict": false,
       "skills": [
@@ -26,8 +27,22 @@
       ]
     },
     {
+      "name": "ux-design",
+      "description": "Bencium's three UX designer modes (controlled/impact/innovative) plus design audit, typography enforcement, and relationship-centric agentic UX design.",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/bencium-controlled-ux-designer",
+        "./skills/bencium-impact-designer",
+        "./skills/bencium-innovative-ux-designer",
+        "./skills/design-audit",
+        "./skills/typography",
+        "./skills/relationship-design"
+      ]
+    },
+    {
       "name": "ui-styling",
-      "description": "shadcn/ui + Tailwind CSS + Canvas design system. Accessible components, responsive layouts, dark mode, theming, and 30 OFL-licensed fonts.",
+      "description": "shadcn/ui + Tailwind CSS + Canvas design system. Accessible components, responsive layouts, dark mode, theming, and 30 OFL fonts.",
       "source": "./",
       "strict": false,
       "skills": [
@@ -37,14 +52,37 @@
       ]
     },
     {
-      "name": "design-skills",
-      "description": "Frontend design guidelines, algorithmic art, and web design audit tools from Anthropic and Vercel.",
+      "name": "design-tools",
+      "description": "Frontend design guidelines, algorithmic art, and web design audit tools.",
       "source": "./",
       "strict": false,
       "skills": [
         "./skills/frontend-design",
         "./skills/algorithmic-art",
         "./skills/web-design-guidelines"
+      ]
+    },
+    {
+      "name": "architecture-thinking",
+      "description": "Renaissance architecture (first-principles), human architect mindset, negentropy/entropy system evaluation, and vanity engineering review.",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/renaissance-architecture",
+        "./skills/human-architect-mindset",
+        "./skills/negentropy-lens",
+        "./skills/vanity-engineering-review"
+      ]
+    },
+    {
+      "name": "communication-intelligence",
+      "description": "Adaptive communication (intent detection), AEO content optimization for AI search, and code conventions.",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/adaptive-communication",
+        "./skills/bencium-aeo",
+        "./skills/bencium-code-conventions"
       ]
     },
     {
