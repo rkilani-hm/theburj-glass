@@ -30,9 +30,9 @@ export default function Connectivity() {
   useHeroTheme("dark");
 
   return (
-    <div style={{ minHeight: "100vh", background: "#fff", overflowX: "hidden" }}>
+    <div style={{ minHeight: "100vh", background: "#0A0A0A", overflowX: "hidden" }}>
       <Header />
-      <main style={{ paddingTop: "var(--nav-h)" }}>
+      <main>
 
         {/* Hero */}
         <section style={{ position: "relative", height: "55vh", minHeight: 400, overflow: "hidden" }}>

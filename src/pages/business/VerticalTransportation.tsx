@@ -39,9 +39,9 @@ export default function VerticalTransportation() {
   useHeroTheme("dark");
 
   return (
-    <div style={{ minHeight: "100vh", background: "#fff", overflowX: "hidden" }}>
+    <div style={{ minHeight: "100vh", background: "#0A0A0A", overflowX: "hidden" }}>
       <Header />
-      <main style={{ paddingTop: "var(--nav-h)" }}>
+      <main>
 
         {/* Hero */}
         <section style={{ position: "relative", height: "60vh", minHeight: 420, overflow: "hidden" }}>

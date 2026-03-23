@@ -52,9 +52,9 @@ export default function OfficeSpaces() {
   useHeroTheme("dark");
 
   return (
-    <div style={{ minHeight: "100vh", background: "var(--limestone)", overflowX: "hidden" }}>
+    <div style={{ minHeight: "100vh", background: "#0A0A0A", overflowX: "hidden" }}>
       <Header />
-      <main style={{ paddingTop: "var(--nav-h)" }}>
+      <main>
 
         {/* Hero */}
         <section style={{ position: "relative", height: "65vh", minHeight: 440, overflow: "hidden" }}>
