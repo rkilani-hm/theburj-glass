@@ -53,7 +53,7 @@ export default function HeroSection() {
           <div style={{ overflow: "hidden", marginBottom: 4 }}>
             <motion.h1 style={{
               fontFamily: "var(--font-display)",
-              fontSize: "clamp(4rem, 11vw, 12rem)",
+              fontSize: "clamp(3.2rem, 9vw, 10rem)",
               fontWeight: 300, lineHeight: 0.90, letterSpacing: "-0.04em",
               color: "#FFFFFF", margin: 0,
             }}
