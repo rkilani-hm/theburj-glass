@@ -105,7 +105,7 @@ export default function HeroSection() {
               </Link>
               <Link to="/leasing/opportunities" style={{
                 display: "inline-flex", alignItems: "center", gap: 10,
-                padding: "13px 28px", background: "#fff",
+                padding: "10px 22px", background: "#fff",
                 fontFamily: "var(--font-sans)", fontSize: "10px", fontWeight: 400,
                 letterSpacing: "0.14em", textTransform: "uppercase",
                 color: "#0F0F0E",
