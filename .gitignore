@@ -26,3 +26,4 @@ dist-ssr
 # Skills — exclude heavy binary/schema files, keep SKILL.md and scripts
 skills/canvas-design/canvas-fonts/*.ttf
 skills/*/scripts/office/schemas/
+skills/ui-styling/canvas-fonts/*.ttf

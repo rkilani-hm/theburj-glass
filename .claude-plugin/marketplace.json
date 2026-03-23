@@ -1,34 +1,55 @@
 {
   "name": "theburj-glass-skills",
-  "owner": {
-    "name": "Al Hamra Tower",
-    "email": "dev@alhamratower.com"
-  },
+  "owner": { "name": "Al Hamra Tower", "email": "dev@alhamratower.com" },
   "metadata": {
-    "description": "Skills and plugins for the Al Hamra Tower website — sourced from Anthropic and Vercel",
-    "version": "2.0.0",
+    "description": "Skills and plugins for the Al Hamra Tower website — sourced from Anthropic, Vercel, and nextlevelbuilder",
+    "version": "3.0.0",
     "sources": [
       "https://github.com/anthropics/skills",
-      "https://github.com/vercel-labs/agent-skills"
+      "https://github.com/vercel-labs/agent-skills",
+      "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill"
     ]
   },
   "plugins": [
     {
+      "name": "ui-ux-intelligence",
+      "description": "UI/UX Pro Max: 50+ styles, 161 color palettes, 57 font pairings, 99 UX guidelines, 25 chart types across 10 stacks. Searchable design intelligence for web and mobile.",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/ui-ux-pro-max",
+        "./skills/design",
+        "./skills/design-system",
+        "./skills/brand",
+        "./skills/slides",
+        "./skills/banner-design"
+      ]
+    },
+    {
+      "name": "ui-styling",
+      "description": "shadcn/ui + Tailwind CSS + Canvas design system. Accessible components, responsive layouts, dark mode, theming, and 30 OFL-licensed fonts.",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/ui-styling",
+        "./skills/canvas-design",
+        "./skills/theme-factory"
+      ]
+    },
+    {
       "name": "design-skills",
-      "description": "Premium UI design, canvas artwork, themes, and algorithmic art for building visually distinctive interfaces",
+      "description": "Frontend design guidelines, algorithmic art, and web design audit tools from Anthropic and Vercel.",
       "source": "./",
       "strict": false,
       "skills": [
         "./skills/frontend-design",
-        "./skills/canvas-design",
-        "./skills/theme-factory",
         "./skills/algorithmic-art",
         "./skills/web-design-guidelines"
       ]
     },
     {
       "name": "react-skills",
-      "description": "React and Next.js best practices, composition patterns, and React Native skills from Vercel Engineering",
+      "description": "React/Next.js best practices (64 rules), composition patterns, and React Native guidelines from Vercel Engineering.",
       "source": "./",
       "strict": false,
       "skills": [
@@ -39,7 +60,7 @@
     },
     {
       "name": "document-skills",
-      "description": "Excel, Word, PowerPoint, and PDF processing capabilities for leasing brochures and investor decks",
+      "description": "Excel, Word, PowerPoint, and PDF processing for leasing brochures, investor decks, and floor plan tables.",
       "source": "./",
       "strict": false,
       "skills": [
@@ -51,7 +72,7 @@
     },
     {
       "name": "deployment-skills",
-      "description": "Deploy to Vercel via CLI, token-based auth, git push, and environment variable management",
+      "description": "Deploy to Vercel via CLI, git push, token-based auth, and environment variable management.",
       "source": "./",
       "strict": false,
       "skills": [
@@ -61,7 +82,7 @@
     },
     {
       "name": "web-skills",
-      "description": "Web artifact builder, browser automation testing, and Claude API/SDK integration reference",
+      "description": "Web artifact builder, browser automation testing, and Claude API/SDK reference.",
       "source": "./",
       "strict": false,
       "skills": [
