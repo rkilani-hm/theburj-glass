@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Skills — exclude heavy binary/schema files, keep SKILL.md and scripts
+skills/canvas-design/canvas-fonts/*.ttf
+skills/*/scripts/office/schemas/
