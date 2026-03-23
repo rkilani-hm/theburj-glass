@@ -1,56 +1,74 @@
-import { useRef, useState, useEffect, memo } from "react";
+/**
+ * Al Hamra Tower — Home Page
+ * Monolithic Limestone design. Dark → Light → Dark alternation.
+ * Every section earns its place.
+ */
+import { useRef, useEffect, useState, memo } from "react";
+import { Link } from "react-router-dom";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useSpring,
+  useInView,
+  AnimatePresence,
+} from "framer-motion";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Header from "@/components/alhamra/Header";
 import HeroSection from "@/components/alhamra/HeroSection";
 import Footer from "@/components/alhamra/Footer";
-import { motion, useScroll, useTransform, useSpring, useInView, AnimatePresence } from "framer-motion";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useLanguage } from "@/contexts/LanguageContext";
-import { Link } from "react-router-dom";
 import useCountUp from "@/hooks/useCountUp";
 
 gsap.registerPlugin(ScrollTrigger);
 
 /* ── Assets ── */
-import somTowerSkyline    from "@/assets/som-tower-skyline.jpg";
-import interiorLobby      from "@/assets/interior-lobby.jpg";
-import towerFacade        from "@/assets/tower-facade-twisted.png";
-import towerLowAngle      from "@/assets/tower-lowangle-clouds.png";
-import towerAerialDay     from "@/assets/tower-aerial-day.png";
-import towerAerialSunset  from "@/assets/tower-aerial-sunset.png";
-import lobbyArches        from "@/assets/lobby-arches.jpg";
-import somLobby           from "@/assets/som-lobby.jpg";
-import officeCorr         from "@/assets/office-corridor.jpg";
-import cityView           from "@/assets/city-view-interior.jpg";
-import entranceDusk       from "@/assets/entrance-dusk.jpg";
-import somObservation     from "@/assets/som-observation.jpg";
+import towerFull      from "@/assets/tower-full-blue-sky.png";
+import towerFacade    from "@/assets/tower-facade-twisted.png";
+import towerAerial    from "@/assets/tower-aerial-day.png";
+import towerBW        from "@/assets/tower-bw-1.png";
+import towerNight     from "@/assets/tower-night-illuminated.jpg";
+import somLobby       from "@/assets/som-lobby.jpg";
+import interiorLobby  from "@/assets/interior-lobby.jpg";
+import cityView       from "@/assets/city-view-interior.jpg";
+import somObservation from "@/assets/som-observation.jpg";
+import officeCorr     from "@/assets/office-corridor.jpg";
+import entranceDusk   from "@/assets/entrance-dusk.jpg";
+import somSkyline     from "@/assets/som-tower-skyline.jpg";
+import aerialGulf     from "@/assets/tower-aerial-gulf.jpg";
+import towerDetail    from "@/assets/som-tower-detail.jpg";
 
-/* ─────────────────────────────────────────────────────
-   SHARED PRIMITIVES
-   ───────────────────────────────────────────────────── */
+/* ═══════════════════════════════
+   ANIMATION PRIMITIVES
+   ═══════════════════════════════ */
 
-/** GSAP-powered text curtain — each line slides up from behind */
-const CurtainText = memo(({ lines, size = "clamp(2rem, 4vw, 4.5rem)", delay = 0 }: {
-  lines: string[]; size?: string; delay?: number;
+/** Lines of text reveal upward — for headlines */
+const LineReveal = memo(({ lines, size, weight = 400, color = "var(--black)", delay = 0, italic = false }: {
+  lines: string[]; size: string; weight?: number; color?: string; delay?: number; italic?: boolean;
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (!ref.current) return;
-    const els = ref.current.querySelectorAll(".curtain-line");
+    const els = ref.current.querySelectorAll(".lr-line");
     gsap.fromTo(els,
-      { yPercent: 105, opacity: 0 },
-      {
-        yPercent: 0, opacity: 1, duration: 1.1, stagger: 0.1, delay,
+      { yPercent: 110, opacity: 0 },
+      { yPercent: 0, opacity: 1, duration: 1.1, stagger: 0.1, delay,
         ease: "power3.out",
-        scrollTrigger: { trigger: ref.current, start: "top 86%", toggleActions: "play none none none" },
-      }
+        scrollTrigger: { trigger: ref.current, start: "top 86%", once: true } }
     );
   }, [delay]);
   return (
     <div ref={ref}>
       {lines.map((l, i) => (
-        <div key={i} style={{ overflow: "hidden", lineHeight: 1.06 }}>
-          <div className="curtain-line" style={{ fontFamily: "var(--font-display)", fontSize: size, fontWeight: 400, letterSpacing: "-0.025em", color: "#0C0C0B" }}>
+        <div key={i} style={{ overflow: "hidden", lineHeight: 1.04 }}>
+          <div className="lr-line" style={{
+            fontFamily: "var(--font-display)",
+            fontSize: size,
+            fontWeight: weight,
+            color,
+            letterSpacing: "-0.025em",
+            fontStyle: italic ? "italic" : "normal",
+          }}>
             {l}
           </div>
         </div>
@@ -58,152 +76,196 @@ const CurtainText = memo(({ lines, size = "clamp(2rem, 4vw, 4.5rem)", delay = 0 
     </div>
   );
 });
-CurtainText.displayName = "CurtainText";
+LineReveal.displayName = "LineReveal";
 
-/** GSAP fade+rise */
-const Reveal = memo(({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) => {
+/** Fade + rise on scroll enter */
+const Reveal = memo(({ children, delay = 0, className = "", style = {} }: {
+  children: React.ReactNode; delay?: number; className?: string; style?: React.CSSProperties;
+}) => {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (!ref.current) return;
     gsap.fromTo(ref.current,
-      { opacity: 0, y: 32 },
-      { opacity: 1, y: 0, duration: 1, delay, ease: "power3.out",
-        scrollTrigger: { trigger: ref.current, start: "top 88%", toggleActions: "play none none none" } }
+      { opacity: 0, y: 36 },
+      { opacity: 1, y: 0, duration: 1, delay,
+        ease: "power3.out",
+        scrollTrigger: { trigger: ref.current, start: "top 88%", once: true } }
     );
   }, [delay]);
-  return <div ref={ref} className={className} style={{ opacity: 0 }}>{children}</div>;
+  return <div ref={ref} className={className} style={{ opacity: 0, ...style }}>{children}</div>;
 });
 Reveal.displayName = "Reveal";
 
-/** Framer parallax image with clip-path reveal */
-const WipeImage = memo(({ src, alt, aspectRatio = "4/3", strength = 18, delay = 0, className = "" }: {
-  src: string; alt: string; aspectRatio?: string; strength?: number; delay?: number; className?: string;
+/** Clip-path image wipe */
+const WipeImage = memo(({ src, alt, ratio = "3/4", strength = 15, delay = 0, style = {} }: {
+  src: string; alt: string; ratio?: string; strength?: number; delay?: number; style?: React.CSSProperties;
 }) => {
   const ref  = useRef<HTMLDivElement>(null);
   const seen = useInView(ref, { once: true, margin: "-80px" });
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const rawY = useTransform(scrollYProgress, [0, 1], [`${strength}%`, `-${strength}%`]);
-  const y    = useSpring(rawY, { stiffness: 70, damping: 28 });
+  const { scrollYProgress: sp } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const rawY = useTransform(sp, [0, 1], [`${strength}%`, `-${strength}%`]);
+  const y    = useSpring(rawY, { stiffness: 65, damping: 25 });
   return (
-    <div ref={ref} className={className} style={{ aspectRatio, overflow: "hidden" }}>
+    <div ref={ref} style={{ aspectRatio: ratio, overflow: "hidden", ...style }}>
       <motion.div style={{ width: "100%", height: "100%" }}
         initial={{ clipPath: "inset(100% 0% 0% 0%)" }}
         animate={seen ? { clipPath: "inset(0% 0% 0% 0%)" } : {}}
         transition={{ duration: 1.1, delay, ease: [0.16, 1, 0.3, 1] }}
       >
         <motion.img src={src} alt={alt} loading="lazy"
-          style={{ y, scale: 1.22, width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+          style={{ y, scale: 1.22, width: "100%", height: "100%", objectFit: "cover" }} />
       </motion.div>
     </div>
   );
 });
 WipeImage.displayName = "WipeImage";
 
-/** Line draws left→right with GSAP */
-const DrawLine = memo(({ delay = 0 }: { delay?: number }) => {
+/** Horizontal hairline draws left → right */
+const DrawLine = memo(({ delay = 0, color = "var(--black)" }: { delay?: number; color?: string }) => {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (!ref.current) return;
-    gsap.fromTo(ref.current.querySelector(".line-inner"),
+    gsap.fromTo(ref.current.querySelector(".dl-inner"),
       { scaleX: 0 },
-      { scaleX: 1, duration: 1.4, delay, ease: "power3.out", transformOrigin: "left",
-        scrollTrigger: { trigger: ref.current, start: "top 90%", toggleActions: "play none none none" } }
+      { scaleX: 1, duration: 1.4, delay,
+        ease: "power3.out", transformOrigin: "left",
+        scrollTrigger: { trigger: ref.current, start: "top 90%", once: true } }
     );
   }, [delay]);
   return (
-    <div ref={ref} style={{ height: 1, background: "#E8E8E5", overflow: "hidden" }}>
-      <div className="line-inner" style={{ height: "100%", background: "#0C0C0B", transform: "scaleX(0)" }} />
+    <div ref={ref} style={{ height: 1, background: "rgba(0,0,0,0.08)", overflow: "hidden" }}>
+      <div className="dl-inner" style={{ height: "100%", background: color, transform: "scaleX(0)" }} />
     </div>
   );
 });
 DrawLine.displayName = "DrawLine";
 
-/* ─────────────────────────────────────────────────────
-   § 1 — ABOUT
-   ───────────────────────────────────────────────────── */
-const AboutSection = () => {
-  const { t } = useLanguage();
+/* ═══════════════════════════════
+   § 1 — THE STORY
+   Dark section, full immersion
+   ═══════════════════════════════ */
+const StorySection = () => {
   const imgRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: imgRef, offset: ["start end", "end start"] });
-  const imgY = useSpring(useTransform(scrollYProgress, [0, 1], ["10%", "-10%"]), { stiffness: 60, damping: 24 });
+  const imgY = useSpring(useTransform(scrollYProgress, [0, 1], ["8%", "-8%"]), { stiffness: 55, damping: 22 });
 
   return (
-    <section className="section" style={{ background: "#fff" }}>
+    <section style={{ background: "#0A0A0A", padding: "clamp(6rem, 12vw, 12rem) 0" }}>
       <div className="container-fluid">
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 mb-20">
-          <div className="lg:col-span-5">
-            <Reveal><p className="label" style={{ color: "#767672", marginBottom: 20 }}>About Al Hamra</p></Reveal>
-            <CurtainText delay={0.1} lines={["We bring architecture", "to life through", "precision and permanence."]} size="clamp(1.9rem, 3.5vw, 4rem)" />
-          </div>
-          <div className="lg:col-span-7 lg:pt-20">
-            <Reveal delay={0.25} style={{ maxWidth: 540 }}>
-              <p style={{ fontSize: "1.02rem", lineHeight: 1.88, fontWeight: 300, color: "#767672", marginBottom: 32 }}>
-                {t("home.intro.p1") || "Al Hamra Tower stands as Kuwait's most significant architectural achievement — a structure of absolute presence, designed to endure beyond trends and cycles."}
-              </p>
-              <Link to="/tower" className="btn-arrow">Who we are</Link>
+        {/* Header row */}
+        <div className="grid lg:grid-cols-12 gap-8 mb-16 lg:mb-24">
+          <div className="lg:col-span-6">
+            <Reveal style={{ marginBottom: 20 }}>
+              <p className="eyebrow-light">The Architecture</p>
             </Reveal>
+            <LineReveal
+              lines={["A form", "carved from", "the desert sun."]}
+              size="clamp(2.5rem, 5vw, 6rem)"
+              color="rgba(255,255,255,0.92)"
+              delay={0.1}
+            />
           </div>
-        </div>
-
-        {/* Full-bleed parallax image */}
-        <Reveal>
-          <div ref={imgRef} style={{ height: "clamp(300px, 56vw, 740px)", overflow: "hidden" }}>
-            <motion.img src={somTowerSkyline} alt="Al Hamra Tower" loading="lazy"
-              style={{ y: imgY, scale: 1.15, width: "100%", height: "120%", objectFit: "cover", top: "-10%" }} />
-          </div>
-        </Reveal>
-      </div>
-    </section>
-  );
-};
-
-/* ─────────────────────────────────────────────────────
-   § 2 — COLLECTION (4-col)
-   ───────────────────────────────────────────────────── */
-const CollectionSection = () => {
-  const { t } = useLanguage();
-  const cards = [
-    { title: "The Tower",  sub: "Architecture",  img: towerFacade,   href: "/tower" },
-    { title: "Business",   sub: "Workspaces",     img: interiorLobby, href: "/business/workplace-experience" },
-    { title: "Leasing",    sub: "Opportunities",  img: officeCorr,    href: "/leasing/opportunities" },
-    { title: "Experience", sub: "Services",       img: lobbyArches,   href: "/services" },
-  ];
-  return (
-    <section className="section" style={{ background: "#F5F5F3" }}>
-      <div className="container-fluid">
-        <div className="flex items-end justify-between mb-14">
-          <div>
-            <Reveal><p className="label" style={{ marginBottom: 16, color: "#767672" }}>Explore</p></Reveal>
-            <CurtainText delay={0.08} lines={[t("home.links.title") || "Arrive. Ascend. Belong."]} size="clamp(2rem, 3.5vw, 4rem)" />
-          </div>
-          <Reveal delay={0.15} className="hidden sm:block">
-            <Link to="/tower" className="btn-arrow">View all</Link>
-          </Reveal>
-        </div>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-          {cards.map((c, i) => (
-            <Reveal key={c.href} delay={i * 0.08}>
-              <Link to={c.href} className="block group">
-                <div style={{ aspectRatio: "3/4", overflow: "hidden", position: "relative" }}>
-                  <motion.img src={c.img} alt={c.title} loading="lazy"
-                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-                    whileHover={{ scale: 1.06 }} transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }} />
-                  <motion.div className="absolute inset-0 flex flex-col justify-end p-5"
-                    style={{ background: "linear-gradient(to top, rgba(0,0,0,0.58) 0%, transparent 58%)" }}
-                    initial={{ opacity: 0 }} whileHover={{ opacity: 1 }} transition={{ duration: 0.3 }}>
-                    <p className="label" style={{ color: "rgba(255,255,255,0.55)", marginBottom: 4 }}>{c.sub}</p>
-                    <p style={{ fontFamily: "var(--font-display)", fontSize: "1.15rem", fontWeight: 400, letterSpacing: "-0.015em", color: "#fff" }}>{c.title}</p>
-                  </motion.div>
-                </div>
-                <div style={{ paddingTop: 14, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                  <div>
-                    <p className="label" style={{ color: "#AAAAAA", marginBottom: 4 }}>{c.sub}</p>
-                    <p style={{ fontFamily: "var(--font-display)", fontSize: "1.05rem", fontWeight: 400, letterSpacing: "-0.01em" }}>{c.title}</p>
-                  </div>
-                  <motion.span className="label" style={{ color: "#AAAAAA" }} whileHover={{ x: 6 }} transition={{ duration: 0.3 }}>→</motion.span>
-                </div>
+          <div className="lg:col-span-5 lg:col-start-8 lg:pt-20">
+            <Reveal delay={0.2}>
+              <p style={{
+                fontFamily: "var(--font-sans)",
+                fontSize: "1rem",
+                fontWeight: 300,
+                lineHeight: 1.88,
+                color: "rgba(255,255,255,0.40)",
+                marginBottom: 32,
+              }}>
+                Designed by Skidmore, Owings &amp; Merrill, Al Hamra Tower's form emerged 
+                from a single mathematical gesture — removing a quarter of each floor, spiralling 
+                from west to east as the building rises. The south facade becomes a monolithic 
+                Jura limestone wall, an architectural bisht draped over the Kuwait skyline.
+              </p>
+              <Link to="/tower/design" className="btn-arrow-white">
+                The Design Story
               </Link>
             </Reveal>
+          </div>
+        </div>
+
+        {/* Full-bleed tower image */}
+        <Reveal>
+          <div ref={imgRef} style={{ height: "clamp(400px, 65vw, 900px)", overflow: "hidden", position: "relative" }}>
+            <motion.img
+              src={towerFull}
+              alt="Al Hamra Tower against blue sky"
+              loading="eager"
+              style={{
+                y: imgY,
+                scale: 1.12,
+                width: "100%",
+                height: "120%",
+                objectFit: "cover",
+                objectPosition: "center top",
+                top: "-10%",
+                position: "absolute",
+              }}
+            />
+            {/* Caption overlay */}
+            <div style={{
+              position: "absolute",
+              bottom: 32,
+              left: 32,
+              display: "flex",
+              flexDirection: "column",
+              gap: 4,
+            }}>
+              <span className="eyebrow-light">Al Hamra Tower, Kuwait City</span>
+              <span style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(1.2rem, 2vw, 2rem)",
+                color: "rgba(255,255,255,0.60)",
+                fontWeight: 300,
+                letterSpacing: "-0.015em",
+                fontStyle: "italic",
+              }}>
+                412.6 metres — 80 floors
+              </span>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* Three facts below image */}
+        <div className="grid lg:grid-cols-3 gap-0 mt-1">
+          {[
+            { num: "500,000", unit: "tons", fact: "of concrete pumped vertically — the largest in Gulf construction history" },
+            { num: "84,000", unit: "m²",   fact: "of Jura limestone facade — the world's tallest stone-clad tower" },
+            { num: "289",    unit: "piles", fact: "driven 22–27 metres deep into Kuwait City bedrock" },
+          ].map((f, i) => (
+            <div key={i} style={{
+              padding: "clamp(2rem, 4vw, 3.5rem)",
+              borderTop: "1px solid rgba(255,255,255,0.06)",
+              borderLeft: i > 0 ? "1px solid rgba(255,255,255,0.06)" : "none",
+            }}>
+              <Reveal delay={i * 0.08}>
+                <div style={{ display: "flex", alignItems: "baseline", gap: 6, marginBottom: 12 }}>
+                  <span style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: "clamp(2rem, 3.5vw, 3.5rem)",
+                    fontWeight: 300,
+                    color: "#fff",
+                    letterSpacing: "-0.04em",
+                  }}>{f.num}</span>
+                  <span style={{
+                    fontFamily: "var(--font-sans)",
+                    fontSize: "12px",
+                    color: "rgba(255,255,255,0.3)",
+                    letterSpacing: "0.1em",
+                  }}>{f.unit}</span>
+                </div>
+                <p style={{
+                  fontFamily: "var(--font-sans)",
+                  fontSize: "13px",
+                  fontWeight: 300,
+                  lineHeight: 1.65,
+                  color: "rgba(255,255,255,0.35)",
+                }}>{f.fact}</p>
+              </Reveal>
+            </div>
           ))}
         </div>
       </div>
@@ -211,184 +273,517 @@ const CollectionSection = () => {
   );
 };
 
-/* ─────────────────────────────────────────────────────
-   § 3 — STATS
-   ───────────────────────────────────────────────────── */
-const StatRow = ({ value, unit, label, desc, index = 0 }: {
-  value: number; unit: string; label: string; desc: string; index?: number;
+/* ═══════════════════════════════
+   § 2 — KEY STATISTICS
+   White section with giant numbers
+   ═══════════════════════════════ */
+const StatCounter = ({ value, suffix = "", label, desc, index = 0 }: {
+  value: number; suffix?: string; label: string; desc: string; index?: number;
 }) => {
-  const { count, ref, isInView } = useCountUp({ end: value, duration: 2000, delay: index * 120 });
+  const { count, ref, isInView } = useCountUp({ end: value, duration: 2000, delay: index * 150 });
   return (
-    <div ref={ref}>
-      <DrawLine delay={index * 0.1} />
-      <motion.div className="grid grid-cols-12 gap-4 items-center" style={{ padding: "24px 0" }}
-        initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.85, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}>
-        <div className="col-span-4 flex items-end gap-1.5">
-          <span className="stat-number">{count}</span>
-          {unit && <span style={{ fontFamily: "var(--font-sans)", fontSize: "1rem", fontWeight: 300, color: "#767672", paddingBottom: 6 }}>{unit}</span>}
-        </div>
-        <div className="col-span-4">
-          <p className="label">{label}</p>
-        </div>
-        <div className="col-span-4 hidden sm:block">
-          <p style={{ fontSize: "0.84rem", lineHeight: 1.6, fontWeight: 300, color: "#AAAAAA" }}>{desc}</p>
-        </div>
-      </motion.div>
-    </div>
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 28 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.85, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+      style={{ padding: "clamp(2rem, 4vw, 3.5rem) 0" }}
+    >
+      <div style={{ display: "flex", alignItems: "baseline", gap: 4, marginBottom: 10 }}>
+        <span style={{
+          fontFamily: "var(--font-display)",
+          fontSize: "clamp(4rem, 7vw, 8rem)",
+          fontWeight: 300,
+          lineHeight: 1,
+          letterSpacing: "-0.045em",
+          color: "var(--black)",
+        }}>{count}</span>
+        {suffix && (
+          <span style={{
+            fontFamily: "var(--font-sans)",
+            fontSize: "clamp(0.8rem, 1.2vw, 1.2rem)",
+            fontWeight: 300,
+            color: "var(--stone)",
+            paddingBottom: 8,
+          }}>{suffix}</span>
+        )}
+      </div>
+      <p className="eyebrow" style={{ marginBottom: 8 }}>{label}</p>
+      <p style={{
+        fontFamily: "var(--font-sans)",
+        fontSize: "13px",
+        fontWeight: 300,
+        lineHeight: 1.65,
+        color: "var(--stone)",
+        maxWidth: 260,
+      }}>{desc}</p>
+    </motion.div>
   );
 };
 
 const StatsSection = () => (
-  <section className="section" style={{ background: "#fff" }}>
+  <section style={{ background: "var(--limestone)", overflow: "hidden" }}>
     <div className="container-fluid">
-      <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 mb-16">
-        <div className="lg:col-span-4">
-          <Reveal><p className="label" style={{ marginBottom: 18, color: "#767672" }}>By the numbers</p></Reveal>
-          <CurtainText delay={0.1} lines={["Defining", "Kuwait's skyline"]} size="clamp(1.8rem, 3vw, 3.5rem)" />
-        </div>
+      {/* Section label row */}
+      <div style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        paddingTop: "clamp(5rem, 10vw, 10rem)",
+        paddingBottom: "clamp(1.5rem, 3vw, 3rem)",
+        borderBottom: "1px solid var(--rule-light)",
+      }}>
+        <Reveal>
+          <p className="eyebrow">By the Numbers</p>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <LineReveal
+            lines={["Kuwait's vertical city"]}
+            size="clamp(1.2rem, 2vw, 2.2rem)"
+            color="var(--graphite)"
+            weight={400}
+            italic
+          />
+        </Reveal>
       </div>
-      <StatRow value={413}  unit="m"  label="Total height"   desc="Among the tallest in the Gulf"             index={0} />
-      <StatRow value={80}   unit="+"  label="Office floors"  desc="Premium Grade-A commercial floor plates"   index={1} />
-      <StatRow value={24}   unit="K+" label="sq.m GLA"       desc="Leasable office space across the tower"    index={2} />
-      <StatRow value={2011} unit=""   label="Year completed" desc="A permanent fixture of Kuwait's skyline"   index={3} />
-      <DrawLine delay={0.4} />
+
+      {/* Stats grid */}
+      <div className="grid grid-cols-2 lg:grid-cols-4">
+        {[
+          { value: 412,  suffix: "m",    label: "Total Height",      desc: "Tallest building in Kuwait. 40th tallest globally." },
+          { value: 80,   suffix: "",     label: "Floors",             desc: "Above-ground levels of premium commercial space." },
+          { value: 43,   suffix: "",     label: "Elevators",          desc: "Including destination dispatch system." },
+          { value: 2000, suffix: "+",    label: "Parking Spaces",     desc: "Across 11 below-grade levels." },
+        ].map((s, i) => (
+          <div key={i} style={{
+            borderLeft: i > 0 ? "1px solid var(--rule-light)" : "none",
+            paddingLeft: i > 0 ? "clamp(1.5rem, 3vw, 3rem)" : 0,
+          }}>
+            <StatCounter {...s} index={i} />
+          </div>
+        ))}
+      </div>
+
+      {/* Awards note */}
+      <div style={{
+        borderTop: "1px solid var(--rule-light)",
+        paddingTop: "clamp(2rem, 4vw, 3.5rem)",
+        paddingBottom: "clamp(5rem, 10vw, 10rem)",
+        display: "flex",
+        flexWrap: "wrap",
+        gap: "clamp(2rem, 4vw, 4rem)",
+        alignItems: "center",
+        justifyContent: "space-between",
+      }}>
+        <Reveal>
+          <p style={{
+            fontFamily: "var(--font-display)",
+            fontSize: "clamp(1.2rem, 2vw, 2.2rem)",
+            fontWeight: 300,
+            fontStyle: "italic",
+            color: "var(--graphite)",
+            maxWidth: 560,
+            lineHeight: 1.4,
+          }}>
+            "Named one of the Best Inventions of 2011 — Time Magazine."
+          </p>
+        </Reveal>
+        <Reveal delay={0.15}>
+          <Link to="/tower/recognition" className="btn-ghost-dark">
+            Awards & Recognition →
+          </Link>
+        </Reveal>
+      </div>
     </div>
   </section>
 );
 
-/* ─────────────────────────────────────────────────────
-   § 4 — SHOWROOM / INTERIOR
-   ───────────────────────────────────────────────────── */
-const ShowroomSection = () => {
-  const rightRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: rightRef, offset: ["start end", "end start"] });
-  const rY = useSpring(useTransform(scrollYProgress, [0, 1], ["18%", "-18%"]), { stiffness: 60, damping: 22 });
-  return (
-    <section className="section" style={{ background: "#F5F5F3" }}>
-      <div className="container-fluid">
-        <div className="grid lg:grid-cols-2 gap-3 lg:gap-5">
-          <div className="flex flex-col gap-3 lg:gap-5">
-            <Reveal><WipeImage src={cityView}     alt="Interior view" aspectRatio="4/5" strength={12} /></Reveal>
-            <Reveal delay={0.1}><WipeImage src={entranceDusk} alt="Entrance at dusk" aspectRatio="4/3" strength={10} /></Reveal>
-          </div>
-          <div className="flex flex-col gap-8 lg:pt-20">
-            <Reveal><p className="label" style={{ color: "#767672" }}>Interior</p></Reveal>
-            <CurtainText delay={0.15} lines={["A place where", "precision meets purpose."]} size="clamp(1.8rem, 3vw, 3.5rem)" />
-            <Reveal delay={0.28} style={{ maxWidth: 380 }}>
-              <p style={{ fontSize: "1rem", lineHeight: 1.88, fontWeight: 300, color: "#767672", marginBottom: 28 }}>
-                The triple-height lobby sets the tone: soaring arches, curated lighting, and materials that speak of permanence.
-              </p>
-              <Link to="/business/workplace-experience" className="btn-arrow">Workplace experience</Link>
-            </Reveal>
-            <Reveal delay={0.12}>
-              <div ref={rightRef} style={{ aspectRatio: "3/4", overflow: "hidden" }}>
-                <motion.img src={somLobby} alt="Lobby" loading="lazy"
-                  style={{ y: rY, scale: 1.22, width: "100%", height: "100%", objectFit: "cover" }} />
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-/* ─────────────────────────────────────────────────────
-   § 5 — TESTIMONIALS
-   ───────────────────────────────────────────────────── */
-const TESTIMONIALS = [
-  { quote: "Al Hamra Tower represents a singular achievement in Gulf commercial architecture — presence, permanence, and an unrivalled workplace environment.", author: "Senior Partner", company: "Regional Architecture Firm", initials: "SP" },
-  { quote: "The quality of the office environment is second to none in Kuwait City. Our team's productivity has measurably improved since relocating here.", author: "Chief Executive", company: "Financial Services Firm", initials: "CE" },
-  { quote: "There is no comparable address in Kuwait. Al Hamra Tower signals to clients and talent alike that you are serious about what you do.", author: "Managing Director", company: "Professional Services", initials: "MD" },
-];
-
-const TestimonialsSection = () => {
-  const [idx, setIdx] = useState(0);
-  const t = TESTIMONIALS[idx];
-  return (
-    <section className="section" style={{ borderTop: "1px solid #E8E8E5", borderBottom: "1px solid #E8E8E5" }}>
-      <div className="container-fluid">
-        <div className="grid lg:grid-cols-12 gap-12 items-start">
-          <div className="lg:col-span-4">
-            <Reveal><p className="label" style={{ marginBottom: 20, color: "#767672" }}>Client stories</p></Reveal>
-            <Reveal delay={0.1}>
-              <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 24 }}>
-                <span style={{ fontFamily: "var(--font-display)", fontSize: "1.5rem", letterSpacing: "-0.02em", color: "#0C0C0B" }}>{String(idx + 1).padStart(2, "0")}</span>
-                <span style={{ color: "#AAAAAA", fontSize: "0.8rem" }}>/</span>
-                <span className="label">{String(TESTIMONIALS.length).padStart(2, "0")}</span>
-              </div>
-              <div style={{ display: "flex", gap: 8 }}>
-                {TESTIMONIALS.map((_, i) => (
-                  <motion.button key={i} onClick={() => setIdx(i)}
-                    style={{ height: 2, background: i === idx ? "#0C0C0B" : "#E8E8E5", border: "none", cursor: "pointer", padding: 0 }}
-                    animate={{ width: i === idx ? 28 : 8 }} transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }} />
-                ))}
-              </div>
-            </Reveal>
-          </div>
-          <div className="lg:col-span-8">
-            <AnimatePresence mode="wait">
-              <motion.div key={idx}
-                initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}>
-                <blockquote style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1.3rem, 2.4vw, 2.2rem)", lineHeight: 1.32, letterSpacing: "-0.015em", fontWeight: 400, color: "#0C0C0B", marginBottom: 28 }}>
-                  "{t.quote}"
-                </blockquote>
-                <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-                  <div style={{ width: 42, height: 42, background: "#EDEDE9", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "var(--font-display)", fontSize: "0.95rem", color: "#767672", flexShrink: 0 }}>
-                    {t.initials}
-                  </div>
-                  <div>
-                    <p style={{ fontSize: "0.88rem", fontWeight: 400, color: "#0C0C0B" }}>{t.author}</p>
-                    <p className="label">{t.company}</p>
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-/* ─────────────────────────────────────────────────────
-   § 6 — FEATURED PROJECTS
-   ───────────────────────────────────────────────────── */
-const ProjectsSection = () => {
-  const projects = [
-    { img: towerAerialSunset, title: "The Sculptural Form",   sub: "Architecture & Engineering", href: "/tower/design"          },
-    { img: towerLowAngle,     title: "Rising to 413 Metres",  sub: "Construction Story",         href: "/tower/rising"          },
-    { img: somObservation,    title: "Views Across Kuwait",   sub: "Perspective & Location",     href: "/location"              },
-    { img: towerAerialDay,    title: "Leasing Opportunities", sub: "Grade-A Office Space",       href: "/leasing/opportunities" },
+/* ═══════════════════════════════
+   § 3 — AWARDS MARQUEE
+   Continuous scroll strip
+   ═══════════════════════════════ */
+const AwardsMarquee = () => {
+  const AWARDS = [
+    "Time Magazine · Best Inventions 2011",
+    "CTBUH · Best Tall Building Finalist",
+    "International Property Awards 2019/20 · Best Commercial High-Rise",
+    "Honeywell · Smartest Building in Kuwait",
+    "ACI Excellence · Concrete Construction 2015",
+    "Emporis Skyscraper Award · Global Top 3",
+    "World's Tallest Stone-Clad Tower",
   ];
+  const doubled = [...AWARDS, ...AWARDS];
+
   return (
-    <section className="section" style={{ background: "#fff" }}>
+    <div style={{
+      background: "var(--black)",
+      borderTop: "1px solid rgba(255,255,255,0.05)",
+      borderBottom: "1px solid rgba(255,255,255,0.05)",
+      padding: "18px 0",
+      overflow: "hidden",
+    }}>
+      <div className="marquee-track">
+        {doubled.map((a, i) => (
+          <span key={i} style={{
+            fontFamily: "var(--font-sans)",
+            fontSize: "10px",
+            fontWeight: 400,
+            letterSpacing: "0.2em",
+            textTransform: "uppercase",
+            color: "rgba(255,255,255,0.30)",
+            paddingRight: "4rem",
+            whiteSpace: "nowrap",
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "4rem",
+          }}>
+            {a}
+            <span style={{ color: "rgba(255,255,255,0.12)" }}>◆</span>
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+/* ═══════════════════════════════
+   § 4 — INSIDE THE TOWER
+   Split-layout interior showcase
+   ═══════════════════════════════ */
+const InsideSection = () => {
+  const leftRef  = useRef<HTMLDivElement>(null);
+  const rightRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress: lP } = useScroll({ target: leftRef,  offset: ["start end", "end start"] });
+  const { scrollYProgress: rP } = useScroll({ target: rightRef, offset: ["start end", "end start"] });
+  const lY = useSpring(useTransform(lP, [0, 1], ["14%", "-14%"]), { stiffness: 55, damping: 22 });
+  const rY = useSpring(useTransform(rP, [0, 1], ["20%", "-20%"]), { stiffness: 55, damping: 22 });
+
+  return (
+    <section style={{ background: "#fff", padding: "clamp(6rem, 12vw, 12rem) 0" }}>
       <div className="container-fluid">
-        <div className="flex items-end justify-between mb-14">
-          <div>
-            <Reveal><p className="label" style={{ marginBottom: 16, color: "#767672" }}>Featured</p></Reveal>
-            <CurtainText delay={0.1} lines={["Each story tells of", "collaboration and precision."]} size="clamp(2rem, 3.5vw, 4rem)" />
+
+        {/* Section header */}
+        <div className="grid lg:grid-cols-12 gap-8 mb-16 lg:mb-20">
+          <div className="lg:col-span-5">
+            <Reveal style={{ marginBottom: 20 }}>
+              <p className="eyebrow">Inside Al Hamra</p>
+            </Reveal>
+            <LineReveal
+              lines={["A lobby", "that sets the", "tone for everything."]}
+              size="clamp(2rem, 4vw, 4.8rem)"
+              delay={0.08}
+            />
           </div>
-          <Reveal delay={0.15} className="hidden sm:block">
-            <Link to="/tower" className="btn-arrow">View all</Link>
+          <div className="lg:col-span-5 lg:col-start-8 lg:pt-24">
+            <Reveal delay={0.2}>
+              <p style={{
+                fontFamily: "var(--font-sans)",
+                fontSize: "1rem",
+                fontWeight: 300,
+                lineHeight: 1.88,
+                color: "var(--graphite)",
+                marginBottom: 28,
+              }}>
+                The 24-metre-high lobby is a column-free space made possible by a 
+                lamella steel roof structure — a technique drawn from Middle Eastern vernacular 
+                architecture. No pillar interrupts the view from the entrance to the Arabian Gulf.
+              </p>
+              <Link to="/business/workplace-experience" className="btn-arrow">
+                The Workplace Experience
+              </Link>
+            </Reveal>
+          </div>
+        </div>
+
+        {/* Image grid */}
+        <div className="grid lg:grid-cols-12 gap-3">
+          {/* Left: tall main image */}
+          <div className="lg:col-span-7">
+            <Reveal>
+              <div ref={leftRef} style={{ height: "clamp(400px, 55vw, 700px)", overflow: "hidden" }}>
+                <motion.img
+                  src={somLobby}
+                  alt="Al Hamra Tower lobby"
+                  loading="lazy"
+                  style={{
+                    y: lY,
+                    scale: 1.18,
+                    width: "100%",
+                    height: "120%",
+                    objectFit: "cover",
+                    top: "-10%",
+                    position: "relative",
+                  }}
+                />
+              </div>
+              <div style={{ paddingTop: 14 }}>
+                <p className="eyebrow" style={{ marginBottom: 4 }}>The Lobby</p>
+                <p style={{ fontFamily: "var(--font-display)", fontSize: "1.1rem", color: "var(--graphite)", fontStyle: "italic" }}>
+                  24m column-free lamella structure
+                </p>
+              </div>
+            </Reveal>
+          </div>
+
+          {/* Right: two stacked images */}
+          <div className="lg:col-span-5 flex flex-col gap-3">
+            <Reveal delay={0.1}>
+              <WipeImage src={cityView} alt="Interior views" ratio="4/3" strength={12} delay={0.1} />
+              <div style={{ paddingTop: 14 }}>
+                <p className="eyebrow" style={{ marginBottom: 4 }}>Gulf Views</p>
+                <p style={{ fontFamily: "var(--font-display)", fontSize: "1.1rem", color: "var(--graphite)", fontStyle: "italic" }}>
+                  270° panoramas of the Arabian Gulf
+                </p>
+              </div>
+            </Reveal>
+
+            <Reveal delay={0.15}>
+              <div ref={rightRef} style={{ aspectRatio: "4/3", overflow: "hidden" }}>
+                <motion.img
+                  src={somObservation}
+                  alt="Sky observation"
+                  loading="lazy"
+                  style={{
+                    y: rY,
+                    scale: 1.18,
+                    width: "100%",
+                    height: "120%",
+                    objectFit: "cover",
+                    top: "-10%",
+                    position: "relative",
+                  }}
+                />
+              </div>
+              <div style={{ paddingTop: 14 }}>
+                <p className="eyebrow" style={{ marginBottom: 4 }}>Sky Lounge</p>
+                <p style={{ fontFamily: "var(--font-display)", fontSize: "1.1rem", color: "var(--graphite)", fontStyle: "italic" }}>
+                  351m — Kuwait's highest dining
+                </p>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+
+        {/* Amenities strip */}
+        <div style={{ marginTop: "clamp(4rem, 8vw, 8rem)" }}>
+          <DrawLine />
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-0">
+            {[
+              { title: "Sky Lounge",          desc: "351m. Kuwait's premier dining address at the summit.",     link: "/services" },
+              { title: "Health Club",         desc: "State-of-the-art fitness facilities for tower tenants.",    link: "/services" },
+              { title: "Sky Corridors",       desc: "Glass-enclosed walkways with panoramic city views.",        link: "/services" },
+              { title: "Smart Building",      desc: "Honeywell-certified. 100% power redundancy.",              link: "/tower/dashboard" },
+            ].map((a, i) => (
+              <div key={i} style={{ padding: "clamp(2rem, 3.5vw, 3rem) 0" }}>
+                <DrawLine delay={i * 0.08} />
+                <Reveal delay={i * 0.06} style={{ paddingTop: 24 }}>
+                  <h3 style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: "1.5rem",
+                    fontWeight: 400,
+                    letterSpacing: "-0.01em",
+                    color: "var(--black)",
+                    marginBottom: 12,
+                  }}>{a.title}</h3>
+                  <p style={{ fontFamily: "var(--font-sans)", fontSize: "13px", fontWeight: 300, lineHeight: 1.65, color: "var(--stone)", marginBottom: 20 }}>
+                    {a.desc}
+                  </p>
+                  <Link to={a.link} className="btn-arrow" style={{ fontSize: "9px" }}>Learn more</Link>
+                </Reveal>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+/* ═══════════════════════════════
+   § 5 — THE BISHT STORY
+   Dark editorial section
+   ═══════════════════════════════ */
+const BishtSection = () => {
+  const ref  = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const imgY = useSpring(useTransform(scrollYProgress, [0, 1], ["10%", "-10%"]), { stiffness: 55, damping: 22 });
+
+  return (
+    <section style={{ background: "var(--charcoal)", overflow: "hidden" }}>
+      <div className="container-fluid" style={{ padding: "clamp(6rem, 12vw, 12rem) clamp(1.25rem, 5vw, 5rem)" }}>
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+
+          {/* Text side */}
+          <div>
+            <Reveal style={{ marginBottom: 20 }}>
+              <p className="eyebrow-light">The Concept</p>
+            </Reveal>
+            <LineReveal
+              lines={["Inspired by", "the bisht."]}
+              size="clamp(3rem, 6vw, 7.5rem)"
+              color="rgba(255,255,255,0.92)"
+              delay={0.1}
+            />
+            <Reveal delay={0.25} style={{ marginTop: 32 }}>
+              <p style={{
+                fontFamily: "var(--font-sans)",
+                fontSize: "1rem",
+                fontWeight: 300,
+                lineHeight: 1.88,
+                color: "rgba(255,255,255,0.40)",
+                marginBottom: 32,
+              }}>
+                The Kuwaiti bisht — the ceremonial robe of distinction — drapes with 
+                effortless gravity. SOM's lead designer Gary Haney found the same 
+                quality in the tower's twisted form: a single fluid gesture, wrapping 
+                upward, the stone face of the south wall revealed like a figure 
+                emerging from cloth.
+              </p>
+              <p style={{
+                fontFamily: "var(--font-sans)",
+                fontSize: "1rem",
+                fontWeight: 300,
+                lineHeight: 1.88,
+                color: "rgba(255,255,255,0.40)",
+                marginBottom: 40,
+              }}>
+                It is not coincidental that Kuwait's tallest building resembles 
+                Kuwait's most important garment. Architecture and identity 
+                converge here, 412 metres above the Arabian Gulf.
+              </p>
+              <Link to="/tower/design" className="btn-arrow-white">
+                The Design Story
+              </Link>
+            </Reveal>
+          </div>
+
+          {/* Image side */}
+          <Reveal delay={0.1}>
+            <div ref={ref} style={{ aspectRatio: "2/3", overflow: "hidden" }}>
+              <motion.img
+                src={towerFacade}
+                alt="Al Hamra Tower twisted limestone facade"
+                loading="lazy"
+                style={{
+                  y: imgY,
+                  scale: 1.18,
+                  width: "100%",
+                  height: "120%",
+                  objectFit: "cover",
+                  top: "-10%",
+                  position: "relative",
+                  filter: "contrast(1.05) brightness(0.9)",
+                }}
+              />
+            </div>
           </Reveal>
         </div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
-          {projects.map((p, i) => (
-            <Reveal key={p.href} delay={i * 0.08}>
-              <Link to={p.href} className="block group">
-                <div style={{ aspectRatio: "3/4", overflow: "hidden" }}>
-                  <motion.img src={p.img} alt={p.title} loading="lazy"
+      </div>
+    </section>
+  );
+};
+
+/* ═══════════════════════════════
+   § 6 — BUSINESS HIGHLIGHT
+   White, clean, editorial
+   ═══════════════════════════════ */
+const BusinessSection = () => {
+  const cards = [
+    {
+      img: officeCorr,
+      label: "Grade-A Offices",
+      title: "Standard & Executive Floors",
+      desc: "2,300 m² per floor. Floor-to-ceiling glass. Arabian Gulf views. Your team works best here.",
+      href: "/business/office-spaces",
+      meta: "Floors 6–73",
+    },
+    {
+      img: interiorLobby,
+      label: "The Summit",
+      title: "Executive Floors 74 & 75",
+      desc: "The highest business address in Kuwait. Reserved for organisations that lead.",
+      href: "/business/office-spaces",
+      meta: "327–338m",
+    },
+    {
+      img: towerDetail,
+      label: "Technical Backbone",
+      title: "Connectivity & Infrastructure",
+      desc: "Fibre optic backbone, 5 substations, 100% power redundancy, smart building automation.",
+      href: "/business/connectivity",
+      meta: "LEED Compliant",
+    },
+  ];
+
+  return (
+    <section style={{ background: "var(--limestone)", padding: "clamp(6rem, 12vw, 12rem) 0" }}>
+      <div className="container-fluid">
+        <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", marginBottom: "clamp(3rem, 6vw, 6rem)", flexWrap: "wrap", gap: 24 }}>
+          <div>
+            <Reveal style={{ marginBottom: 18 }}>
+              <p className="eyebrow">The Business Address</p>
+            </Reveal>
+            <LineReveal
+              lines={["Where Kuwait's", "leadership works."]}
+              size="clamp(2rem, 4vw, 5rem)"
+              delay={0.08}
+            />
+          </div>
+          <Reveal delay={0.15}>
+            <Link to="/business/workplace-experience" className="btn-ghost-dark">
+              Explore Workspaces →
+            </Link>
+          </Reveal>
+        </div>
+
+        <div className="grid lg:grid-cols-3 gap-3">
+          {cards.map((c, i) => (
+            <Reveal key={c.href + i} delay={i * 0.09}>
+              <Link to={c.href} className="block group" style={{ cursor: "pointer" }}>
+                <div style={{ aspectRatio: "3/4", overflow: "hidden", position: "relative", marginBottom: 16 }}>
+                  <motion.img
+                    src={c.img}
+                    alt={c.title}
+                    loading="lazy"
                     style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                    whileHover={{ scale: 1.06 }} transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }} />
+                    whileHover={{ scale: 1.04 }}
+                    transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                  />
+                  {/* Overlay on hover */}
+                  <motion.div
+                    style={{
+                      position: "absolute", inset: 0,
+                      background: "linear-gradient(to top, rgba(10,10,10,0.7) 0%, transparent 55%)",
+                      display: "flex", flexDirection: "column", justifyContent: "flex-end",
+                      padding: "clamp(1rem, 2vw, 1.5rem)",
+                    }}
+                    initial={{ opacity: 0 }}
+                    whileHover={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <p style={{ fontFamily: "var(--font-display)", fontSize: "1.3rem", color: "#fff", fontWeight: 400, letterSpacing: "-0.01em" }}>
+                      {c.title}
+                    </p>
+                  </motion.div>
+                  {/* Meta tag */}
+                  <div style={{
+                    position: "absolute", top: 16, right: 16,
+                    background: "rgba(10,10,10,0.7)", backdropFilter: "blur(8px)",
+                    padding: "5px 10px",
+                  }}>
+                    <span style={{ fontFamily: "var(--font-sans)", fontSize: "9px", letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(255,255,255,0.6)" }}>
+                      {c.meta}
+                    </span>
+                  </div>
                 </div>
-                <div style={{ paddingTop: 14 }}>
-                  <DrawLine delay={0.05 + i * 0.07} />
-                  <p className="label" style={{ marginTop: 12, marginBottom: 6, color: "#AAAAAA" }}>{p.sub}</p>
-                  <p style={{ fontFamily: "var(--font-display)", fontSize: "1rem", fontWeight: 400, letterSpacing: "-0.01em" }}>{p.title}</p>
-                </div>
+                <p className="eyebrow" style={{ marginBottom: 8 }}>{c.label}</p>
+                <h3 style={{ fontFamily: "var(--font-display)", fontSize: "1.4rem", fontWeight: 400, letterSpacing: "-0.01em", color: "var(--black)", marginBottom: 10 }}>
+                  {c.title}
+                </h3>
+                <p style={{ fontFamily: "var(--font-sans)", fontSize: "13px", fontWeight: 300, lineHeight: 1.65, color: "var(--stone)", marginBottom: 16 }}>
+                  {c.desc}
+                </p>
+                <span className="btn-arrow" style={{ fontSize: "9px" }}>View details</span>
               </Link>
             </Reveal>
           ))}
@@ -398,24 +793,141 @@ const ProjectsSection = () => {
   );
 };
 
-/* ─────────────────────────────────────────────────────
-   § 7 — CTA
-   ───────────────────────────────────────────────────── */
-const CTASection = () => (
-  <section className="section" style={{ borderTop: "1px solid #E8E8E5" }}>
-    <div className="container-fluid">
-      <div className="grid lg:grid-cols-12 items-center gap-8">
-        <div className="lg:col-span-7">
-          <CurtainText delay={0} lines={["Where vision meets", "execution"]} size="clamp(2.4rem, 5vw, 5.5rem)" />
+/* ═══════════════════════════════
+   § 7 — TOWER NIGHT / EXTERIOR
+   Full-bleed dark with image
+   ═══════════════════════════════ */
+const NightSection = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const imgY = useSpring(useTransform(scrollYProgress, [0, 1], ["8%", "-8%"]), { stiffness: 55, damping: 22 });
+
+  return (
+    <section style={{ background: "var(--black)", overflow: "hidden" }}>
+      <div ref={ref} style={{ position: "relative", height: "clamp(500px, 70vw, 900px)", overflow: "hidden" }}>
+        <motion.img
+          src={towerNight}
+          alt="Al Hamra Tower at night"
+          loading="lazy"
+          style={{
+            y: imgY,
+            scale: 1.12,
+            width: "100%",
+            height: "120%",
+            objectFit: "cover",
+            objectPosition: "center 30%",
+            top: "-10%",
+            position: "absolute",
+          }}
+        />
+        <div style={{
+          position: "absolute", inset: 0,
+          background: "linear-gradient(to top, rgba(10,10,10,0.85) 0%, rgba(10,10,10,0.2) 50%, transparent 75%)",
+        }} />
+
+        {/* Content overlay */}
+        <div style={{ position: "absolute", bottom: "clamp(3rem, 6vw, 6rem)", left: 0, right: 0 }}>
+          <div className="container-fluid">
+            <div className="grid lg:grid-cols-12">
+              <div className="lg:col-span-7">
+                <Reveal>
+                  <p className="eyebrow-light" style={{ marginBottom: 20 }}>The Address</p>
+                </Reveal>
+                <LineReveal
+                  lines={["Kuwait's most", "consequential", "building."]}
+                  size="clamp(2.5rem, 5.5vw, 6.5rem)"
+                  color="rgba(255,255,255,0.90)"
+                  delay={0.1}
+                />
+                <Reveal delay={0.3}>
+                  <p style={{
+                    fontFamily: "var(--font-sans)",
+                    fontSize: "0.95rem",
+                    fontWeight: 300,
+                    lineHeight: 1.8,
+                    color: "rgba(255,255,255,0.40)",
+                    maxWidth: 480,
+                    margin: "28px 0 36px",
+                  }}>
+                    At 92% occupancy, Al Hamra is home to over 120 tenants — embassies, 
+                    ministries, regional headquarters, and Kuwait's leading private enterprises. 
+                    To work here is to join something permanent.
+                  </p>
+                  <Link to="/leasing/opportunities" className="btn-primary">
+                    Enquire About Availability
+                  </Link>
+                </Reveal>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="lg:col-span-5">
-          <Reveal delay={0.2} style={{ maxWidth: 440 }}>
-            <p style={{ fontSize: "1rem", lineHeight: 1.84, fontWeight: 300, color: "#767672", marginBottom: 32 }}>
-              Every great tenancy begins with understanding what your organisation truly needs. Begin the conversation today.
+      </div>
+    </section>
+  );
+};
+
+/* ═══════════════════════════════
+   § 8 — LEASING CTA
+   Dark, high-contrast conversion
+   ═══════════════════════════════ */
+const LeasingCTA = () => (
+  <section style={{ background: "var(--black)", padding: "clamp(6rem, 12vw, 12rem) 0", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+    <div className="container-fluid">
+      <div className="grid lg:grid-cols-12 items-center gap-12">
+        <div className="lg:col-span-8">
+          <Reveal style={{ marginBottom: 20 }}>
+            <p className="eyebrow-light">Available Now</p>
+          </Reveal>
+          <LineReveal
+            lines={["Secure your position", "above Kuwait City."]}
+            size="clamp(2.8rem, 6vw, 7.5rem)"
+            color="rgba(255,255,255,0.90)"
+            delay={0.08}
+          />
+        </div>
+        <div className="lg:col-span-4">
+          <Reveal delay={0.25}>
+            <p style={{
+              fontFamily: "var(--font-sans)",
+              fontSize: "0.98rem",
+              fontWeight: 300,
+              lineHeight: 1.82,
+              color: "rgba(255,255,255,0.38)",
+              marginBottom: 40,
+            }}>
+              Standard office floors from 2,300 m². 
+              Executive suites on floors 74–75. 
+              Speak with our leasing team — response within 24 hours.
             </p>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
-              <Link to="/leasing/opportunities" className="btn-solid">Get in touch →</Link>
-              <Link to="/tower" className="btn-outline">Our approach</Link>
+            <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+              <Link to="/leasing/opportunities" className="btn-primary">
+                View Available Spaces →
+              </Link>
+              <Link to="/leasing/contact" className="btn-ghost-white">
+                Contact Leasing Team
+              </Link>
+            </div>
+            <div style={{ marginTop: 40, paddingTop: 32, borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+              <p style={{ fontFamily: "var(--font-sans)", fontSize: "10px", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.25)", marginBottom: 12 }}>
+                Direct Contact
+              </p>
+              <a href="tel:+96522270222" style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "1.4rem",
+                fontWeight: 300,
+                letterSpacing: "-0.01em",
+                color: "rgba(255,255,255,0.75)",
+                display: "block",
+                transition: "color 0.2s",
+              }}
+              onMouseEnter={e => (e.currentTarget.style.color = "#fff")}
+              onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.75)")}
+              >
+                +965 222 70 222
+              </a>
+              <p style={{ fontFamily: "var(--font-sans)", fontSize: "10px", letterSpacing: "0.1em", color: "rgba(255,255,255,0.25)", marginTop: 4 }}>
+                WhatsApp · Leasing Office
+              </p>
             </div>
           </Reveal>
         </div>
@@ -424,24 +936,25 @@ const CTASection = () => (
   </section>
 );
 
-/* ─────────────────────────────────────────────────────
+/* ═══════════════════════════════
    HOME PAGE
-   ───────────────────────────────────────────────────── */
-const Home = () => (
-  <div className="min-h-screen bg-white overflow-x-hidden">
-    <Header />
-    <main>
-      <HeroSection />
-      <AboutSection />
-      <CollectionSection />
-      <StatsSection />
-      <ShowroomSection />
-      <TestimonialsSection />
-      <ProjectsSection />
-      <CTASection />
-    </main>
-    <Footer />
-  </div>
-);
-
-export default Home;
+   ═══════════════════════════════ */
+export default function Home() {
+  return (
+    <div style={{ minHeight: "100vh", background: "var(--black)", overflowX: "hidden" }}>
+      <Header />
+      <main>
+        <HeroSection />
+        <StorySection />
+        <StatsSection />
+        <AwardsMarquee />
+        <InsideSection />
+        <BishtSection />
+        <BusinessSection />
+        <NightSection />
+        <LeasingCTA />
+      </main>
+      <Footer />
+    </div>
+  );
+}

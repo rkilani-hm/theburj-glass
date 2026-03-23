@@ -1,368 +1,274 @@
+/**
+ * Al Hamra Tower — Top Navigation
+ * Transparent over hero → solid black on scroll
+ * Per specification §12.1
+ */
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 import alHamraLogo from "@/assets/al-hamra-logo.png";
 
-/* ── Nav structure: each main item has optional sub-items ── */
-const NAV = [
+const NAV_ITEMS = [
   {
     label: { en: "The Tower", ar: "البرج" },
     href: "/tower",
     sub: [
-      { label: { en: "Overview",      ar: "نظرة عامة" }, href: "/tower"                   },
-      { label: { en: "Rising",        ar: "الصعود"    }, href: "/tower/rising"            },
-      { label: { en: "Design",        ar: "التصميم"   }, href: "/tower/design"            },
-      { label: { en: "Sustainability", ar: "الاستدامة"}, href: "/tower/sustainability"    },
-      { label: { en: "Recognition",   ar: "الجوائز"   }, href: "/tower/recognition"       },
+      { en: "Overview",           ar: "نظرة عامة",  href: "/tower" },
+      { en: "Origins",            ar: "النشأة",      href: "/tower/origins" },
+      { en: "Rising",             ar: "الصعود",      href: "/tower/rising" },
+      { en: "Design & Engineering",ar: "التصميم",   href: "/tower/design" },
+      { en: "Sustainability",     ar: "الاستدامة",   href: "/tower/sustainability" },
+      { en: "Awards",             ar: "الجوائز",     href: "/tower/recognition" },
     ],
   },
   {
     label: { en: "Business", ar: "الأعمال" },
     href: "/business/workplace-experience",
     sub: [
-      { label: { en: "Workplace",         ar: "تجربة مكان العمل" }, href: "/business/workplace-experience"    },
-      { label: { en: "Office Spaces",     ar: "المكاتب"           }, href: "/business/office-spaces"          },
-      { label: { en: "Vertical Transport",ar: "النقل العمودي"    }, href: "/business/vertical-transportation" },
-      { label: { en: "Connectivity",      ar: "الاتصال"           }, href: "/business/connectivity"           },
+      { en: "Workplace",          ar: "بيئة العمل",  href: "/business/workplace-experience" },
+      { en: "Office Spaces",      ar: "المكاتب",     href: "/business/office-spaces" },
+      { en: "Vertical Transport", ar: "المصاعد",     href: "/business/vertical-transportation" },
+      { en: "Connectivity",       ar: "الاتصال",     href: "/business/connectivity" },
+    ],
+  },
+  {
+    label: { en: "Experience", ar: "التجربة" },
+    href: "/services",
+    sub: [
+      { en: "Services & Facilities", ar: "الخدمات", href: "/services" },
+      { en: "Location & Access",     ar: "الموقع",  href: "/location" },
     ],
   },
   {
     label: { en: "Leasing", ar: "التأجير" },
     href: "/leasing/opportunities",
     sub: [
-      { label: { en: "Opportunities", ar: "فرص التأجير" }, href: "/leasing/opportunities" },
-      { label: { en: "Inquiry",       ar: "استفسار"     }, href: "/leasing/inquiry"       },
-      { label: { en: "Downloads",     ar: "التنزيلات"   }, href: "/leasing/downloads"     },
-      { label: { en: "Contact",       ar: "التواصل"     }, href: "/leasing/contact"       },
+      { en: "Opportunities", ar: "الفرص",       href: "/leasing/opportunities" },
+      { en: "Inquiry",       ar: "استفسار",     href: "/leasing/inquiry" },
+      { en: "Downloads",     ar: "التنزيلات",   href: "/leasing/downloads" },
+      { en: "Contact",       ar: "التواصل",     href: "/leasing/contact" },
     ],
-  },
-  {
-    label: { en: "Location", ar: "الموقع" },
-    href: "/location",
-    sub: [
-      { label: { en: "Location & Access", ar: "الموقع والوصول" }, href: "/location" },
-      { label: { en: "Services",          ar: "الخدمات"        }, href: "/services" },
-    ],
-  },
-  {
-    label: { en: "Contact", ar: "التواصل" },
-    href: "/leasing/contact",
-    sub: [],
   },
 ];
 
-const PILL_H   = 48;
-const PILL_BOT = 14;
-const GAP      =  6;
-
 export default function Header() {
   const { language, toggleLanguage } = useLanguage();
-  const [open, setOpen]         = useState(false);
-  const [activeIdx, setActiveIdx] = useState(0);   /* which main item is selected */
+  const [scrolled, setScrolled]       = useState(false);
+  const [activeMenu, setActiveMenu]   = useState<string | null>(null);
   const location = useLocation();
-  const pillRef  = useRef<HTMLDivElement>(null);
+  const closeTimer = useRef<ReturnType<typeof setTimeout>>();
 
-  useEffect(() => { setOpen(false); }, [location.pathname]);
-
-  /* Close on outside click */
+  /* Detect scroll to switch transparent → solid */
   useEffect(() => {
-    if (!open) return;
-    const id = setTimeout(() => {
-      const handler = (e: MouseEvent) => {
-        if (pillRef.current && !pillRef.current.contains(e.target as Node)) setOpen(false);
-      };
-      document.addEventListener("mousedown", handler);
-      return () => document.removeEventListener("mousedown", handler);
-    }, 10);
-    return () => clearTimeout(id);
-  }, [open]);
+    const onScroll = () => setScrolled(window.scrollY > 60);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  /* Close dropdown on route change */
+  useEffect(() => setActiveMenu(null), [location.pathname]);
 
   const isActive = (href: string) =>
     location.pathname === href || location.pathname.startsWith(href + "/");
 
-  const currentPage = (() => {
-    const all = NAV.flatMap(n => [n, ...n.sub]);
-    const sorted = all.slice().sort((a, b) => b.href.length - a.href.length);
-    const match  = sorted.find(n => isActive(n.href));
-    return match ? match.label[language] : (language === "en" ? "Menu" : "القائمة");
-  })();
+  const handleMenuEnter = (label: string) => {
+    clearTimeout(closeTimer.current);
+    setActiveMenu(label);
+  };
+  const handleMenuLeave = () => {
+    closeTimer.current = setTimeout(() => setActiveMenu(null), 180);
+  };
 
-  const activeItem = NAV[activeIdx];
+  /* Colors based on scroll position */
+  const bg    = scrolled ? "rgba(10,10,10,0.97)" : "transparent";
+  const textC = scrolled ? "rgba(255,255,255,0.85)" : "rgba(255,255,255,0.90)";
 
   return (
     <>
-      {/* ════════════════════════════════════════════════════
-          POPUP — position:fixed, two-panel: main + sub
-          ════════════════════════════════════════════════════ */}
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            key="popup"
-            initial={{ opacity: 0, y: 10, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0,  scale: 1    }}
-            exit={{   opacity: 0, y: 10,  scale: 0.98 }}
-            transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-            style={{
-              position: "fixed",
-              bottom: PILL_H + PILL_BOT + GAP,
-              left: "50%",
-              transform: "translateX(-50%)",
-              width: "calc(100vw - clamp(2rem, 8vw, 4rem))",
-              maxWidth: 480,
-              zIndex: 9999,
-              display: "flex",
-              gap: 8,
-            }}
-          >
-            {/* ── Main menu card ── */}
-            <div style={{
-              flex: "0 0 auto",
-              width: 180,
-              background: "#FFFFFF",
-              border: "1px solid #E8E8E8",
-              borderRadius: 16,
-              boxShadow: "0 8px 32px rgba(0,0,0,0.09), 0 1px 4px rgba(0,0,0,0.05)",
-              overflow: "hidden",
-              padding: "8px 0",
-            }}>
-              {NAV.map((item, i) => {
-                const active = activeIdx === i;
-                return (
-                  <button
-                    key={item.href}
-                    onMouseEnter={() => setActiveIdx(i)}
-                    onClick={() => {
-                      if (item.sub.length === 0) setOpen(false);
-                      else setActiveIdx(i);
-                    }}
-                    style={{
-                      width: "100%",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                      padding: "9px 14px",
-                      background: active ? "#F5F5F3" : "transparent",
-                      border: "none",
-                      cursor: "pointer",
-                      fontFamily: "var(--font-serif)",
-                      fontSize: "1rem",
-                      fontWeight: 400,
-                      letterSpacing: "-0.01em",
-                      color: active || isActive(item.href) ? "#1A1A1A" : "#999999",
-                      textAlign: "left",
-                      transition: "background 0.15s, color 0.15s",
-                    }}
-                  >
-                    <span>{item.label[language]}</span>
-                    {item.sub.length > 0 && (
-                      <span style={{
-                        fontSize: "9px",
-                        color: active ? "#999" : "#CCCCCC",
-                        transition: "color 0.15s",
-                      }}>›</span>
-                    )}
-                  </button>
-                );
-              })}
-
-              {/* Bottom: contact + CTA */}
-              <div style={{ borderTop: "1px solid #F0F0F0", padding: "10px 14px", marginTop: 4 }}>
-                <a href="tel:+96522275000"
-                  style={{ display: "block", fontFamily: "var(--font-sans)", fontSize: "10px",
-                    fontWeight: 300, color: "#BBBBBB", marginBottom: 3,
-                    transition: "color 0.15s", textDecoration: "none" }}
-                  onMouseEnter={e => (e.currentTarget.style.color = "#1A1A1A")}
-                  onMouseLeave={e => (e.currentTarget.style.color = "#BBBBBB")}
-                >
-                  +965 2227 5000
-                </a>
-                <Link to="/leasing/opportunities" onClick={() => setOpen(false)}
-                  style={{
-                    fontFamily: "var(--font-sans)", fontSize: "9px", fontWeight: 400,
-                    letterSpacing: "0.1em", textTransform: "uppercase",
-                    color: "#1A1A1A", textDecoration: "none",
-                    display: "inline-flex", alignItems: "center", gap: 4,
-                    marginTop: 4,
-                    transition: "opacity 0.15s",
-                  }}
-                  onMouseEnter={e => ((e.currentTarget as HTMLElement).style.opacity = "0.5")}
-                  onMouseLeave={e => ((e.currentTarget as HTMLElement).style.opacity = "1")}
-                >
-                  Get in touch →
-                </Link>
-              </div>
-            </div>
-
-            {/* ── Sub-menu card — only when active item has sub-items ── */}
-            <AnimatePresence mode="wait">
-              {activeItem.sub.length > 0 && (
-                <motion.div
-                  key={activeIdx}
-                  initial={{ opacity: 0, x: -6 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{   opacity: 0, x: -4 }}
-                  transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
-                  style={{
-                    flex: 1,
-                    background: "#FFFFFF",
-                    border: "1px solid #E8E8E8",
-                    borderRadius: 16,
-                    boxShadow: "0 8px 32px rgba(0,0,0,0.09), 0 1px 4px rgba(0,0,0,0.05)",
-                    overflow: "hidden",
-                    padding: "10px 0",
-                  }}
-                >
-                  {/* Sub-menu header */}
-                  <div style={{
-                    padding: "4px 14px 10px",
-                    borderBottom: "1px solid #F0F0F0",
-                    marginBottom: 4,
-                  }}>
-                    <p style={{ fontFamily: "var(--font-sans)", fontSize: "9px", letterSpacing: "0.18em",
-                      textTransform: "uppercase", color: "#CCCCCC" }}>
-                      {activeItem.label[language]}
-                    </p>
-                  </div>
-
-                  {/* Sub-menu items */}
-                  {activeItem.sub.map((sub, si) => (
-                    <motion.div key={sub.href}
-                      initial={{ opacity: 0, x: -6 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: si * 0.03, duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-                    >
-                      <Link to={sub.href} onClick={() => setOpen(false)}
-                        style={{
-                          display: "flex", alignItems: "center", justifyContent: "space-between",
-                          padding: "8px 14px",
-                          fontFamily: "var(--font-sans)", fontSize: "12px", fontWeight: 300,
-                          letterSpacing: "0.02em",
-                          color: isActive(sub.href) ? "#1A1A1A" : "#999999",
-                          transition: "color 0.15s, background 0.15s",
-                          textDecoration: "none",
-                          borderBottom: si < activeItem.sub.length - 1 ? "1px solid #F5F5F5" : "none",
-                        }}
-                        onMouseEnter={e => {
-                          e.currentTarget.style.color = "#1A1A1A";
-                          e.currentTarget.style.background = "#F9F9F7";
-                        }}
-                        onMouseLeave={e => {
-                          e.currentTarget.style.color = isActive(sub.href) ? "#1A1A1A" : "#999999";
-                          e.currentTarget.style.background = "transparent";
-                        }}
-                      >
-                        <span>{sub.label[language]}</span>
-                        {isActive(sub.href) && (
-                          <span style={{ fontSize: "9px", color: "#CCCCCC" }}>●</span>
-                        )}
-                      </Link>
-                    </motion.div>
-                  ))}
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* ════════════════════════════════════════════════════
-          PILL — smaller, fixed, centred
-          ════════════════════════════════════════════════════ */}
-      <div
-        style={{
-          position: "fixed",
-          bottom: PILL_BOT,
-          left: "50%",
-          transform: "translateX(-50%)",
-          width: "calc(100vw - clamp(2rem, 8vw, 4rem))",
-          maxWidth: 480,
-          zIndex: 9999,
-        }}
+      <motion.header
+        style={{ background: bg, backdropFilter: scrolled ? "blur(16px)" : "none" }}
+        className="fixed top-0 left-0 right-0 z-50"
+        animate={{ background: bg }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
       >
         <div
-          ref={pillRef}
-          style={{
-            height: PILL_H,
-            background: "#FFFFFF",
-            border: "1px solid #E8E8E8",
-            borderRadius: 9999,
-            boxShadow: "0 4px 20px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.04)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            padding: "0 16px",
-          }}
+          className="container-fluid flex items-center justify-between"
+          style={{ height: "var(--nav-h)" }}
         >
           {/* Logo */}
           <Link to="/" style={{ flexShrink: 0, lineHeight: 0 }}>
-            <motion.img src={alHamraLogo} alt="Al Hamra Tower"
-              style={{ height: 26, width: "auto", objectFit: "contain" }}
-              whileHover={{ opacity: 0.6 }} transition={{ duration: 0.2 }}
+            <img
+              src={alHamraLogo}
+              alt="Al Hamra Tower"
+              style={{
+                height: 36,
+                width: "auto",
+                objectFit: "contain",
+                filter: "brightness(0) invert(1)",
+                opacity: scrolled ? 1 : 0.92,
+                transition: "opacity 0.3s",
+              }}
             />
           </Link>
 
-          {/* Center links — desktop */}
-          <nav className="hidden lg:flex" style={{ alignItems: "center", gap: 20 }}>
-            {NAV.slice(0, 4).map(item => (
-              <Link key={item.href} to={item.href}
-                style={{
-                  fontFamily: "var(--font-sans)", fontSize: "10px", fontWeight: 400,
-                  letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none",
-                  color: isActive(item.href) ? "#1A1A1A" : "#AAAAAA",
-                  transition: "color 0.2s",
-                }}
-                onMouseEnter={e => (e.currentTarget.style.color = "#1A1A1A")}
-                onMouseLeave={e => (e.currentTarget.style.color = isActive(item.href) ? "#1A1A1A" : "#AAAAAA")}
+          {/* Centre nav — desktop */}
+          <nav className="hidden lg:flex items-center gap-8">
+            {NAV_ITEMS.map((item) => (
+              <div
+                key={item.href}
+                onMouseEnter={() => handleMenuEnter(item.label.en)}
+                onMouseLeave={handleMenuLeave}
+                style={{ position: "relative" }}
               >
-                {item.label[language]}
-              </Link>
+                <Link
+                  to={item.href}
+                  style={{
+                    fontFamily: "var(--font-sans)",
+                    fontSize: "11px",
+                    fontWeight: 400,
+                    letterSpacing: "0.12em",
+                    textTransform: "uppercase",
+                    color: isActive(item.href) ? "#fff" : textC,
+                    transition: "color 0.2s",
+                    paddingBottom: 4,
+                  }}
+                  onMouseEnter={e => (e.currentTarget.style.color = "#fff")}
+                  onMouseLeave={e => (e.currentTarget.style.color = isActive(item.href) ? "#fff" : textC)}
+                >
+                  {item.label[language]}
+                </Link>
+
+                {/* Active underline */}
+                {isActive(item.href) && (
+                  <motion.div
+                    layoutId="nav-indicator"
+                    style={{
+                      position: "absolute",
+                      bottom: -2,
+                      left: 0,
+                      right: 0,
+                      height: 1,
+                      background: "#fff",
+                    }}
+                  />
+                )}
+
+                {/* Dropdown */}
+                <AnimatePresence>
+                  {activeMenu === item.label.en && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 8 }}
+                      transition={{ duration: 0.2, ease: "easeOut" }}
+                      onMouseEnter={() => handleMenuEnter(item.label.en)}
+                      onMouseLeave={handleMenuLeave}
+                      style={{
+                        position: "absolute",
+                        top: "calc(100% + 20px)",
+                        left: "50%",
+                        transform: "translateX(-50%)",
+                        background: "rgba(10,10,10,0.97)",
+                        backdropFilter: "blur(20px)",
+                        border: "1px solid rgba(255,255,255,0.08)",
+                        padding: "8px 0",
+                        minWidth: 220,
+                        zIndex: 100,
+                      }}
+                    >
+                      {item.sub.map((sub) => (
+                        <Link
+                          key={sub.href}
+                          to={sub.href}
+                          onClick={() => setActiveMenu(null)}
+                          style={{
+                            display: "block",
+                            padding: "10px 20px",
+                            fontFamily: "var(--font-sans)",
+                            fontSize: "11px",
+                            fontWeight: 300,
+                            letterSpacing: "0.08em",
+                            color: isActive(sub.href)
+                              ? "rgba(255,255,255,0.95)"
+                              : "rgba(255,255,255,0.45)",
+                            transition: "color 0.15s, background 0.15s",
+                          }}
+                          onMouseEnter={e => {
+                            e.currentTarget.style.color = "rgba(255,255,255,0.95)";
+                            e.currentTarget.style.background = "rgba(255,255,255,0.04)";
+                          }}
+                          onMouseLeave={e => {
+                            e.currentTarget.style.color = isActive(sub.href)
+                              ? "rgba(255,255,255,0.95)"
+                              : "rgba(255,255,255,0.45)";
+                            e.currentTarget.style.background = "transparent";
+                          }}
+                        >
+                          {sub[language as "en" | "ar"]}
+                        </Link>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             ))}
           </nav>
 
-          {/* Right: lang + toggle */}
-          <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-            <button onClick={toggleLanguage}
+          {/* Right: language + CTA */}
+          <div className="flex items-center gap-5">
+            <button
+              onClick={toggleLanguage}
               style={{
-                fontFamily: "var(--font-sans)", fontSize: "10px", fontWeight: 400,
-                letterSpacing: "0.1em", textTransform: "uppercase",
-                color: "#AAAAAA", cursor: "pointer", background: "none", border: "none", padding: 0,
+                fontFamily: "var(--font-sans)",
+                fontSize: "11px",
+                fontWeight: 400,
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                color: textC,
+                background: "none",
+                border: "none",
+                padding: 0,
                 transition: "color 0.2s",
               }}
-              onMouseEnter={e => (e.currentTarget.style.color = "#1A1A1A")}
-              onMouseLeave={e => (e.currentTarget.style.color = "#AAAAAA")}
+              onMouseEnter={e => (e.currentTarget.style.color = "#fff")}
+              onMouseLeave={e => (e.currentTarget.style.color = textC)}
             >
-              {language === "en" ? "ع" : "EN"}
+              {language === "en" ? "عربي" : "EN"}
             </button>
 
-            <button onClick={() => setOpen(v => !v)}
+            <Link
+              to="/leasing/opportunities"
               style={{
-                fontFamily: "var(--font-sans)", fontSize: "10px", fontWeight: 400,
-                letterSpacing: "0.1em", textTransform: "uppercase",
-                color: open ? "#AAAAAA" : "#1A1A1A",
-                cursor: "pointer", background: "none", border: "none", padding: 0,
-                transition: "color 0.2s", minWidth: 44, textAlign: "right",
+                fontFamily: "var(--font-sans)",
+                fontSize: "10px",
+                fontWeight: 400,
+                letterSpacing: "0.14em",
+                textTransform: "uppercase",
+                color: "#0A0A0A",
+                background: scrolled ? "#fff" : "rgba(255,255,255,0.92)",
+                padding: "10px 22px",
+                border: "1px solid transparent",
+                transition: "all 0.25s ease",
+                whiteSpace: "nowrap",
               }}
+              onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.78)")}
+              onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = scrolled ? "#fff" : "rgba(255,255,255,0.92)")}
             >
-              <AnimatePresence mode="wait">
-                {open ? (
-                  <motion.span key="c"
-                    initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }}
-                    transition={{ duration: 0.12 }} style={{ display: "block" }}>
-                    Close
-                  </motion.span>
-                ) : (
-                  <motion.span key="p"
-                    initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 4 }}
-                    transition={{ duration: 0.12 }} style={{ display: "block" }}>
-                    {currentPage}
-                  </motion.span>
-                )}
-              </AnimatePresence>
-            </button>
+              Leasing Inquiries
+            </Link>
           </div>
         </div>
-      </div>
+
+        {/* Bottom border — only when scrolled */}
+        {scrolled && (
+          <div style={{ height: 1, background: "rgba(255,255,255,0.06)" }} />
+        )}
+      </motion.header>
+
+      {/* Spacer so content doesn't hide under the top nav */}
+      {/* Not needed — hero is full-viewport and overlay-based */}
     </>
   );
 }
