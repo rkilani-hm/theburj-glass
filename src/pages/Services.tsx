@@ -2,7 +2,10 @@ import Header from "@/components/alhamra/Header";
 import ServicesSection from "@/components/alhamra/ServicesSection";
 import Footer from "@/components/alhamra/Footer";
 
+import { useHeroTheme } from "@/contexts/HeroThemeContext";
 const Services = () => {
+
+  useHeroTheme("light");
   return (
     <div style={{ minHeight: "100vh", background: "#fff", overflowX: "hidden" }}>
       <Header />

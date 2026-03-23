@@ -11,7 +11,10 @@ import somTowerDetail from "@/assets/som-tower-detail.jpg";
 import towerSunset from "@/assets/tower-sunset.png";
 import somLobby from "@/assets/som-lobby.jpg";
 
+import { useHeroTheme } from "@/contexts/HeroThemeContext";
 const Sustainability = () => {
+
+  useHeroTheme("light");
   const heroReveal = useScrollReveal();
   const introReveal = useScrollReveal();
   const statsRef = useRef<HTMLDivElement>(null);

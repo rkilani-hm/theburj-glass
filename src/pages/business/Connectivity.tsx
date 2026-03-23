@@ -5,6 +5,7 @@ import Header from "@/components/alhamra/Header";
 import Footer from "@/components/alhamra/Footer";
 import towerDayHud from "@/assets/tower-daylight-hud.png";
 
+import { useHeroTheme } from "@/contexts/HeroThemeContext";
 const R = ({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) => {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
@@ -26,6 +27,8 @@ const SYSTEMS = [
 ];
 
 export default function Connectivity() {
+  useHeroTheme("dark");
+
   return (
     <div style={{ minHeight: "100vh", background: "#fff", overflowX: "hidden" }}>
       <Header />

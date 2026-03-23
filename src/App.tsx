@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { LanguageProvider } from "./contexts/LanguageContext";
+import { HeroThemeProvider } from "./contexts/HeroThemeContext";
 import PageLayout from "./layouts/PageLayout";
 import PageTransition from "./components/alhamra/PageTransition";
 import ScrollToTop from "./components/alhamra/ScrollToTop";
@@ -83,6 +84,7 @@ const AnimatedRoutes = () => {
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <LanguageProvider>
+      <HeroThemeProvider>
       <TooltipProvider>
         <Toaster />
         <Sonner />
@@ -96,6 +98,7 @@ const App = () => (
           <FloatingContact />
         </BrowserRouter>
       </TooltipProvider>
+      </HeroThemeProvider>
     </LanguageProvider>
   </QueryClientProvider>
 );

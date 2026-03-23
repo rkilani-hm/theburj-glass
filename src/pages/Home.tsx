@@ -26,6 +26,7 @@ import officeCorr      from "@/assets/office-corridor.jpg";
 import somTowerSkyline from "@/assets/som-tower-skyline.jpg";
 import towerDetail     from "@/assets/som-tower-detail.jpg";
 
+import { useHeroTheme } from "@/contexts/HeroThemeContext";
 /* ══════════════════ ANIMATION PRIMITIVES ══════════════════ */
 
 const LineReveal = memo(({ lines, size, color = "var(--ink)", italic = false, delay = 0 }: {
@@ -520,6 +521,8 @@ const LeasingCTA = () => (
 
 /* ═══════════════════ HOME PAGE ═══════════════════ */
 export default function Home() {
+  useHeroTheme("dark");
+
   return (
     <div style={{ minHeight: "100vh", background: "#FFFFFF", overflowX: "hidden" }}>
       <Header />

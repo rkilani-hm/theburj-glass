@@ -10,7 +10,10 @@ import DashboardFooter from "@/components/alhamra/DashboardFooter";
 import { motion } from "framer-motion";
 import towerBackground from "@/assets/tower-daylight-hud.png";
 
+import { useHeroTheme } from "@/contexts/HeroThemeContext";
 const Dashboard = () => {
+
+  useHeroTheme("light");
   const { language } = useLanguage();
   const isMobile = useIsMobile();
   const [selectedHotspot, setSelectedHotspot] = useState<string | null>(null);

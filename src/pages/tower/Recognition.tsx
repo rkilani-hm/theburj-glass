@@ -7,7 +7,10 @@ import towerNight from "@/assets/tower-night-illuminated.jpg";
 import towerTopClouds from "@/assets/tower-top-clouds.png";
 import skylineHero from "@/assets/skyline-hero.jpg";
 
+import { useHeroTheme } from "@/contexts/HeroThemeContext";
 const Recognition = () => {
+
+  useHeroTheme("light");
   const heroReveal = useScrollReveal();
 
   const awards = [

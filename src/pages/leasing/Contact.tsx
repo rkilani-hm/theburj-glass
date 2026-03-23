@@ -5,6 +5,7 @@ import Header from "@/components/alhamra/Header";
 import Footer from "@/components/alhamra/Footer";
 import towerEntranceNight from "@/assets/tower-entrance-night.jpg";
 
+import { useHeroTheme } from "@/contexts/HeroThemeContext";
 const R = ({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) => {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-40px" });
@@ -57,6 +58,8 @@ const CONTACTS = [
 ];
 
 export default function LeasingContact() {
+  useHeroTheme("dark");
+
   return (
     <div style={{ minHeight: "100vh", background: "#fff", overflowX: "hidden" }}>
       <Header />

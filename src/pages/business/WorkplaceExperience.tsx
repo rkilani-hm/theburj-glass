@@ -8,6 +8,7 @@ import towerAerialDay  from "@/assets/tower-aerial-day.png";
 import interiorLobby   from "@/assets/interior-lobby.jpg";
 import panoramaCity    from "@/assets/panorama-city.jpg";
 
+import { useHeroTheme } from "@/contexts/HeroThemeContext";
 const R = ({ children, delay = 0, style = {} }: { children: React.ReactNode; delay?: number; style?: React.CSSProperties }) => {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
@@ -21,6 +22,8 @@ const R = ({ children, delay = 0, style = {} }: { children: React.ReactNode; del
 };
 
 export default function WorkplaceExperience() {
+  useHeroTheme("dark");
+
   const PILLARS = [
     { n: "01", title: "Premium Office Floors", body: "2,300 m² per floor. Column-free layouts with 3.2m ceiling heights and floor-to-ceiling glass. Gulf views from every direction." },
     { n: "02", title: "Sky Lounge & Corridors", body: "Glass-enclosed sky corridors with panoramic views connect the tower's upper sections. The Sky Lounge at 351m is Kuwait's highest dining destination." },

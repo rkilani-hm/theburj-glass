@@ -7,6 +7,7 @@ import towerAerialSea  from "@/assets/tower-aerial-sea.jpg";
 import skylinePark     from "@/assets/skyline-park-panorama.jpg";
 import somObservation  from "@/assets/som-observation.jpg";
 
+import { useHeroTheme } from "@/contexts/HeroThemeContext";
 const R = ({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) => {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
@@ -34,6 +35,8 @@ const REASONS = [
 ];
 
 export default function LeasingOpportunities() {
+  useHeroTheme("dark");
+
   return (
     <div style={{ minHeight: "100vh", background: "#fff", overflowX: "hidden" }}>
       <Header />

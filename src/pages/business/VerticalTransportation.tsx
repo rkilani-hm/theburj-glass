@@ -6,6 +6,7 @@ import Footer from "@/components/alhamra/Footer";
 import towerNightHud from "@/assets/tower-night-hud.png";
 import towerVertical from "@/assets/som-tower-vertical.jpg";
 
+import { useHeroTheme } from "@/contexts/HeroThemeContext";
 const R = ({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) => {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
@@ -35,6 +36,8 @@ const ZONES = [
 ];
 
 export default function VerticalTransportation() {
+  useHeroTheme("dark");
+
   return (
     <div style={{ minHeight: "100vh", background: "#fff", overflowX: "hidden" }}>
       <Header />

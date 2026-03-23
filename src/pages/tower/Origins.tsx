@@ -15,7 +15,10 @@ import constructionFacade from "@/assets/construction-facade.jpg";
 import skylineParkPanorama from "@/assets/skyline-park-panorama.jpg";
 import waterfrontPromenade from "@/assets/waterfront-promenade.jpg";
 
+import { useHeroTheme } from "@/contexts/HeroThemeContext";
 const Origins = () => {
+
+  useHeroTheme("light");
   const heroReveal = useScrollReveal();
   const contentReveal = useScrollReveal();
   const visionReveal = useScrollReveal();

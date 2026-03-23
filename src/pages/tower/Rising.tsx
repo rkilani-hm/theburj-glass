@@ -4,7 +4,10 @@ import LegacySection from "@/components/alhamra/LegacySection";
 import ConstructionStory from "@/components/alhamra/ConstructionStory";
 import PerspectiveSection from "@/components/alhamra/PerspectiveSection";
 
+import { useHeroTheme } from "@/contexts/HeroThemeContext";
 const Rising = () => {
+
+  useHeroTheme("light");
   return (
     <div style={{ minHeight: "100vh", background: "#fff", overflowX: "hidden" }}>
       <Header />

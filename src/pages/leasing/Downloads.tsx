@@ -4,6 +4,7 @@ import { motion, useInView } from "framer-motion";
 import Header from "@/components/alhamra/Header";
 import Footer from "@/components/alhamra/Footer";
 
+import { useHeroTheme } from "@/contexts/HeroThemeContext";
 const R = ({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) => {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-40px" });
@@ -28,6 +29,8 @@ const DOCS = [
 ];
 
 export default function Downloads() {
+  useHeroTheme("light");
+
   const categories = [...new Set(DOCS.map(d => d.cat))];
 
   return (

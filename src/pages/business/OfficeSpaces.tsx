@@ -8,6 +8,7 @@ import aerialGulf    from "@/assets/tower-aerial-gulf.jpg";
 import entranceDusk  from "@/assets/entrance-dusk.jpg";
 import towerAerialN  from "@/assets/tower-aerial-north.jpg";
 
+import { useHeroTheme } from "@/contexts/HeroThemeContext";
 const R = ({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) => {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
@@ -48,6 +49,8 @@ const CONFIGS = [
 ];
 
 export default function OfficeSpaces() {
+  useHeroTheme("dark");
+
   return (
     <div style={{ minHeight: "100vh", background: "var(--limestone)", overflowX: "hidden" }}>
       <Header />

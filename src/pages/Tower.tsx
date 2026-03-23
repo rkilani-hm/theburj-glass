@@ -16,6 +16,7 @@ import towerLow      from "@/assets/tower-lowangle-clouds.png";
 import towerNight    from "@/assets/tower-night-illuminated.jpg";
 import towerSkyline  from "@/assets/som-tower-skyline.jpg";
 
+import { useHeroTheme } from "@/contexts/HeroThemeContext";
 /* ── shared mini-reveal ── */
 const R = ({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -30,6 +31,8 @@ const R = ({ children, delay = 0 }: { children: React.ReactNode; delay?: number 
 };
 
 export default function Tower() {
+  useHeroTheme("dark");
+
   /* Hero parallax */
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });

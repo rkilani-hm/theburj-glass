@@ -1,11 +1,16 @@
 /**
- * Header — White nav bar, transparent over hero → solid white on scroll
- * fluid.glass aesthetic: light, refined, barely-there
+ * Header — Adaptive color nav
+ *
+ * Three states:
+ * 1. Transparent + dark hero  → white text, white logo, white CTA border
+ * 2. Transparent + light hero → black text, black logo, black CTA border
+ * 3. Scrolled (any page)      → white background, black text, black logo
  */
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useHeroThemeValue } from "@/contexts/HeroThemeContext";
 import alHamraLogo from "@/assets/al-hamra-logo.png";
 
 const NAV = [
@@ -45,6 +50,7 @@ const NAV = [
 
 export default function Header() {
   const { language, toggleLanguage } = useLanguage();
+  const heroDark = useHeroThemeValue();          // ← reads from context
   const [scrolled, setScrolled]       = useState(false);
   const [activeMenu, setActiveMenu]   = useState<string | null>(null);
   const location = useLocation();
@@ -62,20 +68,39 @@ export default function Header() {
   const isActive = (href: string) =>
     location.pathname === href || location.pathname.startsWith(href + "/");
 
-  const open  = (key: string) => { clearTimeout(timer.current); setActiveMenu(key); };
-  const close = () => { timer.current = setTimeout(() => setActiveMenu(null), 160); };
+  const openMenu  = (key: string) => { clearTimeout(timer.current); setActiveMenu(key); };
+  const closeMenu = () => { timer.current = setTimeout(() => setActiveMenu(null), 160); };
 
-  const textColor = (active: boolean) => active ? "var(--ink)" : "var(--ink-light)";
+  // ── Derived colors ──────────────────────────────────────────
+  // When scrolled: always dark-on-white
+  // When not scrolled: white-on-dark OR black-on-light
+  const onDark = !scrolled && heroDark;
+
+  const navBg      = scrolled ? "rgba(255,255,255,0.97)" : "transparent";
+  const navShadow  = scrolled ? "0 1px 0 rgba(0,0,0,0.07)" : "none";
+  const logoFilter = onDark ? "brightness(0) invert(1)" : "none";
+  const linkColor  = (active: boolean): string => {
+    if (scrolled) return active ? "var(--ink)" : "var(--ink-light)";
+    return onDark
+      ? (active ? "#ffffff"              : "rgba(255,255,255,0.70)")
+      : (active ? "var(--ink)"           : "var(--ink-light)");
+  };
+  const linkHover  = (): string => onDark ? "#ffffff" : "var(--ink)";
+  const underlineC = onDark ? "#ffffff" : "var(--ink)";
+  const langColor  = scrolled ? "var(--ink-light)" : (onDark ? "rgba(255,255,255,0.60)" : "var(--ink-light)");
+  const langHover  = onDark ? "#ffffff" : "var(--ink)";
+
+  // CTA button: invert on dark-transparent to stand out
+  const ctaBg     = scrolled ? "var(--ink)" : (onDark ? "rgba(255,255,255,0.95)" : "var(--ink)");
+  const ctaColor  = scrolled ? "#fff"       : (onDark ? "var(--ink)"             : "#fff");
+  const ctaHoverBg= scrolled ? "#333"       : (onDark ? "rgba(255,255,255,0.80)" : "#333");
 
   return (
     <motion.header
       className="fixed top-0 left-0 right-0 z-50"
-      animate={{
-        background: scrolled ? "rgba(255,255,255,0.97)" : "rgba(255,255,255,0)",
-        boxShadow: scrolled ? "0 1px 0 rgba(0,0,0,0.06)" : "none",
-      }}
+      animate={{ background: navBg, boxShadow: navShadow }}
       style={{ backdropFilter: scrolled ? "blur(20px)" : "none" }}
-      transition={{ duration: 0.35, ease: "easeOut" }}
+      transition={{ duration: 0.32, ease: "easeOut" }}
     >
       <div className="container-fluid flex items-center justify-between" style={{ height: "var(--nav-h)" }}>
 
@@ -84,8 +109,8 @@ export default function Header() {
           <motion.img
             src={alHamraLogo}
             alt="Al Hamra Tower"
-            animate={{ filter: scrolled ? "none" : "brightness(0) invert(1)" }}
-            transition={{ duration: 0.35 }}
+            animate={{ filter: logoFilter }}
+            transition={{ duration: 0.32 }}
             style={{ height: 34, width: "auto", objectFit: "contain" }}
           />
         </Link>
@@ -94,16 +119,20 @@ export default function Header() {
         <nav className="hidden lg:flex items-center gap-8">
           {NAV.map((item) => (
             <div key={item.href} style={{ position: "relative" }}
-              onMouseEnter={() => open(item.label.en)}
-              onMouseLeave={close}
+              onMouseEnter={() => openMenu(item.label.en)}
+              onMouseLeave={closeMenu}
             >
-              <Link to={item.href} style={{
-                fontFamily: "var(--font-sans)", fontSize: "11px", fontWeight: 400,
-                letterSpacing: "0.12em", textTransform: "uppercase",
-                color: scrolled ? textColor(isActive(item.href)) : (isActive(item.href) ? "#fff" : "rgba(255,255,255,0.75)"),
-                transition: "color 0.2s",
-                paddingBottom: 2,
-              }}>
+              <Link to={item.href}
+                style={{
+                  fontFamily: "var(--font-sans)", fontSize: "11px", fontWeight: 400,
+                  letterSpacing: "0.12em", textTransform: "uppercase",
+                  color: linkColor(isActive(item.href)),
+                  transition: "color 0.22s",
+                  paddingBottom: 2,
+                }}
+                onMouseEnter={e => (e.currentTarget.style.color = linkHover())}
+                onMouseLeave={e => (e.currentTarget.style.color = linkColor(isActive(item.href)))}
+              >
                 {item.label[language]}
               </Link>
 
@@ -112,7 +141,8 @@ export default function Header() {
                 <motion.div layoutId="nav-ul" style={{
                   position: "absolute", bottom: -2, left: 0, right: 0,
                   height: 1,
-                  background: scrolled ? "var(--ink)" : "#fff",
+                  background: underlineC,
+                  transition: "background 0.32s",
                 }} />
               )}
 
@@ -124,15 +154,15 @@ export default function Header() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 6 }}
                     transition={{ duration: 0.18, ease: "easeOut" }}
-                    onMouseEnter={() => open(item.label.en)}
-                    onMouseLeave={close}
+                    onMouseEnter={() => openMenu(item.label.en)}
+                    onMouseLeave={closeMenu}
                     style={{
-                      position: "absolute", top: "calc(100% + 16px)",
+                      position: "absolute", top: "calc(100% + 14px)",
                       left: "50%", transform: "translateX(-50%)",
                       background: "rgba(255,255,255,0.98)",
                       backdropFilter: "blur(20px)",
-                      border: "1px solid var(--border)",
-                      boxShadow: "0 8px 32px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.04)",
+                      border: "1px solid rgba(0,0,0,0.08)",
+                      boxShadow: "0 8px 32px rgba(0,0,0,0.10), 0 1px 4px rgba(0,0,0,0.05)",
                       padding: "6px 0", minWidth: 220, zIndex: 100,
                     }}
                   >
@@ -146,8 +176,14 @@ export default function Header() {
                           color: isActive(sub.href) ? "var(--ink)" : "var(--ink-light)",
                           transition: "color 0.15s, background 0.15s",
                         }}
-                        onMouseEnter={e => { e.currentTarget.style.color = "var(--ink)"; e.currentTarget.style.background = "var(--surface)"; }}
-                        onMouseLeave={e => { e.currentTarget.style.color = isActive(sub.href) ? "var(--ink)" : "var(--ink-light)"; e.currentTarget.style.background = "transparent"; }}
+                        onMouseEnter={e => {
+                          e.currentTarget.style.color = "var(--ink)";
+                          e.currentTarget.style.background = "var(--limestone)";
+                        }}
+                        onMouseLeave={e => {
+                          e.currentTarget.style.color = isActive(sub.href) ? "var(--ink)" : "var(--ink-light)";
+                          e.currentTarget.style.background = "transparent";
+                        }}
                       >
                         {sub[language as "en" | "ar"]}
                       </Link>
@@ -159,22 +195,33 @@ export default function Header() {
           ))}
         </nav>
 
-        {/* Right */}
+        {/* Right — language + CTA */}
         <div className="flex items-center gap-5">
           <button onClick={toggleLanguage} style={{
             fontFamily: "var(--font-sans)", fontSize: "11px", fontWeight: 400,
             letterSpacing: "0.12em", textTransform: "uppercase", cursor: "pointer",
             background: "none", border: "none", padding: 0,
-            color: scrolled ? "var(--ink-light)" : "rgba(255,255,255,0.65)",
-            transition: "color 0.2s",
+            color: langColor,
+            transition: "color 0.22s",
           }}
-          onMouseEnter={e => (e.currentTarget.style.color = scrolled ? "var(--ink)" : "#fff")}
-          onMouseLeave={e => (e.currentTarget.style.color = scrolled ? "var(--ink-light)" : "rgba(255,255,255,0.65)")}
+          onMouseEnter={e => (e.currentTarget.style.color = langHover)}
+          onMouseLeave={e => (e.currentTarget.style.color = langColor)}
           >
             {language === "en" ? "عربي" : "EN"}
           </button>
 
-          <Link to="/leasing/opportunities" className="btn-primary" style={{ fontSize: "10px", padding: "10px 20px" }}>
+          <Link to="/leasing/opportunities" style={{
+            display: "inline-flex", alignItems: "center", gap: 8,
+            padding: "10px 20px", fontSize: "10px", fontFamily: "var(--font-sans)",
+            fontWeight: 400, letterSpacing: "0.14em", textTransform: "uppercase",
+            background: ctaBg, color: ctaColor,
+            border: "1px solid transparent",
+            transition: "background 0.25s, color 0.25s",
+            whiteSpace: "nowrap",
+          }}
+          onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = ctaHoverBg)}
+          onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = ctaBg)}
+          >
             Leasing Inquiries
           </Link>
         </div>

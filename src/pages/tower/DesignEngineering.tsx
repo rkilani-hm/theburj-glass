@@ -18,7 +18,10 @@ import towerLowangleClouds from "@/assets/tower-lowangle-clouds.png";
 import LamellaVisualization from "@/components/alhamra/LamellaVisualization";
 import FloorPlanSelector from "@/components/alhamra/FloorPlanSelector";
 
+import { useHeroTheme } from "@/contexts/HeroThemeContext";
 const DesignEngineering = () => {
+
+  useHeroTheme("light");
   const heroReveal = useScrollReveal();
   const featuresReveal = useScrollReveal();
   const floorPlanReveal = useScrollReveal();
