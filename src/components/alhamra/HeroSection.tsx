@@ -88,7 +88,7 @@ export default function HeroSection() {
               Kuwait's tallest building. The world's tallest sculpted concrete tower.
               Inspired by the bisht — a symbol rising from the desert.
             </p>
-            <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
+            <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
               <Link to="/tower" style={{
                 display: "inline-flex", alignItems: "center", gap: 10,
                 padding: "13px 28px", background: "rgba(255,255,255,0.10)",
