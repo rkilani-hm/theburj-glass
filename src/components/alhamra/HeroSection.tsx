@@ -75,7 +75,7 @@ export default function HeroSection() {
             >Business Tower</motion.p>
           </div>
 
-          <motion.div style={{ display: "flex", flexWrap: "wrap", alignItems: "flex-end", justifyContent: "space-between", gap: 24 }}
+          <motion.div style={{ display: "flex", flexWrap: "wrap", alignItems: "flex-end", justifyContent: "space-between", gap: 16 }}
             initial={{ opacity: 0, y: 22 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 1.05, ease: [0.16, 1, 0.3, 1] }}
