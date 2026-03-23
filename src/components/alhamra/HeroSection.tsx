@@ -91,7 +91,7 @@ export default function HeroSection() {
             <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
               <Link to="/tower" style={{
                 display: "inline-flex", alignItems: "center", gap: 10,
-                padding: "13px 28px", background: "rgba(255,255,255,0.10)",
+                padding: "10px 22px", background: "rgba(255,255,255,0.10)",
                 border: "1px solid rgba(255,255,255,0.20)",
                 fontFamily: "var(--font-sans)", fontSize: "10px", fontWeight: 400,
                 letterSpacing: "0.14em", textTransform: "uppercase",
