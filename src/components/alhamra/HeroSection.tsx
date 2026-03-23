@@ -1,12 +1,11 @@
 /**
- * Hero — Full-screen video. Cinematic gradient overlay — warm not pitch black.
- * After hero, everything goes LIGHT.
+ * Hero — Full-screen video only. No poster/fallback image.
+ * Brighter gradient: video is the hero, not the overlay.
  */
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { Link } from "react-router-dom";
 import heroVideo from "@/assets/hero-video.mp4";
-import towerFull from "@/assets/tower-full-blue-sky.png";
 
 export default function HeroSection() {
   const ref = useRef<HTMLElement>(null);
@@ -20,17 +19,30 @@ export default function HeroSection() {
   return (
     <section ref={ref} style={{
       position: "relative", width: "100%", height: "100svh", minHeight: 560,
-      background: "#1A1814", overflow: "hidden",
+      background: "#0A0A0A", overflow: "hidden",
       display: "flex", flexDirection: "column", justifyContent: "flex-end",
     }}>
-      {/* Video */}
+      {/* Video — no poster, video only */}
       <motion.div style={{ position: "absolute", inset: 0, scale, transformOrigin: "center" }}>
-        <video src={heroVideo} poster={towerFull} autoPlay muted loop playsInline preload="metadata"
-          style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 20%" }} />
-        {/* Gradient veil — warm dark, not pure black */}
+        <video
+          src={heroVideo}
+          autoPlay muted loop playsInline preload="auto"
+          style={{
+            width: "100%", height: "100%",
+            objectFit: "cover", objectPosition: "center 20%",
+            /* Brighten the video itself so the footage reads clearly */
+            filter: "brightness(1.15) contrast(1.05)",
+          }}
+        />
+        {/* Lighter gradient — bottom ramp for text legibility, barely touching the upper frame */}
         <div style={{
           position: "absolute", inset: 0,
-          background: "linear-gradient(to top, rgba(20,18,15,0.92) 0%, rgba(20,18,15,0.45) 35%, rgba(20,18,15,0.1) 65%, rgba(20,18,15,0.25) 100%)",
+          background: [
+            /* Bottom text zone — needed for legibility */
+            "linear-gradient(to top,  rgba(10,10,10,0.82) 0%,  rgba(10,10,10,0.30) 28%, transparent 55%)",
+            /* Very subtle top vignette so nav text is readable */
+            "linear-gradient(to bottom, rgba(10,10,10,0.30) 0%, transparent 22%)",
+          ].join(", "),
         }} />
       </motion.div>
 
@@ -41,7 +53,7 @@ export default function HeroSection() {
 
           <motion.p
             style={{ fontFamily: "var(--font-sans)", fontSize: "10px", letterSpacing: "0.2em",
-              textTransform: "uppercase", color: "rgba(255,255,255,0.45)", marginBottom: 14 }}
+              textTransform: "uppercase", color: "rgba(255,255,255,0.50)", marginBottom: 14 }}
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
@@ -49,7 +61,6 @@ export default function HeroSection() {
             Kuwait City · 412 Metres · Since 2011
           </motion.p>
 
-          {/* Main headline */}
           <div style={{ overflow: "hidden", marginBottom: 4 }}>
             <motion.h1 style={{
               fontFamily: "var(--font-display)",
@@ -67,7 +78,7 @@ export default function HeroSection() {
               fontFamily: "var(--font-display)", fontStyle: "italic",
               fontSize: "clamp(1.1rem, 3vw, 3.5rem)",
               fontWeight: 300, lineHeight: 0.95, letterSpacing: "-0.02em",
-              color: "rgba(255,255,255,0.42)", margin: 0,
+              color: "rgba(255,255,255,0.45)", margin: 0,
             }}
               initial={{ y: "102%" }}
               animate={{ y: 0 }}
@@ -83,7 +94,7 @@ export default function HeroSection() {
             <p style={{
               fontFamily: "var(--font-sans)", fontSize: "clamp(0.78rem, 0.9vw, 0.88rem)",
               fontWeight: 300, lineHeight: 1.78,
-              color: "rgba(255,255,255,0.38)", maxWidth: 460, margin: 0,
+              color: "rgba(255,255,255,0.42)", maxWidth: 460, margin: 0,
             }}>
               Kuwait's tallest building. The world's tallest sculpted concrete tower.
               Inspired by the bisht — a symbol rising from the desert.
@@ -92,10 +103,10 @@ export default function HeroSection() {
               <Link to="/tower" style={{
                 display: "inline-flex", alignItems: "center", gap: 10,
                 padding: "10px 22px", background: "rgba(255,255,255,0.10)",
-                border: "1px solid rgba(255,255,255,0.20)",
+                border: "1px solid rgba(255,255,255,0.22)",
                 fontFamily: "var(--font-sans)", fontSize: "10px", fontWeight: 400,
                 letterSpacing: "0.14em", textTransform: "uppercase",
-                color: "rgba(255,255,255,0.80)",
+                color: "rgba(255,255,255,0.85)",
                 transition: "all 0.25s ease",
               }}
               onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.18)"; }}
@@ -121,10 +132,10 @@ export default function HeroSection() {
         </div>
       </motion.div>
 
-      {/* Stats bar at bottom */}
+      {/* Stats bar */}
       <motion.div style={{
         position: "absolute", bottom: 0, left: 0, right: 0,
-        borderTop: "1px solid rgba(255,255,255,0.07)", zIndex: 2,
+        borderTop: "1px solid rgba(255,255,255,0.08)", zIndex: 2,
         opacity: rawOpacity as any,
       }}
         initial={{ opacity: 0 }} animate={{ opacity: 1 }}
@@ -133,17 +144,17 @@ export default function HeroSection() {
         <div className="container-fluid">
           <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", padding: "14px 0" }}>
             {[
-              { num: "412m",  label: "Height" },
-              { num: "80",    label: "Floors" },
-              { num: "77",    label: "Office Floors" },
-              { num: "2011",  label: "Completed" },
+              { num: "412m", label: "Height" },
+              { num: "80",   label: "Floors" },
+              { num: "77",   label: "Office Floors" },
+              { num: "2011", label: "Completed" },
             ].map((s, i) => (
               <div key={i} style={{
                 paddingLeft: i > 0 ? "clamp(1rem, 2.5vw, 2.5rem)" : 0,
-                borderLeft: i > 0 ? "1px solid rgba(255,255,255,0.07)" : "none",
+                borderLeft: i > 0 ? "1px solid rgba(255,255,255,0.08)" : "none",
               }}>
-                <span style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1rem, 2vw, 1.6rem)", fontWeight: 300, color: "rgba(255,255,255,0.80)", display: "block", letterSpacing: "-0.03em" }}>{s.num}</span>
-                <span style={{ fontFamily: "var(--font-sans)", fontSize: "9px", letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(255,255,255,0.28)", display: "block", marginTop: 2 }}>{s.label}</span>
+                <span style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1rem, 2vw, 1.6rem)", fontWeight: 300, color: "rgba(255,255,255,0.85)", display: "block", letterSpacing: "-0.03em" }}>{s.num}</span>
+                <span style={{ fontFamily: "var(--font-sans)", fontSize: "9px", letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(255,255,255,0.32)", display: "block", marginTop: 2 }}>{s.label}</span>
               </div>
             ))}
           </div>
@@ -159,9 +170,9 @@ export default function HeroSection() {
         initial={{ opacity: 0 }} animate={{ opacity: 1 }}
         transition={{ delay: 2, duration: 0.7 }}
       >
-        <span style={{ fontFamily: "var(--font-sans)", fontSize: "8px", letterSpacing: "0.22em", textTransform: "uppercase", color: "rgba(255,255,255,0.28)", writingMode: "vertical-rl" }}>Scroll</span>
-        <div style={{ width: 1, height: 44, background: "rgba(255,255,255,0.10)", overflow: "hidden" }}>
-          <motion.div style={{ width: "100%", height: "100%", background: "rgba(255,255,255,0.55)" }}
+        <span style={{ fontFamily: "var(--font-sans)", fontSize: "8px", letterSpacing: "0.22em", textTransform: "uppercase", color: "rgba(255,255,255,0.30)", writingMode: "vertical-rl" }}>Scroll</span>
+        <div style={{ width: 1, height: 44, background: "rgba(255,255,255,0.12)", overflow: "hidden" }}>
+          <motion.div style={{ width: "100%", height: "100%", background: "rgba(255,255,255,0.60)" }}
             animate={{ y: ["-100%", "200%"] }}
             transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }} />
         </div>
