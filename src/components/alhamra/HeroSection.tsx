@@ -41,7 +41,7 @@ export default function HeroSection() {
 
           <motion.p
             style={{ fontFamily: "var(--font-sans)", fontSize: "10px", letterSpacing: "0.2em",
-              textTransform: "uppercase", color: "rgba(255,255,255,0.45)", marginBottom: 22 }}
+              textTransform: "uppercase", color: "rgba(255,255,255,0.45)", marginBottom: 14 }}
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
