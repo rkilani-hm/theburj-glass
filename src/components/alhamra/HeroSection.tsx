@@ -62,7 +62,7 @@ export default function HeroSection() {
               transition={{ duration: 1.2, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
             >Al Hamra</motion.h1>
           </div>
-          <div style={{ overflow: "hidden", marginBottom: 32 }}>
+          <div style={{ overflow: "hidden", marginBottom: 20 }}>
             <motion.p style={{
               fontFamily: "var(--font-display)", fontStyle: "italic",
               fontSize: "clamp(1.3rem, 3.5vw, 4.5rem)",
