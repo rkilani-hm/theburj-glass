@@ -81,7 +81,7 @@ export default function HeroSection() {
             transition={{ duration: 0.9, delay: 1.05, ease: [0.16, 1, 0.3, 1] }}
           >
             <p style={{
-              fontFamily: "var(--font-sans)", fontSize: "clamp(0.85rem, 1vw, 0.95rem)",
+              fontFamily: "var(--font-sans)", fontSize: "clamp(0.78rem, 0.9vw, 0.88rem)",
               fontWeight: 300, lineHeight: 1.78,
               color: "rgba(255,255,255,0.38)", maxWidth: 460, margin: 0,
             }}>
