@@ -65,7 +65,7 @@ export default function HeroSection() {
           <div style={{ overflow: "hidden", marginBottom: 20 }}>
             <motion.p style={{
               fontFamily: "var(--font-display)", fontStyle: "italic",
-              fontSize: "clamp(1.3rem, 3.5vw, 4.5rem)",
+              fontSize: "clamp(1.1rem, 3vw, 3.5rem)",
               fontWeight: 300, lineHeight: 0.95, letterSpacing: "-0.02em",
               color: "rgba(255,255,255,0.42)", margin: 0,
             }}
