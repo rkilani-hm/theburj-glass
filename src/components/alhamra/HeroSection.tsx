@@ -37,7 +37,7 @@ export default function HeroSection() {
       {/* Content */}
       <motion.div style={{ y: contentY, opacity: rawOpacity, position: "relative", zIndex: 2 }}
         className="container-fluid">
-        <div style={{ paddingBottom: "clamp(3rem, 6vw, 6rem)", maxWidth: 900 }}>
+        <div style={{ paddingBottom: "clamp(2rem, 4vw, 4rem)", maxWidth: 900 }}>
 
           <motion.p
             style={{ fontFamily: "var(--font-sans)", fontSize: "10px", letterSpacing: "0.2em",
