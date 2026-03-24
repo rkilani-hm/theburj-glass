@@ -6,6 +6,7 @@ import Footer from "@/components/alhamra/Footer";
 import towerDayHud from "@/assets/tower-daylight-hud.png";
 
 import { useHeroTheme } from "@/contexts/HeroThemeContext";
+import EditableText from "@/components/admin/EditableText";
 const R = ({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) => {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
@@ -42,12 +43,12 @@ export default function Connectivity() {
             <div style={{ paddingBottom: "clamp(2.5rem, 5vw, 5rem)" }}>
               <motion.p className="eyebrow-light" style={{ marginBottom: 14 }}
                 initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.3 }}>
-                Business · Connectivity
+                <EditableText cms="cx.eyebrow" oneLine tag="p" className="eyebrow-light" />
               </motion.p>
               <div style={{ overflow: "hidden" }}>
                 <motion.h1 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2.5rem, 6vw, 7rem)", fontWeight: 300, lineHeight: 0.96, letterSpacing: "-0.03em", color: "#fff", margin: 0 }}
                   initial={{ y: "105%" }} animate={{ y: 0 }} transition={{ duration: 1.1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}>
-                  Zero tolerance for downtime.
+                  <EditableText cms="cx.headline" oneLine tag="h1" />
                 </motion.h1>
               </div>
             </div>
@@ -59,10 +60,10 @@ export default function Connectivity() {
           <div className="container-fluid">
             <div className="grid lg:grid-cols-12 gap-12 mb-16">
               <div className="lg:col-span-5">
-                <R><p className="eyebrow" style={{ marginBottom: 18 }}>Technical Infrastructure</p></R>
+                <R><p className="eyebrow" style={{ marginBottom: 18 }}><EditableText cms="cx.infra.label" oneLine tag="p" className="eyebrow" /></p></R>
                 <R delay={0.08}>
                   <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2rem, 4vw, 4.5rem)", fontWeight: 400, lineHeight: 1.06, letterSpacing: "-0.025em", color: "var(--black)" }}>
-                    Built for the demands of modern business.
+                    <EditableText cms="cx.infra.h" oneLine tag="h2" />
                   </h2>
                 </R>
               </div>

@@ -9,6 +9,7 @@ import interiorLobby   from "@/assets/interior-lobby.jpg";
 import panoramaCity    from "@/assets/panorama-city.jpg";
 
 import { useHeroTheme } from "@/contexts/HeroThemeContext";
+import EditableText from "@/components/admin/EditableText";
 const R = ({ children, delay = 0, style = {} }: { children: React.ReactNode; delay?: number; style?: React.CSSProperties }) => {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
@@ -44,12 +45,12 @@ export default function WorkplaceExperience() {
             <div style={{ paddingBottom: "clamp(3rem, 5vw, 5rem)" }}>
               <motion.p className="eyebrow-light" style={{ marginBottom: 16 }}
                 initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.3 }}>
-                Business · Workplace Experience
+                <EditableText cms="wp.eyebrow" oneLine tag="p" className="eyebrow-light" />
               </motion.p>
               <div style={{ overflow: "hidden" }}>
                 <motion.h1 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2.8rem, 7vw, 7rem)", fontWeight: 300, lineHeight: 0.96, letterSpacing: "-0.03em", color: "#fff", margin: 0 }}
                   initial={{ y: "105%" }} animate={{ y: 0 }} transition={{ duration: 1.1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}>
-                  Where Kuwait's leaders work.
+                  <EditableText cms="wp.headline" oneLine tag="h1" />
                 </motion.h1>
               </div>
             </div>
@@ -61,10 +62,10 @@ export default function WorkplaceExperience() {
           <div className="container-fluid">
             <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 mb-16">
               <div className="lg:col-span-5">
-                <R><p className="eyebrow" style={{ marginBottom: 18 }}>The Environment</p></R>
+                <R><p className="eyebrow" style={{ marginBottom: 18 }}><EditableText cms="wp.env.label" oneLine tag="p" className="eyebrow" /></p></R>
                 <R delay={0.08}>
                   <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2rem, 4vw, 4.5rem)", fontWeight: 400, lineHeight: 1.06, letterSpacing: "-0.025em", color: "var(--black)" }}>
-                    Infrastructure built for enterprise excellence.
+                    <EditableText cms="wp.env.h" oneLine tag="h2" />
                   </h2>
                 </R>
               </div>
@@ -79,7 +80,7 @@ export default function WorkplaceExperience() {
                     From the column-free floor plates to the 24-metre lamella lobby, 
                     every decision was made to create an environment where serious work happens.
                   </p>
-                  <Link to="/business/office-spaces" className="btn-arrow">View Office Configurations</Link>
+                  <Link to="/business/office-spaces" className="btn-arrow"><EditableText cms="wp.env.cta" oneLine /></Link>
                 </R>
               </div>
             </div>
@@ -134,9 +135,9 @@ export default function WorkplaceExperience() {
                 </div>
               </R>
               <R delay={0.12}>
-                <p className="eyebrow" style={{ marginBottom: 20 }}>The Address</p>
+                <p className="eyebrow" style={{ marginBottom: 20 }}><EditableText cms="wp.addr.label" oneLine tag="p" className="eyebrow" /></p>
                 <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1.8rem, 3.5vw, 4rem)", fontWeight: 400, lineHeight: 1.1, letterSpacing: "-0.02em", color: "var(--black)", marginBottom: 24 }}>
-                  A global business address in Kuwait's heart.
+                  <EditableText cms="wp.addr.h" oneLine tag="h2" />
                 </h2>
                 <p style={{ fontFamily: "var(--font-sans)", fontSize: "0.98rem", fontWeight: 300, lineHeight: 1.88, color: "var(--graphite)", marginBottom: 32 }}>
                   Al Sharq District. Adjacent to the diplomatic quarter and government institutions. 

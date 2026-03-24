@@ -8,6 +8,7 @@ import skylinePark     from "@/assets/skyline-park-panorama.jpg";
 import somObservation  from "@/assets/som-observation.jpg";
 
 import { useHeroTheme } from "@/contexts/HeroThemeContext";
+import EditableText from "@/components/admin/EditableText";
 const R = ({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) => {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
@@ -50,12 +51,12 @@ export default function LeasingOpportunities() {
             <div style={{ paddingBottom: "clamp(3rem, 5vw, 5rem)" }}>
               <motion.p className="eyebrow-light" style={{ marginBottom: 14 }}
                 initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.3 }}>
-                Leasing · Available Spaces
+                <EditableText cms="lo.eyebrow" oneLine tag="p" className="eyebrow-light" />
               </motion.p>
               <div style={{ overflow: "hidden" }}>
                 <motion.h1 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2.8rem, 7vw, 8rem)", fontWeight: 300, lineHeight: 0.96, letterSpacing: "-0.035em", color: "#fff", margin: 0 }}
                   initial={{ y: "105%" }} animate={{ y: 0 }} transition={{ duration: 1.1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}>
-                  Your office above Kuwait City.
+                  <EditableText cms="lo.headline" oneLine tag="h1" />
                 </motion.h1>
               </div>
             </div>
@@ -66,9 +67,9 @@ export default function LeasingOpportunities() {
         <section style={{ background: "var(--limestone)", padding: "clamp(5rem, 10vw, 10rem) 0" }}>
           <div className="container-fluid">
             <R style={{ marginBottom: "clamp(3rem, 5vw, 5rem)" }}>
-              <p className="eyebrow" style={{ marginBottom: 16 }}>Why Al Hamra</p>
+              <p className="eyebrow" style={{ marginBottom: 16 }}><EditableText cms="lo.why.label" oneLine tag="p" className="eyebrow" /></p>
               <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2rem, 4vw, 4.5rem)", fontWeight: 400, lineHeight: 1.06, letterSpacing: "-0.025em", color: "var(--black)", maxWidth: 640 }}>
-                The address that signals seriousness.
+                <EditableText cms="lo.why.h" oneLine tag="h2" />
               </h2>
             </R>
 
@@ -92,9 +93,9 @@ export default function LeasingOpportunities() {
         <section style={{ background: "#fff", padding: "clamp(5rem, 10vw, 10rem) 0" }}>
           <div className="container-fluid">
             <R style={{ marginBottom: "clamp(3rem, 5vw, 5rem)" }}>
-              <p className="eyebrow" style={{ marginBottom: 16 }}>Space Configurations</p>
+              <p className="eyebrow" style={{ marginBottom: 16 }}><EditableText cms="lo.types.label" oneLine tag="p" className="eyebrow" /></p>
               <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2rem, 4vw, 4.5rem)", fontWeight: 400, lineHeight: 1.06, letterSpacing: "-0.025em", color: "var(--black)" }}>
-                Every scale of ambition.
+                <EditableText cms="lo.types.h" oneLine tag="h2" />
               </h2>
             </R>
 
@@ -167,7 +168,7 @@ export default function LeasingOpportunities() {
               <div className="lg:col-span-7">
                 <R>
                   <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2.5rem, 6vw, 7rem)", fontWeight: 300, lineHeight: 0.96, letterSpacing: "-0.035em", color: "#fff" }}>
-                    Begin the conversation.
+                    <EditableText cms="lo.begin.h" oneLine tag="h2" />
                   </h2>
                 </R>
               </div>

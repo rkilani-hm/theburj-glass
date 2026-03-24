@@ -6,6 +6,7 @@ import Footer from "@/components/alhamra/Footer";
 import towerEntranceNight from "@/assets/tower-entrance-night.jpg";
 
 import { useHeroTheme } from "@/contexts/HeroThemeContext";
+import EditableText from "@/components/admin/EditableText";
 const R = ({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) => {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-40px" });
@@ -73,12 +74,12 @@ export default function LeasingContact() {
             <div style={{ paddingBottom: "clamp(2.5rem, 5vw, 5rem)" }}>
               <motion.p className="eyebrow-light" style={{ marginBottom: 14 }}
                 initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.3 }}>
-                Leasing · Contact
+                <EditableText cms="lc.eyebrow" oneLine tag="p" className="eyebrow-light" />
               </motion.p>
               <div style={{ overflow: "hidden" }}>
                 <motion.h1 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2.5rem, 6vw, 7rem)", fontWeight: 300, lineHeight: 0.96, letterSpacing: "-0.03em", color: "#fff", margin: 0 }}
                   initial={{ y: "105%" }} animate={{ y: 0 }} transition={{ duration: 1.1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}>
-                  We are here.
+                  <EditableText cms="lc.headline" oneLine tag="h1" />
                 </motion.h1>
               </div>
             </div>
@@ -90,10 +91,10 @@ export default function LeasingContact() {
           <div className="container-fluid">
             <div className="grid lg:grid-cols-12 gap-12 mb-16">
               <div className="lg:col-span-4">
-                <R><p className="eyebrow" style={{ marginBottom: 18 }}>Get in Touch</p></R>
+                <R><p className="eyebrow" style={{ marginBottom: 18 }}><EditableText cms="lc.touch.label" oneLine tag="p" className="eyebrow" /></p></R>
                 <R delay={0.08}>
                   <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2rem, 4vw, 4.5rem)", fontWeight: 400, lineHeight: 1.06, letterSpacing: "-0.025em", color: "var(--black)" }}>
-                    Every inquiry deserves a direct response.
+                    <EditableText cms="lc.touch.h" oneLine tag="h2" />
                   </h2>
                 </R>
               </div>
@@ -102,10 +103,10 @@ export default function LeasingContact() {
                   <div style={{ padding: "clamp(1.5rem, 3vw, 2.5rem)", background: "var(--limestone)", marginBottom: 24 }}>
                     <p className="eyebrow" style={{ marginBottom: 10 }}>Address</p>
                     <p style={{ fontFamily: "var(--font-display)", fontSize: "1.2rem", fontWeight: 300, letterSpacing: "-0.01em", color: "var(--black)", lineHeight: 1.6 }}>
-                      Al Hamra Business Tower<br />
-                      Al Sharq, Block 8<br />
-                      Jaber Al Mubarak Street<br />
-                      Kuwait City, Kuwait
+                      <EditableText cms="lc.address.line1" oneLine /><br />
+                      <EditableText cms="lc.address.line2" oneLine /><br />
+                      <EditableText cms="lc.address.line3" oneLine /><br />
+                      <EditableText cms="lc.address.line4" oneLine />
                     </p>
                     <p style={{ fontFamily: "var(--font-sans)", fontSize: "11px", fontWeight: 300, color: "var(--stone)", marginTop: 10 }}>
                       P.O. Box 83 Safat · 13001 Kuwait
@@ -176,9 +177,9 @@ export default function LeasingContact() {
             <div className="grid lg:grid-cols-12 items-center gap-12">
               <div className="lg:col-span-5">
                 <R>
-                  <p className="eyebrow-light" style={{ marginBottom: 18 }}>Find Us</p>
+                  <p className="eyebrow-light" style={{ marginBottom: 18 }}><EditableText cms="lc.map.label" oneLine tag="p" className="eyebrow-light" /></p>
                   <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2rem, 4vw, 4.5rem)", fontWeight: 300, letterSpacing: "-0.025em", color: "#fff", lineHeight: 1.08, marginBottom: 28 }}>
-                    Al Sharq District,<br />Kuwait City.
+                    <EditableText cms="lc.map.h1" oneLine /><br /><EditableText cms="lc.map.h2" oneLine />
                   </h2>
                   <p style={{ fontFamily: "var(--font-sans)", fontSize: "0.95rem", fontWeight: 300, color: "rgba(255,255,255,0.38)", lineHeight: 1.82, marginBottom: 32 }}>
                     Located at the intersection of Jaber Al Mubarak Street and Al Shuhada'a — 
