@@ -5,13 +5,9 @@ import { motion } from "framer-motion";
 import towerAerial from "@/assets/tower-aerial.png";
 import towerClouds from "@/assets/tower-clouds-aerial.png";
 import towerBw1 from "@/assets/tower-bw-1.png";
-import towerBw2 from "@/assets/tower-bw-2.png";
 import towerBwAngle from "@/assets/tower-bw-angle.png";
 import towerSunset from "@/assets/tower-sunset.png";
 import towerCityContext from "@/assets/tower-city-context.jpg";
-import constructionFoundation from "@/assets/construction-foundation.jpg";
-import constructionSteel from "@/assets/construction-steel.jpg";
-import constructionFacade from "@/assets/construction-facade.jpg";
 import skylineParkPanorama from "@/assets/skyline-park-panorama.jpg";
 import waterfrontPromenade from "@/assets/waterfront-promenade.jpg";
 
@@ -21,10 +17,8 @@ const Origins = () => {
   useHeroTheme("light");
   const heroReveal = useScrollReveal();
   const contentReveal = useScrollReveal();
-  const visionReveal = useScrollReveal();
   const foundersReveal = useScrollReveal();
   const galleryReveal = useScrollReveal();
-  const constructionReveal = useScrollReveal();
   const competitionReveal = useScrollReveal();
 
   const milestones = [
@@ -287,140 +281,6 @@ const Origins = () => {
                 </blockquote>
               </div>
             </motion.div>
-          </div>
-        </section>
-
-        {/* Design Philosophy */}
-        <section className="py-24 px-6 lg:px-12">
-          <div className="container-fluid">
-            <motion.div
-              ref={visionReveal.ref}
-              initial="hidden"
-              animate={visionReveal.isInView ? "visible" : "hidden"}
-              variants={revealVariants.fadeUp}
-              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="text-center max-w-3xl mx-auto mb-16"
-            >
-              <h2 className="text-3xl lg:text-4xl font-light tracking-wide mb-8">
-                A Revolutionary Design
-              </h2>
-              <p className="text-muted-foreground leading-relaxed">
-                The winning concept—a sculptural tower developed by subtracting a quadrant of a typical 
-                filleted square floor plan—captured the essence of local culture while pushing the 
-                boundaries of structural engineering to unprecedented heights.
-              </p>
-            </motion.div>
-            
-            <div className="grid md:grid-cols-3 gap-8">
-              {[
-                { 
-                  title: "Cultural Inspiration", 
-                  description: "The asymmetric twisting form draws inspiration from the flowing folds of traditional Kuwaiti garments, creating a uniquely regional identity.",
-                  image: towerBw1
-                },
-                { 
-                  title: "Structural Innovation", 
-                  description: "The carved-out corner presented unprecedented engineering challenges, requiring hyperbolic paraboloid walls and innovative creep compatibility analysis.",
-                  image: towerBwAngle
-                },
-                { 
-                  title: "Sustainable Vision", 
-                  description: "Stone façade to the south provides environmental protection from the desert sun, reducing solar heat gain by 40% while maximizing Gulf views.",
-                  image: towerBw2
-                },
-              ].map((item, index) => (
-                <motion.div
-                  key={item.title}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.15 }}
-                  className="group"
-                >
-                  <div className="aspect-[4/5] overflow-hidden mb-6">
-                    <img 
-                      src={item.image} 
-                      alt={item.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                  </div>
-                  <h3 className="text-xl font-light mb-3">{item.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Construction Phases */}
-        <section className="py-24 px-6 lg:px-12 bg-muted/30">
-          <div className="container-fluid">
-            <motion.div
-              ref={constructionReveal.ref}
-              initial="hidden"
-              animate={constructionReveal.isInView ? "visible" : "hidden"}
-              variants={revealVariants.fadeUp}
-              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="text-center mb-16"
-            >
-              <h2 className="text-3xl lg:text-4xl font-light tracking-wide mb-4">
-                Building the Dream
-              </h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
-                From the first foundation pour to the final glass panel, witness the monumental 
-                construction journey that brought Kuwait's tallest tower to life.
-              </p>
-            </motion.div>
-
-            <div className="grid md:grid-cols-3 gap-8">
-              {[
-                {
-                  image: constructionFoundation,
-                  phase: "Phase One",
-                  title: "Foundation & Excavation",
-                  year: "2006-2007",
-                  description: "5,800m² foundation mat biased north to match the tower's offset center of mass. Over 200 concrete piles driven 30 meters into bedrock."
-                },
-                {
-                  image: constructionSteel,
-                  phase: "Phase Two",
-                  title: "Composite Structure",
-                  year: "2007-2009",
-                  description: "Perimeter columns with embedded W360 steel sections to Level 29. Self-climbing formwork technology accelerated vertical construction of the concrete core."
-                },
-                {
-                  image: constructionFacade,
-                  phase: "Phase Three",
-                  title: "Digital Fabrication",
-                  year: "2009-2011",
-                  description: "24,000m² of custom-cut limestone panels installed using fiberglass formwork moulds fabricated directly from 3D digital models."
-                },
-              ].map((item, index) => (
-                <motion.div
-                  key={item.title}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.15 }}
-                  className="group"
-                >
-                  <div className="relative aspect-[4/3] overflow-hidden mb-6 rounded-sm">
-                    <img 
-                      src={item.image}
-                      alt={item.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                    <div className="absolute bottom-4 left-4">
-                      <span className="text-xs text-white/70 uppercase tracking-wider">{item.phase}</span>
-                      <p className="text-white font-light">{item.year}</p>
-                    </div>
-                  </div>
-                  <h3 className="text-xl font-light mb-3">{item.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
-                </motion.div>
-              ))}
-            </div>
           </div>
         </section>
 
