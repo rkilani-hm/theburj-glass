@@ -18,6 +18,14 @@ import towerLowangleClouds from "@/assets/tower-lowangle-clouds.png";
 import LamellaVisualization from "@/components/alhamra/LamellaVisualization";
 import FloorPlanSelector from "@/components/alhamra/FloorPlanSelector";
 
+/* New assets — V3 revamp */
+import droneVideo from "@/assets/drone-aerial.mp4";
+import lobbyLamella from "@/assets/lobby-lamella-interior.jpg";
+import lobbyGrandHall from "@/assets/lobby-grand-hall.jpg";
+import lobbyEntranceHall from "@/assets/lobby-entrance-hall.jpg";
+import escalatorArt from "@/assets/escalator-art.jpg";
+import towerMoonlight from "@/assets/tower-moonlight.jpg";
+
 import { useHeroTheme } from "@/contexts/HeroThemeContext";
 const DesignEngineering = () => {
 

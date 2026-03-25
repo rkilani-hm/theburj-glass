@@ -13,6 +13,10 @@ import towerLow   from "@/assets/tower-lowangle-clouds.png";
 import towerNight from "@/assets/tower-night-illuminated.jpg";
 import towerSkyline from "@/assets/som-tower-skyline.jpg";
 
+/* New assets — V3 revamp */
+import towerMoonlight from "@/assets/tower-moonlight.jpg";
+import towerFoggy from "@/assets/tower-foggy-skyline.jpg";
+
 const R = ({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) => {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });

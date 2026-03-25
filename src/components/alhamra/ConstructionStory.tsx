@@ -7,6 +7,11 @@ import constructionSteel from "@/assets/construction-steel.jpg";
 import constructionFacade from "@/assets/construction-facade.jpg";
 import towerSunset from "@/assets/tower-sunset.png";
 
+/* New construction photos — V3 revamp */
+import constructionProgress01 from "@/assets/construction-progress-01.jpg";
+import constructionProgress02 from "@/assets/construction-progress-02.jpg";
+import constructionProgress03 from "@/assets/construction-progress-03.jpg";
+
 interface ConstructionPhase {
   id: string;
   titleKey: string;
