@@ -21,7 +21,7 @@ const R = ({ children, delay = 0, style, className }: { children: React.ReactNod
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
   return (
-    <motion.div ref={ref} initial={{ opacity: 0, y: 28 }}
+    <motion.div ref={ref} style={style} className={className} initial={{ opacity: 0, y: 28 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.95, delay, ease: [0.16, 1, 0.3, 1] }}>
       {children}
