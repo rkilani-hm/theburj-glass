@@ -250,7 +250,7 @@ const StatsSection = () => (
           }} />
         </Reveal>
         <Reveal delay={0.12}>
-          <Link to="/tower/recognition" className="btn-outline">
+          <Link to="/tower/recognition" className="btn-navy-outline">
             <EditableText cms="stats.quote.cta" oneLine /> →
           </Link>
         </Reveal>
@@ -401,7 +401,7 @@ const BusinessSection = () => {
             <CMSHeadline keys={["business.headline1","business.headline2"]} size="clamp(2rem,4vw,5rem)" delay={0.06} />
           </div>
           <Reveal delay={0.14}>
-            <Link to="/business/workplace-experience" className="btn-outline">
+            <Link to="/business/workplace-experience" className="btn-navy-outline">
               <EditableText cms="business.cta" oneLine /> →
             </Link>
           </Reveal>
@@ -483,12 +483,12 @@ const NightSection = () => {
                   }} />
                   <Link to="/leasing/opportunities" style={{
                     display: "inline-flex", alignItems: "center", gap: 10,
-                    padding: "14px 30px", background: "#fff", color: "#0F0F0E",
+                    padding: "14px 30px", background: "#fff", color: "#1E3552",
                     fontFamily: "var(--font-sans)", fontSize: "10px", fontWeight: 400,
-                    letterSpacing: "0.14em", textTransform: "uppercase", transition: "background 0.25s",
+                    letterSpacing: "0.14em", textTransform: "uppercase", transition: "background 0.25s, color 0.25s",
                   }}
-                    onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = "#F0EDE7")}
-                    onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = "#fff")}>
+                    onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.background = "#2C4A6E"; el.style.color = "#fff"; }}
+                    onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.background = "#fff"; el.style.color = "#1E3552"; }}>
                     <EditableText cms="night.cta" oneLine />
                   </Link>
                 </Reveal>
@@ -501,39 +501,71 @@ const NightSection = () => {
   );
 };
 
-/* ═══ §7 LEASING CTA ══════════════════════════════════════ */
+/* ═══ §7 LEASING CTA — Sole dark section (Gulf Navy) ═════ */
 const LeasingCTA = () => (
-  <section style={{ background: "var(--surface)", borderTop: "1px solid var(--border)", padding: "clamp(6rem,12vw,12rem) 0" }}>
-    <div className="container-fluid">
+  <section style={{
+    background: "#1E3552",
+    padding: "clamp(6rem,12vw,11rem) 0",
+    position: "relative",
+    overflow: "hidden",
+  }}>
+    {/* Subtle architectural grain overlay */}
+    <div style={{
+      position: "absolute", inset: 0,
+      background: "linear-gradient(135deg, rgba(44,74,110,0.15) 0%, transparent 50%, rgba(30,53,82,0.10) 100%)",
+      pointerEvents: "none",
+    }} />
+    <div className="container-fluid" style={{ position: "relative", zIndex: 1 }}>
       <div className="grid lg:grid-cols-12 items-center gap-12">
         <div className="lg:col-span-7">
           <Reveal style={{ marginBottom: 22 }}>
-            <EditableText cms="cta.eyebrow" tag="p" className="eyebrow" oneLine />
+            <EditableText cms="cta.eyebrow" tag="p" oneLine style={{
+              fontFamily: "var(--font-sans)", fontSize: "10px", fontWeight: 400,
+              letterSpacing: "0.18em", textTransform: "uppercase",
+              color: "rgba(255,255,255,0.35)",
+            }} />
           </Reveal>
-          <CMSHeadline keys={["cta.headline1","cta.headline2"]} size="clamp(2.5rem,5.5vw,7rem)" delay={0.06} />
+          <CMSHeadline keys={["cta.headline1","cta.headline2"]} size="clamp(2.5rem,5.5vw,7rem)" color="rgba(255,255,255,0.92)" delay={0.06} />
         </div>
         <div className="lg:col-span-4 lg:col-start-9">
           <Reveal delay={0.2}>
             <EditableText cms="cta.body" tag="p" multiline style={{
               fontFamily: "var(--font-sans)", fontSize: "1rem", fontWeight: 300,
-              lineHeight: 1.82, color: "var(--ink-light)", marginBottom: 36,
+              lineHeight: 1.82, color: "rgba(255,255,255,0.45)", marginBottom: 36,
             }} />
             <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-              <Link to="/leasing/opportunities" className="btn-primary">
+              <Link to="/leasing/opportunities" style={{
+                display: "inline-flex", alignItems: "center", gap: 10,
+                padding: "14px 30px", background: "#FFFFFF", color: "#1E3552",
+                fontFamily: "var(--font-sans)", fontSize: "11px", fontWeight: 400,
+                letterSpacing: "0.14em", textTransform: "uppercase",
+                border: "1px solid #FFFFFF", transition: "all 0.25s ease",
+              }}
+                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.background = "transparent"; el.style.color = "#fff"; }}
+                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.background = "#FFFFFF"; el.style.color = "#1E3552"; }}>
                 <EditableText cms="cta.primary" oneLine /> →
               </Link>
-              <Link to="/leasing/contact" className="btn-outline">
+              <Link to="/leasing/contact" style={{
+                display: "inline-flex", alignItems: "center", gap: 10,
+                padding: "13px 30px", background: "transparent",
+                color: "rgba(255,255,255,0.70)",
+                fontFamily: "var(--font-sans)", fontSize: "11px", fontWeight: 400,
+                letterSpacing: "0.14em", textTransform: "uppercase",
+                border: "1px solid rgba(255,255,255,0.20)", transition: "all 0.25s ease",
+              }}
+                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = "rgba(255,255,255,0.55)"; el.style.color = "#fff"; }}
+                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = "rgba(255,255,255,0.20)"; el.style.color = "rgba(255,255,255,0.70)"; }}>
                 <EditableText cms="cta.secondary" oneLine />
               </Link>
             </div>
-            <div style={{ marginTop: 36, paddingTop: 28, borderTop: "1px solid var(--border)" }}>
+            <div style={{ marginTop: 36, paddingTop: 28, borderTop: "1px solid rgba(255,255,255,0.10)" }}>
               <EditableText cms="cta.phone.label" tag="p" oneLine style={{
                 fontFamily: "var(--font-sans)", fontSize: "9px", letterSpacing: "0.15em",
-                textTransform: "uppercase", color: "var(--ink-faint)", marginBottom: 10,
+                textTransform: "uppercase", color: "rgba(255,255,255,0.25)", marginBottom: 10,
               }} />
               <EditableText cms="cta.phone" tag="a" oneLine style={{
                 fontFamily: "var(--font-display)", fontSize: "1.5rem", fontWeight: 300,
-                letterSpacing: "-0.01em", color: "var(--ink)", display: "block",
+                letterSpacing: "-0.01em", color: "rgba(255,255,255,0.72)", display: "block",
               }} />
             </div>
           </Reveal>

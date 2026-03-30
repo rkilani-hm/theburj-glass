@@ -24,6 +24,13 @@
     --border:     #E5E2DC;   /* hairline — warm grey              */
     --border-mid: #CECCCA;   /* stronger divider                  */
 
+    /* ── Gulf Navy Accent (sole accent — from tower glass curtain wall) ── */
+    --navy:       #2C4A6E;   /* primary accent — CTAs, active states  */
+    --navy-light: #3D6490;   /* hover state                           */
+    --navy-dark:  #1E3552;   /* pressed / footer                      */
+    --navy-faint: rgba(44, 74, 110, 0.08);  /* subtle tint bg         */
+    --navy-10:    rgba(44, 74, 110, 0.10);  /* glass overlay           */
+
     /* Shadcn compatibility */
     --background:             40 15% 100%;
     --foreground:             30 3% 6%;
@@ -135,6 +142,23 @@
     text-transform: uppercase;
     color: var(--ink-light);
   }
+  .eyebrow-navy {
+    font-family: var(--font-sans);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--navy);
+  }
+  .eyebrow-navy::before {
+    content: "";
+    display: inline-block;
+    width: 32px;
+    height: 1px;
+    background: var(--navy);
+    margin-right: 14px;
+    vertical-align: middle;
+  }
   .label-sm {
     font-family: var(--font-sans);
     font-size: 9px;
@@ -201,6 +225,44 @@
     cursor: pointer;
   }
   .btn-primary:hover { background: var(--ink-mid); border-color: var(--ink-mid); }
+
+  .btn-navy {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 30px;
+    background: var(--navy);
+    color: #fff;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    border: 1px solid var(--navy);
+    transition: all 0.25s ease;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  .btn-navy:hover { background: var(--navy-light); border-color: var(--navy-light); }
+  .btn-navy:active { background: var(--navy-dark); border-color: var(--navy-dark); }
+
+  .btn-navy-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 30px;
+    background: transparent;
+    color: var(--navy);
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    border: 1px solid var(--navy);
+    transition: all 0.25s ease;
+    cursor: pointer;
+  }
+  .btn-navy-outline:hover { background: var(--navy); color: #fff; }
 
   .btn-outline {
     display: inline-flex;

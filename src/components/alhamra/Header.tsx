@@ -92,19 +92,19 @@ export default function Header() {
 
   const linkC = (active: boolean) =>
     scrolled
-      ? (active ? "var(--ink)" : "var(--ink-light)")
+      ? (active ? "#2C4A6E" : "var(--ink-light)")
       : onDark
         ? (active ? "#fff" : "rgba(255,255,255,0.72)")
-        : (active ? "var(--ink)" : "var(--ink-light)");
+        : (active ? "#2C4A6E" : "var(--ink-light)");
   const linkHover = () => onDark ? "#fff" : "var(--ink)";
-  const underlineC = onDark ? "#fff" : "var(--ink)";
+  const underlineC = onDark ? "#fff" : "#2C4A6E";
   const langC = scrolled ? "var(--ink-light)" : (onDark ? "rgba(255,255,255,0.62)" : "var(--ink-light)");
 
   /* Hamburger line color — always contrasts with nav bg */
   const burgerC = (scrolled || mobileOpen) ? "var(--ink)" : (onDark ? "#fff" : "var(--ink)");
 
-  const ctaBg    = scrolled ? "var(--ink)" : (onDark ? "rgba(255,255,255,0.95)" : "var(--ink)");
-  const ctaColor = scrolled ? "#fff"       : (onDark ? "var(--ink)"             : "#fff");
+  const ctaBg    = scrolled ? "#2C4A6E" : (onDark ? "rgba(255,255,255,0.95)" : "#2C4A6E");
+  const ctaColor = scrolled ? "#fff"    : (onDark ? "#1E3552"               : "#fff");
 
   return (
     <>
@@ -174,11 +174,11 @@ export default function Header() {
                             display: "block", padding: "10px 20px",
                             fontFamily: "var(--font-sans)", fontSize: "11px",
                             fontWeight: 300, letterSpacing: "0.06em",
-                            color: isActive(sub.href) ? "var(--ink)" : "var(--ink-light)",
+                            color: isActive(sub.href) ? "#2C4A6E" : "var(--ink-light)",
                             transition: "color 0.15s, background 0.15s",
                           }}
-                          onMouseEnter={e => { e.currentTarget.style.color = "var(--ink)"; e.currentTarget.style.background = "var(--limestone)"; }}
-                          onMouseLeave={e => { e.currentTarget.style.color = isActive(sub.href) ? "var(--ink)" : "var(--ink-light)"; e.currentTarget.style.background = "transparent"; }}
+                          onMouseEnter={e => { e.currentTarget.style.color = "#2C4A6E"; e.currentTarget.style.background = "rgba(44,74,110,0.04)"; }}
+                          onMouseLeave={e => { e.currentTarget.style.color = isActive(sub.href) ? "#2C4A6E" : "var(--ink-light)"; e.currentTarget.style.background = "transparent"; }}
                         >{sub[language as "en" | "ar"]}</Link>
                       ))}
                     </motion.div>
@@ -355,7 +355,7 @@ export default function Header() {
               >
                 <Link to="/leasing/opportunities" onClick={() => setMobileOpen(false)} style={{
                   display: "flex", alignItems: "center", justifyContent: "center",
-                  padding: "16px", background: "var(--ink)", color: "#fff",
+                  padding: "16px", background: "#2C4A6E", color: "#fff",
                   fontFamily: "var(--font-sans)", fontSize: "11px", fontWeight: 400,
                   letterSpacing: "0.14em", textTransform: "uppercase",
                 }}>

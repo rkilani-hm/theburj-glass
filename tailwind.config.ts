@@ -29,6 +29,8 @@ export default {
         graphite:     "#666",
         mist:         "#999",
         beige:        { DEFAULT: "#e5e5e5", light: "#f0f0f0" },
+        // Gulf Navy accent system
+        navy:         { DEFAULT: "#2C4A6E", light: "#3D6490", dark: "#1E3552", faint: "rgba(44,74,110,0.08)" },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))", foreground: "hsl(var(--sidebar-foreground))",
           primary: "hsl(var(--sidebar-primary))", "primary-foreground": "hsl(var(--sidebar-primary-foreground))",

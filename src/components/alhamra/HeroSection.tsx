@@ -1,8 +1,75 @@
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { Link } from "react-router-dom";
 import heroVideo from "@/assets/al-hamra-hero.mp4";
 import EditableText from "@/components/admin/EditableText";
+
+/** Animated altitude counter: 0 → 413m */
+const AltitudeCounter = () => {
+  const [count, setCount] = useState(0);
+  const [started, setStarted] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setStarted(true), 1200);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    if (!started) return;
+    const target = 413;
+    const duration = 2400;
+    const startTime = performance.now();
+    let raf: number;
+
+    const animate = (now: number) => {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      // Expo ease-out
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.round(eased * target));
+      if (progress < 1) raf = requestAnimationFrame(animate);
+    };
+    raf = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(raf);
+  }, [started]);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 1.0, duration: 0.8 }}
+      style={{
+        position: "absolute",
+        top: "clamp(6rem, 12vw, 10rem)",
+        right: "clamp(1.5rem, 4vw, 4rem)",
+        zIndex: 3,
+        textAlign: "right",
+      }}
+    >
+      <div style={{
+        fontFamily: "var(--font-display)",
+        fontSize: "clamp(4rem, 10vw, 8rem)",
+        fontWeight: 300,
+        lineHeight: 0.9,
+        letterSpacing: "-0.04em",
+        color: "rgba(10,10,10,0.08)",
+      }}>
+        {count}
+      </div>
+      <div style={{
+        fontFamily: "var(--font-sans)",
+        fontSize: "9px",
+        fontWeight: 400,
+        letterSpacing: "0.22em",
+        textTransform: "uppercase",
+        color: "rgba(10,10,10,0.28)",
+        marginTop: 6,
+      }}>
+        Metres
+      </div>
+    </motion.div>
+  );
+};
 
 export default function HeroSection() {
   const ref = useRef<HTMLElement>(null);
@@ -28,6 +95,9 @@ export default function HeroSection() {
           "linear-gradient(to bottom, rgba(245,245,240,0.22) 0%, transparent 18%)",
         ].join(", ") }} />
       </motion.div>
+
+      {/* Altitude counter */}
+      <AltitudeCounter />
 
       {/* Content */}
       <motion.div style={{ position: "absolute", inset: 0, zIndex: 2, y: contentY, opacity: rawOpacity as any,
@@ -85,31 +155,31 @@ export default function HeroSection() {
               </motion.div>
             </div>
 
-            {/* Right: CTAs */}
+            {/* Right: CTAs — Gulf Navy accent */}
             <motion.div style={{ display: "flex", flexDirection: "column", gap: 10, flexShrink: 0 }}
               initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.9, delay: 1.1, ease: [0.16, 1, 0.3, 1] }}>
               <Link to="/leasing/opportunities" style={{
                 display: "inline-flex", alignItems: "center", justifyContent: "center",
-                padding: "12px 24px", background: "#0A0A0A",
+                padding: "13px 26px", background: "#2C4A6E",
                 fontFamily: "var(--font-sans)", fontSize: "9px", fontWeight: 400,
                 letterSpacing: "0.18em", textTransform: "uppercase", color: "#FFFFFF",
-                whiteSpace: "nowrap", transition: "background 0.22s",
+                whiteSpace: "nowrap", transition: "background 0.25s",
               }}
-                onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = "#1a1a1a")}
-                onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = "#0A0A0A")}>
+                onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = "#3D6490")}
+                onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = "#2C4A6E")}>
                 <EditableText cms="hero.cta.primary" oneLine />
               </Link>
               <Link to="/tower" style={{
                 display: "inline-flex", alignItems: "center", justifyContent: "center",
-                padding: "12px 24px", background: "transparent",
-                border: "1px solid rgba(10,10,10,0.25)",
+                padding: "12px 26px", background: "transparent",
+                border: "1px solid rgba(44,74,110,0.35)",
                 fontFamily: "var(--font-sans)", fontSize: "9px", fontWeight: 400,
                 letterSpacing: "0.18em", textTransform: "uppercase",
-                color: "rgba(10,10,10,0.70)", whiteSpace: "nowrap", transition: "border-color 0.22s, color 0.22s",
+                color: "rgba(44,74,110,0.80)", whiteSpace: "nowrap", transition: "border-color 0.25s, color 0.25s, background 0.25s",
               }}
-                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = "rgba(10,10,10,0.50)"; el.style.color = "#0A0A0A"; }}
-                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = "rgba(10,10,10,0.25)"; el.style.color = "rgba(10,10,10,0.70)"; }}>
+                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = "#2C4A6E"; el.style.color = "#fff"; el.style.background = "#2C4A6E"; }}
+                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = "rgba(44,74,110,0.35)"; el.style.color = "rgba(44,74,110,0.80)"; el.style.background = "transparent"; }}>
                 <EditableText cms="hero.cta.secondary" oneLine />
               </Link>
             </motion.div>
