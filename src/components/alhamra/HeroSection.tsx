@@ -55,7 +55,7 @@ export default function HeroSection() {
               <div style={{ overflow: "hidden" }}>
                 <motion.div initial={{ y: "105%" }} animate={{ y: 0 }}
                   transition={{ duration: 1.1, delay: 0.65, ease: [0.16, 1, 0.3, 1] }}>
-                  <EditableText cms="hero.headline" tag="h1" className="font-normal opacity-100" style={{
+                  <EditableText cms="hero.headline" tag="h1" className="font-normal opacity-100 text-4xl" style={{
                     fontFamily: "var(--font-display)", fontSize: "clamp(2.8rem,6.5vw,6.5rem)",
                     lineHeight: 1.0, letterSpacing: "-0.03em",
                     color: "#0A0A0A", margin: 0,
@@ -66,7 +66,7 @@ export default function HeroSection() {
               <div style={{ overflow: "hidden" }}>
                 <motion.div initial={{ y: "105%" }} animate={{ y: 0 }}
                   transition={{ duration: 1.0, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}>
-                  <EditableText cms="hero.subheadline" tag="p" className="font-sans text-5xl opacity-65" style={{
+                  <EditableText cms="hero.subheadline" tag="p" className="font-sans opacity-65 text-3xl" style={{
                     fontStyle: "italic",
                     fontSize: "clamp(1.4rem,3.2vw,3.2rem)", fontWeight: 300, lineHeight: 1.1,
                     letterSpacing: "-0.01em", color: "rgba(10,10,10,0.48)",
