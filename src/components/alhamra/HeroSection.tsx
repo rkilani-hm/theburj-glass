@@ -45,8 +45,8 @@ export default function HeroSection() {
             {/* Left */}
             <div>
               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.6 }}>
-                <EditableText cms="hero.eyebrow" tag="p" style={{
-                  fontFamily: "var(--font-sans)", fontSize: "9px", letterSpacing: "0.26em",
+                <EditableText cms="hero.eyebrow" tag="p" className="font-sans text-3xl opacity-70" style={{
+                  fontSize: "9px", letterSpacing: "0.26em",
                   textTransform: "uppercase", color: "rgba(10,10,10,0.50)",
                   marginBottom: "clamp(0.8rem,1.5vw,1.2rem)",
                 }} oneLine />
@@ -55,9 +55,9 @@ export default function HeroSection() {
               <div style={{ overflow: "hidden" }}>
                 <motion.div initial={{ y: "105%" }} animate={{ y: 0 }}
                   transition={{ duration: 1.1, delay: 0.65, ease: [0.16, 1, 0.3, 1] }}>
-                  <EditableText cms="hero.headline" tag="h1" style={{
+                  <EditableText cms="hero.headline" tag="h1" className="font-normal opacity-100" style={{
                     fontFamily: "var(--font-display)", fontSize: "clamp(2.8rem,6.5vw,6.5rem)",
-                    fontWeight: 300, lineHeight: 1.0, letterSpacing: "-0.03em",
+                    lineHeight: 1.0, letterSpacing: "-0.03em",
                     color: "#0A0A0A", margin: 0,
                   }} oneLine />
                 </motion.div>
@@ -66,8 +66,8 @@ export default function HeroSection() {
               <div style={{ overflow: "hidden" }}>
                 <motion.div initial={{ y: "105%" }} animate={{ y: 0 }}
                   transition={{ duration: 1.0, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}>
-                  <EditableText cms="hero.subheadline" tag="p" style={{
-                    fontFamily: "var(--font-display)", fontStyle: "italic",
+                  <EditableText cms="hero.subheadline" tag="p" className="font-sans text-5xl opacity-65" style={{
+                    fontStyle: "italic",
                     fontSize: "clamp(1.4rem,3.2vw,3.2rem)", fontWeight: 300, lineHeight: 1.1,
                     letterSpacing: "-0.01em", color: "rgba(10,10,10,0.48)",
                     margin: "0 0 clamp(1.2rem,2.5vw,2rem)",
@@ -77,7 +77,7 @@ export default function HeroSection() {
 
               <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.9, delay: 1.05, ease: [0.16, 1, 0.3, 1] }}>
-                <EditableText cms="hero.tagline" tag="p" style={{
+                <EditableText cms="hero.tagline" tag="p" className="rounded-none text-left text-sm" style={{
                   fontFamily: "var(--font-sans)", fontSize: "clamp(0.72rem,0.85vw,0.82rem)",
                   fontWeight: 300, lineHeight: 1.82, color: "rgba(10,10,10,0.40)",
                   maxWidth: 380, margin: 0,
