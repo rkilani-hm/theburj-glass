@@ -9,7 +9,7 @@ export interface CMSContent {
 export const DEFAULT_CONTENT: CMSContent = {
   // Hero
   "hero.eyebrow":        "Kuwait City · 412 Metres · Est. 2011",
-  "hero.headline":       "Al Hamra",
+  "hero.headline":       "AL HAMRA",
   "hero.subheadline":    "Business Tower",
   "hero.tagline":        "Kuwait's tallest building. The world's tallest sculpted concrete tower. An architectural landmark designed by Skidmore, Owings & Merrill.",
   "hero.cta.primary":    "Leasing Inquiries",
