@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { Link } from "react-router-dom";
-import heroVideo from "@/assets/hero-video.mp4";
+import heroVideo from "@/assets/al-hamra-hero.mp4";
 import EditableText from "@/components/admin/EditableText";
 
 export default function HeroSection() {
