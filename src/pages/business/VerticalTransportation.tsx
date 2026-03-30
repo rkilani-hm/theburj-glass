@@ -8,11 +8,11 @@ import towerVertical from "@/assets/som-tower-vertical.jpg";
 
 import { useHeroTheme } from "@/contexts/HeroThemeContext";
 import EditableText from "@/components/admin/EditableText";
-const R = ({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) => {
+const R = ({ children, delay = 0, style, className }: { children: React.ReactNode; delay?: number; style?: React.CSSProperties; className?: string }) => {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
   return (
-    <motion.div ref={ref}
+    <motion.div ref={ref} style={style} className={className}
       initial={{ opacity: 0, y: 26 }} animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.9, delay, ease: [0.16, 1, 0.3, 1] }}>
       {children}

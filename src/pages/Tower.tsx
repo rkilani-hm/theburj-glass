@@ -17,7 +17,7 @@ import towerSkyline from "@/assets/som-tower-skyline.jpg";
 import towerMoonlight from "@/assets/tower-moonlight.jpg";
 import towerFoggy from "@/assets/tower-foggy-skyline.jpg";
 
-const R = ({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) => {
+const R = ({ children, delay = 0, style, className }: { children: React.ReactNode; delay?: number; style?: React.CSSProperties; className?: string }) => {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
   return (
